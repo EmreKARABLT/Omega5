@@ -41,7 +41,7 @@ public class GameLoop {
      */
     private Cell isPieceInBoard(double x , double y){
         if(true){
-            return new Cell(0,0,0);
+            return new Cell(0,0,0,0);
         }
         return null;
     }

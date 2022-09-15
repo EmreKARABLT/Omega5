@@ -12,13 +12,14 @@ public class Cell {
     private double x,y ; // coordinates in GUI
     private double offsetX , offsetY ; // offsets in the x and y directions
 
-    public Cell(int q , int r , int s ){
+    public Cell(int q , int r , int s , int id){
         this.neighbors = new LinkedList<>();
         this.color = 0 ;
         this.visited = false ;
         this.q = q;
         this.r = r;
         this.s = s;
+        this.id = id;
         cellToPixel();
     }
 
