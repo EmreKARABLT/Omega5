@@ -3,21 +3,60 @@ package GAME;
 import java.util.LinkedList;
 
 public class Cell {
-    private int q , r , s ; // indices / coordinates
+    private int q , r , s , id ; // indices / coordinates
     private int color ; // 0:empty 1:white 2:black 3:red 4:blue
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
+    private LinkedList<Integer> neighborsIndexes ;
 
     private double x,y ; // coordinates in GUI
-    private double offset;
+    private double offsetX , offsetY ; // offsets in the x and y directions
 
-    public Cell(int q , int r , int s){
+    public Cell(int q , int r , int s ){
         this.neighbors = new LinkedList<>();
         this.color = 0 ;
         this.visited = false ;
         this.q = q;
         this.r = r;
         this.s = s;
+        cellToPixel();
+    }
+
+    /**
+     * Calculates the coordinates of a cell on screen by using q, r and s/id
+     * LEA
+     */
+    private void cellToPixel(){
+
+    }
+    /**
+     * Checks if the provided cell is neighbor of the current cell
+     * @param cell a cell
+     * @return true if 2 cells are neighbors else returns false
+     */
+    public boolean isNeighbors(Cell cell){
+        return true;
+    }
+
+    /**
+     * Adds a cell to neighbor list of the given cell
+     * @param cell the cell which will be added to neighbor list
+     */
+    public void addNeighbor(Cell cell){
+        if( neighbors != null){
+            if( !neighbors.contains(cell))
+                neighbors.add(cell);
+        }
+    }
+    /**
+     * Adds an index of a cell to neighbor list of the given cell
+     * @param index the index which will be added to neighborIndexes list
+     */
+    public void addNeighborByIndex(int index){
+        if( neighborsIndexes != null){
+            if( !neighborsIndexes.contains(index))
+                neighborsIndexes.add(index);
+        }
     }
 
     public int getQ() {
@@ -44,6 +83,14 @@ public class Cell {
         this.s = s;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getColor() {
         return color;
     }
@@ -68,6 +115,14 @@ public class Cell {
         this.neighbors = neighbors;
     }
 
+    public LinkedList<Integer> getNeighborsIndexes() {
+        return neighborsIndexes;
+    }
+
+    public void setNeighborsIndexes(LinkedList<Integer> neighborsIndexes) {
+        this.neighborsIndexes = neighborsIndexes;
+    }
+
     public double getX() {
         return x;
     }
@@ -84,11 +139,19 @@ public class Cell {
         this.y = y;
     }
 
-    public double getOffset() {
-        return offset;
+    public double getOffsetX() {
+        return offsetX;
     }
 
-    public void setOffset(double offset) {
-        this.offset = offset;
+    public void setOffsetX(double offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public double getOffsetY() {
+        return offsetY;
+    }
+
+    public void setOffsetY(double offsetY) {
+        this.offsetY = offsetY;
     }
 }
