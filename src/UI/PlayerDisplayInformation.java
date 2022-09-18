@@ -48,6 +48,10 @@ public class PlayerDisplayInformation {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Ceates a fake board
+     * @return fake board
+     */
     private static JPanel fakeBoard() {
         JPanel board = new JPanel();
 
@@ -57,6 +61,12 @@ public class PlayerDisplayInformation {
         return board;
     }
 
+    /**
+     * adds a player with specified color and name
+     * @param playerColor the color of the player
+     * @param playerName the name of the player
+     * @return Jpanel representing the player
+     */
     private static JPanel addPlayer(Color playerColor, String playerName) {
         JPanel player = new JPanel(new GridBagLayout());
         player.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(5.0f), playerColor));
@@ -68,6 +78,13 @@ public class PlayerDisplayInformation {
         return player;
     }
 
+    /**
+     * Adds the details to the Jpanel of the player
+     * @param player the player whos detials we are adding to
+     * @param pieceColor the color of the current piece
+     * @param playerScore the score of the player
+     * @param playerName the name of the player
+     */
     public static void addPlayerDetails(JPanel player, Color pieceColor, int playerScore, String playerName) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
