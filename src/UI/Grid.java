@@ -15,158 +15,28 @@ public class Grid extends JPanel{
     private LinkedList<HexCoord> setOfCoordinates;
     private LinkedList<Polygon> setOfPolygons;
     private LinkedList<Hex> setOfHexagons;
-    private LinkedList<int[]> setOfQRS;
     private HashMap<HexCoord, Hex> mapOfHex;
     private ArrayList<Cell> setOfCells;
-    private final int [][] QRS_SYSTEM  = {{1,-1,0}, {0,-1,1}, {-1,0,1}, {-1,1,0}, {0,1,-1}, {1,0,-1}};
-    private final int [][] QRS_SYSTEM2 = {{-1,0,1}, {-1,1,0}, {0,1,-1}, {1,0,-1}, {1,-1,0}, {0,-1,1}};
+    private final double RADIUS = 25.5;
+    private final int WIDTH  = 1000;
+    private final int HEIGHT = 1000;
 
-
-
-    private final double PI = Math.PI;
-    private final double RADIUS;
-    private final HexCoord SCREEN_CENTER;
-    public final int TOTAL_OF_HEX;
-    private int radius;
-    private final int LADOS = 6;
-    private final int WIDTH;
-    private final int HEIGHT;
-
-    /*
-    public Grid(int width, int heigth, int radius){
-        HEIGHT = heigth;
-        WIDTH = width;
-        this.radius = radius;
-        this.RADIUS = 25.5;
-        this.SCREEN_CENTER = new HexCoord((width) / 2.d, (heigth) / 2.d);
-        this.TOTAL_OF_HEX = calculateTotal();
-
-        this.setOfCoordinates = createCoordinates(radius);
-        setOfQRS = createQRS(setOfCoordinates);
-        this.setOfHexagons = createHex(3);
-        this.mapOfHex = mappingHexagons();
-        setPreferredSize(new Dimension(width, heigth));
-        this.setOfPolygons = createPoly();
-
-    }
-*/
     public Grid(int radius){
-
         Board board = new Board(radius);
-        this.HEIGHT = 1000;
-        this.WIDTH = 1000;
-        this.SCREEN_CENTER = new HexCoord((WIDTH) / 2.d, (HEIGHT) / 2.d);
-        this.RADIUS = 25.5;
+        this.setOfCells = board.getCells();
+        this.setOfCoordinates = createCoordinates(setOfCells);
+
+        this.setOfHexagons = createHex(3);
+        this.setOfPolygons = createPoly();
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        ArrayList<Cell> setOfCells = board.getCells();
-        this.setOfCoordinates = createCoordinates(radius);
-        setOfQRS = createQRS(setOfCoordinates);
-        this.setOfCells = fromCellsToCoord(setOfCells);
-        this.TOTAL_OF_HEX = setOfCells.size();
-        this.setOfHexagons = createHex(3);
-        this.setOfPolygons = createPoly();
-
-    }
-/*
-    public Grid(LinkedList<HexCoord> coordinates, int width, int heigth, int radius){
-        HEIGHT = heigth;
-        WIDTH = width;
-        this.radius = radius;
-        this.RADIUS = 26;
-        this.SCREEN_CENTER = new HexCoord((width+100) / 2.d, heigth / 2.d);
-        this.TOTAL_OF_HEX = calculateTotal();
-        this.setOfCoordinates = coordinates;
-        this.setOfHexagons = createHex(3);
-        setPreferredSize(new Dimension(width, heigth));
-        this.setOfPolygons = createPoly();
-        removeDuplicates();
-
-
-    }
-*/
-    public ArrayList<Cell> fromCellsToCoord(ArrayList<Cell> setOfCells){
-
-        for (int i = 0; i < setOfCells.size(); i++) {
-            for (int j = 0; j < setOfCoordinates.size(); j++) {
-                int[] cellQRS = setOfCells.get(i).getQRSasArray();
-
-                if(     cellQRS[0] == setOfCoordinates.get(j).getQRS()[0] &&
-                        cellQRS[1] == setOfCoordinates.get(j).getQRS()[1] &&
-                        cellQRS[2] == setOfCoordinates.get(j).getQRS()[2]
-                ){
-                    setOfCells.get(i).setX(setOfCoordinates.get(j).getX());
-                    setOfCells.get(i).setY(setOfCoordinates.get(j).getY());
-                }
-            }
-        }
-        return setOfCells;
     }
 
-    public void createKDTree(LinkedList<HexCoord> coordinates){}
-
-    public HashMap<HexCoord, Hex> mappingHexagons(){
-        HashMap<HexCoord, Hex> myMap = new HashMap<>();
-        for (int i = 0; i < setOfCoordinates.size(); i++) {
-            myMap.put(setOfCoordinates.get(i), setOfHexagons.get(i));
-            System.out.println(setOfCoordinates.get(i).toString());
-        }
-        return myMap;
-    }
-
-    public LinkedList<int[]> createQRS(LinkedList<HexCoord> coord){
-
-        LinkedList<int[]> QRS = new LinkedList<>();
-        for (int i = 0; i < coord.size(); i++) {
-            QRS.add(coord.get(i).getQRS());
-        }
-        return QRS;
-
-    }
-
-    public LinkedList<HexCoord> createCoordinates(int radius){
-
-        LinkedList<HexCoord> setOfCoordinates = new LinkedList<>();
-        setOfCoordinates.add(SCREEN_CENTER);
-        setOfCoordinates.get(0).putQRS(0, 0, 0);
-        int times = 2;
-        for (int i = 1; i < radius + 1; i++) {
-
-            for (int j = 0; j < LADOS; j++) {
-
-                double x = (SCREEN_CENTER.getX() + (2 * i) * RADIUS * Math.cos(j * 2 * PI / (LADOS) + (PI / LADOS)));
-                double y = (SCREEN_CENTER.getY() + (2 * i) * RADIUS * Math.sin(j * 2 * PI / (LADOS) + (PI / LADOS)));
-
-                HexCoord coordenadas = new HexCoord(x, y);
-
-                if (!setOfCoordinates.contains(j)){
-                    coordenadas.putQRS(i * QRS_SYSTEM[j][0], i * QRS_SYSTEM[j][1], i * QRS_SYSTEM[j][2]);
-                    setOfCoordinates.add(coordenadas);
-                }
-
-                if(i >= 2){
-
-                    int desviation = j + 3;
-
-                    for (int k = 1; k < times; k++) {
-
-                        double Xnew = x;
-                        double Ynew = y;
-                        int[] c = coordenadas.getQRS();
-
-                        x = (Xnew + (2) * RADIUS * Math.cos(desviation * 2 * PI / (LADOS) - (PI / LADOS)));
-                        y = (Ynew + (2) * RADIUS * Math.sin(desviation * 2 * PI / (LADOS) - (PI / LADOS)));
-                        coordenadas = new HexCoord(x, y);
-                        if (!setOfCoordinates.contains(coordenadas)){
-                            coordenadas.putQRS(QRS_SYSTEM2[j][0] + c[0], QRS_SYSTEM2[j][1] + c[1], QRS_SYSTEM2[j][2] + c[2]);
-                            setOfCoordinates.add(coordenadas);
-                        }
-
-                    }
-                }
-
-            }
-
-            times++;
+    public LinkedList<HexCoord> createCoordinates(ArrayList<Cell> boardCells){
+        setOfCoordinates = new LinkedList<>();
+        for (Cell cell :
+                boardCells) {
+            HexCoord coordenadas = new HexCoord(cell.getX(), cell.getY());
+            setOfCoordinates.add(coordenadas);
         }
         return setOfCoordinates;
     }
@@ -194,28 +64,6 @@ public class Grid extends JPanel{
         }
 
         return setOfHexagons;
-    }
-
-    public int calculateTotal(){
-        int total = 1;
-
-        for (int i = 1; i <= radius; i++) {
-            total += LADOS * i;
-        }
-
-        return total;
-    }
-
-
-    public double calculateRadius(){
-        double r = 0;
-
-        if (WIDTH > HEIGHT) {
-            r = (WIDTH - 200) / (radius * 2);
-        }else{
-            r = (HEIGHT - 200) / (radius * 2);
-        }
-        return r;
     }
 
     @Override
@@ -267,27 +115,53 @@ public class Grid extends JPanel{
     public LinkedList<HexCoord> getSetOfCoordinates() {
         return setOfCoordinates;
     }
+
     public void setSetOfCoordinates(LinkedList<HexCoord> setOfCoordinates) {
         this.setOfCoordinates = setOfCoordinates;
     }
-    public void setSetOfHexagons(LinkedList<Hex> setOfHexagons) {
-        this.setOfHexagons = setOfHexagons;
-        updateUI();
-    }
-    public LinkedList<Hex> getSetOfHexagons() {
-        return setOfHexagons;
-    }
-    public void setSetOfPolygons(LinkedList<Polygon> setOfPolygons) {
-        this.setOfPolygons = setOfPolygons;
-    }
+
     public LinkedList<Polygon> getSetOfPolygons() {
         return setOfPolygons;
     }
+
+    public void setSetOfPolygons(LinkedList<Polygon> setOfPolygons) {
+        this.setOfPolygons = setOfPolygons;
+    }
+
+    public LinkedList<Hex> getSetOfHexagons() {
+        return setOfHexagons;
+    }
+
+    public void setSetOfHexagons(LinkedList<Hex> setOfHexagons) {
+        this.setOfHexagons = setOfHexagons;
+    }
+
+    public HashMap<HexCoord, Hex> getMapOfHex() {
+        return mapOfHex;
+    }
+
     public void setMapOfHex(HashMap<HexCoord, Hex> mapOfHex) {
         this.mapOfHex = mapOfHex;
     }
-    public HashMap<HexCoord, Hex> getMapOfHex() {
-        return mapOfHex;
+
+    public ArrayList<Cell> getSetOfCells() {
+        return setOfCells;
+    }
+
+    public void setSetOfCells(ArrayList<Cell> setOfCells) {
+        this.setOfCells = setOfCells;
+    }
+
+    public double getRADIUS() {
+        return RADIUS;
+    }
+
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
+    public int getHEIGHT() {
+        return HEIGHT;
     }
 }
 
