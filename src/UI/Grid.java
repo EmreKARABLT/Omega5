@@ -1,5 +1,9 @@
 package UI;
 
+import GAME.Board;
+import GAME.Cell;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import javax.swing.JPanel;
@@ -33,7 +37,7 @@ public class Grid extends JPanel{
         WIDTH = width;
         this.radius = radius;
         this.RADIUS = 25.5;
-        this.SCREEN_CENTER = new HexCoord((width) / 2, (heigth) / 2);
+        this.SCREEN_CENTER = new HexCoord((width) / 2.d, (heigth) / 2.d);
         this.TOTAL_OF_HEX = calculateTotal();
 
         this.setOfCoordinates = createCoordinates(radius);
@@ -45,18 +49,49 @@ public class Grid extends JPanel{
 
     }
 
+    public Grid(int radius){
+        Board board = new Board(radius);
+
+        this.HEIGHT = 1000;
+        this.WIDTH = 1000;
+        this.SCREEN_CENTER = new HexCoord((WIDTH) / 2.d, (HEIGHT) / 2.d);
+        this.RADIUS = 25.5;
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        ArrayList<Cell> setOfCells = board.getCells();
+        this.TOTAL_OF_HEX = setOfCells.size();
+        this.setOfCoordinates = createCoordinates(radius);
+        setOfQRS = createQRS(setOfCoordinates);
+        this.setOfHexagons = createHex(3);
+        fromCellsToCoord(setOfCells);
+        this.setOfPolygons = createPoly();
+        this.mapOfHex = mappingHexagons();
+
+    }
+
     public Grid(LinkedList<HexCoord> coordinates, int width, int heigth, int radius){
         HEIGHT = heigth;
         WIDTH = width;
         this.radius = radius;
         this.RADIUS = 26;
-        this.SCREEN_CENTER = new HexCoord((width+100) / 2, heigth / 2);
+        this.SCREEN_CENTER = new HexCoord((width+100) / 2.d, heigth / 2.d);
         this.TOTAL_OF_HEX = calculateTotal();
         this.setOfCoordinates = coordinates;
         this.setOfHexagons = createHex(3);
         setPreferredSize(new Dimension(width, heigth));
         this.setOfPolygons = createPoly();
 
+
+    }
+
+    public void fromCellsToCoord(ArrayList<Cell> setOfCells){
+        for (int i = 0; i < setOfCells.size(); i++) {
+            int[] qrs = setOfCells.get(i).getQRSasArray();
+            if(qrs[0] == setOfQRS.get(i)[0] || qrs[1] == setOfQRS.get(i)[1] || qrs[2] == setOfQRS.get(i)[2]){
+                setOfCells.get(i).setX(setOfCoordinates.get(i).getX());
+                setOfCells.get(i).setY(setOfCoordinates.get(i).getY());
+            }
+
+        }
     }
 
     public void createKDTree(LinkedList<HexCoord> coordinates){}

@@ -155,4 +155,8 @@ public class Cell {
     public void setOffsetY(double offsetY) {
         this.offsetY = offsetY;
     }
+
+    public int[] getQRSasArray(){
+        return new int[]{ q, r, s };
+    }
 }
