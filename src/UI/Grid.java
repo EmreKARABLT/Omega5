@@ -56,7 +56,7 @@ public class Grid extends JPanel{
         this.HEIGHT = 1000;
         this.WIDTH = 1000;
         this.SCREEN_CENTER = new HexCoord((WIDTH) / 2.d, (HEIGHT) / 2.d);
-        this.RADIUS = 30;
+        this.RADIUS = 25.5;
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         ArrayList<Cell> setOfCells = board.getCells();
         this.setOfCoordinates = createCoordinates(radius);

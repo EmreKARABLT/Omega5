@@ -32,7 +32,6 @@ public class Board {
             for( int r = rMax ; r<=rMin ; r++){
                 cells.add( new Cell( q, r,-q-r ,id++));
             }
-
         }
     }
 
@@ -55,8 +54,25 @@ public class Board {
                 }
             }
         }
+    }
 
+    /**
+     * This method will assign the center of each hexagon on the board
+     */
+    public void createCenters(){
+        for (Cell cell : cells) {
+            double offsetX = cell.getOFFSET_X();
+            double offsetY = cell.getOFFSET_Y();
+            double radius = cell.getRadius();
+            int q = cell.getQ();
+            int r = cell.getR();
+            double sqrt3 = Math.sqrt(3);
+            double x = radius * (    3/2.d * q) + offsetX;
+            double y = radius * (sqrt3/2.d * q + sqrt3 * r ) +offsetY;
 
+            cell.setX(x);
+            cell.setY(y);
+        }
     }
     /**
      * will be called by constructor to create the board
@@ -64,7 +80,11 @@ public class Board {
     private void createBoard(){
         createCells();
         connectCells();
+        createCenters();
     }
+
+
+
 
     /**
      * Calculates the score of the given color
@@ -91,18 +111,13 @@ public class Board {
         this.cells = cells;
     }
 
-    /**
-     *
-     */
 
     public static void main(String[] args) {
-        Board board = new Board(3);
+        Board board = new Board(1);
         for (Cell c : board.getCells()) {
-            for (Cell cell: c.getNeighbors()) {
-                System.out.println(cell.getQ() +" "+ cell.getR() +" "+ cell.getS() +" "+ cell.getId() );
-
-            }
+            System.out.println(c.getQ() + "," + c.getR() + "," + c.getS() + " ---> " +c.getX() + " ////// " + c.getY()  );
         }
+
     }
 
 

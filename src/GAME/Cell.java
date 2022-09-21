@@ -10,8 +10,8 @@ public class Cell {
     private LinkedList<Integer> neighborsIndexes ;
 
     private double x,y ; // coordinates in GUI
-    private double offsetX , offsetY ; // offsets in the x and y directions
-
+    private final double OFFSET_X = 500  , OFFSET_Y = 500; // offsets in the x and y directions
+    private double radius = 35;
     public Cell(int q , int r , int s , int id){
         this.neighbors = new LinkedList<>();
         this.color = 0 ;
@@ -140,21 +140,22 @@ public class Cell {
         this.y = y;
     }
 
-    public double getOffsetX() {
-        return offsetX;
+    public double getOFFSET_X() {
+        return OFFSET_X;
     }
 
-    public void setOffsetX(double offsetX) {
-        this.offsetX = offsetX;
+    public double getOFFSET_Y() {
+        return OFFSET_Y;
     }
 
-    public double getOffsetY() {
-        return offsetY;
+    public double getRadius() {
+        return radius;
     }
 
-    public void setOffsetY(double offsetY) {
-        this.offsetY = offsetY;
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
+
 
     public int[] getQRSasArray(){
         return new int[]{ q, r, s };
