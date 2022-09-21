@@ -8,6 +8,12 @@ import java.util.ArrayList;
 public class GameLoop {
     private Board board ;
     private ArrayList<Player> players ;
+    private int numberOfPlayerss = 4; //Temporary 
+    private int numOfCells = board.getNumberOfCells()+1;
+    private int totalTurnCounter = 0; 
+    private int currentPlayersTurn = 0; 
+
+
 
     /**
      * Creates the board with given board size and as many players as desired
@@ -17,7 +23,7 @@ public class GameLoop {
     public GameLoop(int board_size , int numberOfPlayers){
         this.board = new Board(board_size);
         for (int i = 0; i < Math.min( numberOfPlayers , 4 ); i++) {
-            players.add( new HumanPlayer() );
+            players.add(new HumanPlayer(i));
         }
     }
 
@@ -28,7 +34,7 @@ public class GameLoop {
     public GameLoop(int board_size ){
         this.board = new Board(board_size);
         for (int i = 0; i < 2; i++) {
-            players.add( new HumanPlayer() );
+            players.add(new HumanPlayer(i));
         }
     }
 
@@ -43,7 +49,7 @@ public class GameLoop {
         if(true){
             return new Cell(0,0,0,0);
         }
-        return null;
+        return Cell
     }
 
     /**
@@ -52,21 +58,40 @@ public class GameLoop {
      * @return true if the cell is coloured
      */
     private boolean isCellColoured(Cell cell){
-        return (cell.getColor()) != 0 ;
+        return ((cell.getColor()) != 0) ;
     }
     /**
      * At the end of each round this method checks if there are enough cells for every player to play
      * @return true if there is no enough space for everyone else false
      */
     private boolean isGameOver(){
-        return false;
+         int totalTurnNum = (int) (numOfCells/Math.pow(numberOfPlayerss, 2)); 
+
+         return (totalTurnCounter == totalTurnNum);
+
     }
+
+    private void nextTurn(){
+        if(currentPlayersTurn != numberOfPlayerss){
+            currentPlayersTurn++;
+        }
+        else{
+            currentPlayersTurn=0;
+            totalTurnCounter++;
+            }
+
+    }
+
+
 
     /**
      * (Can be changed by anyone who will code this method , can be split several methods )
      * Controls game flow, checks which players turn, which color will be placed, updates scores and ends the game when game is over
      */
-    private void gameFlow(){}
+    private void gameFlow(){
+    }
+    
+
 
 
 
