@@ -32,15 +32,7 @@ public class Grid extends JPanel{
     private final int WIDTH;
     private final int HEIGHT;
 
-    public Grid(Board board){
-        this.HEIGHT = 1000;
-        this.WIDTH = 1000;
-        this.SCREEN_CENTER = new HexCoord((WIDTH) / 2.d, (HEIGHT) / 2.d);
-        this.RADIUS = 30;
-        this.TOTAL_OF_HEX = calculateTotal();
-
-
-    }
+    /*
     public Grid(int width, int heigth, int radius){
         HEIGHT = heigth;
         WIDTH = width;
@@ -57,7 +49,7 @@ public class Grid extends JPanel{
         this.setOfPolygons = createPoly();
 
     }
-
+*/
     public Grid(int radius){
 
         Board board = new Board(radius);
@@ -75,7 +67,7 @@ public class Grid extends JPanel{
         this.setOfPolygons = createPoly();
 
     }
-
+/*
     public Grid(LinkedList<HexCoord> coordinates, int width, int heigth, int radius){
         HEIGHT = heigth;
         WIDTH = width;
@@ -91,7 +83,7 @@ public class Grid extends JPanel{
 
 
     }
-
+*/
     public ArrayList<Cell> fromCellsToCoord(ArrayList<Cell> setOfCells){
 
         for (int i = 0; i < setOfCells.size(); i++) {
@@ -121,26 +113,6 @@ public class Grid extends JPanel{
         return myMap;
     }
 
-    public void removeDuplicates(){
-        LinkedList<Integer> a = new LinkedList<>();
-        for (int i = 0; i < setOfCoordinates.size(); i++) {
-            for (int j = i+1; j < setOfCoordinates.size(); j++) {
-                if (i != j){
-                    if (setOfCoordinates.get(i).getX() == setOfCoordinates.get(j).getX()){
-                        if (setOfCoordinates.get(i).getY() == setOfCoordinates.get(j).getY()){
-                            a.add(i);
-                        }
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < a.size(); i++) {
-            setOfCoordinates.remove(a.get(i));
-        }
-    }
-
-
     public LinkedList<int[]> createQRS(LinkedList<HexCoord> coord){
 
         LinkedList<int[]> QRS = new LinkedList<>();
@@ -150,6 +122,7 @@ public class Grid extends JPanel{
         return QRS;
 
     }
+
     public LinkedList<HexCoord> createCoordinates(int radius){
 
         LinkedList<HexCoord> setOfCoordinates = new LinkedList<>();
@@ -169,8 +142,6 @@ public class Grid extends JPanel{
                     coordenadas.putQRS(i * QRS_SYSTEM[j][0], i * QRS_SYSTEM[j][1], i * QRS_SYSTEM[j][2]);
                     setOfCoordinates.add(coordenadas);
                 }
-
-
 
                 if(i >= 2){
 
@@ -257,15 +228,15 @@ public class Grid extends JPanel{
             g.fillPolygon(setOfHexagons.get(i).getPolygon());
             g.setColor(Color.BLACK);
             g.drawPolygon(setOfHexagons.get(i).getPolygon());
-
-
         }
 
         for (int i = 0; i < setOfCells.size(); i++) {
-            g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
+            //g.drawString((int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
+            //g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
+            //System.out.println(setOfCells.get(i).toString() + " " + (int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY());
         }
 
-        repaint(1);
+        //repaint(1);
 
     }
 
