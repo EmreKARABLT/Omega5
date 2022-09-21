@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Board {
     private int boardSize ;
-    private ArrayList<Cell> cells ;
+    private ArrayList<Cell> cells;
     
     public Board( int boardSize){
         /*
@@ -91,9 +91,9 @@ public class Board {
         this.cells = cells;
     }
 
-    /**
-     *
-     */
+    public int getNumberOfCells(){
+        return (cells == null) ? 0 : cells.size();
+    }
 
     public static void main(String[] args) {
         Board board = new Board(3);
