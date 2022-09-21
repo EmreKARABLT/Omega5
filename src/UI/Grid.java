@@ -32,7 +32,15 @@ public class Grid extends JPanel{
     private final int WIDTH;
     private final int HEIGHT;
 
+    public Grid(Board board){
+        this.HEIGHT = 1000;
+        this.WIDTH = 1000;
+        this.SCREEN_CENTER = new HexCoord((WIDTH) / 2.d, (HEIGHT) / 2.d);
+        this.RADIUS = 30;
+        this.TOTAL_OF_HEX = calculateTotal();
 
+
+    }
     public Grid(int width, int heigth, int radius){
         HEIGHT = heigth;
         WIDTH = width;
@@ -59,15 +67,12 @@ public class Grid extends JPanel{
         this.RADIUS = 30;
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         ArrayList<Cell> setOfCells = board.getCells();
-        this.TOTAL_OF_HEX = setOfCells.size();
         this.setOfCoordinates = createCoordinates(radius);
         setOfQRS = createQRS(setOfCoordinates);
-        removeDuplicates();
+        this.setOfCells = fromCellsToCoord(setOfCells);
+        this.TOTAL_OF_HEX = setOfCells.size();
         this.setOfHexagons = createHex(3);
-        fromCellsToCoord(setOfCells);
-        this.setOfCells = setOfCells;
         this.setOfPolygons = createPoly();
-        this.mapOfHex = mappingHexagons();
 
     }
 
@@ -82,29 +87,27 @@ public class Grid extends JPanel{
         this.setOfHexagons = createHex(3);
         setPreferredSize(new Dimension(width, heigth));
         this.setOfPolygons = createPoly();
+        removeDuplicates();
 
 
     }
 
-    public void fromCellsToCoord(ArrayList<Cell> setOfCells){
+    public ArrayList<Cell> fromCellsToCoord(ArrayList<Cell> setOfCells){
 
         for (int i = 0; i < setOfCells.size(); i++) {
-            int[] qrs = setOfCells.get(i).getQRSasArray();
             for (int j = 0; j < setOfCoordinates.size(); j++) {
-                
-                if(qrs[0] == setOfQRS.get(j)[0] && qrs[1] == setOfQRS.get(j)[1] && qrs[2] == setOfQRS.get(j)[2]){
+                int[] cellQRS = setOfCells.get(i).getQRSasArray();
+
+                if(     cellQRS[0] == setOfCoordinates.get(j).getQRS()[0] &&
+                        cellQRS[1] == setOfCoordinates.get(j).getQRS()[1] &&
+                        cellQRS[2] == setOfCoordinates.get(j).getQRS()[2]
+                ){
                     setOfCells.get(i).setX(setOfCoordinates.get(j).getX());
                     setOfCells.get(i).setY(setOfCoordinates.get(j).getY());
                 }
             }
-
-            LinkedList<HexCoord> setOfCoordinates;
-            for (int j = 0; j < setOfCells.size(); j++) {
-                
-            }
-
-
         }
+        return setOfCells;
     }
 
     public void createKDTree(LinkedList<HexCoord> coordinates){}
@@ -119,11 +122,21 @@ public class Grid extends JPanel{
     }
 
     public void removeDuplicates(){
-        for (int i = 0; i < setOfCoordinates.size()-1; i++) {
-            if(setOfCoordinates.get(i).getX() == setOfCoordinates.get(i + 1).getX() && setOfCoordinates.get(i).getX() == setOfCoordinates.get(i + 1).getX()){
-                setOfCoordinates.remove(i);
-                setOfQRS.remove(i);
+        LinkedList<Integer> a = new LinkedList<>();
+        for (int i = 0; i < setOfCoordinates.size(); i++) {
+            for (int j = i+1; j < setOfCoordinates.size(); j++) {
+                if (i != j){
+                    if (setOfCoordinates.get(i).getX() == setOfCoordinates.get(j).getX()){
+                        if (setOfCoordinates.get(i).getY() == setOfCoordinates.get(j).getY()){
+                            a.add(i);
+                        }
+                    }
+                }
             }
+        }
+
+        for (int i = 0; i < a.size(); i++) {
+            setOfCoordinates.remove(a.get(i));
         }
     }
 
@@ -191,7 +204,7 @@ public class Grid extends JPanel{
 
         LinkedList<Polygon> setOfPolygons = new LinkedList<>();
 
-        for (int i = 0; i < setOfCoordinates.size(); i++) {
+        for (int i = 0; i < setOfCells.size(); i++) {
             setOfPolygons.add(setOfHexagons.get(i).getPolygon());
         }
 
@@ -202,10 +215,10 @@ public class Grid extends JPanel{
 
         LinkedList<Hex> setOfHexagons = new LinkedList<>();
 
-        for (int i = 0; i < setOfCoordinates.size(); i++) {
+        for (int i = 0; i < setOfCells.size(); i++) {
 
-            Hex hex = new Hex(setOfCoordinates.get(i).getX(),setOfCoordinates.get(i).getY(), color);
-            hex.setQRS(setOfCoordinates.get(i).getQRS());
+            Hex hex = new Hex(setOfCells.get(i).getX(),setOfCells.get(i).getY(), color);
+            hex.setQRS(setOfCells.get(i).getQRSasArray());
             setOfHexagons.add(hex);
         }
 
