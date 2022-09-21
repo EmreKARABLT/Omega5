@@ -159,4 +159,9 @@ public class Cell {
     public int[] getQRSasArray(){
         return new int[]{ q, r, s };
     }
+
+    @Override
+    public String toString() {
+        return  q + " " + r + " " + s;
+    }
 }

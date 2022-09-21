@@ -13,7 +13,7 @@ public class Show extends  JFrame{
     public static void main(String[] args) {
         JFrame frame = new JFrame("Draw Hexagon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Grid grid = new Grid( 5);
+        Grid grid = new Grid( 4);
         frame.add(grid);
         frame.pack();
         frame.setLocationRelativeTo(null);
