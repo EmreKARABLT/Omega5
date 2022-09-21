@@ -16,12 +16,6 @@ public interface Player {
     public void placeCurrentPieceOnCell(Cell cell);
 
     /**
-     * Checks if the current players turn is over or not
-     * @return true if turn is over, false if turn is not over
-     */
-    public boolean turnIsOver();
-
-    /**
      * sets the color the player represents
      * @param playersColor an integer representing color the player will change to
      */

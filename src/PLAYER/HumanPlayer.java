@@ -5,7 +5,9 @@ import GAME.Cell;
 public class HumanPlayer implements Player{
     private int score;
     private int playerColor;
-    private int pieceColor;
+    private int pieceColor; // 0 = white, 1 = black, 2 = red, 3 = blue
+
+    private int numberOfPlayers = 4; //TEMPORARY NUMBER
 
     public HumanPlayer(int playerColor){
         this.playerColor = playerColor;
@@ -15,17 +17,17 @@ public class HumanPlayer implements Player{
 
     @Override
     public void changeToNextPieceColor() {
-
+        if (pieceColor != numberOfPlayers){
+            pieceColor++;
+        }
+        else {
+            pieceColor = 0;
+        }
     }
 
     @Override
     public void placeCurrentPieceOnCell(Cell cell) {
 
-    }
-
-    @Override
-    public boolean turnIsOver() {
-        return false;
     }
 
     @Override
