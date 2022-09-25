@@ -20,7 +20,7 @@ public class Hex extends JPanel {
         this.cell = cell;
         this.radius = cell.getRADIUS();
         this.polygon = createPolygon();
-        changeColor(cell.getColor());
+        changeColor(0 );
     }
 
 
