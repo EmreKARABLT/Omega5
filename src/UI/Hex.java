@@ -1,75 +1,96 @@
 package UI;
 
 
+import GAME.Cell;
+
+import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
-public class Hex {
+public class Hex extends JPanel {
 
-    private HexCoord coordinates;
-    private Color color ;
-    private int radius = 30;
+    private Color color;
+    private final Color EMPTY_CELL_COLOR = new Color(232,201,116);
+    private double radius ;
     private Polygon polygon;
-    private int[] QRS = new int[3];
+    private final Cell cell ;
 
-    public Hex(double x, double y, int color){
 
-        this.coordinates = new HexCoord(x, y);
+    public Hex(Cell cell) {
+        this.cell = cell;
+        this.radius = cell.getRADIUS();
         this.polygon = createPolygon();
-        QRS = coordinates.getQRS();
-
-        changeColor(color);
+        changeColor(0 );
     }
 
 
-    public Polygon createPolygon(){
+    /**
+     * Create the shape of hexagon using 6 points shifted by a certain degree
+     *
+     * @return a new Polygon object
+     */
+
+    public Polygon createPolygon() {
 
         Polygon p = new Polygon();
 
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             p.addPoint(
-                    (int) (coordinates.getX() + radius * Math.cos(i * 2 * Math.PI / 6)),
-                    (int) (coordinates.getY() + radius * Math.sin(i * 2 * Math.PI / 6))
+                    (int) (cell.getX() + Cell.RADIUS * Math.cos(i * 2 * Math.PI / 6)),
+                    (int) (cell.getY() + Cell.RADIUS * Math.sin(i * 2 * Math.PI / 6))
             );
         }
         return p;
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+        g.setColor(getColor());
+        g.fillPolygon(getPolygon());
+        g.setColor(Color.BLACK);
+        g.drawPolygon(getPolygon());
+        repaint(1);
+    }
+
     public void changeColor(int colorID) {
 
-        if(colorID == 1){
+        if (colorID == 1) {
+            this.cell.setColor(colorID);
             this.color = Color.WHITE;
         }
-        if(colorID == 2){
+        if (colorID == 2) {
+            this.cell.setColor(colorID);
             this.color = Color.BLACK;
         }
-        if(colorID == 3){
+        if (colorID == 3) {
+            this.cell.setColor(colorID);
             this.color = Color.RED;
         }
-        if(colorID == 4){
+        if (colorID == 4) {
+            this.cell.setColor(colorID);
             this.color = Color.BLUE;
         }
-        if(colorID == 0){
-            this.color = Color.DARK_GRAY;
+        if (colorID == 0) {
+            this.cell.setColor(colorID);
+            this.color = EMPTY_CELL_COLOR ;
         }
     }
 
-    public int calculateDistance(HexCoord pointerCoordinates){
-
-        double X1 = coordinates.getX();
-        double Y1 = coordinates.getY();
-
-        double X2 = pointerCoordinates.getX();
-        double Y2 = pointerCoordinates.getY();
-
-        return (int) Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
-    }
-
-    public void setCoordinates(HexCoord coordinates) {
-        this.coordinates = coordinates;
-    }
+//    public int calculateDistanceToCell(Cell cell) {
+//
+//        double X1 = this.cell.getX();
+//        double Y1 = this.cell.getY();
+//
+//        double X2 = cell.getX();
+//        double Y2 = cell.getY();
+//
+//        return (int) Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
+//    }
 
     public void setColor(Color color) {
-        this.color = color;
+
     }
 
     public void setRadius(int radius) {
@@ -80,28 +101,48 @@ public class Hex {
         return color;
     }
 
-    public HexCoord getCoordinates() {
-        return coordinates;
+    public int getColorID() {
+
+        if (this.color == Color.WHITE) {
+            return 1;
+        }
+        if (this.color == Color.BLACK) {
+            return 2;
+        }
+        if (this.color == Color.RED) {
+            return 3;
+        }
+        if (this.color == Color.BLUE) {
+            return 4;
+        }
+        if (this.color == EMPTY_CELL_COLOR ) {
+            return 0;
+        }
+        return -1;
     }
 
-    public int getRadius() {
+
+    public double getRadius() {
         return radius;
     }
+
     public Polygon getPolygon() {
         return polygon;
     }
+
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
     }
+
     public int[] getQRS() {
-        return QRS;
+        return cell.getQRSasArray();
     }
-    public void setQRS(int[] qRS) {
-        QRS = qRS;
-    }
+
     @Override
     public String toString() {
 
-        return "(" + QRS[0] + ", " + QRS[1] + ", " +QRS[2] + ")" ;
+        return "(" + Arrays.toString(cell.getQRSasArray()) + ")";
     }
+
+
 }

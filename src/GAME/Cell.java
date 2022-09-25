@@ -7,11 +7,10 @@ public class Cell {
     private int color ; // 0:empty 1:white 2:black 3:red 4:blue
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
-    private LinkedList<Integer> neighborsIndexes ;
-
     private double x,y ; // coordinates in GUI
     private final double OFFSET_X = 500  , OFFSET_Y = 500; // offsets in the x and y directions
-    private double radius = 35;
+    public static final double RADIUS = 30;
+
     public Cell(int q , int r , int s , int id){
         this.neighbors = new LinkedList<>();
         this.color = 0 ;
@@ -36,7 +35,7 @@ public class Cell {
      * @return true if 2 cells are neighbors else returns false
      */
     public boolean isNeighbors(Cell cell){
-        return true;
+        return this.neighbors.contains(cell);
     }
 
     /**
@@ -49,16 +48,7 @@ public class Cell {
                 neighbors.add(cell);
         }
     }
-    /**
-     * Adds an index of a cell to neighbor list of the given cell
-     * @param index the index which will be added to neighborIndexes list
-     */
-    public void addNeighborByIndex(int index){
-        if( neighborsIndexes != null){
-            if( !neighborsIndexes.contains(index))
-                neighborsIndexes.add(index);
-        }
-    }
+
 
     public int getQ() {
         return q;
@@ -116,14 +106,6 @@ public class Cell {
         this.neighbors = neighbors;
     }
 
-    public LinkedList<Integer> getNeighborsIndexes() {
-        return neighborsIndexes;
-    }
-
-    public void setNeighborsIndexes(LinkedList<Integer> neighborsIndexes) {
-        this.neighborsIndexes = neighborsIndexes;
-    }
-
     public double getX() {
         return x;
     }
@@ -148,12 +130,8 @@ public class Cell {
         return OFFSET_Y;
     }
 
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
+    public double getRADIUS() {
+        return RADIUS;
     }
 
 
