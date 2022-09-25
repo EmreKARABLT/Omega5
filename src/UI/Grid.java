@@ -3,67 +3,62 @@ package UI;
 import GAME.Board;
 import GAME.Cell;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 import java.awt.*;
 
-public class Grid extends JPanel{
+public class Grid extends JPanel {
 
 
-    private LinkedList<HexCoord> setOfCoordinates;
-    private LinkedList<Polygon> setOfPolygons;
     private LinkedList<Hex> setOfHexagons;
-    private HashMap<HexCoord, Hex> mapOfHex;
     private ArrayList<Cell> setOfCells;
-    private final double RADIUS = 25.5;
+
+    private final Board board ;
     private final int WIDTH  = 1000;
     private final int HEIGHT = 1000;
 
     public Grid(int radius){
-        Board board = new Board(radius);
+
+        this.board = new Board(radius);
         this.setOfCells = board.getCells();
-        this.setOfCoordinates = createCoordinates(setOfCells);
+        this.setOfHexagons = createHexagons();
 
-        this.setOfHexagons = createHex(3);
-        this.setOfPolygons = createPoly();
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        HexListener listener = new HexListener();
+        addMouseListener(listener);
+
     }
 
-    public LinkedList<HexCoord> createCoordinates(ArrayList<Cell> boardCells){
-        setOfCoordinates = new LinkedList<>();
-        for (Cell cell :
-                boardCells) {
-            HexCoord coordenadas = new HexCoord(cell.getX(), cell.getY());
-            setOfCoordinates.add(coordenadas);
-        }
-        return setOfCoordinates;
+    public Grid(Board board){
+
+        this.board = board;
+        this.setOfCells = board.getCells();
+        this.setOfHexagons = createHexagons();
+
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        HexListener listener = new HexListener();
+        addMouseListener(listener);
+
     }
 
-    public LinkedList<Polygon> createPoly(){
-
-        LinkedList<Polygon> setOfPolygons = new LinkedList<>();
-
-        for (int i = 0; i < setOfCells.size(); i++) {
-            setOfPolygons.add(setOfHexagons.get(i).getPolygon());
-        }
-
-        return setOfPolygons;
-    }
-
-    public LinkedList<Hex> createHex(int color){
+    public LinkedList<Hex> createHexagons(){
 
         LinkedList<Hex> setOfHexagons = new LinkedList<>();
 
-        for (int i = 0; i < setOfCells.size(); i++) {
-
-            Hex hex = new Hex(setOfCells.get(i).getX(),setOfCells.get(i).getY(), color);
-            hex.setQRS(setOfCells.get(i).getQRSasArray());
+        for (Cell setOfCell : setOfCells) {
+            Hex hex = new Hex(setOfCell);
             setOfHexagons.add(hex);
         }
 
         return setOfHexagons;
+    }
+
+    public Cell getCellFromMouseClick( double x , double y ){
+        return board.getCellFromPosition(x,y);
     }
 
     @Override
@@ -79,8 +74,8 @@ public class Grid extends JPanel{
         }
 
         for (int i = 0; i < setOfCells.size(); i++) {
-            //g.drawString((int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
-            //g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
+//            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
+//            g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
             //System.out.println(setOfCells.get(i).toString() + " " + (int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY());
         }
 
@@ -88,45 +83,6 @@ public class Grid extends JPanel{
 
     }
 
-    public Hex getNeearestHexagon2(HexCoord pointerCoordinates){
-        return mapOfHex.get(pointerCoordinates);
-    }
-
-    public Hex getNeearestHexagon(HexCoord pointerCoordinates){
-
-        double X2 = pointerCoordinates.getX();
-        double Y2 = pointerCoordinates.getY();
-
-        for (int i = 0; i < setOfCoordinates.size(); i++) {
-            double X1 = setOfCoordinates.get(i).getX();
-            double Y1 = setOfCoordinates.get(i).getY();
-
-            int distance = (int) Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
-
-            if(distance < RADIUS){
-                return setOfHexagons.get(i);
-            }
-        }
-
-        return setOfHexagons.get(0);
-    }
-
-
-    public LinkedList<HexCoord> getSetOfCoordinates() {
-        return setOfCoordinates;
-    }
-
-    public void setSetOfCoordinates(LinkedList<HexCoord> setOfCoordinates) {
-        this.setOfCoordinates = setOfCoordinates;
-    }
-
-    public LinkedList<Polygon> getSetOfPolygons() {
-        return setOfPolygons;
-    }
-
-    public void setSetOfPolygons(LinkedList<Polygon> setOfPolygons) {
-        this.setOfPolygons = setOfPolygons;
-    }
 
     public LinkedList<Hex> getSetOfHexagons() {
         return setOfHexagons;
@@ -136,13 +92,7 @@ public class Grid extends JPanel{
         this.setOfHexagons = setOfHexagons;
     }
 
-    public HashMap<HexCoord, Hex> getMapOfHex() {
-        return mapOfHex;
-    }
 
-    public void setMapOfHex(HashMap<HexCoord, Hex> mapOfHex) {
-        this.mapOfHex = mapOfHex;
-    }
 
     public ArrayList<Cell> getSetOfCells() {
         return setOfCells;
@@ -152,16 +102,84 @@ public class Grid extends JPanel{
         this.setOfCells = setOfCells;
     }
 
-    public double getRADIUS() {
-        return RADIUS;
-    }
-
     public int getWIDTH() {
         return WIDTH;
     }
 
     public int getHEIGHT() {
         return HEIGHT;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+
+    private class HexListener extends MouseAdapter {
+
+        /**
+         * Invoked when the mouse button has been clicked (pressed
+         * and released) on a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+
+        }
+
+        /**
+         * Invoked when a mouse button has been pressed on a component.
+         *
+         * @param e the event to be processed
+         */
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            System.out.print(".");
+            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
+            if(cell != null ){
+                cell.setColor(1);
+                List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
+                if( list.size() > 0 ){
+                    list.get(0).changeColor(1);
+                }
+                repaint();
+
+            }
+
+        }
+
+        /**
+         * Invoked when a mouse button has been released on a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        /**
+         * Invoked when the mouse enters a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        /**
+         * Invoked when the mouse exits a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 package GAME;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 public class Board {
     private int boardSize ;
@@ -63,7 +63,7 @@ public class Board {
         for (Cell cell : cells) {
             double offsetX = cell.getOFFSET_X();
             double offsetY = cell.getOFFSET_Y();
-            double radius = cell.getRadius();
+            double radius = cell.getRADIUS();
             int q = cell.getQ();
             int r = cell.getR();
             double sqrt3 = Math.sqrt(3);
@@ -83,7 +83,18 @@ public class Board {
         createCenters();
     }
 
+    public Cell getCellFromPosition(double x , double y ){
+        double radius = cells.get(0).getRADIUS();
+        double q = 2/3.d * (x - 500) / radius ;
+        double r = ( -1/3.d * (x-500) + Math.sqrt(3)/3 * (y - 500) )/ radius;
 
+        int q_i = (q >= 0 ) ? (int)  (q + 0.5) : (int)(q - 0.5) ;
+        int r_i = (r >= 0 ) ? (int)  (r + 0.5) : (int)(r - 0.5) ;
+        System.out.println(q_i + " " + r_i);
+        List<Cell> match = cells.stream().filter(cell -> cell.getQ() == q_i && cell.getR() == r_i).toList();
+
+        return (match.size() > 0 ) ? match.get(0) : null ;
+    }
 
 
     /**
@@ -91,7 +102,7 @@ public class Board {
      * @param color is the color of the player
      * @return the score of the given color
      */
-    private int countScores(int color){
+    public int countScores(int color){
         return 0 ;
     }
 

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class GameLoop {
     private Board board ;
     private ArrayList<Player> players ;
+    private int numberOfPlayers ;
+    private boolean isRunning ;
 
     /**
      * Creates the board with given board size and as many players as desired
@@ -16,19 +18,30 @@ public class GameLoop {
      */
     public GameLoop(int board_size , int numberOfPlayers){
         this.board = new Board(board_size);
-        for (int i = 0; i < Math.min( numberOfPlayers , 4 ); i++) {
-            players.add( new HumanPlayer() );
+        for (int i = 1; i <= Math.max( 2, Math.min(numberOfPlayers, 4) ); i++) {
+            players.add( new HumanPlayer(i) );
         }
+        this.isRunning = true ;
+        this.numberOfPlayers = numberOfPlayers;
     }
 
+    public boolean checkIfEnoughSpaces(){
+        int numberOfEmptyCells = 0 ;
+        for (Cell cell: board.getCells() ) {
+            if(cell.getColor() == 0 ){
+                numberOfEmptyCells++;
+            }
+        }
+        return numberOfEmptyCells > numberOfPlayers * numberOfEmptyCells ;
+    }
     /**
      * Creates the board with given board size and 2 human players as default
      * @param board_size desired board size
      */
     public GameLoop(int board_size ){
         this.board = new Board(board_size);
-        for (int i = 0; i < 2; i++) {
-            players.add( new HumanPlayer() );
+        for (int i = 1; i <= 2; i++) {
+            players.add( new HumanPlayer(i) );
         }
     }
 
@@ -39,12 +52,12 @@ public class GameLoop {
      * @return returns to the cell corresponding to the given coordinates
      * (LEA)
      */
-    private Cell isPieceInBoard(double x , double y){
-        if(true){
-            return new Cell(0,0,0,0);
-        }
-        return null;
-    }
+//    private Cell isPieceInBoard(double x , double y){
+//        if(true){
+//            return new Cell(0,0,0,0);
+//        }
+//        return null;
+//    }
 
     /**
      * Checks if the cell is available for a player to place a piece
@@ -67,6 +80,8 @@ public class GameLoop {
      * Controls game flow, checks which players turn, which color will be placed, updates scores and ends the game when game is over
      */
     private void gameFlow(){}
+
+
 
 
 
