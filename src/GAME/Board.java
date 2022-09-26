@@ -1,23 +1,32 @@
 package GAME;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
     private int boardSize ;
     private ArrayList<Cell> cells ;
-    
-    public Board( int boardSize){
+    private int offsetX = 718 , offsetY =382 ;
+    public Board(int boardSize, int offset_x, int offset_y){
         /*
         counting
-        finding a cell in given coordinates
-        checking neighbors
         copying the whole board for searching algorithms
-
          */
+        this.offsetX = offset_x;
+        this.offsetY = offset_y;
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
+    }
+    public Board(int boardSize){
+        this.cells = new ArrayList<>();
+        this.boardSize = boardSize;
+        createBoard();
+        for (Cell cell :
+            cells) {
+            cell.setColor( (Math.random() < 0.5) ? 1 : 2 );
+        }
     }
 
     /**
@@ -61,8 +70,6 @@ public class Board {
      */
     public void createCenters(){
         for (Cell cell : cells) {
-            double offsetX = cell.getOFFSET_X();
-            double offsetY = cell.getOFFSET_Y();
             double radius = cell.getRADIUS();
             int q = cell.getQ();
             int r = cell.getR();
@@ -85,15 +92,19 @@ public class Board {
 
     public Cell getCellFromPosition(double x , double y ){
         double radius = cells.get(0).getRADIUS();
-        double q = 2/3.d * (x - 500) / radius ;
-        double r = ( -1/3.d * (x-500) + Math.sqrt(3)/3 * (y - 500) )/ radius;
+        double q = 2/3.d * (x - offsetX) / radius ;
+        double r = ( -1/3.d * (x-offsetX) + Math.sqrt(3)/3 * (y - offsetY) )/ radius;
 
         int q_i = (q >= 0 ) ? (int)  (q + 0.5) : (int)(q - 0.5) ;
         int r_i = (r >= 0 ) ? (int)  (r + 0.5) : (int)(r - 0.5) ;
-        System.out.println(q_i + " " + r_i);
+
         List<Cell> match = cells.stream().filter(cell -> cell.getQ() == q_i && cell.getR() == r_i).toList();
 
         return (match.size() > 0 ) ? match.get(0) : null ;
+    }
+
+    public int getNumberOfEmptyCells(){
+        return cells.stream().filter(cell -> cell.getColor()==0).toList().size();
     }
 
 
@@ -102,8 +113,48 @@ public class Board {
      * @param color is the color of the player
      * @return the score of the given color
      */
-    public int countScores(int color){
-        return 0 ;
+    public int scoreOfAPlayer(int color ){
+        ArrayList<Integer> groups = new ArrayList<>();
+        for(Cell startingCell : cells ){
+            int numberOfPiecesConnectedToNotVisitedCell = numberOfPiecesConnectedToCell(color , startingCell);
+            if(numberOfPiecesConnectedToNotVisitedCell > 0 ){
+                groups.add(numberOfPiecesConnectedToNotVisitedCell);
+            }
+        }
+        int multiplication = 0 ;
+        if(groups.size() > 0 )
+            multiplication = 1 ;
+        System.out.println(color + " " + groups );
+        for (int i : groups) {
+            if(i != 0 )
+                multiplication *= i;
+        }
+        for (Cell cell :
+                cells) {
+            cell.setVisited(false);
+        }
+        return multiplication;
+    }
+    public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
+        if( startingCell.isVisited() )
+            return 0;
+        int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
+
+        LinkedList<Cell> queue = new LinkedList<>();
+        queue.add(startingCell);
+        startingCell.setVisited(true);
+        while(!queue.isEmpty()){
+            Cell currentCell = queue.pollLast();
+            for (Cell neighborCell :
+                    currentCell.getNeighbors()) {
+                if(!neighborCell.isVisited() && neighborCell.getColor() == color){
+                    neighborCell.setVisited(true);
+                    queue.add(neighborCell);
+                    number_Of_pieces_in_group++;
+                }
+            }
+        }
+        return number_Of_pieces_in_group;
     }
 
     public int getBoardSize() {
@@ -124,10 +175,11 @@ public class Board {
 
 
     public static void main(String[] args) {
-        Board board = new Board(1);
-        for (Cell c : board.getCells()) {
-            System.out.println(c.getQ() + "," + c.getR() + "," + c.getS() + " ---> " +c.getX() + " ////// " + c.getY()  );
+        Board board = new Board(3);
+        for (int i = 0 ; i < 37 ; i++){
+            board.getCells().get(i).setColor(1);
         }
+        System.out.println(board.getNumberOfEmptyCells());
 
     }
 

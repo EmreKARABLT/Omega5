@@ -8,7 +8,6 @@ public class Cell {
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
     private double x,y ; // coordinates in GUI
-    private final double OFFSET_X = 500  , OFFSET_Y = 500; // offsets in the x and y directions
     public static final double RADIUS = 30;
 
     public Cell(int q , int r , int s , int id){
@@ -120,14 +119,6 @@ public class Cell {
 
     public void setY(double y) {
         this.y = y;
-    }
-
-    public double getOFFSET_X() {
-        return OFFSET_X;
-    }
-
-    public double getOFFSET_Y() {
-        return OFFSET_Y;
     }
 
     public double getRADIUS() {

@@ -24,7 +24,7 @@ public class Menu extends JPanel{
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) (screenSize.getWidth() - 100);
         int height = (int) (screenSize.getHeight() - 100);
-
+        System.out.println(width + " " + height);
         BufferedImage originalImage = null;
         try {
             originalImage = ImageIO.read(new File("src/UI/background.jpg"));
@@ -99,8 +99,8 @@ public class Menu extends JPanel{
         //buttons + press action + ASSIGNMENT of BoardSize to variable
         //variables for menuBoardSize method
         JButton buttonBoardSize3 = new JButton("3");
-        JButton buttonBoardSize5 = new JButton("5");
-        JButton buttonBoardSize7 = new JButton("7");
+        JButton buttonBoardSize5 = new JButton("4");
+        JButton buttonBoardSize7 = new JButton("5");
 
         JButton[] buttons = new JButton[]{buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
@@ -117,11 +117,13 @@ public class Menu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     for (JButton button: buttons ) {
                         JButton clickedButton = (JButton) e.getSource();
-                        if(button != clickedButton)
+                        if(button != clickedButton){
                             button.setForeground(Color.RED);
+                        }
                         clickedButton.setForeground(Color.ORANGE);
+                        boardSize = Integer.parseInt(clickedButton.getText());
                     }
-                    boardSize = Integer.parseInt(buttonBoardSize3.getText());
+
 
                     //Add MouseListener to move the component
 
@@ -184,7 +186,6 @@ public class Menu extends JPanel{
                 frame.getContentPane().removeAll();
                 frame.setContentPane(new Grid(boardSize));
                 frame.revalidate();
-                System.out.println("YARRAK ALERT");
             }
         });
         panel.add(playButton);

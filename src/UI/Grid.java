@@ -27,10 +27,13 @@ public class Grid extends JPanel {
         this.setOfCells = board.getCells();
         this.setOfHexagons = createHexagons();
 
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+//        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         HexListener listener = new HexListener();
         addMouseListener(listener);
 
+        for (int i = 1; i <= 2; i++) {
+            System.out.println(board.scoreOfAPlayer(i));
+        }
     }
 
     public Grid(Board board){
@@ -49,10 +52,13 @@ public class Grid extends JPanel {
 
         LinkedList<Hex> setOfHexagons = new LinkedList<>();
 
-        for (Cell setOfCell : setOfCells) {
-            Hex hex = new Hex(setOfCell);
+        for (Cell cell : setOfCells) {
+            Hex hex = new Hex(cell);
             setOfHexagons.add(hex);
+            hex.changeColor(cell.getColor());
         }
+        repaint();
+
 
         return setOfHexagons;
     }
@@ -140,14 +146,16 @@ public class Grid extends JPanel {
             System.out.print(".");
             Cell cell = getCellFromMouseClick( e.getX() , e.getY());
             if(cell != null ){
-                cell.setColor(1);
+//                cell.setColor(1);
                 List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
                 if( list.size() > 0 ){
-                    list.get(0).changeColor(1);
+//                    list.get(0).changeColor(1);
+                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
                 }
                 repaint();
 
             }
+
 
         }
 
