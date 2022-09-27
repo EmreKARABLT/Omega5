@@ -34,8 +34,13 @@ public class Board {
     public void colorTheCellsRandomly(){
         for (Cell cell :
                 cells) {
-            cell.setColor( (Math.random() < 0.5) ? 1 : 2 );
+            double random = Math.random();
+            if(random < 0.4 )
+                cell.setColor(1);
+            else if(random < 0.8)
+                cell.setColor(2);
         }
+
     }
     /**
      * Creates all the cells in the board , assign coordinates on GUI (x,y) and q r s and ID variables
