@@ -3,6 +3,8 @@ package UI;
 import GAME.Board;
 import GAME.Cell;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -78,6 +80,7 @@ public class Grid extends JPanel {
             g.setColor(Color.BLACK);
             g.drawPolygon(setOfHexagons.get(i).getPolygon());
         }
+        addMainMenuButton();
 
         for (int i = 0; i < setOfCells.size(); i++) {
 //            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
@@ -87,6 +90,25 @@ public class Grid extends JPanel {
 
         //repaint(1);
 
+    }
+    public void addMainMenuButton(){
+        JButton backButton = new JButton("<");
+        backButton.setFont(Show.customFont_40f);
+        backButton.setBounds( 10 ,10,60, 60);
+
+        backButton.setOpaque(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setForeground(Color.BLACK);
+        backButton.setFocusPainted(false);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+//                Show.frame.getContentPane().removeAll();
+                Show.frame.setContentPane(Menu.getInstance().getPanel());
+                Show.frame.getRootPane().revalidate();
+            }
+        });
+        super.add(backButton);
     }
 
 
