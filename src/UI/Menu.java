@@ -43,6 +43,8 @@ public class Menu extends JPanel{
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) (screenSize.getWidth() - 100);
         int height = (int) (screenSize.getHeight() - 100);
+
+        System.out.println("Check the first comment in Board and replace the following line with the variables in Board class");
         System.out.println("private int offsetX = " + width/2  +" , " + "offsetY = " + height/2 + ";");
 
         //LOADING BACKGROUND
@@ -107,7 +109,12 @@ public class Menu extends JPanel{
             buttons[i].setOpaque(false);
             buttons[i].setContentAreaFilled(false);
             buttons[i].setBorderPainted(false);
-            buttons[i].setForeground(Color.RED);
+
+            if(i==0){
+                buttons[i].setForeground(Color.ORANGE);
+            }else
+                buttons[i].setForeground(Color.RED);
+
             buttons[i].setFocusPainted(false);
             panel.add(buttons[i]);
             buttons[i].addActionListener(new ActionListener() {
@@ -120,10 +127,6 @@ public class Menu extends JPanel{
                         clickedButton.setForeground(Color.ORANGE);
                         boardSize = Integer.parseInt(clickedButton.getText());
                     }
-
-
-                    //Add MouseListener to move the component
-
                 }
             });
         }
@@ -144,7 +147,12 @@ public class Menu extends JPanel{
             buttons_player[i].setOpaque(false);
             buttons_player[i].setContentAreaFilled(false);
             buttons_player[i].setBorderPainted(false);
-            buttons_player[i].setForeground(Color.RED);
+
+            if(i==0){
+                buttons_player[i].setForeground(Color.ORANGE);
+            }else
+                buttons_player[i].setForeground(Color.RED);
+
             buttons_player[i].setFocusPainted(false);
             panel.add(buttons_player[i]);
             buttons_player[i].addActionListener(new ActionListener() {

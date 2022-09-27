@@ -33,9 +33,12 @@ public class Grid extends JPanel {
         HexListener listener = new HexListener();
         addMouseListener(listener);
 
+        //FOR TESTING
         for (int i = 1; i <= 2; i++) {
-            System.out.println(board.scoreOfAPlayer(i));
+            System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + board.scoreOfAPlayer(i) + "\n");
+
         }
+        System.out.println("----------------");
     }
 
     public Grid(Board board){
@@ -165,7 +168,6 @@ public class Grid extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            System.out.print(".");
             Cell cell = getCellFromMouseClick( e.getX() , e.getY());
             if(cell != null ){
 //                cell.setColor(1);
