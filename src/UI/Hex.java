@@ -62,7 +62,7 @@ public class Hex extends JPanel {
         }
         if (colorID == 2) {
             this.cell.setColor(colorID);
-            this.color = Color.BLACK;
+            this.color = Color.DARK_GRAY;
         }
         if (colorID == 3) {
             this.cell.setColor(colorID);

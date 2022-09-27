@@ -1,27 +1,44 @@
 package GAME;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
     private int boardSize ;
     private ArrayList<Cell> cells ;
-    
-    public Board( int boardSize){
-        /*
-        counting
-        finding a cell in given coordinates
-        checking neighbors
-        copying the whole board for searching algorithms
+    /*
+    TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
+         Replace the following line with the printed values on console
+     */
+    private int offsetX = 718 , offsetY =382 ; // this is the half size of the screen to put it to the middle of the screen
 
-         */
+    public Board(int boardSize, int offset_x, int offset_y){
+        this.offsetX = offset_x;
+        this.offsetY = offset_y;
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
     }
+    public Board(int boardSize){
+        this.cells = new ArrayList<>();
+        this.boardSize = boardSize;
+        createBoard();
+        colorTheCellsRandomly();
+    }
 
     /**
-     * creates all the cells in the board , assign coordinates on GUI (x,y) and q r s variables
+     * Colors each cell to white or black
+     * Implemented for testing purposes
+     */
+    public void colorTheCellsRandomly(){
+        for (Cell cell :
+                cells) {
+            cell.setColor( (Math.random() < 0.5) ? 1 : 2 );
+        }
+    }
+    /**
+     * Creates all the cells in the board , assign coordinates on GUI (x,y) and q r s and ID variables
      */
     private void createCells(){
         int n = boardSize;
@@ -36,12 +53,11 @@ public class Board {
     }
 
     /**
-     * iterates over the cells in the board and creates neigborship ,( by using addNeighbor method from Cell class)
+     * iterates over the cells in the board and creates neigborship ,( by using addNeighbor method from Cell class )
      */
     private void connectCells(){
         if(cells == null){
-            System.out.println("Cells list is empty");
-            return;
+            createCells();
         }
         for (int i = 0; i < cells.size()-1; i++) {
             Cell c1 = cells.get(i);
@@ -55,14 +71,20 @@ public class Board {
             }
         }
     }
+    /**
+     * will be called by constructor to create the board
+     */
+    private void createBoard(){
+        createCells();
+        connectCells();
+        createCenters();
+    }
 
     /**
-     * This method will assign the center of each hexagon on the board
+     * This method will assign the center of each hexagon on the board , x and y values
      */
     public void createCenters(){
         for (Cell cell : cells) {
-            double offsetX = cell.getOFFSET_X();
-            double offsetY = cell.getOFFSET_Y();
             double radius = cell.getRADIUS();
             int q = cell.getQ();
             int r = cell.getR();
@@ -74,26 +96,32 @@ public class Board {
             cell.setY(y);
         }
     }
-    /**
-     * will be called by constructor to create the board
-     */
-    private void createBoard(){
-        createCells();
-        connectCells();
-        createCenters();
-    }
 
+    /**
+     * Finds the corresponding cell to x and y coordinates on screen
+     * @param x x position on screen
+     * @param y y position on screen
+     * @return a cell which is located at x and y coordinates
+     */
     public Cell getCellFromPosition(double x , double y ){
         double radius = cells.get(0).getRADIUS();
-        double q = 2/3.d * (x - 500) / radius ;
-        double r = ( -1/3.d * (x-500) + Math.sqrt(3)/3 * (y - 500) )/ radius;
+        double q = 2/3.d * (x - offsetX) / radius ;
+        double r = ( -1/3.d * (x-offsetX) + Math.sqrt(3)/3 * (y - offsetY) )/ radius;
 
         int q_i = (q >= 0 ) ? (int)  (q + 0.5) : (int)(q - 0.5) ;
         int r_i = (r >= 0 ) ? (int)  (r + 0.5) : (int)(r - 0.5) ;
-        System.out.println(q_i + " " + r_i);
+
         List<Cell> match = cells.stream().filter(cell -> cell.getQ() == q_i && cell.getR() == r_i).toList();
 
         return (match.size() > 0 ) ? match.get(0) : null ;
+    }
+
+    /**
+     * iterates over the cells to check how many cells are empty
+     * @return the number of empty cells
+     */
+    public int getNumberOfEmptyCells(){
+        return cells.stream().filter(cell -> cell.getColor()==0).toList().size();
     }
 
 
@@ -102,8 +130,71 @@ public class Board {
      * @param color is the color of the player
      * @return the score of the given color
      */
-    public int countScores(int color){
-        return 0 ;
+    public int scoreOfAPlayer(int color ){
+        ArrayList<Integer> groups = new ArrayList<>();
+        for(Cell startingCell : cells ){
+            int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
+            if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
+                groups.add(numberOfPiecesConnectedToStartingCell);
+            }
+        }
+        setAllCellsToNotVisited();
+        return multiplyTheGivenArrayList(groups);
+    }
+
+    /**
+     * this method counts how many pieces with the given color is connected , starts to search from given cell
+     * @param color given color
+     * @param startingCell the cell which we will start searching from
+     * @return if the color doesnt match with the starting cell's color returns 0 , else returns the amount of cell with
+     * the same color is connected to the provided cell
+     */
+    public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
+        if( startingCell.isVisited() )
+            return 0;
+        int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
+
+        LinkedList<Cell> queue = new LinkedList<>();
+        queue.add(startingCell);
+        startingCell.setVisited(true);
+        while(!queue.isEmpty()){
+            Cell currentCell = queue.pollLast();
+            for (Cell neighborCell :
+                    currentCell.getNeighbors()) {
+                if(!neighborCell.isVisited() && neighborCell.getColor() == color){
+                    neighborCell.setVisited(true);
+                    queue.add(neighborCell);
+                    number_Of_pieces_in_group++;
+                }
+            }
+        }
+        return number_Of_pieces_in_group;
+    }
+
+    /**
+     * multiplies all the integers in the given arrayList
+     * @param integerList an arrayList consists integers
+     * @return multiplication of elements in the provided list
+     */
+    public int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
+        int multiplication = 1 ;
+
+        for (int numberOfElementsInGroups : integerList) {
+            if( numberOfElementsInGroups != 0 ) {
+                multiplication *= numberOfElementsInGroups;
+            }
+        }
+        return multiplication;
+    }
+
+    /**
+     * sets all the visited variable of cells to False
+     */
+    public void setAllCellsToNotVisited(){
+        for (Cell cell :
+                cells) {
+            cell.setVisited(false);
+        }
     }
 
     public int getBoardSize() {
@@ -124,10 +215,11 @@ public class Board {
 
 
     public static void main(String[] args) {
-        Board board = new Board(1);
-        for (Cell c : board.getCells()) {
-            System.out.println(c.getQ() + "," + c.getR() + "," + c.getS() + " ---> " +c.getX() + " ////// " + c.getY()  );
+        Board board = new Board(3);
+        for (int i = 0 ; i < 37 ; i++){
+            board.getCells().get(i).setColor(1);
         }
+        System.out.println(board.getNumberOfEmptyCells());
 
     }
 
