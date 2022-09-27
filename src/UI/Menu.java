@@ -97,7 +97,7 @@ public class Menu extends JPanel{
 
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
-        JButton buttonBoardSize3 = new JButton("3");
+        JButton buttonBoardSize3 = new JButton("2");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
@@ -177,7 +177,7 @@ public class Menu extends JPanel{
 
         //PLAY BUTTON AND ACTION LISTENER
         JButton playButton = new JButton("PLAY");
-        playButton.setBounds( (width - 300 )/2     , (height - size_l1.height) / 10 * 8, 300, 100);
+        playButton.setBounds( (width - 300 )/2     , (height - size_l1.height) / 10 * 8, 300, 80);
 
         playButton.setFont( Show.customFont_60f );
         playButton.setOpaque(false);

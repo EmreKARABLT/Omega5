@@ -64,17 +64,23 @@ public class Board {
         if(cells == null){
             createCells();
         }
-        for (int i = 0; i < cells.size()-1; i++) {
+        for (int i = 0; i < cells.size(); i++) {
             Cell c1 = cells.get(i);
-            for (int j = i+1; j < cells.size(); j++) {
+            for (int j = 0; j < cells.size(); j++) {
                 Cell c2 = cells.get(j);
                 int abs_difference = Math.abs(c1.getQ() - c2.getQ()) + Math.abs(c1.getR() - c2.getR()) + Math.abs(c1.getS() - c2.getS());
-                if(abs_difference == 2 ){
+                if (abs_difference == 2 && i != j ) {
                     c1.addNeighbor(c2);
                     c2.addNeighbor(c1);
                 }
             }
         }
+        int numberOfNeighbors = 0 ;
+        for (Cell cell :
+                cells) {
+            numberOfNeighbors+= cell.getNeighbors().size();
+        }
+        System.out.println(numberOfNeighbors);
     }
     /**
      * will be called by constructor to create the board
@@ -136,15 +142,22 @@ public class Board {
      * @return the score of the given color
      */
     public int scoreOfAPlayer(int color ){
+        return multiplyTheGivenArrayList( getGroupForColor(color) );
+    }
+
+    public ArrayList<Integer> getGroupForColor(int color){
         ArrayList<Integer> groups = new ArrayList<>();
+
         for(Cell startingCell : cells ){
-            int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
-            if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
-                groups.add(numberOfPiecesConnectedToStartingCell);
+            if(startingCell.getColor() == color){
+                int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
+
+                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
+                    groups.add(numberOfPiecesConnectedToStartingCell);
+                }
             }
         }
-        setAllCellsToNotVisited();
-        return multiplyTheGivenArrayList(groups);
+        return groups;
     }
 
     /**
@@ -155,7 +168,7 @@ public class Board {
      * the same color is connected to the provided cell
      */
     public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
-        if( startingCell.isVisited() )
+        if( startingCell.isVisited() && startingCell.getColor() != color )
             return 0;
         int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
 
@@ -182,6 +195,7 @@ public class Board {
      * @return multiplication of elements in the provided list
      */
     public int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
+        if(integerList.size() == 0 ) return 0;
         int multiplication = 1 ;
 
         for (int numberOfElementsInGroups : integerList) {

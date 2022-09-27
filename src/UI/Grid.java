@@ -2,6 +2,7 @@ package UI;
 
 import GAME.Board;
 import GAME.Cell;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,12 +34,7 @@ public class Grid extends JPanel {
         HexListener listener = new HexListener();
         addMouseListener(listener);
 
-        //FOR TESTING
-        for (int i = 1; i <= 2; i++) {
-            System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + board.scoreOfAPlayer(i) + "\n");
 
-        }
-        System.out.println("----------------");
     }
 
     public Grid(Board board){
@@ -86,7 +82,7 @@ public class Grid extends JPanel {
         addMainMenuButton();
 
         for (int i = 0; i < setOfCells.size(); i++) {
-//            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
+            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
 //            g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
             //System.out.println(setOfCells.get(i).toString() + " " + (int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY());
         }
@@ -169,14 +165,33 @@ public class Grid extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             Cell cell = getCellFromMouseClick( e.getX() , e.getY());
+            int color = 0 ;
             if(cell != null ){
-//                cell.setColor(1);
+
+                if(SwingUtilities.isLeftMouseButton(e)){
+                    color = 1;
+                }else if (SwingUtilities.isRightMouseButton(e))
+                    color = 2;
+
+                cell.setColor(color);
                 List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
+
                 if( list.size() > 0 ){
-//                    list.get(0).changeColor(1);
-                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
+                    list.get(0).changeColor(color);
+//                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
                 }
+                System.out.println("----------------");
                 repaint();
+
+                //FOR TESTING
+                for (int i = 1; i <= 2; i++) {
+                    System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + board.scoreOfAPlayer(i) + "\n");
+                    board.setAllCellsToNotVisited();
+                }
+                if(SwingUtilities.isMiddleMouseButton(e)){
+                    System.out.println();
+                }
+
 
             }
 
