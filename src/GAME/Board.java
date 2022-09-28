@@ -20,6 +20,7 @@ public class Board {
         this.boardSize = boardSize;
         createBoard();
     }
+
     public Board(int boardSize){
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
@@ -146,18 +147,7 @@ public class Board {
     }
 
     public ArrayList<Integer> getGroupForColor(int color){
-        ArrayList<Integer> groups = new ArrayList<>();
-
-        for(Cell startingCell : cells ){
-            if(startingCell.getColor() == color){
-                int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
-
-                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
-                    groups.add(numberOfPiecesConnectedToStartingCell);
-                }
-            }
-        }
-        return groups;
+        return null;
     }
 
     /**
@@ -168,25 +158,7 @@ public class Board {
      * the same color is connected to the provided cell
      */
     public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
-        if( startingCell.isVisited() && startingCell.getColor() != color )
-            return 0;
-        int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
-
-        LinkedList<Cell> queue = new LinkedList<>();
-        queue.add(startingCell);
-        startingCell.setVisited(true);
-        while(!queue.isEmpty()){
-            Cell currentCell = queue.pollLast();
-            for (Cell neighborCell :
-                    currentCell.getNeighbors()) {
-                if(!neighborCell.isVisited() && neighborCell.getColor() == color){
-                    neighborCell.setVisited(true);
-                    queue.add(neighborCell);
-                    number_Of_pieces_in_group++;
-                }
-            }
-        }
-        return number_Of_pieces_in_group;
+        return 0 ;
     }
 
     /**
@@ -195,15 +167,7 @@ public class Board {
      * @return multiplication of elements in the provided list
      */
     public int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
-        if(integerList.size() == 0 ) return 0;
-        int multiplication = 1 ;
-
-        for (int numberOfElementsInGroups : integerList) {
-            if( numberOfElementsInGroups != 0 ) {
-                multiplication *= numberOfElementsInGroups;
-            }
-        }
-        return multiplication;
+        return 0;
     }
 
     /**

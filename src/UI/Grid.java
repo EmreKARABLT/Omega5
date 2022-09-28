@@ -2,6 +2,7 @@ package UI;
 
 import GAME.Board;
 import GAME.Cell;
+import GAME.GameLoop;
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ public class Grid extends JPanel {
     private final Board board ;
     private final int WIDTH  = 1000;
     private final int HEIGHT = 1000;
+
 
     public Grid(int radius){
 

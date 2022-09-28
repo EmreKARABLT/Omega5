@@ -190,6 +190,7 @@ public class Menu extends JPanel{
 //                Show.frame.getContentPane().removeAll();
                 Show.frame.setContentPane(new Grid(boardSize ));
                 Show.frame.revalidate();
+
             }
         });
         panel.add(playButton);
