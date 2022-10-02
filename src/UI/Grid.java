@@ -24,11 +24,19 @@ public class Grid extends JPanel {
     private final Board board ;
     private final int WIDTH  = 1000;
     private final int HEIGHT = 1000;
+    public Players players;
+
+    public int P = 0;
+    public int pT = 0;
+    int p;
 
 
-    public Grid(int radius){
+    public Grid(int radius, int p, Human human, Bot bot){
 
+        this.p = p;
         this.board = new Board(radius);
+
+        this.players = new Players(p , 0, human, bot);
         this.setOfCells = board.getCells();
         this.setOfHexagons = createHexagons();
 
@@ -38,6 +46,8 @@ public class Grid extends JPanel {
 
 
     }
+
+
 
     public Grid(Board board){
 
@@ -61,8 +71,6 @@ public class Grid extends JPanel {
             hex.changeColor(cell.getColor());
         }
         repaint();
-
-
         return setOfHexagons;
     }
 
@@ -83,15 +91,15 @@ public class Grid extends JPanel {
         }
         addMainMenuButton();
 
-        for (int i = 0; i < setOfCells.size(); i++) {
-            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
-//            g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
-            //System.out.println(setOfCells.get(i).toString() + " " + (int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY());
-        }
+        g.drawString(players.getFinalScore().get(0) + " " ,900, 200);
+        g.drawString(players.getFinalScore().get(1) + " " ,900, 300);
+        g.drawString(players.getFinalScore().get(2) + " " ,900, 400);
+        g.drawString(players.getFinalScore().get(3) + " " ,900, 100);
 
-        //repaint(1);
+        repaint(1);
 
     }
+
     public void addMainMenuButton(){
         JButton backButton = new JButton("<");
         backButton.setFont(Show.customFont_40f);
@@ -143,6 +151,41 @@ public class Grid extends JPanel {
         return board;
     }
 
+    public void botPlays(){
+
+        for (int i = 0; i < players.totalPlayers; i++) {
+            Cell cell = players.bots.selectCell(board);
+            players.update();
+            int color = players.getColor();
+            cell.setColor(color);
+            List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(cell.getX() , cell.getY())).toList();
+            if( list.size() > 0 ){
+                list.get(0).changeColor(color);
+            }
+            repaint();
+        }
+    }
+
+    public void humanPlays(Cell cell){
+        int color = 0;
+        if(cell != null ){
+            if(cell.getColor() == 0){
+
+                players.update();
+                color = players.getColor();
+                if(players.currentPlayer >= players.totalPlayers - 1){}
+            }else{
+                color = cell.getColor();
+            }
+            cell.setColor(color);
+            List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(cell.getX() , cell.getY())).toList();
+            if( list.size() > 0 ){
+                list.get(0).changeColor(color);
+            }
+            repaint();
+        }
+    }
+
 
     private class HexListener extends MouseAdapter {
 
@@ -166,36 +209,25 @@ public class Grid extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
-            int color = 0 ;
-            if(cell != null ){
 
-                if(SwingUtilities.isLeftMouseButton(e)){
-                    color = 1;
-                }else if (SwingUtilities.isRightMouseButton(e))
-                    color = 2;
+            if(!players.gameOver(board.getNumberOfEmptyCells())){
 
-                cell.setColor(color);
-                List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
+                if(players.botTurn()){
+                    botPlays();
+                }else{
+                    Cell cell = getCellFromMouseClick( e.getX() , e.getY());
+                    int color = 0 ;
+                    humanPlays(cell);
+                    if(players.color == 2){
+                        players.update();
+                    }
 
-                if( list.size() > 0 ){
-                    list.get(0).changeColor(color);
-//                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
                 }
-                System.out.println("----------------");
-                repaint();
-
-                //FOR TESTING
-                for (int i = 1; i <= 2; i++) {
-                    System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + board.scoreOfAPlayer(i) + "\n");
-                    board.setAllCellsToNotVisited();
-                }
-                if(SwingUtilities.isMiddleMouseButton(e)){
-                    System.out.println();
-                }
-
-
             }
+            else{
+                System.out.println("GAME OVER");
+            }
+
 
 
         }

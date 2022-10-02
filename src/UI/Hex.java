@@ -58,19 +58,19 @@ public class Hex extends JPanel {
 
         if (colorID == 1) {
             this.cell.setColor(colorID);
-            this.color = Color.WHITE;
+            this.color = Color.RED;
         }
         if (colorID == 2) {
             this.cell.setColor(colorID);
-            this.color = Color.DARK_GRAY;
+            this.color = Color.BLUE;
         }
         if (colorID == 3) {
             this.cell.setColor(colorID);
-            this.color = Color.RED;
+            this.color = Color.GREEN;
         }
         if (colorID == 4) {
             this.cell.setColor(colorID);
-            this.color = Color.BLUE;
+            this.color = Color.YELLOW;
         }
         if (colorID == 0) {
             this.cell.setColor(colorID);

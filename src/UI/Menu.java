@@ -188,7 +188,9 @@ public class Menu extends JPanel{
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
 //                Show.frame.getContentPane().removeAll();
-                Show.frame.setContentPane(new Grid(boardSize ));
+                Human player1 = new Human(1);
+                Bot player2 = new Bot(2, "ramdom");
+                Show.frame.setContentPane(new Grid(boardSize, 2, player1, player2));
                 Show.frame.revalidate();
 
             }
@@ -204,14 +206,4 @@ public class Menu extends JPanel{
         Show.frame.setVisible(true);
     }
 
-
-    public void Grid(){
-        JFrame frame = new JFrame("Draw Hexagon");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Grid grid = new Grid(boardSize);
-        frame.add(grid);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }
