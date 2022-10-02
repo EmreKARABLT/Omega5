@@ -136,7 +136,6 @@ public class Board {
         return cells.stream().filter(cell -> cell.getColor()==0).toList().size();
     }
 
-
     /**
      * Calculates the score of the given color
      * @param color is the color of the player
@@ -147,7 +146,18 @@ public class Board {
     }
 
     public ArrayList<Integer> getGroupForColor(int color){
-        return null;
+        ArrayList<Integer> groups = new ArrayList<>();
+
+        for(Cell startingCell : cells ){
+            if(startingCell.getColor() == color){
+                int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
+
+                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
+                    groups.add(numberOfPiecesConnectedToStartingCell);
+                }
+            }
+        }
+        return groups;
     }
 
     /**
@@ -158,7 +168,25 @@ public class Board {
      * the same color is connected to the provided cell
      */
     public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
-        return 0 ;
+        if( startingCell.isVisited() && startingCell.getColor() != color )
+            return 0;
+        int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
+
+        LinkedList<Cell> queue = new LinkedList<>();
+        queue.add(startingCell);
+        startingCell.setVisited(true);
+        while(!queue.isEmpty()){
+            Cell currentCell = queue.pollLast();
+            for (Cell neighborCell :
+                    currentCell.getNeighbors()) {
+                if(!neighborCell.isVisited() && neighborCell.getColor() == color){
+                    neighborCell.setVisited(true);
+                    queue.add(neighborCell);
+                    number_Of_pieces_in_group++;
+                }
+            }
+        }
+        return number_Of_pieces_in_group;
     }
 
     /**
@@ -167,7 +195,15 @@ public class Board {
      * @return multiplication of elements in the provided list
      */
     public int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
-        return 0;
+        if(integerList.size() == 0 ) return 0;
+        int multiplication = 1 ;
+
+        for (int numberOfElementsInGroups : integerList) {
+            if( numberOfElementsInGroups != 0 ) {
+                multiplication *= numberOfElementsInGroups;
+            }
+        }
+        return multiplication;
     }
 
     /**

@@ -6,7 +6,7 @@ public class HumanPlayer implements Player{
     private int score;
     private int playerColor;
     private int pieceColor; // 0 = white, 1 = black, 2 = red, 3 = blue
-
+    private int turn = 0;
     private int numberOfPlayers = 4; //TEMPORARY NUMBER
 
     public HumanPlayer(int playerColor){
