@@ -1,6 +1,10 @@
 package UI;
 
+import GAME.State;
+
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Menu extends JPanel{
 
@@ -97,7 +102,7 @@ public class Menu extends JPanel{
 
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
-        JButton buttonBoardSize3 = new JButton("2");
+        JButton buttonBoardSize3 = new JButton("3");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
@@ -147,13 +152,13 @@ public class Menu extends JPanel{
             buttons_player[i].setOpaque(false);
             buttons_player[i].setContentAreaFilled(false);
             buttons_player[i].setBorderPainted(false);
+            buttons_player[i].setFocusPainted(false);
 
             if(i==0){
                 buttons_player[i].setForeground(Color.ORANGE);
             }else
                 buttons_player[i].setForeground(Color.RED);
 
-            buttons_player[i].setFocusPainted(false);
             panel.add(buttons_player[i]);
             buttons_player[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -166,7 +171,6 @@ public class Menu extends JPanel{
                             } else {
                                 HumanOrComputer = 1;
                             }
-
                         }
                         clickedButton.setForeground(Color.ORANGE);
                     }
@@ -187,8 +191,12 @@ public class Menu extends JPanel{
         playButton.setFocusPainted(false);
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-//                Show.frame.getContentPane().removeAll();
-                Show.frame.setContentPane(new Grid(boardSize ));
+                //Players ArrayList
+                ArrayList<String> players = new ArrayList<>(){};
+                players.add("human");
+                players.add("human");
+                Grid grid = new Grid(new State(boardSize ,players ));
+                Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
 
             }

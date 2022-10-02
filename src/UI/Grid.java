@@ -2,8 +2,7 @@ package UI;
 
 import GAME.Board;
 import GAME.Cell;
-import GAME.GameLoop;
-import jdk.swing.interop.SwingInterOpUtils;
+import GAME.State;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,32 +19,22 @@ public class Grid extends JPanel {
 
     private LinkedList<Hex> setOfHexagons;
     private ArrayList<Cell> setOfCells;
-
-    private final Board board ;
+    private State state;
     private final int WIDTH  = 1000;
     private final int HEIGHT = 1000;
-
-
+    private int counter = 1 ;
+    public Grid(State state){
+        this.state = state;
+        this.setOfCells = state.getBoard().getCells();
+        this.setOfHexagons = createHexagons();
+        HexListener listener = new HexListener();
+        addMouseListener(listener);
+    }
     public Grid(int radius){
 
-        this.board = new Board(radius);
-        this.setOfCells = board.getCells();
         this.setOfHexagons = createHexagons();
 
 //        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        HexListener listener = new HexListener();
-        addMouseListener(listener);
-
-
-    }
-
-    public Grid(Board board){
-
-        this.board = board;
-        this.setOfCells = board.getCells();
-        this.setOfHexagons = createHexagons();
-
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         HexListener listener = new HexListener();
         addMouseListener(listener);
 
@@ -67,7 +56,7 @@ public class Grid extends JPanel {
     }
 
     public Cell getCellFromMouseClick( double x , double y ){
-        return board.getCellFromPosition(x,y);
+        return state.getBoard().getCellFromPosition(x,y);
     }
 
     @Override
@@ -140,7 +129,7 @@ public class Grid extends JPanel {
     }
 
     public Board getBoard() {
-        return board;
+        return state.getBoard();
     }
 
 
@@ -154,8 +143,34 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseClicked(MouseEvent e) {
+//            getCellFromMouseClick(e.getX(),e.getY()).setColor(state.getTable().traverseTable(1).getPlayer().getTurn() );
+            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
+            int color = 0 ;
+            System.out.println(cell);
+            if(cell != null ){
 
+                color = (state.getTable().traverseTable(counter).getPlayer().getTurn() );
+                System.out.println(color);
+                cell.setColor(color);
+                List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
+                counter++;
+                if( list.size() > 0 ){
+                    list.get(0).changeColor(color);
+//                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
+                }
+                System.out.println("----------------");
+                repaint();
 
+                //FOR TESTING
+//                for (int i = 1; i <= 2; i++) {
+//                    System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + state.getBoard().scoreOfAPlayer(i) + "\n");
+//                    state.getBoard().setAllCellsToNotVisited();
+//                }
+//                if(SwingUtilities.isMiddleMouseButton(e)){
+//                    System.out.println();
+//                }
+
+            }
         }
 
         /**
@@ -166,36 +181,8 @@ public class Grid extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
-            int color = 0 ;
-            if(cell != null ){
-
-                if(SwingUtilities.isLeftMouseButton(e)){
-                    color = 1;
-                }else if (SwingUtilities.isRightMouseButton(e))
-                    color = 2;
-
-                cell.setColor(color);
-                List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
-
-                if( list.size() > 0 ){
-                    list.get(0).changeColor(color);
-//                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
-                }
-                System.out.println("----------------");
-                repaint();
-
-                //FOR TESTING
-                for (int i = 1; i <= 2; i++) {
-                    System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + board.scoreOfAPlayer(i) + "\n");
-                    board.setAllCellsToNotVisited();
-                }
-                if(SwingUtilities.isMiddleMouseButton(e)){
-                    System.out.println();
-                }
 
 
-            }
 
 
         }
@@ -207,7 +194,6 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseReleased(MouseEvent e) {
-
         }
 
         /**
