@@ -16,7 +16,7 @@ public class Hex extends JPanel {
     private final Cell cell ;
 
 
-    public Hex(Cell cell) {
+    public Hex( Cell cell ) {
         this.cell = cell;
         this.radius = cell.getRADIUS();
         this.polygon = createPolygon();
@@ -55,24 +55,25 @@ public class Hex extends JPanel {
     }
 
     public void changeColor(int colorID) {
-
-        if (colorID == 1) {
+//        if(this.cell.getColor() != 0 )
+//            return;
+        if (colorID == 0) {
             this.cell.setColor(colorID);
             this.color = Color.WHITE;
         }
-        if (colorID == 2) {
+        if (colorID == 1) {
             this.cell.setColor(colorID);
             this.color = Color.DARK_GRAY;
         }
-        if (colorID == 3) {
+        if (colorID == 2) {
             this.cell.setColor(colorID);
             this.color = Color.RED;
         }
-        if (colorID == 4) {
+        if (colorID == 3) {
             this.cell.setColor(colorID);
             this.color = Color.BLUE;
         }
-        if (colorID == 0) {
+        if (colorID == -1) {
             this.cell.setColor(colorID);
             this.color = EMPTY_CELL_COLOR ;
         }
@@ -104,21 +105,21 @@ public class Hex extends JPanel {
     public int getColorID() {
 
         if (this.color == Color.WHITE) {
-            return 1;
-        }
-        if (this.color == Color.BLACK) {
-            return 2;
-        }
-        if (this.color == Color.RED) {
-            return 3;
-        }
-        if (this.color == Color.BLUE) {
-            return 4;
-        }
-        if (this.color == EMPTY_CELL_COLOR ) {
             return 0;
         }
-        return -1;
+        if (this.color == Color.BLACK) {
+            return 1;
+        }
+        if (this.color == Color.RED) {
+            return 2;
+        }
+        if (this.color == Color.BLUE) {
+            return 3;
+        }
+        if (this.color == EMPTY_CELL_COLOR ) {
+            return -1;
+        }
+        return -2;
     }
 
 
@@ -136,6 +137,10 @@ public class Hex extends JPanel {
 
     public int[] getQRS() {
         return cell.getQRSasArray();
+    }
+
+    public Cell getCell() {
+        return cell;
     }
 
     @Override
