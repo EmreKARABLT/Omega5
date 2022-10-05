@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Cell {
     private int q , r , s , id ; // indices / coordinates
-    private int color ; // 0:empty 1:white 2:black 3:red 4:blue
+    private int color ; // -1:empty 0:white 1:black 2:red 3:blue
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
     private double x,y ; // coordinates in GUI
@@ -12,22 +12,14 @@ public class Cell {
 
     public Cell(int q , int r , int s , int id){
         this.neighbors = new LinkedList<>();
-        this.color = 0 ;
+        this.color = -1 ;
         this.visited = false ;
         this.q = q;
         this.r = r;
         this.s = s;
         this.id = id;
-        cellToPixel();
     }
 
-    /**
-     * Calculates the coordinates of a cell on screen by using q, r and s/id
-     * LEA
-     */
-    private void cellToPixel(){
-
-    }
     /**
      * Checks if the provided cell is neighbor of the current cell
      * @param cell a cell
@@ -48,10 +40,9 @@ public class Cell {
         }
     }
 
+    public boolean isEmpty(){return color == -1 ;}
 
-    public int getQ() {
-        return q;
-    }
+    public int getQ() {return q;}
 
     public void setQ(int q) {
         this.q = q;
@@ -86,6 +77,8 @@ public class Cell {
     }
 
     public void setColor(int color) {
+        if(this.color != -1 )
+            return;
         this.color = color;
     }
 

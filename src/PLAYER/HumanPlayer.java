@@ -1,62 +1,43 @@
 package PLAYER;
 
-import GAME.Cell;
 
-public class HumanPlayer implements Player{
-    private int score;
-    private int playerColor;
-    private int pieceColor; // 0 = white, 1 = black, 2 = red, 3 = blue
-    private int turn = 0;
-    private int numberOfPlayers = 4; //TEMPORARY NUMBER
+public class HumanPlayer implements Player {
 
-    public HumanPlayer(int playerColor){
-        this.playerColor = playerColor;
-        this.pieceColor = playerColor;
-        this.score = 0;
+    private final String playerName;
+    private int currentPiecesID = 0 ;
+    private int score = 0 ;
+    private final int playerID;
+
+    public HumanPlayer(String playerName, int playerID){
+        this.playerName = playerName;
+        this.playerID = playerID;
+        
+    }
+    @Override
+    public int getCurrentPieceID() {
+        return currentPiecesID;
     }
 
     @Override
-    public void changeToNextPieceColor() {
-        if (pieceColor != numberOfPlayers){
-            pieceColor++;
-        }
-        else {
-            pieceColor = 0;
-        }
+    public boolean isBot() { return "human".equalsIgnoreCase(playerName); }
+
+
+    @Override
+    public void setCurrentPieceID(int currentPieceID) {
+        this.currentPiecesID = currentPieceID;
     }
 
     @Override
-    public void placeCurrentPieceOnCell(Cell cell) {
-
+    public int getPlayerID() {
+        return playerID;
     }
 
     @Override
-    public void setPlayersColor(int playersColor) {
-        this.playerColor = playersColor;
-    }
+    public String getPlayerName() { return playerName; }
 
     @Override
-    public int getPlayersColor() {
-        return playerColor;
-    }
+    public int getScore() { return score; }
 
     @Override
-    public void setPieceColor(int pieceColor) {
-        this.pieceColor = pieceColor;
-    }
-
-    @Override
-    public int getPieceColor() {
-        return pieceColor;
-    }
-
-    @Override
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    @Override
-    public int getScore() {
-        return score;
-    }
+    public void setScore(int score) { this.score = score; }
 }

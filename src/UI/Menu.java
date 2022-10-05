@@ -193,8 +193,8 @@ public class Menu extends JPanel{
             public void actionPerformed(ActionEvent e){
                 //Players ArrayList
                 ArrayList<String> players = new ArrayList<>(){};
-                players.add("human");
-                players.add("human");
+                players.add("human - white");
+                players.add("human - black");
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
@@ -213,13 +213,4 @@ public class Menu extends JPanel{
     }
 
 
-    public void Grid(){
-        JFrame frame = new JFrame("Draw Hexagon");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Grid grid = new Grid(boardSize);
-        frame.add(grid);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }

@@ -3,6 +3,7 @@ package UI;
 import GAME.Board;
 import GAME.Cell;
 import GAME.State;
+import PLAYER.Player;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,24 +20,66 @@ public class Grid extends JPanel {
     private LinkedList<Hex> setOfHexagons;
     private ArrayList<Cell> setOfCells;
     private State state;
-    private final int WIDTH  = 1000;
-    private final int HEIGHT = 1000;
-    private int counter = 1 ;
+    private ArrayList<JLabel> scores = new ArrayList<>();
+    private ArrayList<JLabel> names = new ArrayList<>();
+    private ArrayList<JPanel> colorBars = new ArrayList<>();
+
+
     public Grid(State state){
         this.state = state;
         this.setOfCells = state.getBoard().getCells();
         this.setOfHexagons = createHexagons();
         HexListener listener = new HexListener();
         addMouseListener(listener);
+        createGamingPage();
+
     }
-    public Grid(int radius){
+    public void createGamingPage(){
+        this.setLayout(null);
 
-        this.setOfHexagons = createHexagons();
+        for (Player player :state.getPlayers()) { createPlayerPanels(player); }
+        updateColorBars();
+        super.add(mainMenuButton());
+        repaint();
+    }
+    public void createPlayerPanels(Player player){
+        Color color = null;
+        JPanel colorBar = new JPanel();
+        if(player.getPlayerID() == 0 ) color = Color.WHITE;
+        if(player.getPlayerID() == 1 ) color = Color.BLACK;
+        if(player.getPlayerID() == 2 ) color = Color.RED;
+        if(player.getPlayerID() == 3 ) color = Color.BLUE;
 
-//        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        HexListener listener = new HexListener();
-        addMouseListener(listener);
+        colorBar.setBackground(Color.WHITE);
+        JLabel name = new JLabel(player.getPlayerName());
+        JLabel score = new JLabel(""+player.getScore());
 
+        name.setFont(Show.customFont_25f);
+        score.setFont(Show.customFont_25f);
+
+        name.setForeground(color);
+        score.setForeground(color);
+
+        int x = 0 , y  = 0;
+        if(player.getPlayerID() == 0){ x = 20                              ;  y = 20                              ;}
+        if(player.getPlayerID() == 1){ x = getBoard().getOffsetX()*2 - 220 ;  y = 20                              ;}
+        if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*20 - 120;}
+        if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*20 - 120;}
+        System.out.println(x + " " + y);
+
+        name.setBounds( x+20,y,200,50);
+        score.setBounds(x+20,y+25,200,50);
+        colorBar.setBounds(x+5,y+13,7,50);
+
+        super.add(name);
+        super.add(score);
+        super.add(colorBar);
+
+//        panel.setBackground();
+
+        colorBars.add(colorBar);
+        names.add(name);
+        scores.add(score);
     }
 
     public LinkedList<Hex> createHexagons(){
@@ -49,13 +91,48 @@ public class Grid extends JPanel {
             setOfHexagons.add(hex);
             hex.changeColor(cell.getColor());
         }
+
         repaint();
 
 
         return setOfHexagons;
     }
 
-    public Cell getCellFromMouseClick( double x , double y ){
+
+    public void updateScores(){
+        for (int i = 0; i < scores.size(); i++) {
+            Player p = state.getPlayers().get(i);
+            scores.get(i).setText( getBoard().scoreOfAPlayer(p.getPlayerID())+"");
+        }
+
+    }
+    public void updateColors(){
+        for (Hex hex : setOfHexagons) {
+            hex.changeColor(hex.getCell().getColor());
+        }
+    }
+    public void updateColorBars() {
+        for (int i = 0; i < colorBars.size(); i++) {
+            int colorBarIndexToShow = state.getCurrentPlayer().getPlayerID();
+            if (i == state.getCurrentPlayer().getPlayerID()) {
+                colorBars.get(i).setVisible(true);
+                Color color = null;
+                int currentColor = state.getCurrentColor();
+                if (currentColor == 0) color = Color.WHITE;
+                if (currentColor == 1) color = Color.BLACK;
+                if (currentColor == 2) color = Color.RED;
+                if (currentColor == 3) color = Color.BLUE;
+
+                colorBars.get(i).setBackground(color);
+
+            } else {
+                colorBars.get(i).setVisible(false);
+            }
+        }
+    }
+
+
+        public Cell getCellFromMouseClick( double x , double y ){
         return state.getBoard().getCellFromPosition(x,y);
     }
 
@@ -63,28 +140,29 @@ public class Grid extends JPanel {
     public void paintComponent(Graphics g){
 
         super.paintComponent(g);
-
+        this.setOpaque(false);
         for (int i = 0; i < setOfHexagons.size(); i++) {
             g.setColor(setOfHexagons.get(i).getColor());
             g.fillPolygon(setOfHexagons.get(i).getPolygon());
-            g.setColor(Color.BLACK);
+            g.setColor(new Color(92, 130, 117));
             g.drawPolygon(setOfHexagons.get(i).getPolygon());
         }
-        addMainMenuButton();
+        Show.frame.setBackground(new Color(92, 130, 117));
+        repaint();
 
-        for (int i = 0; i < setOfCells.size(); i++) {
-            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
-//            g.drawString(setOfCells.get(i).toString(), (int)setOfCells.get(i).getX(), (int)setOfHexagons.get(i).getCoordinates().getY());
-            //System.out.println(setOfCells.get(i).toString() + " " + (int)setOfCells.get(i).getX() + " " + (int)setOfCells.get(i).getY());
-        }
 
-        //repaint(1);
+
+
+//
+//        for (int i = 0; i < setOfCells.size(); i++) {
+//            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
+//        }
 
     }
-    public void addMainMenuButton(){
+    public JButton mainMenuButton(){
         JButton backButton = new JButton("<");
         backButton.setFont(Show.customFont_40f);
-        backButton.setBounds( 10 ,10,60, 60);
+        backButton.setBounds( 10 , getBoard().getOffsetY()-60,60, 60);
 
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
@@ -98,8 +176,9 @@ public class Grid extends JPanel {
                 Show.frame.getRootPane().revalidate();
             }
         });
-        super.add(backButton);
+        return backButton;
     }
+
 
 
     public LinkedList<Hex> getSetOfHexagons() {
@@ -143,34 +222,7 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseClicked(MouseEvent e) {
-//            getCellFromMouseClick(e.getX(),e.getY()).setColor(state.getTable().traverseTable(1).getPlayer().getTurn() );
-            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
-            int color = 0 ;
-            System.out.println(cell);
-            if(cell != null ){
 
-                color = (state.getTable().traverseTable(counter).getPlayer().getTurn() );
-                System.out.println(color);
-                cell.setColor(color);
-                List<Hex> list = setOfHexagons.stream().filter(hex -> hex.getPolygon().contains(e.getX() , e.getY())).toList();
-                counter++;
-                if( list.size() > 0 ){
-                    list.get(0).changeColor(color);
-//                    System.out.println(board.numberOfPiecesConnectedToCell(cell.getColor(), cell));
-                }
-                System.out.println("----------------");
-                repaint();
-
-                //FOR TESTING
-//                for (int i = 1; i <= 2; i++) {
-//                    System.out.print(((i==1) ? "WHITE = " : "BLACK = ") + state.getBoard().scoreOfAPlayer(i) + "\n");
-//                    state.getBoard().setAllCellsToNotVisited();
-//                }
-//                if(SwingUtilities.isMiddleMouseButton(e)){
-//                    System.out.println();
-//                }
-
-            }
         }
 
         /**
@@ -181,9 +233,42 @@ public class Grid extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
+            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
+            int color , playerID;
+            if(SwingUtilities.isMiddleMouseButton(e)){
+                for (Player player : state.getPlayers() ) {
+                    System.out.println(player.getScore());
+                }
+            }
+            if(SwingUtilities.isRightMouseButton(e)){
+                for (int i = 0 ; i < state.getNumberOfPlayers() ; i++){
+                    System.out.println(state.getBoard().scoreOfAPlayer(i));
+                    state.getBoard().setAllCellsToNotVisited();
+                }
+            }
+
+            Player player = state.getCurrentPlayer();
+            color = player.getCurrentPieceID();
+
+            if(!state.isGameOver() && cell != null && cell.isEmpty() ){
+
+                cell.setColor(color);
+                updateColors();
 
 
+                state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
+                state.getBoard().setAllCellsToNotVisited();
 
+                state.nextTurn();
+                updateScores();
+                updateColorBars();
+
+                repaint();
+            }
+            if(state.isGameOver()) {
+                state.setGameOver(true);
+                
+            }
 
         }
 

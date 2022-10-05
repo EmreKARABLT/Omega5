@@ -25,7 +25,7 @@ public class Board {
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
-        colorTheCellsRandomly();
+//        colorTheCellsRandomly();
     }
 
     /**
@@ -37,9 +37,9 @@ public class Board {
                 cells) {
             double random = Math.random();
             if(random < 0.4 )
-                cell.setColor(1);
+                cell.setColor(0);
             else if(random < 0.8)
-                cell.setColor(2);
+                cell.setColor(1);
         }
 
     }
@@ -76,12 +76,6 @@ public class Board {
                 }
             }
         }
-        int numberOfNeighbors = 0 ;
-        for (Cell cell :
-                cells) {
-            numberOfNeighbors+= cell.getNeighbors().size();
-        }
-        System.out.println(numberOfNeighbors);
     }
     /**
      * will be called by constructor to create the board
@@ -133,7 +127,7 @@ public class Board {
      * @return the number of empty cells
      */
     public int getNumberOfEmptyCells(){
-        return cells.stream().filter(cell -> cell.getColor()==0).toList().size();
+        return cells.stream().filter(cell -> cell.getColor()==-1).toList().size();
     }
 
     /**
@@ -232,18 +226,19 @@ public class Board {
         this.cells = cells;
     }
 
-
-    public static void main(String[] args) {
-        Board board = new Board(3);
-        for (int i = 0 ; i < 37 ; i++){
-            board.getCells().get(i).setColor(1);
-        }
-        System.out.println(board.getNumberOfEmptyCells());
-
+    public int getOffsetX() {
+        return offsetX;
     }
 
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
 
+    public int getOffsetY() {
+        return offsetY;
+    }
 
-
-
+    public void setOffsetY(int offsetY) {
+        this.offsetY = offsetY;
+    }
 }
