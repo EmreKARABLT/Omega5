@@ -234,18 +234,7 @@ public class Grid extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             Cell cell = getCellFromMouseClick( e.getX() , e.getY());
-            int color , playerID;
-            if(SwingUtilities.isMiddleMouseButton(e)){
-                for (Player player : state.getPlayers() ) {
-                    System.out.println(player.getScore());
-                }
-            }
-            if(SwingUtilities.isRightMouseButton(e)){
-                for (int i = 0 ; i < state.getNumberOfPlayers() ; i++){
-                    System.out.println(state.getBoard().scoreOfAPlayer(i));
-                    state.getBoard().setAllCellsToNotVisited();
-                }
-            }
+            int color ;
 
             Player player = state.getCurrentPlayer();
             color = player.getCurrentPieceID();
