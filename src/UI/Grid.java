@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import javax.swing.*;
 import java.awt.*;
@@ -246,7 +247,6 @@ public class Grid extends JPanel {
 
 
                 state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
-                state.getBoard().setAllCellsToNotVisited();
 
                 state.nextTurn();
                 updateScores();
@@ -255,8 +255,45 @@ public class Grid extends JPanel {
                 repaint();
             }
             if(state.isGameOver()) {
-                state.setGameOver(true);
-                
+                //int finalscore = state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                System.out.println(player.getScore());
+                System.out.println(getBoard().scoreOfAPlayer(1));
+                //jdialog window
+                StringBuilder s = new StringBuilder();
+                int[] scores = new int[state.getNumberOfPlayers()];
+                for (int i = 0; i < scores.length; i++) {
+                    Player p = state.getPlayers().get(i);
+                    scores[i] = p.getScore();
+                    s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
+                }
+                if(scores[0] < scores[1])
+                    s.append("BLACK WON!!");
+                else
+                    s.append("WHITE WON!!");
+
+
+
+                System.out.println(Arrays.toString(scores));
+                String[] playagainbuttontext = {"Play again!"};
+                int play_again = JOptionPane.showOptionDialog(
+                        null,
+                        s,
+                        "End Frame -- Thank you for playing!",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        playagainbuttontext,
+                        0
+                );
+
+                //play_again==0 means you want to play again
+                if (play_again == 0){
+                    Show.frame.setContentPane(Menu.getInstance().getPanel());
+                    Show.frame.getRootPane().revalidate();
+                }
+                else {
+                    Show.frame.dispose();
+                }
             }
 
         }
@@ -291,4 +328,3 @@ public class Grid extends JPanel {
         }
     }
 }
-

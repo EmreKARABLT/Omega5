@@ -193,8 +193,8 @@ public class Menu extends JPanel{
             public void actionPerformed(ActionEvent e){
                 //Players ArrayList
                 ArrayList<String> players = new ArrayList<>(){};
-                players.add("human - white");
-                players.add("human - black");
+                players.add("White");
+                players.add("Black");
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
