@@ -13,14 +13,6 @@ public class Board {
      */
     private int offsetX = 718 , offsetY =382 ; // this is the half size of the screen to put it to the middle of the screen
 
-    public Board(int boardSize, int offset_x, int offset_y){
-        this.offsetX = offset_x;
-        this.offsetY = offset_y;
-        this.cells = new ArrayList<>();
-        this.boardSize = boardSize;
-        createBoard();
-    }
-
     public Board(int boardSize){
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
@@ -51,7 +43,8 @@ public class Board {
             int rMax = Math.max(-n , -q-n);
             int rMin = Math.min( n , -q+n);
             for( int r = rMax ; r<=rMin ; r++){
-                cells.add( new Cell( q, r,-q-r ,id++));
+                Cell cell = new Cell( q, r,-q-r ,id++);
+                cells.add(cell);
             }
         }
     }
@@ -79,6 +72,7 @@ public class Board {
      * will be called by constructor to create the board
      */
     private void createBoard(){
+        Cell.RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
         createCells();
         connectCells();
         createCenters();
@@ -93,8 +87,8 @@ public class Board {
             int q = cell.getQ();
             int r = cell.getR();
             double sqrt3 = Math.sqrt(3);
-            double x = radius * (    3/2.d * q) + offsetX;
-            double y = radius * (sqrt3/2.d * q + sqrt3 * r ) +offsetY;
+            double x = radius * (    3/2.d * q) +              offsetX;
+            double y = radius * (sqrt3/2.d * q  + sqrt3 * r ) +offsetY;
 
             cell.setX(x);
             cell.setY(y);
@@ -109,8 +103,8 @@ public class Board {
      */
     public Cell getCellFromPosition(double x , double y ){
         double radius = cells.get(0).getRADIUS();
-        double q = 2/3.d * (x - offsetX) / radius ;
-        double r = ( -1/3.d * (x-offsetX) + Math.sqrt(3)/3 * (y - offsetY) )/ radius;
+        double q =    2/3.d * (x - offsetX) / radius ;
+        double r = ( -1/3.d * (x - offsetX) + Math.sqrt(3)/3 * (y - offsetY) )/ radius;
 
         int q_i = (q >= 0 ) ? (int)  (q + 0.5) : (int)(q - 0.5) ;
         int r_i = (r >= 0 ) ? (int)  (r + 0.5) : (int)(r - 0.5) ;
