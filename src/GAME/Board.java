@@ -11,7 +11,7 @@ public class Board {
     TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
          Replace the following line with the printed values on console
      */
-    private int offsetX = 590 , offsetY =295 ; // this is the half size of the screen to put it to the middle of the screen
+    private int offsetX = 718 , offsetY =382 ; // this is the half size of the screen to put it to the middle of the screen
 
     public Board(int boardSize, int offset_x, int offset_y){
         this.offsetX = offset_x;
@@ -25,7 +25,7 @@ public class Board {
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
-        colorTheCellsRandomly();
+//        colorTheCellsRandomly();
     }
 
     /**

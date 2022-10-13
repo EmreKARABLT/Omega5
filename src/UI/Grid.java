@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import javax.swing.*;
 import java.awt.*;
@@ -271,9 +270,6 @@ public class Grid extends JPanel {
                 else
                     s.append("WHITE WON!!");
 
-
-
-                System.out.println(Arrays.toString(scores));
                 String[] playagainbuttontext = {"Play again!"};
                 int play_again = JOptionPane.showOptionDialog(
                         null,
@@ -290,9 +286,6 @@ public class Grid extends JPanel {
                 if (play_again == 0){
                     Show.frame.setContentPane(Menu.getInstance().getPanel());
                     Show.frame.getRootPane().revalidate();
-                }
-                else {
-                    Show.frame.dispose();
                 }
             }
 
@@ -328,3 +321,4 @@ public class Grid extends JPanel {
         }
     }
 }
+
