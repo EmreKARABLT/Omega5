@@ -140,6 +140,10 @@ public class Grid extends JPanel {
     public void paintComponent(Graphics g){
 
         super.paintComponent(g);
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        ((Graphics2D) g).setStroke(new BasicStroke(3));
         this.setOpaque(false);
         for (int i = 0; i < setOfHexagons.size(); i++) {
             g.setColor(setOfHexagons.get(i).getColor());
