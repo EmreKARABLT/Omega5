@@ -291,6 +291,9 @@ public class Grid extends JPanel {
                     Show.frame.setContentPane(Menu.getInstance().getPanel());
                     Show.frame.getRootPane().revalidate();
                 }
+                else {
+                    Show.frame.dispose();
+                }
             }
 
         }
