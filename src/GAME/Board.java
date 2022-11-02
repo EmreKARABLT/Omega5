@@ -3,6 +3,7 @@ package GAME;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class Board {
     private int boardSize ;
@@ -250,5 +251,24 @@ public class Board {
 
     public void setOffsetY(int offsetY) {
         this.offsetY = offsetY;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+        Board board = (Board) o;
+
+        for (int i = 0; i < cells.size(); i++) {
+            if(cells.get(i).getColor() != board.getCells().get(i).getColor() ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cells);
     }
 }

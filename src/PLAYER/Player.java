@@ -6,6 +6,7 @@ import GAME.State;
 import java.util.ArrayList;
 
 public abstract class Player {
+    //protected static State state;
     String playerName;
     int currentPiecesID = 0 ;
     int score = 0 ;

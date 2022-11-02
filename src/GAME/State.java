@@ -4,6 +4,7 @@ import PLAYER.Player;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class State{
     private Board board;
@@ -99,4 +100,16 @@ public class State{
         board.clearBoard();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof State)) return false;
+        State state = (State) o;
+        return Objects.equals(board, state.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(board);
+    }
 }
