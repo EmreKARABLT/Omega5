@@ -246,17 +246,31 @@ public class Grid extends JPanel {
             if(!state.isGameOver() && cell != null && cell.isEmpty() ){
 
                 cell.setColor(color);
-                updateColors();
-
-
                 state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
-
                 state.nextTurn();
+
+                updateColors();
                 updateScores();
                 updateColorBars();
-
                 repaint();
             }
+
+            if(state.getCurrentPlayer().isBot()){
+                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+
+                moves.get(0).setColor(0);
+                moves.get(1).setColor(1);
+                state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                state.nextTurn();
+                state.nextTurn();
+
+                updateColors();
+                updateScores();
+                updateColorBars();
+                repaint();
+            }
+
             if(state.isGameOver()) {
                 //int finalscore = state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
                 System.out.println(player.getScore());

@@ -6,18 +6,6 @@ import java.io.IOException;
 
 
 public class Show extends JFrame {
-    /*
-        CREATING JFRAME
-        I fall into the sin of using static variables. I hope, the following explanation will make you to forgive me :)
-        I wanted to implement a main menu button on the game screen to come back to main menu.
-        To be able to do that I created some buttons ( Menu -> PLAY BUTTON -> Game  //// Game -> MENU BUTTON (<) -> Menu )
-        and assigned action listeners to them. But the problem was, we had to use only one frame and switch between 2 JPanels ,
-        which are our Grid and Menu classes ( both extend JPanel) . So I choose 'static way' to have just one global JFrame which I can use everywhere.
-        And to be able to use custom fonts everywhere without implementing them again and again. I also put them as static variables.
-
-        If you run into a trouble with these variable or if you have more elegant solutions text me!!
-        Emre K.
-     */
 
     public static JFrame frame = new JFrame();
     //CREATING FONTS
@@ -46,6 +34,10 @@ public class Show extends JFrame {
             ge.registerFont(Show.customFont_25f);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
+            Show.customFont_60f = new Font("Arial", Font.BOLD, 60);
+            Show.customFont_50f = new Font("Arial", Font.BOLD, 50);
+            Show.customFont_40f = new Font("Arial", Font.BOLD, 40);
+            Show.customFont_25f = new Font("Arial", Font.BOLD, 25);
         }
     }
 }

@@ -1,16 +1,37 @@
 package PLAYER;
 
-public interface Player {
-    boolean isBot();
-    String getPlayerName();
-    int getPlayerID();
+import GAME.Cell;
+import GAME.State;
 
-    int getScore();
-    void setScore(int score);
+import java.util.ArrayList;
 
-    int getCurrentPieceID();
-    void setCurrentPieceID(int currentPieceID);
+public abstract class Player {
+    String playerName;
+    int currentPiecesID = 0 ;
+    int score = 0 ;
+    int playerID ;
+    public static int counterForIDs = 0;
 
 
+    public boolean isBot(){return false;};
+    public ArrayList<Cell> getMoves(State state){
+        return null;
+    };
+
+
+
+    public String getPlayerName(){return playerName;};
+    public int getPlayerID(){return playerID;};
+
+    public int getScore(){return score;};
+    public void setScore(int score){ this.score = score;};
+
+    public int getCurrentPieceID(){return currentPiecesID;};
+    public void setCurrentPieceID(int currentPieceID){ this.currentPiecesID = currentPieceID;};
+
+    public void reset(){
+        score = 0 ;
+        currentPiecesID = 0 ;
+    }
 
 }

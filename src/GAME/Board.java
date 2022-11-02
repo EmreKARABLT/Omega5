@@ -11,7 +11,7 @@ public class Board {
     TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
          Replace the following line with the printed values on console
      */
-    private int offsetX = 718 , offsetY =382 ; // this is the half size of the screen to put it to the middle of the screen
+    private int offsetX = 718 , offsetY = 382; // this is the half size of the screen to put it to the middle of the screen
 
     public Board(int boardSize){
         this.cells = new ArrayList<>();
@@ -19,6 +19,7 @@ public class Board {
         createBoard();
 //        colorTheCellsRandomly();
     }
+
 
     /**
      * Colors each cell to white or black
@@ -122,6 +123,15 @@ public class Board {
         return cells.stream().filter(cell -> cell.getColor()==-1).toList().size();
     }
 
+    public ArrayList<Cell> getEmptyCells(){
+        ArrayList<Cell> emptyCells= new ArrayList<>();
+        for (Cell cell :
+                cells) {
+            if(cell.isEmpty())
+                emptyCells.add(cell);
+        }
+        return emptyCells;
+    }
     /**
      * Calculates the score of the given color
      * @param color is the color of the player
@@ -201,6 +211,12 @@ public class Board {
         for (Cell cell :
                 cells) {
             cell.setVisited(false);
+        }
+    }
+
+    public void clearBoard(){
+        for (Cell cell : cells) {
+            cell.reset();
         }
     }
 

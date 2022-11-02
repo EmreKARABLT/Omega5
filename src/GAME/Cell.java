@@ -123,6 +123,10 @@ public class Cell {
         return new int[]{ q, r, s };
     }
 
+    public void reset(){
+        this.visited = false;
+        this.color =-1;
+    }
     @Override
     public String toString() {
         return  q + " " + r + " " + s;

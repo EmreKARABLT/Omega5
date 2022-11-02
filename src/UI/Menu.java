@@ -1,10 +1,11 @@
 package UI;
 
 import GAME.State;
+import PLAYER.RandomBot;
+import PLAYER.HumanPlayer;
+import PLAYER.Player;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,9 +57,7 @@ public class Menu extends JPanel{
         BufferedImage originalImage = null;
         try {
             originalImage = ImageIO.read(new File("src/UI/background.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException ignored) {}
         Image img = null;
         if(originalImage != null )
             img = originalImage.getScaledInstance( originalImage.getWidth()/3, originalImage.getHeight()/3, Image.SCALE_AREA_AVERAGING);
@@ -78,6 +77,8 @@ public class Menu extends JPanel{
                     int y = this.getParent().getHeight()/2 - finalImg.getHeight(null)/2;
                     g.drawImage(finalImg,x,y,this);
                 }
+                else
+                    this.setBackground(new Color(92, 130, 117));
         }};
         panel.setLayout(null);
         Show.frame.add(panel);
@@ -192,9 +193,10 @@ public class Menu extends JPanel{
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 //Players ArrayList
-                ArrayList<String> players = new ArrayList<>(){};
-                players.add("White");
-                players.add("Black");
+                ArrayList<Player> players = new ArrayList<>(){};
+                Player.counterForIDs = 0 ;
+                players.add(new HumanPlayer("White") );
+                players.add(new RandomBot("Black") );
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();

@@ -1,14 +1,13 @@
 package GAME;
 
-import PLAYER.HumanPlayer;
 import PLAYER.Player;
 
 
 import java.util.ArrayList;
 
-public class State {
+public class State{
     private Board board;
-    private int numberOfPlayers = 0;
+    private int numberOfPlayers ;
 //    private Table table;
     private int numberOfAIPlayers = 0;
     private boolean isGameOver;
@@ -21,12 +20,10 @@ public class State {
      *
      * @param board_size desired board size (3, 5 ,7)
      */
-    public State(int board_size, ArrayList<String> playersList) {
+    public State(int board_size, ArrayList<Player> playersList) {
         this.numberOfPlayers = playersList.size();
+        players = playersList;
 
-        for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new HumanPlayer(playersList.get(i), i ));
-        }
         this.currentPlayer = players.get(0);
         this.currentColor = 0 ;
 //        this.table = new Table(players);
@@ -41,11 +38,11 @@ public class State {
         return currentPlayer.getCurrentPieceID();
     }
 
-    public void nextTurn(){
-        currentColor = (currentColor + 1) % numberOfPlayers;
-        int nextColor = currentColor;
-        currentPlayer.setCurrentPieceID(nextColor);
-        if(nextColor == 0 ){
+        public void nextTurn(){
+            currentColor = (currentColor + 1) % numberOfPlayers;
+            int nextColor = currentColor;
+            currentPlayer.setCurrentPieceID(nextColor);
+            if(nextColor == 0 ){
             currentPlayer = players.get( (currentPlayer.getPlayerID()+1) % numberOfPlayers);
         }
     }
@@ -74,15 +71,6 @@ public class State {
         this.numberOfPlayers = numberOfPlayers;
     }
 
-
-//    public Table getTable() {
-//        return table;
-//    }
-//
-//    public void setTable(Table table) {
-//        this.table = table;
-//    }
-
     public int getNumberOfAIPlayers() {
         return numberOfAIPlayers;
     }
@@ -97,6 +85,18 @@ public class State {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
+    }
+    public Player getWinner(){
+        return (players.get(0).getScore()>players.get(1).getScore()) ? players.get(0) : players.get(1);
+    }
+    public void restart(){
+
+        for (Player player: players) {
+            player.reset();
+        }
+        currentColor = 0 ;
+        currentPlayer = players.get(0);
+        board.clearBoard();
     }
 
 }
