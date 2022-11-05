@@ -14,6 +14,22 @@ public class Tree {
         root = new Node(null, state, null, null );
     }
 
+
+    public Node selection(Node root){
+
+        Node node = root;
+
+        while(!(node.getChildren().size() == 0)){
+            node = UCT.bestNodeUTC(node);
+        }
+
+        return node;
+    }
+
+    public void expansion(Node node){
+        node.allChildrens();
+    }
+
     public void simulaton(Node node){
 
         Node simNode = node;
@@ -45,6 +61,10 @@ public class Tree {
             simNode.setNumberOfWins(simNode.getNumberOfWins() + win);
             simNode.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
         }
+    }
+
+    public void setRoot(Node node){
+        this.root = node;
     }
 
 }

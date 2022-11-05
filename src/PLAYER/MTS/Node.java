@@ -20,7 +20,7 @@ public class Node {
     private Cell black ;
     private int depth;
     private int numberOfSimulations;
-    private int numberOfWins = 0;
+    private int numberOfWins;
     private int numberOfChildren;
     private ArrayList<Cell> emptyCells;
 
@@ -30,7 +30,9 @@ public class Node {
         this.white = white;
         this.black = black;
         this.emptyCells = state.getBoard().getEmptyCells();
+        numberOfWins = 0;
         numberOfChildren = 0;
+        numberOfSimulations = 0;
     }
 
     public boolean isRoot(){
@@ -38,8 +40,9 @@ public class Node {
     }
     public Node addChild(Node child){
         for (Node node: children) {
-            if( child.equals(node) )
+            if(child.equals(node)){
                 return node;
+            }
         }
         children.add(child);
         numberOfChildren++;
@@ -108,7 +111,7 @@ public class Node {
         return true;
     }
 
-    public void possibleStates(){
+    public void allChildrens(){
 
         for (int i = 0; i < emptyCells.size(); i++) {
 
@@ -149,70 +152,22 @@ public class Node {
 
     public State getState() {return state;}
     public void setState(State state) {this.state = state;}
-
-    public Node getRoot() {
-        return root;
-    }
-
-    public void setRoot(Node root) {
-        this.root = root;
-    }
-
-    public int getNumberOfSimulations() {
-        return numberOfSimulations;
-    }
-
-    public void setNumberOfSimulations(int numberOfSimulations) {
-        this.numberOfSimulations = numberOfSimulations;
-    }
-
-    public int getNumberOfWins() {
-        return numberOfWins;
-    }
-
-    public void setNumberOfWins(int numberOfWins) {
-        this.numberOfWins = numberOfWins;
-    }
-
-    public Cell getBlack() {
-        return black;
-    }
-
-    public void setBlack(Cell black) {
-        this.black = black;
-    }
-
-    public ArrayList<Cell> getEmptyCells() {
-        return emptyCells;
-    }
-
-    public void setEmptyCells(ArrayList<Cell> emptyCells) {
-        this.emptyCells = emptyCells;
-    }
-
-    public Cell getWhite() {
-        return white;
-    }
-
-    public void setWhite(Cell white) {
-        this.white = white;
-    }
-
-    public int getDepth() {
-        return depth;
-    }
-
-    public void setDepth(int depth) {
-        this.depth = depth;
-    }
-
-    public int getNumberOfChildren() {
-        return numberOfChildren;
-    }
-
-    public void setNumberOfChildren(int numberOfChildren) {
-        this.numberOfChildren = numberOfChildren;
-    }
+    public Node getRoot() {return root;}
+    public void setRoot(Node root) {this.root = root;}
+    public int getNumberOfSimulations() {return numberOfSimulations;}
+    public void setNumberOfSimulations(int numberOfSimulations) {this.numberOfSimulations = numberOfSimulations;}
+    public int getNumberOfWins() {return numberOfWins;}
+    public void setNumberOfWins(int numberOfWins) {this.numberOfWins = numberOfWins;}
+    public Cell getBlack() {return black;}
+    public void setBlack(Cell black) {this.black = black;}
+    public ArrayList<Cell> getEmptyCells() {return emptyCells;}
+    public void setEmptyCells(ArrayList<Cell> emptyCells) {this.emptyCells = emptyCells;}
+    public Cell getWhite() {return white;}
+    public void setWhite(Cell white) {this.white = white;}
+    public int getDepth() {return depth;}
+    public void setDepth(int depth) {this.depth = depth;}
+    public int getNumberOfChildren() {return numberOfChildren;}
+    public void setNumberOfChildren(int numberOfChildren) {this.numberOfChildren = numberOfChildren;}
 
     @Override
     public boolean equals(Object o) {
@@ -227,15 +182,6 @@ public class Node {
         return Objects.hash(parent, state, white, black, depth);
     }
 
-
-    /*
-        public Node(State state, Node parent, Cell cellWhite, Cell cellBlack){
-        this.state = state;
-        this.parent = parent;
-        this.white = cellWhite;
-        this.black = cellBlack;
-    }
-    */
     public static void main(String[] args) {
         ArrayList<Player> players = new ArrayList<>(){};
         players.add(new HumanPlayer("White") );
