@@ -9,7 +9,6 @@ import java.util.Objects;
 public class State{
     private Board board;
     private int numberOfPlayers ;
-//    private Table table;
     private int numberOfAIPlayers = 0;
     private boolean isGameOver;
     private Player currentPlayer ;

@@ -1,5 +1,6 @@
 package PLAYER.MTS;
 
+import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.HumanPlayer;
@@ -11,16 +12,17 @@ import java.util.Objects;
 
 public class Node {
 
-    Node parent;
-    Node root;
-    State state;
-    ArrayList<Node> children;
-    Cell white ;
-    Cell black ;
-    int depth;
-    int numberOfSimulations;
-    int numberOfWins = 0;
-    ArrayList<Cell> emptyCells;
+    private Node parent;
+    private Node root;
+    private State state;
+    private ArrayList<Node> children;
+    private Cell white ;
+    private Cell black ;
+    private int depth;
+    private int numberOfSimulations;
+    private int numberOfWins = 0;
+    private int numberOfChildren;
+    private ArrayList<Cell> emptyCells;
 
     public Node(Node parent,State state,Cell white , Cell black){
         this.parent = parent;
@@ -28,17 +30,84 @@ public class Node {
         this.white = white;
         this.black = black;
         this.emptyCells = state.getBoard().getEmptyCells();
+        numberOfChildren = 0;
     }
 
+    public boolean isRoot(){
+        return parent == null;
+    }
     public Node addChild(Node child){
         for (Node node: children) {
             if( child.equals(node) )
                 return node;
         }
         children.add(child);
+        numberOfChildren++;
         return child;
     }
-    /*
+
+    public State getRandomState(){
+
+        ArrayList<Cell> emptyCells = state.getBoard().getEmptyCells();
+
+        int r1 = (int) (Math.random() * emptyCells.size());
+        Cell white = emptyCells.remove(r1);
+
+        int r2 = (int) (Math.random() * emptyCells.size());
+        Cell black = emptyCells.remove(r2);
+
+        State newState = new State(state.getBoard().getBoardSize(), state.getPlayers());
+        Board board = state.getBoard();
+
+        board.getCells().add(white);
+        board.getCells().add(black);
+        newState.setBoard(board);
+
+        return newState;
+
+    }
+
+    public boolean terminalNode(){
+        return state.isGameOver();
+    }
+
+    public int numberOfPossibleMoves(){
+        int n = state.getBoard().getNumberOfEmptyCells();
+        int k = n - 2;
+        return factorial(n)/(2 * factorial(k));
+    }
+
+    public boolean Do_I_Have_More_Moves(){
+        int n = state.getBoard().getNumberOfEmptyCells();
+        int k = n - 2;
+        int posibleMoves = factorial(n)/(2 * factorial(k));
+        if(posibleMoves <= numberOfChildren){
+            return false;
+        }
+        return true;
+    }
+
+    public int factorial (int number) {
+
+        if (number == 0){
+            return 1;
+        } else{
+            return number * factorial(number - 1);
+        }
+
+    }
+
+
+    public boolean duplicatedRandomMove(State state){
+
+        for (Node child : children) {
+            if (child.getState().equals(state)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void possibleStates(){
 
         for (int i = 0; i < emptyCells.size(); i++) {
@@ -50,11 +119,11 @@ public class Node {
                 c1.setColor(0);
                 c2.setColor(1);
 
-                children.add(new Node(this, state));
+                children.add(new Node(this, state, c1, c2));
             }
         }
     }
-    */
+
 
     public double winningProbability(){
         if(numberOfSimulations > 0 )
@@ -78,6 +147,9 @@ public class Node {
         this.parent = parent;
     }
 
+    public State getState() {return state;}
+    public void setState(State state) {this.state = state;}
+
     public Node getRoot() {
         return root;
     }
@@ -100,6 +172,46 @@ public class Node {
 
     public void setNumberOfWins(int numberOfWins) {
         this.numberOfWins = numberOfWins;
+    }
+
+    public Cell getBlack() {
+        return black;
+    }
+
+    public void setBlack(Cell black) {
+        this.black = black;
+    }
+
+    public ArrayList<Cell> getEmptyCells() {
+        return emptyCells;
+    }
+
+    public void setEmptyCells(ArrayList<Cell> emptyCells) {
+        this.emptyCells = emptyCells;
+    }
+
+    public Cell getWhite() {
+        return white;
+    }
+
+    public void setWhite(Cell white) {
+        this.white = white;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public int getNumberOfChildren() {
+        return numberOfChildren;
+    }
+
+    public void setNumberOfChildren(int numberOfChildren) {
+        this.numberOfChildren = numberOfChildren;
     }
 
     @Override
