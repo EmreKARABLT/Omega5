@@ -30,7 +30,7 @@ public class MonteCarloTreeSearch {
             Node bestNode = tree.selection(tree.root);
             Node exploration = bestNode;
             tree.expansion(exploration);
-            tree.simulaton(exploration);
+            tree.simulation(exploration);
             a++;
         }
 

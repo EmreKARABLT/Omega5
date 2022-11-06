@@ -28,10 +28,10 @@ public class Tree {
     }
 
     public void expansion(Node node){
-        node.allChildrens();
+        node.allChildren();
     }
 
-    public void simulaton(Node node){
+    public void simulation(Node node){
 
         Node simNode = node;
 
@@ -59,12 +59,14 @@ public class Tree {
 
         backpropagation(node, simNode, win);
     }
-
+    //TODO fix this method
     public void backpropagation(Node node, Node simNode, int win){
         while (!simNode.equals(node)){
-            simNode.getWhite().setColor(-1);
-            simNode.getBlack().setColor(-1);
             Node parent = simNode.getParent();
+            State parentsState = parent.getState();
+            parentsState.getBoard().getCells().get(simNode.getWhite().getId()).setColor(-1);
+            parentsState.getBoard().getCells().get(simNode.getBlack().getId()).setColor(-1);
+            parent.setState(parentsState);
             parent.setNumberOfWins(simNode.getNumberOfWins() + win);
             parent.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
             simNode = parent ;

@@ -107,10 +107,11 @@ public class Node {
         }
         return true;
     }
-
-    public void allChildrens(){
+    //TODO fix all children
+    public void allChildren(){
 
         int desiredSize = 100;
+        //TODO fix Number of possible moves !!
         int numberOfPossibleMoves = numberOfPossibleMoves();
         System.out.println(numberOfPossibleMoves);
         outer:
@@ -127,9 +128,9 @@ public class Node {
                 if(!this.doesContain(c2,c1))
                     children.add(new Node(this, state, c2, c1));
 
-                if(children.size() >= Math.min(desiredSize,numberOfPossibleMoves)){
-                    break outer;
-                }
+//                if(children.size() >= 2){
+//                    break outer;
+//                }
 //                break outer;
             }
 
