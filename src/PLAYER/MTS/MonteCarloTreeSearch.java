@@ -7,11 +7,17 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 100;
+    private final double SEARCH_TIME = 1.1;
     Tree tree;
 
     public MonteCarloTreeSearch(State state){
-        this.tree = new Tree(state);
+        State clonedState = null;
+        try {
+            clonedState = (State) (state.clone());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        this.tree = new Tree(clonedState);
     }
 
     public ArrayList<Cell> bestMove(){

@@ -1,6 +1,5 @@
 package PLAYER.MTS;
 
-import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.HumanPlayer;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Node {
+    //TODO create the clone of the state all the time.
 
     private Node parent;
     private Node root;
@@ -29,6 +29,16 @@ public class Node {
         this.state = state;
         this.white = white;
         this.black = black;
+        try {
+            this.state = (State) (state.clone());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(white != null) {
+            state.getBoard().getCells().get(white.getId()).setColor(0);
+            state.getBoard().getCells().get(black.getId()).setColor(1);
+            state.updatePlayerScores();
+        }
         this.emptyCells = state.getBoard().getEmptyCells();
         numberOfWins = 0;
         numberOfChildren = 0;
@@ -50,24 +60,11 @@ public class Node {
         return child;
     }
 
-    public State getRandomState(){
-
-        ArrayList<Cell> emptyCells = state.getBoard().getEmptyCells();
-
-        int r1 = (int) (Math.random() * emptyCells.size());
-        Cell white = emptyCells.remove(r1);
-
-        int r2 = (int) (Math.random() * emptyCells.size());
-        Cell black = emptyCells.remove(r2);
-
-        State newState = new State(state.getBoard().getBoardSize(), state.getPlayers());
-        Board board = state.getBoard();
-
-        board.getCells().add(white);
-        board.getCells().add(black);
-        newState.setBoard(board);
-
-        return newState;
+    public Node getRandomChild(){
+        //TODO correct this method
+        if(children.size()==0)
+            return null;
+        return children.get((int)(Math.random()*children.size()));
 
     }
 
@@ -77,8 +74,8 @@ public class Node {
 
     public int numberOfPossibleMoves(){
         int n = state.getBoard().getNumberOfEmptyCells();
-        int k = n - 2;
-        return factorial(n)/(2 * factorial(k));
+        int k = 2;
+        return factorial(n)/(factorial(n-k));
     }
 
     public boolean Do_I_Have_More_Moves(){
@@ -92,8 +89,7 @@ public class Node {
     }
 
     public int factorial (int number) {
-
-        if (number == 0){
+        if (number <= 1){
             return 1;
         } else{
             return number * factorial(number - 1);
@@ -114,7 +110,10 @@ public class Node {
 
     public void allChildrens(){
 
-        int a = 0;
+        int desiredSize = 100;
+        int numberOfPossibleMoves = numberOfPossibleMoves();
+        System.out.println(numberOfPossibleMoves);
+        outer:
         for (int i = 0; i < emptyCells.size(); i++) {
 
             for (int j = i + 1; j < emptyCells.size(); j++) {
@@ -123,13 +122,17 @@ public class Node {
                 Cell c2 = emptyCells.get(j);
                 c1.setColor(0);
                 c2.setColor(1);
+                if(!this.doesContain(c1,c2))
+                    children.add(new Node(this, state, c1, c2));
+                if(!this.doesContain(c2,c1))
+                    children.add(new Node(this, state, c2, c1));
 
-                children.add(new Node(this, state, c1, c2));
-                a++;
-                if(a>100){
-                    break;
+                if(children.size() >= Math.min(desiredSize,numberOfPossibleMoves)){
+                    break outer;
                 }
+//                break outer;
             }
+
         }
     }
 
@@ -175,12 +178,14 @@ public class Node {
     public int getNumberOfChildren() {return numberOfChildren;}
     public void setNumberOfChildren(int numberOfChildren) {this.numberOfChildren = numberOfChildren;}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Node)) return false;
-        Node node = (Node) o;
-        return Objects.equals(state, node.state) && Objects.equals(white, node.white) && Objects.equals(black, node.black);
+    public boolean doesContain(Cell white ,Cell black) {
+        for (Node node :
+                children) {
+            if (node.getWhite().getId() == white.getId() && node.getBlack().getId() == black.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

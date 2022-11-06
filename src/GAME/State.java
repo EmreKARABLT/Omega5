@@ -6,11 +6,10 @@ import PLAYER.Player;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class State{
+public class State implements Cloneable{
     private Board board;
     private int numberOfPlayers ;
     private int numberOfAIPlayers = 0;
-    private boolean isGameOver;
     private Player currentPlayer ;
     private int currentColor ;
     private ArrayList<Player> players = new ArrayList<>();
@@ -28,8 +27,6 @@ public class State{
         this.currentColor = 0 ;
 //        this.table = new Table(players);
         this.board = new Board(board_size);
-        this.isGameOver = true;
-
     }
     public Player getCurrentPlayer(){
         return currentPlayer;
@@ -48,12 +45,12 @@ public class State{
     }
 
     public boolean isGameOver() {
-        return currentPlayer.getPlayerID() == 0 && currentColor == 0 && board.getNumberOfEmptyCells() < numberOfPlayers * numberOfPlayers;
+        return board.getNumberOfEmptyCells() <= board.getCells().size()%(numberOfPlayers*numberOfPlayers);
     }
-    public void setGameOver(boolean isGameOver){
-        this.isGameOver = isGameOver;
+    public void updatePlayerScores(){
+        players.get(0).setScore(board.scoreOfAPlayer(0));
+        players.get(1).setScore(board.scoreOfAPlayer(1));
     }
-
 
     public Board getBoard() {
         return board;
@@ -97,6 +94,11 @@ public class State{
         currentColor = 0 ;
         currentPlayer = players.get(0);
         board.clearBoard();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

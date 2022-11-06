@@ -129,6 +129,6 @@ public class Cell {
     }
     @Override
     public String toString() {
-        return  q + " " + r + " " + s;
+        return  "id: " + id+" - color: " + color;
     }
 }

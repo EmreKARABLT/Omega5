@@ -1,5 +1,6 @@
 package GAME;
 
+import PLAYER.MonteCarlo;
 import PLAYER.RandomBot;
 import PLAYER.Player;
 
@@ -55,7 +56,7 @@ public class TestBot {
     public static void main(String[] args) {
         double start = System.currentTimeMillis();
         Player bot1 = new RandomBot("Black");
-        Player bot2 = new RandomBot("White");
+        Player bot2 = new MonteCarlo("White");
         TestBot testBot = new TestBot(100000,bot1,bot2);
         System.out.println(testBot.getWhitesWinPercentage() + " " + testBot.getBlacksWinPercentage());
         double end = System.currentTimeMillis();

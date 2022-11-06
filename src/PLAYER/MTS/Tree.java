@@ -1,6 +1,5 @@
 package PLAYER.MTS;
 
-import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
 
@@ -21,7 +20,7 @@ public class Tree {
         if(node.getChildren().size() == 0){
             expansion(node);
         }
-        while((node.getChildren().size() == 0)){
+        while(!(node.getChildren().size() == 0)){
             node = UCT.bestNodeUTC(node);
         }
 
@@ -36,32 +35,39 @@ public class Tree {
 
         Node simNode = node;
 
-        while(simNode.terminalNode()){
-            State nextState = simNode.getRandomState();
-            Node nextSimNode = simNode;
-            nextSimNode.setState(nextState);
-            simNode.addChild(nextSimNode);
+        while(!simNode.terminalNode()){
+            Node nextNode = simNode.getRandomChild();
+            if(nextNode==null){
+                expansion(simNode);
+                nextNode = simNode.getRandomChild();
+            }
+            State nextState = nextNode.getState();
+            nextNode.setState(nextState);
+//            simNode.addChild(nextNode);
+            simNode = nextNode;
         }
         Player winner = simNode.getState().getWinner();
 
         int win = 0;
 
-        if(winner.isBot()){
+        if(winner.isBot() && winner.getPlayerID() == 1){
             win = 1;
         }
 
         simNode.setNumberOfWins(simNode.getNumberOfWins() + win);
         simNode.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
 
-        bacpropagation(node, simNode, win);
+        backpropagation(node, simNode, win);
     }
 
-    public void bacpropagation(Node node, Node simNode, int win){
-
-        while (simNode.equals(node)){
-            Node simNOde = simNode.getParent();
-            simNode.setNumberOfWins(simNode.getNumberOfWins() + win);
-            simNode.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
+    public void backpropagation(Node node, Node simNode, int win){
+        while (!simNode.equals(node)){
+            simNode.getWhite().setColor(-1);
+            simNode.getBlack().setColor(-1);
+            Node parent = simNode.getParent();
+            parent.setNumberOfWins(simNode.getNumberOfWins() + win);
+            parent.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
+            simNode = parent ;
         }
     }
 
