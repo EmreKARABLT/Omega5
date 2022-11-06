@@ -18,8 +18,10 @@ public class Tree {
     public Node selection(Node root){
 
         Node node = root;
-
-        while(!(node.getChildren().size() == 0)){
+        if(node.getChildren().size() == 0){
+            expansion(node);
+        }
+        while((node.getChildren().size() == 0)){
             node = UCT.bestNodeUTC(node);
         }
 

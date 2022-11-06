@@ -33,6 +33,7 @@ public class Node {
         numberOfWins = 0;
         numberOfChildren = 0;
         numberOfSimulations = 0;
+        children = new ArrayList<>();
     }
 
     public boolean isRoot(){
@@ -113,6 +114,7 @@ public class Node {
 
     public void allChildrens(){
 
+        int a = 0;
         for (int i = 0; i < emptyCells.size(); i++) {
 
             for (int j = i + 1; j < emptyCells.size(); j++) {
@@ -123,6 +125,10 @@ public class Node {
                 c2.setColor(1);
 
                 children.add(new Node(this, state, c1, c2));
+                a++;
+                if(a>100){
+                    break;
+                }
             }
         }
     }

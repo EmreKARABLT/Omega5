@@ -1,6 +1,7 @@
 package UI;
 
 import GAME.State;
+import PLAYER.MonteCarlo;
 import PLAYER.RandomBot;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
@@ -196,7 +197,8 @@ public class Menu extends JPanel{
                 ArrayList<Player> players = new ArrayList<>(){};
                 Player.counterForIDs = 0 ;
                 players.add(new HumanPlayer("White") );
-                players.add(new RandomBot("Black") );
+                //players.add(new RandomBot("Black") );
+                players.add(new MonteCarlo("Black") );
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
