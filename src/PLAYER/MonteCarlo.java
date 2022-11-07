@@ -24,10 +24,10 @@ public class MonteCarlo extends Player{
 
         if(montecarlo == null){
             montecarlo = new MonteCarloTreeSearch(state);
-            return montecarlo.bestMove();
+            return montecarlo.bestMove(state);
         }
 
-        return montecarlo.bestMove();
+        return montecarlo.bestMove(state);
 
     }
 

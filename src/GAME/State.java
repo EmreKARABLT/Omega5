@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class State implements Cloneable{
+    private int id ;
+    private static int idCounter = 0;
     private Board board;
     private int numberOfPlayers ;
     private int numberOfAIPlayers = 0;
@@ -22,11 +24,19 @@ public class State implements Cloneable{
     public State(int board_size, ArrayList<Player> playersList) {
         this.numberOfPlayers = playersList.size();
         players = playersList;
-
+        id = idCounter++;
         this.currentPlayer = players.get(0);
         this.currentColor = 0 ;
 //        this.table = new Table(players);
         this.board = new Board(board_size);
+    }
+    public State(State state) {
+        this.numberOfPlayers = state.getPlayers().size();
+        players = state.getPlayers();
+        id = idCounter++;
+        this.currentPlayer = state.getCurrentPlayer();
+        this.currentColor = state.getCurrentColor();
+        this.board = new Board(state.getBoard());
     }
     public Player getCurrentPlayer(){
         return currentPlayer;
@@ -96,10 +106,6 @@ public class State implements Cloneable{
         board.clearBoard();
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -112,5 +118,21 @@ public class State implements Cloneable{
     @Override
     public int hashCode() {
         return Objects.hash(board);
+    }
+
+    @Override
+    public State clone() {
+        try {
+            State clone = (State) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return id + "";
     }
 }

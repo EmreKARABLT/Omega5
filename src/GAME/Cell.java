@@ -2,7 +2,7 @@ package GAME;
 
 import java.util.LinkedList;
 
-public class Cell {
+public class Cell implements Cloneable{
     private int q , r , s , id ; // indices / coordinates
     private int color ; // -1:empty 0:white 1:black 2:red 3:blue
     private boolean visited ; // will be used to count groups
@@ -19,7 +19,15 @@ public class Cell {
         this.s = s;
         this.id = id;
     }
-
+    public Cell(Cell cell){
+        this.neighbors = new LinkedList<>();
+        this.color = cell.getColor();
+        this.visited = cell.visited;
+        this.q = cell.q;
+        this.r = cell.r;
+        this.s = cell.s;
+        this.id = cell.id;
+    }
     /**
      * Checks if the provided cell is neighbor of the current cell
      * @param cell a cell
@@ -130,5 +138,16 @@ public class Cell {
     @Override
     public String toString() {
         return  "id: " + id+" - color: " + color;
+    }
+
+    @Override
+    public Cell clone() {
+        try {
+            Cell clone = (Cell) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

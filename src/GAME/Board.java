@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class Board {
+public class Board implements Cloneable{
     private int boardSize ;
     private ArrayList<Cell> cells ;
     /*
@@ -20,7 +20,17 @@ public class Board {
         createBoard();
 //        colorTheCellsRandomly();
     }
-
+    public Board(Board board){
+        this.boardSize = board.boardSize;
+        this.cells = new ArrayList<>();
+        createBoard();
+        copyCells(board.getCells());
+    }
+    public void copyCells(ArrayList<Cell> cells){
+        for (int i = 0; i < cells.size(); i++) {
+            this.cells.get(i).setColor(cells.get(i).getColor());
+        }
+    }
 
     /**
      * Colors each cell to white or black
@@ -40,13 +50,15 @@ public class Board {
      */
     private void createCells(){
         int n = boardSize;
-        int id = 0 ;
-        for (int q = -n; q <= n ; q++) {
-            int rMax = Math.max(-n , -q-n);
-            int rMin = Math.min( n , -q+n);
-            for( int r = rMax ; r<=rMin ; r++){
-                Cell cell = new Cell( q, r,-q-r ,id++);
-                cells.add(cell);
+        int id = 0;
+        if(cells.isEmpty()) {
+            for (int q = -n; q <= n; q++) {
+                int rMax = Math.max(-n, -q - n);
+                int rMin = Math.min(n, -q + n);
+                for (int r = rMax; r <= rMin; r++) {
+                    Cell cell = new Cell(q, r, -q - r, id++);
+                    cells.add(cell);
+                }
             }
         }
     }
@@ -74,6 +86,9 @@ public class Board {
      * will be called by constructor to create the board
      */
     private void createBoard(){
+        if(this.cells == null){
+            cells = new ArrayList<>();
+        }
         Cell.RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
         createCells();
         connectCells();
@@ -270,5 +285,16 @@ public class Board {
     @Override
     public int hashCode() {
         return Objects.hash(cells);
+    }
+
+    @Override
+    public Board clone() {
+        try {
+            Board clone = (Board) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

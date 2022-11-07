@@ -41,11 +41,9 @@ public class Tree {
                 expansion(simNode);
                 nextNode = simNode.getRandomChild();
             }
-            State nextState = nextNode.getState();
-            nextNode.setState(nextState);
-//            simNode.addChild(nextNode);
             simNode = nextNode;
         }
+        simNode.getState().updatePlayerScores();
         Player winner = simNode.getState().getWinner();
 
         int win = 0;
@@ -53,7 +51,6 @@ public class Tree {
         if(winner.isBot() && winner.getPlayerID() == 1){
             win = 1;
         }
-
         simNode.setNumberOfWins(simNode.getNumberOfWins() + win);
         simNode.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
 
@@ -61,15 +58,12 @@ public class Tree {
     }
     //TODO fix this method
     public void backpropagation(Node node, Node simNode, int win){
-        while (!simNode.equals(node)){
-            Node parent = simNode.getParent();
-            State parentsState = parent.getState();
-            parentsState.getBoard().getCells().get(simNode.getWhite().getId()).setColor(-1);
-            parentsState.getBoard().getCells().get(simNode.getBlack().getId()).setColor(-1);
-            parent.setState(parentsState);
-            parent.setNumberOfWins(simNode.getNumberOfWins() + win);
-            parent.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
-            simNode = parent ;
+        Node currentNode = simNode;
+        while (!currentNode.equals(node)){
+            Node parent = currentNode.getParent();
+            parent.setNumberOfWins(currentNode.getNumberOfWins() + win);
+            parent.setNumberOfSimulations(currentNode.getNumberOfSimulations() + 1);
+            currentNode = currentNode.getParent();
         }
     }
 
