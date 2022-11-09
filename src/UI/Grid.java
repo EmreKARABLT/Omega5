@@ -320,7 +320,9 @@ public class Grid extends JPanel {
                     scores[i] = p.getScore();
                     s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
                 }
-                if(scores[0] < scores[1])
+                if(scores[0] == scores[1]){
+                    s.append("TIE");
+                }else if(scores[0] < scores[1])
                     s.append("BLACK WON!!");
                 else
                     s.append("WHITE WON!!");

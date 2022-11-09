@@ -25,6 +25,7 @@ public class State implements Cloneable{
      */
     public State(int board_size, ArrayList<Player> playersList) {
         this.boardSize = board_size;
+
         this.numberOfPlayers = playersList.size();
         players = playersList;
         id = idCounter++;
@@ -32,7 +33,7 @@ public class State implements Cloneable{
         this.currentColor = 0 ;
 //        this.table = new Table(players);
         this.board = new Board(board_size);
-
+        restart();
         if(playersList.get(0).isBot() && playersList.get(1).isBot()){
             gameLoop();
         }

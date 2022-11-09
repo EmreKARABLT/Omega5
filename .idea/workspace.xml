@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="032db7ea-3bd4-456d-918f-7cd1c9657701" name="Changes" comment="sunday starting point">
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/HeapSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/Individuals.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Functions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" afterDir="false" />
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/UCT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/UCT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/UCT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/UCT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +71,7 @@
       <recent name="PLAYER.GA" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GeneticAlgorithm">
+  <component name="RunManager" selected="Application.Show">
     <configuration name="GeneticAlgorithm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PLAYER.GA.GeneticAlgorithm" />
       <module name="Omega" />
@@ -112,8 +126,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GeneticAlgorithm" />
         <item itemvalue="Application.Show" />
+        <item itemvalue="Application.GeneticAlgorithm" />
         <item itemvalue="Application.test" />
         <item itemvalue="Application.Node" />
         <item itemvalue="Application.Show" />
@@ -160,6 +174,9 @@
     <option name="localTasksCounter" value="5" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -196,7 +213,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
           <line>156</line>
-          <properties class="PLAYER.MTS.Node" method="get_N_Children">
+          <properties class="PLAYER.MTS.Node">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -205,7 +222,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
           <line>96</line>
-          <properties class="PLAYER.MTS.Node" method="allChildren">
+          <properties class="PLAYER.MTS.Node" method="getPlayerID">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
