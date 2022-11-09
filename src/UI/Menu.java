@@ -2,7 +2,6 @@ package UI;
 
 import GAME.State;
 import PLAYER.MonteCarlo;
-import PLAYER.RandomBot;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
 
@@ -23,8 +22,8 @@ public class Menu extends JPanel{
     public int HumanOrComputer = 0; // default is human against human
     public int numberOfAiPlayers = 0;
     public JPanel panel ;
-    public Player humanPlayer =new HumanPlayer("White");
-    public Player botPlayer = new MonteCarlo("Black");
+    public Player whitePlayer =new HumanPlayer("White");
+    public Player blackPlayer = new HumanPlayer("Black");
 
     private Menu(){
         menuBoardSize();
@@ -168,13 +167,12 @@ public class Menu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     for (int j = 0 ; j < buttons_player.length ; j++ ) {
                         JButton clickedButton = (JButton) e.getSource();
+                        if(clickedButton.getText().contains("COMPUTER")){
+                            blackPlayer = new MonteCarlo("Black");
+                        }
                         if (buttons_player[j] != clickedButton) {
+
                             buttons_player[j].setForeground(Color.RED);
-                            if (j == 0) {
-                                HumanOrComputer = 0;
-                            } else {
-                                HumanOrComputer = 1;
-                            }
                         }
                         clickedButton.setForeground(Color.ORANGE);
                     }
@@ -198,9 +196,9 @@ public class Menu extends JPanel{
                 //Players ArrayList
                 ArrayList<Player> players = new ArrayList<>(){};
                 Player.counterForIDs = 0 ;
-                players.add(humanPlayer);
+                players.add(whitePlayer);
 //                players.add(new RandomBot("Black") );
-                players.add(botPlayer);
+                players.add(blackPlayer);
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();

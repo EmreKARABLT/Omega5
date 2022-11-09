@@ -93,7 +93,7 @@ public class Tree {
         backpropagation(tempRoot, node, win,winnerId);
     }
     public void backpropagation(Node root, Node node, double win , int winnerId){
-        while (!node.isRoot()){
+        while (!node.equals(root) ){
             Node parent = node.getParent();
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
             if(winnerId == -1)
