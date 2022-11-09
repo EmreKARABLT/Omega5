@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="032db7ea-3bd4-456d-918f-7cd1c9657701" name="Changes" comment="sunday starting point">
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/HeapSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/GA/Individuals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Functions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/UCT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/UCT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="c334b946d67c584630e4b49da2fd2670f951f275" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GzQD9zUvNJyv0AEY4cuP3UGqmG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="PLAYER.GA" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.GeneticAlgorithm">
+    <configuration name="GeneticAlgorithm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PLAYER.GA.GeneticAlgorithm" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PLAYER.GA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Node" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PLAYER.MTS.Node" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PLAYER.MTS.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Show" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UI.Show" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PLAYER.MTS.test" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PLAYER.MTS.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GeneticAlgorithm" />
+        <item itemvalue="Application.Show" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.Node" />
+        <item itemvalue="Application.Show" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="032db7ea-3bd4-456d-918f-7cd1c9657701" name="Changes" comment="" />
+      <created>1667388814892</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667388814892</updated>
+    </task>
+    <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
+      <created>1667396595168</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667396595168</updated>
+    </task>
+    <task id="LOCAL-00002" summary="methods for MTS and also I add a class UTC">
+      <created>1667661218962</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667661218962</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Montecarlo done will have bugs for sure idk tomorrow I will run it and fix if I can">
+      <created>1667664036067</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667664036067</updated>
+    </task>
+    <task id="LOCAL-00004" summary="sunday starting point">
+      <created>1667747042823</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667747042823</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="MCTS" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="MCST implementation first attempt :)" />
+    <MESSAGE value="methods for MTS and also I add a class UTC" />
+    <MESSAGE value="Montecarlo done will have bugs for sure idk tomorrow I will run it and fix if I can" />
+    <MESSAGE value="sunday starting point" />
+    <option name="LAST_COMMIT_MESSAGE" value="sunday starting point" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
+          <line>156</line>
+          <properties class="PLAYER.MTS.Node" method="get_N_Children">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
+          <line>96</line>
+          <properties class="PLAYER.MTS.Node" method="allChildren">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
