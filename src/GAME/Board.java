@@ -1,5 +1,7 @@
 package GAME;
 
+import UI.Menu;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,15 +14,17 @@ public class Board implements Cloneable{
     TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
          Replace the following line with the printed values on console
      */
-    private int offsetX = 718 , offsetY = 382; // this is the half size of the screen to put it to the middle of the screen
-
+    private int offsetX = 718 , offsetY = 382;
     public Board(int boardSize){
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
+
 //        colorTheCellsRandomly();
     }
     public Board(Board board){
+        offsetX = Menu.WIDTH/2;
+        offsetY = Menu.HEIGHT/2;
         this.boardSize = board.boardSize;
         this.cells = new ArrayList<>();
         createBoard();

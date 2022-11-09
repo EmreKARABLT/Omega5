@@ -19,7 +19,7 @@ public class UCT {
      * @param numberOfSimulations = T
      * @return the value UCT of the node
      */
-    public static double UCT(int numberOfSimulationsParents, int numberOfWins, int numberOfSimulations) {
+    public static double UCT(int numberOfSimulationsParents, double numberOfWins, int numberOfSimulations) {
 
         if (numberOfSimulations == 0) {return Integer.MAX_VALUE;} // W/N = 2147483647
 
@@ -43,6 +43,11 @@ public class UCT {
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> childrens = node.getChildren();
         return Collections.max(childrens, Comparator.comparing(c -> UCT(visited, c.getNumberOfWins(), c.getNumberOfSimulations())));
+    }
+    public static Node worstNodeUTC(Node node){
+        int visited = node.getNumberOfSimulations();
+        ArrayList<Node> childrens = node.getChildren();
+        return Collections.min(childrens, Comparator.comparing(c -> UCT(visited, c.getNumberOfWins(), c.getNumberOfSimulations())));
     }
 
 

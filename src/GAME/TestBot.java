@@ -7,18 +7,17 @@ import PLAYER.Player;
 import java.util.ArrayList;
 
 public class TestBot {
-    private ArrayList<Player> playersList;
-    private int numberOfTest ;
-    private State state ;
+    private final int numberOfTest ;
+    private final State state ;
     private int numberOfGamesWhiteWon = 0 ;
     private int numberOfGamesBlackWon = 0 ;
 
     public TestBot(int numberOfTest , Player bot1 , Player bot2){
         this.numberOfTest = numberOfTest;
-        playersList = new ArrayList<>();
+        ArrayList<Player> playersList = new ArrayList<>();
         playersList.add( bot1 );
         playersList.add( bot2 );
-        state = new State(3,playersList);
+        state = new State(3, playersList);
 
         for (int i = 0; i < numberOfTest; i++) {
             runTest();

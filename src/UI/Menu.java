@@ -23,6 +23,8 @@ public class Menu extends JPanel{
     public int HumanOrComputer = 0; // default is human against human
     public int numberOfAiPlayers = 0;
     public JPanel panel ;
+    public Player humanPlayer =new HumanPlayer("White");
+    public Player botPlayer = new MonteCarlo("Black");
 
     private Menu(){
         menuBoardSize();
@@ -104,7 +106,7 @@ public class Menu extends JPanel{
 
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
-        JButton buttonBoardSize3 = new JButton("3");
+        JButton buttonBoardSize3 = new JButton(boardSize+"");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
@@ -196,9 +198,9 @@ public class Menu extends JPanel{
                 //Players ArrayList
                 ArrayList<Player> players = new ArrayList<>(){};
                 Player.counterForIDs = 0 ;
-                players.add(new HumanPlayer("White") );
-                //players.add(new RandomBot("Black") );
-                players.add(new MonteCarlo("Black") );
+                players.add(humanPlayer );
+//                players.add(new RandomBot("Black") );
+                players.add(botPlayer );
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();

@@ -11,6 +11,7 @@ public class test {
         return mult;
     }
     public static void main(String[] args) {
-        System.out.println(binomCoef(3,2));
+        int numberOfPossible = 10;
+        System.out.println(Math.min(200,Math.min(numberOfPossible,200)));
     }
 }
