@@ -105,14 +105,15 @@ public class Menu extends JPanel{
 
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
+        JButton buttonBoardSize2 = new JButton("2");
         JButton buttonBoardSize3 = new JButton(boardSize+"");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
-        JButton[] buttons = new JButton[]{buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+        JButton[] buttons = new JButton[]{buttonBoardSize2 , buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setBounds( (width - 500 )/2 + 200 * i    , (height - size_l1.height) / 10 * 3, 100, 100);
+            buttons[i].setBounds( (width - buttons.length*200-100 )/3 + 300 * i    , (height - size_l1.height) / 10 * 3, 100, 100);
             buttons[i].setFont( Show.customFont_50f );
             buttons[i].setOpaque(false);
             buttons[i].setContentAreaFilled(false);
