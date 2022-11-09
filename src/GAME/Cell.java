@@ -3,6 +3,7 @@ package GAME;
 import java.util.LinkedList;
 
 public class Cell implements Cloneable{
+    private static int counter = 0;
     private int q , r , s , id ; // indices / coordinates
     private int color ; // -1:empty 0:white 1:black 2:red 3:blue
     private boolean visited ; // will be used to count groups
@@ -84,10 +85,9 @@ public class Cell implements Cloneable{
         return color;
     }
 
-    public void setColor(int color) {
-        if(this.color != -1 )
-            return;
+    public boolean setColor(int color) {
         this.color = color;
+        return this.color==color;
     }
 
     public boolean isVisited() {
@@ -137,7 +137,7 @@ public class Cell implements Cloneable{
     }
     @Override
     public String toString() {
-        return  "id: " + id+" - color: " + color;
+        return ""+color +" ";
     }
 
     @Override

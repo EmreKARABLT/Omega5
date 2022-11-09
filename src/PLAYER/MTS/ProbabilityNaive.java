@@ -12,7 +12,7 @@ public class ProbabilityNaive {
      * @param numberOfSimulations
      * @return Best value of win rate
      */
-    public static double PNaive(int numberOfWins, int numberOfSimulations) {
+    public static double PNaive(double numberOfWins, int numberOfSimulations) {
 
         if (numberOfSimulations == 0) {return Integer.MAX_VALUE;} // W/N = 2147483647
         double PNaive = (double)(numberOfWins/ numberOfSimulations);

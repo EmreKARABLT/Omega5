@@ -1,9 +1,9 @@
 package UI;
 
 import GAME.State;
+import PLAYER.MonteCarlo;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
-import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,6 +22,8 @@ public class Menu extends JPanel{
     public int HumanOrComputer = 0; // default is human against human
     public int numberOfAiPlayers = 0;
     public JPanel panel ;
+    public Player whitePlayer =new HumanPlayer("White");
+    public Player blackPlayer = new HumanPlayer("Black");
 
     private Menu(){
         menuBoardSize();
@@ -103,14 +105,15 @@ public class Menu extends JPanel{
 
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
-        JButton buttonBoardSize3 = new JButton("3");
+        JButton buttonBoardSize2 = new JButton("2");
+        JButton buttonBoardSize3 = new JButton(boardSize+"");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
-        JButton[] buttons = new JButton[]{buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+        JButton[] buttons = new JButton[]{buttonBoardSize2 , buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setBounds( (width - 500 )/2 + 200 * i    , (height - size_l1.height) / 10 * 3, 100, 100);
+            buttons[i].setBounds( (width - buttons.length*200-100 )/3 + 300 * i    , (height - size_l1.height) / 10 * 3, 100, 100);
             buttons[i].setFont( Show.customFont_50f );
             buttons[i].setOpaque(false);
             buttons[i].setContentAreaFilled(false);
@@ -165,13 +168,12 @@ public class Menu extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     for (int j = 0 ; j < buttons_player.length ; j++ ) {
                         JButton clickedButton = (JButton) e.getSource();
+                        if(clickedButton.getText().contains("COMPUTER")){
+                            blackPlayer = new MonteCarlo("Black");
+                        }
                         if (buttons_player[j] != clickedButton) {
+
                             buttons_player[j].setForeground(Color.RED);
-                            if (j == 0) {
-                                HumanOrComputer = 0;
-                            } else {
-                                HumanOrComputer = 1;
-                            }
                         }
                         clickedButton.setForeground(Color.ORANGE);
                     }
@@ -195,12 +197,10 @@ public class Menu extends JPanel{
                 //Players ArrayList
                 ArrayList<Player> players = new ArrayList<>(){};
                 Player.counterForIDs = 0 ;
-                players.add(new HumanPlayer("White") );
-                //players.add(new RandomBot("Black") );
-                //players.add(new MonteCarlo("Black") );
-                players.add(new RuleBasedBot("Black") );
-
-                Grid grid = new Grid(new State( boardSize ,players ));
+                players.add(whitePlayer);
+//                players.add(new RandomBot("Black") );
+                players.add(blackPlayer);
+                Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
 

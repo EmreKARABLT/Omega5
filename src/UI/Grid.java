@@ -23,7 +23,8 @@ public class Grid extends JPanel {
     private ArrayList<JLabel> scores = new ArrayList<>();
     private ArrayList<JLabel> names = new ArrayList<>();
     private ArrayList<JPanel> colorBars = new ArrayList<>();
-
+    private ArrayList<Cell> lastWhites = new ArrayList<>();
+    private ArrayList<Cell> lastBlacks = new ArrayList<>();
 
     public Grid(State state){
         this.state = state;
@@ -34,8 +35,6 @@ public class Grid extends JPanel {
         createGamingPage();
 
     }
-
-
     public void createGamingPage(){
         this.setLayout(null);
 
@@ -67,7 +66,6 @@ public class Grid extends JPanel {
         if(player.getPlayerID() == 1){ x = getBoard().getOffsetX()*2 - 220 ;  y = 20                              ;}
         if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*20 - 120;}
         if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*20 - 120;}
-        System.out.println(x + " " + y);
 
         name.setBounds( x+20,y,200,50);
         score.setBounds(x+20,y+25,200,50);
@@ -159,7 +157,6 @@ public class Grid extends JPanel {
 
 
 
-
 //
 //        for (int i = 0; i < setOfCells.size(); i++) {
 //            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
@@ -240,23 +237,64 @@ public class Grid extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            Cell cell = getCellFromMouseClick( e.getX() , e.getY());
-            int color ;
+            if(SwingUtilities.isRightMouseButton(e)){
+                int color;
 
-            Player player = state.getCurrentPlayer();
-            color = player.getCurrentPieceID();
+                Player player = state.getCurrentPlayer();
+                color = player.getCurrentPieceID();
+                if (color == 1) {
+                    if(!lastWhites.isEmpty()) {
+                        lastWhites.get(lastWhites.size() - 1).setColor(-1);
+                        lastWhites.remove(lastWhites.size() - 1);
+                    }
+                } else if(color == 0){
+                    if(!lastBlacks.isEmpty()) {
+                        lastBlacks.get(lastBlacks.size() - 1).setColor(-1);
+                        lastBlacks.remove(lastBlacks.size() - 1);
+                    }
+                }
+                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+                state.previousTurn();
 
-            if(!state.isGameOver() && cell != null && cell.isEmpty()){
-
-                cell.setColor(color);
-                state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
-                state.nextTurn();
 
                 updateColors();
                 updateScores();
                 updateColorBars();
                 repaint();
+                return;
             }
+            if(SwingUtilities.isLeftMouseButton(e)) {
+                Cell cell = getCellFromMouseClick(e.getX(), e.getY());
+                int color;
+
+                Player player = state.getCurrentPlayer();
+                color = player.getCurrentPieceID();
+
+                if (!state.isGameOver() && cell != null && cell.isEmpty()) {
+
+                    cell.setColor(color);
+                    if(color == 0 )
+                        lastWhites.add(cell);
+                    else
+                        lastBlacks.add(cell);
+                    state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
+                    state.nextTurn();
+                    updateColors();
+                    updateScores();
+                    updateColorBars();
+                    repaint();
+                }
+            }
+        }
+
+        /**
+         * Invoked when a mouse button has been released on a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseReleased(MouseEvent e) {
 
             if(state.getCurrentPlayer().isBot()){
                 ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
@@ -275,10 +313,6 @@ public class Grid extends JPanel {
             }
 
             if(state.isGameOver()) {
-                //int finalscore = state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-                System.out.println(player.getScore());
-                System.out.println(getBoard().scoreOfAPlayer(1));
-                //jdialog window
                 StringBuilder s = new StringBuilder();
                 int[] scores = new int[state.getNumberOfPlayers()];
                 for (int i = 0; i < scores.length; i++) {
@@ -313,15 +347,6 @@ public class Grid extends JPanel {
                 }
             }
 
-        }
-
-        /**
-         * Invoked when a mouse button has been released on a component.
-         *
-         * @param e the event to be processed
-         */
-        @Override
-        public void mouseReleased(MouseEvent e) {
         }
 
         /**

@@ -76,21 +76,37 @@ public class State implements Cloneable{
         return currentPlayer.getCurrentPieceID();
     }
 
-        public void nextTurn(){
-            currentColor = (currentColor + 1) % numberOfPlayers;
-            int nextColor = currentColor;
-            currentPlayer.setCurrentPieceID(nextColor);
-            if(nextColor == 0 ){
+    public void nextTurn(){
+        currentColor = (currentColor + 1) % numberOfPlayers;
+        int nextColor = currentColor;
+        currentPlayer.setCurrentPieceID(nextColor);
+        if(nextColor == 0 ){
             currentPlayer = players.get( (currentPlayer.getPlayerID()+1) % numberOfPlayers);
         }
     }
-
-    public boolean isGameOver() {
-        return board.getNumberOfEmptyCells() <= board.getCells().size()%(numberOfPlayers*numberOfPlayers);
+    public void previousTurn(){
+        currentColor = Math.abs(currentColor - 1);
+        int previousColor = currentColor;
+        if(previousColor == 1)
+            currentPlayer = players.get( Math.abs(currentPlayer.getPlayerID() - 1));
+        currentPlayer.setCurrentPieceID(previousColor);
     }
     public void updatePlayerScores(){
         players.get(0).setScore(board.scoreOfAPlayer(0));
         players.get(1).setScore(board.scoreOfAPlayer(1));
+    }
+
+    public boolean isGameOver() {
+        return board.getNumberOfEmptyCells() <= board.getCells().size() % (numberOfPlayers * numberOfPlayers);
+    }
+    public void colorWhite(Cell cell){
+        board.getCells().get(cell.getId()).setColor(0);
+    }
+    public void colorBlack(Cell cell){
+        board.getCells().get(cell.getId()).setColor(1);
+    }
+    public void uncolor(Cell cell){
+        board.getCells().get(cell.getId()).setColor(-1);
     }
 
     public Board getBoard() {
@@ -125,7 +141,14 @@ public class State implements Cloneable{
         this.players = players;
     }
     public Player getWinner(){
+        if(players.get(0).getScore() == players.get(1).getScore())
+            return null;
         return (players.get(0).getScore()>players.get(1).getScore()) ? players.get(0) : players.get(1);
+    }
+    public Player getLoser(){
+        if(players.get(0).getScore() == players.get(1).getScore())
+            return null;
+        return (players.get(1).getScore()<players.get(0).getScore()) ? players.get(1) : players.get(0);
     }
     public void restart(){
 

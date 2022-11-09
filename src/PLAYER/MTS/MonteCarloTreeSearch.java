@@ -7,34 +7,34 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 1000; // 5 seconds
+    private final double SEARCH_TIME = 30000;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
     }
 
     public ArrayList<Cell> bestMove(State state){
-
         ArrayList<Cell> move = new ArrayList<>();
-        //TODO change this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //TODO instead of creating a new tree all the time, check that if it is discovered before if yes use it wisely otherwise create a new tree!
         this.tree = new Tree(state);
         double a = 0;
-        while (a < SEARCH_TIME){
-            double start = System.currentTimeMillis();
-            Node bestNode = tree.selection(tree.root);
-            Node exploration = bestNode;
-            //tree.expansion(exploration);
-            tree.simulation(exploration);
-            double finish = System.currentTimeMillis();
 
+        while ( a < SEARCH_TIME){
+            double start = System.currentTimeMillis();
+
+            Node currentNode = tree.root;
+            tree.simulation(currentNode);
+
+            double finish = System.currentTimeMillis();
             a += finish-start;
         }
 
-        Node winner = tree.selection(tree.root);
-        tree.setRoot(winner);
-        move.add(state.getBoard().getCells().get(winner.getWhite()));
-        move.add(state.getBoard().getCells().get(winner.getBlack()));
-        System.out.println(winner.getWhite() + "  " + winner.getBlack());
+        Node winner = tree.getBest(tree.root);
+//        System.out.println("UCT : " + UCT.UCT(winner.getParent().getNumberOfSimulations(),winner.getNumberOfWins(),winner.getNumberOfSimulations()));
+        System.out.println("wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations());
+        System.out.println(tree.simNumber);
+        move.add(winner.getWhite());
+        move.add(winner.getBlack());
         return move;
     }
 }
