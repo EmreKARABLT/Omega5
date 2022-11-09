@@ -1,6 +1,7 @@
 package GAME;
 
 import PLAYER.Player;
+import UI.Grid;
 
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class State implements Cloneable{
     private Player currentPlayer ;
     private int currentColor ;
     private ArrayList<Player> players = new ArrayList<>();
+    int boardSize;
 
     /**
      * Creates the board with given board size and as many players as desired
@@ -22,6 +24,7 @@ public class State implements Cloneable{
      * @param board_size desired board size (3, 5 ,7)
      */
     public State(int board_size, ArrayList<Player> playersList) {
+        this.boardSize = board_size;
         this.numberOfPlayers = playersList.size();
         players = playersList;
         id = idCounter++;
@@ -29,6 +32,33 @@ public class State implements Cloneable{
         this.currentColor = 0 ;
 //        this.table = new Table(players);
         this.board = new Board(board_size);
+
+        if(playersList.get(0).isBot() && playersList.get(1).isBot()){
+            gameLoop();
+        }
+
+
+    }
+
+    public void resetBoard(){
+        this.board = new Board(boardSize);
+    }
+
+    public void gameLoop(){
+
+            while (!isGameOver()){
+                ArrayList<Cell> moves = getCurrentPlayer().getMoves(this);
+
+                moves.get(0).setColor(0);
+                moves.get(1).setColor(1);
+                this.getPlayers().get(0).setScore(this.getBoard().scoreOfAPlayer(0));
+                this.getPlayers().get(1).setScore(this.getBoard().scoreOfAPlayer(1));
+                this.nextTurn();
+                this.nextTurn();
+            }
+
+            resetBoard();
+
     }
     public State(State state) {
         this.numberOfPlayers = state.getPlayers().size();
@@ -41,6 +71,7 @@ public class State implements Cloneable{
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+
     public int getCurrentColor(){
         return currentPlayer.getCurrentPieceID();
     }

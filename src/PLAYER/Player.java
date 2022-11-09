@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public abstract class Player {
     //protected static State state;
-    String playerName;
+    double[] w = {1,1,1,1,1};
+    protected String playerName;
     int currentPiecesID = 0 ;
     int score = 0 ;
-    int playerID ;
+    protected int playerID ;
     public static int counterForIDs = 0;
 
 
@@ -33,6 +34,10 @@ public abstract class Player {
     public void reset(){
         score = 0 ;
         currentPiecesID = 0 ;
+    }
+
+    public void setW(double[] w){
+        this.w = w;
     }
 
 }

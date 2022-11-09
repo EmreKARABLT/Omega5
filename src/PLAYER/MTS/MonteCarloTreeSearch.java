@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 10000;
+    private final double SEARCH_TIME = 1000; // 5 seconds
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
@@ -23,7 +23,7 @@ public class MonteCarloTreeSearch {
             double start = System.currentTimeMillis();
             Node bestNode = tree.selection(tree.root);
             Node exploration = bestNode;
-            tree.expansion(exploration);
+            //tree.expansion(exploration);
             tree.simulation(exploration);
             double finish = System.currentTimeMillis();
 

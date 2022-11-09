@@ -1,10 +1,9 @@
 package UI;
 
 import GAME.State;
-import PLAYER.MonteCarlo;
-import PLAYER.RandomBot;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -198,8 +197,10 @@ public class Menu extends JPanel{
                 Player.counterForIDs = 0 ;
                 players.add(new HumanPlayer("White") );
                 //players.add(new RandomBot("Black") );
-                players.add(new MonteCarlo("Black") );
-                Grid grid = new Grid(new State(boardSize ,players ));
+                //players.add(new MonteCarlo("Black") );
+                players.add(new RuleBasedBot("Black") );
+
+                Grid grid = new Grid(new State( boardSize ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
 

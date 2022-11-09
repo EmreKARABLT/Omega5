@@ -129,6 +129,45 @@ public class Node {
         }
     }
 
+    public ArrayList<Integer[]> conbinations(){
+
+        ArrayList<Integer[]> conbinations = new ArrayList<>();
+        ArrayList<Cell> emptyCells = state.getBoard().getEmptyCells();
+
+        for (int i = 0; i < state.getBoard().getNumberOfEmptyCells(); i++) {
+            for (int j = 0; i < state.getBoard().getNumberOfEmptyCells(); j++) {
+                if(i != j){
+                    Integer[] cells = new Integer[2];
+                    cells[0] = emptyCells.get(i).getId();
+                    cells[1] = emptyCells.get(j).getId();
+                    conbinations.add(cells);
+                }
+
+
+                /*
+                cells[1] = emptyCells.get(i);
+                cells[0] = emptyCells.get(j);
+                conbinations.add(cells);
+                */
+            }
+        }
+        return conbinations;
+    }
+
+    public void get_N_Children(int N){
+
+        ArrayList<Integer[]> child = conbinations();
+
+        for (int i = 0; i < N; i++) {
+            int index = ((int) (Math.random() * child.size()));
+            Integer[] cells = child.get(index);
+            Integer a = cells[0];
+            Integer b = cells[1];
+            children.add(new Node(this, state, a, b));
+            child.remove(index);
+        }
+    }
+
 
     public double winningProbability(){
         if(numberOfSimulations > 0 )

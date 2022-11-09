@@ -29,6 +29,7 @@ public class Tree {
 
     public void expansion(Node node){
         node.allChildren();
+        //node.get_N_Children(10);
     }
 
     public void simulation(Node node){
@@ -51,11 +52,13 @@ public class Tree {
         if(winner.isBot() && winner.getPlayerID() == 1){
             win = 1;
         }
+
         simNode.setNumberOfWins(simNode.getNumberOfWins() + win);
         simNode.setNumberOfSimulations(simNode.getNumberOfSimulations() + 1);
 
         backpropagation(node, simNode, win);
     }
+
     //TODO fix this method
     public void backpropagation(Node node, Node simNode, int win){
         Node currentNode = simNode;

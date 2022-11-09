@@ -25,7 +25,7 @@ public class UCT {
 
         double W = (double) numberOfWins;
         double N = (double) numberOfSimulations;
-        double c = Math.sqrt(2);
+        double c = 0.8;
         double T = (double) numberOfSimulationsParents;
         double UCT = W/N + c * Math.sqrt((Math.sqrt(T)/N)); //UCT = W/N + c * (log(T) / N)^0.5
 

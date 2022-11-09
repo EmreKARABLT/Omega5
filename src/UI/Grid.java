@@ -34,6 +34,8 @@ public class Grid extends JPanel {
         createGamingPage();
 
     }
+
+
     public void createGamingPage(){
         this.setLayout(null);
 
@@ -157,6 +159,7 @@ public class Grid extends JPanel {
 
 
 
+
 //
 //        for (int i = 0; i < setOfCells.size(); i++) {
 //            g.drawString(setOfCells.get(i).getQ() + " " + setOfCells.get(i).getR(), (int)setOfCells.get(i).getX(), (int)setOfCells.get(i).getY());
@@ -243,7 +246,7 @@ public class Grid extends JPanel {
             Player player = state.getCurrentPlayer();
             color = player.getCurrentPieceID();
 
-            if(!state.isGameOver() && cell != null && cell.isEmpty() ){
+            if(!state.isGameOver() && cell != null && cell.isEmpty()){
 
                 cell.setColor(color);
                 state.getPlayers().get(color).setScore(state.getBoard().scoreOfAPlayer(color));
