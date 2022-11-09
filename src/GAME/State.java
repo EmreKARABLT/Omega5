@@ -110,9 +110,13 @@ public class State implements Cloneable{
         this.players = players;
     }
     public Player getWinner(){
+        if(players.get(0).getScore() == players.get(1).getScore())
+            return null;
         return (players.get(0).getScore()>players.get(1).getScore()) ? players.get(0) : players.get(1);
     }
     public Player getLoser(){
+        if(players.get(0).getScore() == players.get(1).getScore())
+            return null;
         return (players.get(1).getScore()<players.get(0).getScore()) ? players.get(1) : players.get(0);
     }
     public void restart(){

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Cell implements Cloneable{
     private static int counter = 0;
-    private int q , r , s , id , n; // indices / coordinates
+    private int q , r , s , id ; // indices / coordinates
     private int color ; // -1:empty 0:white 1:black 2:red 3:blue
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
@@ -12,7 +12,6 @@ public class Cell implements Cloneable{
     public static double RADIUS = 30;
 
     public Cell(int q , int r , int s , int id){
-        this.n = counter++;
         this.neighbors = new LinkedList<>();
         this.color = -1 ;
         this.visited = false ;

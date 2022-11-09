@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Node {
-    //TODO create the clone of the state all the time.
+    //TODO store the score of players (white , black )
 
     private Node parent;
     private Node root;
@@ -34,15 +34,6 @@ public class Node {
         this.white = white;
         this.black = black;
         this.noec = state.getBoard().getNumberOfEmptyCells();
-        //TODO check if the root is updated during the backtracking !!! IMPORTANT
-        //TODO maybe we can apply forward checking but what are constraints? Maybe it is the UCT values of each node ??? ( we need to know the intermediate steps)
-        //TODO can we divide the problem to find optimal white and optimal black separately ( we may need to calculate score after each coloring)
-
-
-        //FIXME remove copied state and apply setColor methods inside of when we visit them , and remove them when we visit the parent (DONE BUT THERE IS A BUG)
-        //TODO 0.5 0 1 for draw lose win (DONE)
-
-//        this.emptyCells = this.state.getBoard().getEmptyCells();
         numberOfWins = 0;
         numberOfChildren = 0;
         numberOfSimulations = 0;
@@ -54,7 +45,7 @@ public class Node {
     }
 
     public boolean isRoot(){
-        return parent == null;
+        return this.equals(root) ;
     }
 
     public Node addChild(Node child){
@@ -71,28 +62,17 @@ public class Node {
         if(white != null) {
             state.colorWhite(white);
             state.colorBlack(black);
-            this.noec = state.getBoard().getNumberOfEmptyCells();
+//            this.noec = state.getBoard().getNumberOfEmptyCells();
         }
     }
     public void uncolor(){
         if(white != null) {
             state.uncolor(white);
             state.uncolor(black);
-            this.noec = state.getBoard().getNumberOfEmptyCells();
+//            this.noec = state.getBoard().getNumberOfEmptyCells();
         }
 //        emptyCells = state.getBoard().getEmptyCells();
 
-    }
-
-    public Node getRandomChild(){
-        if(children.size()==0)
-            return null;
-        return children.get((int)(Math.random()*children.size()));
-
-    }
-
-    public boolean terminalNode(){
-        return state.isGameOver();
     }
 
     public int numberOfPossibleMoves(){
@@ -113,58 +93,6 @@ public class Node {
     }
 
 
-    public boolean duplicatedRandomMove(State state){
-
-        for (Node child : children) {
-            if (child.getState().equals(state)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    //TODO fix all children
-    public void allChildren(){
-
-//        int desiredSize = 15;
-//        //TODO fix Number of possible moves !!
-//        int numberOfPossibleMoves = numberOfPossibleMoves();
-////        System.out.println(numberOfPossibleMoves);
-//
-//        //TODO add if statement to create nodes in order if number of possible moves is smaller than possible states
-//        if(numberOfPossibleMoves <= desiredSize ){
-//            for (int i = 0; i < emptyCells.size(); i++) {
-//                for (int j = i+1; j < emptyCells.size(); j++) {
-//                    Cell c1= emptyCells.get(i);
-//                    Cell c2= emptyCells.get(j);
-//                    if(!this.doesContain(c1,c2))
-//                        children.add(new Node(this,state,c1,c2));
-//                    if(!this.doesContain(c2,c1))
-//                        children.add(new Node(this,state,c2,c1));
-//                }
-//            }
-//        }else {
-//            while (children.size() < desiredSize) {
-//                ArrayList<Cell> temp = state.getBoard().getEmptyCells();
-//                //if(numberOfPossibleM
-//                //getEmptyForWhite
-//                //getEmptyForBlack
-//                Cell cell_w = temp.get((int) (Math.random() * temp.size()));
-//                temp.remove(cell_w);
-//                Cell cell_b = temp.get((int) (Math.random() * temp.size()));
-//                if (cell_w != cell_b && !this.doesContain(cell_w, cell_b))
-//                    children.add(new Node(this, state, cell_b, cell_w));
-//                else
-//                    System.out.println(cell_w+" "+cell_b +" duplicated");
-//            }
-//        }
-    }
-
-
-    public double winningProbability(){
-        if(numberOfSimulations > 0 )
-            return numberOfWins/(double)numberOfSimulations;
-        return 0 ;
-    }
 
     public int getPlayerID() {
         return playerID;
@@ -204,28 +132,6 @@ public class Node {
     public void setDepth(int depth) {this.depth = depth;}
     public int getNumberOfChildren() {return numberOfChildren;}
     public void setNumberOfChildren(int numberOfChildren) {this.numberOfChildren = numberOfChildren;}
-
-    public boolean doesContain(Cell white ,Cell black) {
-        if(this.children.size() == 0)
-            return false;
-        for (Node node :
-                children) {
-            if (Objects.equals(node.getWhite(), white) && Objects.equals(node.getBlack(),black)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public Node doContains(Cell white ,Cell black) {
-        if(this.children.size() == 0)
-            return null;
-        for (Node node : children) {
-            if (node.getWhite().getId()== white.getId() && node.getBlack().getId()==black.getId()) {
-                return node;
-            }
-        }
-        return null;
-    }
 
     @Override
     public boolean equals(Object o) {

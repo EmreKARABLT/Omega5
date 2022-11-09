@@ -11,19 +11,21 @@ public class TestBot {
     private final State state ;
     private int numberOfGamesWhiteWon = 0 ;
     private int numberOfGamesBlackWon = 0 ;
+    private int ties = 0 ;
 
     public TestBot(int numberOfTest , Player bot1 , Player bot2){
         this.numberOfTest = numberOfTest;
         ArrayList<Player> playersList = new ArrayList<>();
         playersList.add( bot1 );
         playersList.add( bot2 );
-        state = new State(3, playersList);
+        state = new State(2, playersList);
 
         for (int i = 0; i < numberOfTest; i++) {
             runTest();
+            //in this part board will be full and any data can be derived
+            // state.getBoard().getCells();// with this line you can get the cells of the board (END GAME )
             state.restart();
         }
-        System.out.println(numberOfGamesWhiteWon + " " + numberOfGamesBlackWon);
 
     }
     public void runTest(){
@@ -36,11 +38,17 @@ public class TestBot {
             state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
             state.nextTurn();
             state.nextTurn();
+            //If you want to get the state of the board after each move it is where you need to derive the state of the board state.getBoard().getCells()
         }
 
         if(state.isGameOver()) {
-
-            if(state.getWinner().getPlayerName().equals("Black")){
+            Player winner = state.getWinner();
+            Player loser = state.getLoser();
+            if(winner == null || loser==null){
+                ties++;
+                return ;
+            }
+            if(winner.getPlayerName().equals("Black")){
                 numberOfGamesBlackWon++;
             }else
                 numberOfGamesWhiteWon++;
@@ -52,14 +60,17 @@ public class TestBot {
     public double getBlacksWinPercentage() {
         return  numberOfGamesBlackWon / (double) numberOfTest * 100;
     }
+    public double getTiesPercentage(){return ties/(double)numberOfTest *100; }
     public static void main(String[] args) {
         double start = System.currentTimeMillis();
         Player bot1 = new RandomBot("Black");
-        Player bot2 = new MonteCarlo("White");
-        TestBot testBot = new TestBot(100000,bot1,bot2);
-        System.out.println(testBot.getWhitesWinPercentage() + " " + testBot.getBlacksWinPercentage());
+        Player bot2 = new RandomBot("White");
+        TestBot testBot = new TestBot(10000,bot1,bot2);
+        System.out.println("win rate (white) :" +testBot.getWhitesWinPercentage() + " win rate (black): " + testBot.getBlacksWinPercentage());
+        System.out.println("Tie percentage " + testBot.getTiesPercentage());
         double end = System.currentTimeMillis();
-        System.out.println((end - start)/1000.d);
+
+
     }
 
 }

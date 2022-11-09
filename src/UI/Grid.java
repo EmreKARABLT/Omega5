@@ -66,7 +66,6 @@ public class Grid extends JPanel {
         if(player.getPlayerID() == 1){ x = getBoard().getOffsetX()*2 - 220 ;  y = 20                              ;}
         if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*20 - 120;}
         if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*20 - 120;}
-        System.out.println(x + " " + y);
 
         name.setBounds( x+20,y,200,50);
         score.setBounds(x+20,y+25,200,50);
