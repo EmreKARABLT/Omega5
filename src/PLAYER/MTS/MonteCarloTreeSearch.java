@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 30000;
+    private final double SEARCH_TIME = 60000;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
@@ -18,7 +18,8 @@ public class MonteCarloTreeSearch {
         ArrayList<Cell> move = new ArrayList<>();
         this.tree = new Tree(state);
         double a = 0;
-        while (a < SEARCH_TIME){
+
+        while ( a < SEARCH_TIME){
             double start = System.currentTimeMillis();
             Node currentNode = tree.root;
 //            Node exploration = bestNode;
@@ -30,6 +31,8 @@ public class MonteCarloTreeSearch {
         }
 
         Node winner = tree.getBest(tree.root);
+//        System.out.println("UCT : " + UCT.UCT(winner.getParent().getNumberOfSimulations(),winner.getNumberOfWins(),winner.getNumberOfSimulations()));
+//        System.out.println("wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations());
         System.out.println(tree.simNumber);
 //        state.setBoard(tree.root.getState().getBoard());
 //        tree.setRoot(winner);

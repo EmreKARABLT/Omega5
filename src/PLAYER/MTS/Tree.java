@@ -23,10 +23,7 @@ public class Tree {
 
         int numberOfPossible = node.numberOfPossibleMoves();
         if(node.getChildren().size()>= Math.min(numberOfPossible,500)) {
-            if(node.getPlayerID()==1)
-                selected = getBest(node);
-            else
-                selected = getWorst(node);
+            selected = getBest(node);
             return selected;
         }
         ArrayList<Cell> emptyCells = state.getBoard().getEmptyCells();
