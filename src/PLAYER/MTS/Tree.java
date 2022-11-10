@@ -3,8 +3,12 @@ package PLAYER.MTS;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.RuleBasedBot;
+import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Tree {
     Node root;
@@ -18,28 +22,22 @@ public class Tree {
     }
 
 
-    public Node selection(Node node){
+    public Node selection(Node node,ArrayList<Node> best_N){
         Node selected ;
-        int numberOfPossible = node.numberOfPossibleMoves();
-
-        if(node.getChildren().size()>= Math.min(numberOfPossible,300)) {
+        if(node.getChildren().size() < best_N.size() ){
+            int random = (int) (best_N.size() * Math.random());
+            selected = node.addChild( best_N.get(random));
+        }else {
+            selected = getBest(node);
+        }
             //TODO think about the way to update the score of each node according to playerID and looking for the best or worst
 //            if(node.getPlayerID()==1)
-                selected = getBest(node);
+//        if(!node.getChildren().isEmpty())
 //            else
 //                selected = getWorst(node);
-            return selected;
-        }
 
         //TODO implement heuristics for selection instead of random selection
-        ArrayList<Cell> emptyCells = state.getBoard().getEmptyCells();
-        Cell cell_white = emptyCells.get((int) (emptyCells.size() * Math.random()));
-        Cell cell_black = emptyCells.get((int) (emptyCells.size() * Math.random()));
-        while(cell_black.equals(cell_white))
-            cell_black = emptyCells.get((int) (emptyCells.size() * Math.random()));
 
-
-        selected = node.addChild(new Node(node,node.getState(),cell_white, cell_black));
         return selected;
     }
 
@@ -63,14 +61,15 @@ public class Tree {
         simNumber=counter++;
         Node tempRoot = node;
         while(!state.isGameOver()){
-            Node nextNode = selection(node);
+            ArrayList<Node> best_n = best_N_Nodes(node,50);
+            Node nextNode = selection(node,best_n);
             nextNode.color();
 
 
-            nextNode.getState().updatePlayerScores();
             //TODO we need to save players score to corresponding cell after each move in this way while backtracking we wont have to calculate it again and again
             node =nextNode;
         }
+            node.getState().updatePlayerScores();
         //TODO we may need to calculate method after each move
         //TODO centerOfMass of Clusters()
         Player winner = node.getState().getWinner();
@@ -96,17 +95,33 @@ public class Tree {
         while (!node.equals(root) ){
             Node parent = node.getParent();
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
-            if(winnerId == -1)
-                parent.setNumberOfWins(parent.getNumberOfWins()+win);
             //TODO Think and research about updating score for each parent node by taking playerId of the parent !!!!! It may effect to look for the best or the worst score !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            else if(parent.getPlayerID()==winnerId)
-                parent.setNumberOfWins(parent.getNumberOfWins() + win);
+            parent.setNumberOfWins(parent.getNumberOfWins() + Math.abs(1-win));
 
             node.uncolor();
             //TODO assign the scores according to saved scores
             node = parent;
         }
 
+    }
+    private ArrayList<Node> best_N_Nodes(Node parent , int maxChildrenSize){
+
+        ArrayList<Cell> ec = state.getBoard().getEmptyCells();
+        ArrayList<Node> allCombinations = new ArrayList<>();
+        for(int i = 0 ; i < ec.size() ; i++){
+            for (int j = i+1; j < ec.size(); j++) {
+                allCombinations.add(new Node(parent, state, ec.get(i), ec.get(j)));
+                allCombinations.add(new Node(parent, state, ec.get(j), ec.get(i)));
+            }
+        }
+//        System.out.println(allCombinations);
+        Collections.sort(allCombinations);
+        ArrayList<Node> bestN = new ArrayList<>();
+        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
+            System.out.println(allCombinations.get(i).eval());
+            bestN.add(allCombinations.get(i));
+        }
+        return bestN;
     }
 
     public void setRoot(Node node){

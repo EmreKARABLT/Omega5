@@ -4,6 +4,7 @@ import GAME.State;
 import PLAYER.MonteCarlo;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class Menu extends JPanel{
 
-    public int boardSize = 3;
+    public int boardSize = 2;
     public final int numberOfPlayers = 2;
     public int HumanOrComputer = 0; // default is human against human
     public int numberOfAiPlayers = 0;
@@ -106,7 +107,7 @@ public class Menu extends JPanel{
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
         JButton buttonBoardSize2 = new JButton("2");
-        JButton buttonBoardSize3 = new JButton(boardSize+"");
+        JButton buttonBoardSize3 = new JButton("3");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 

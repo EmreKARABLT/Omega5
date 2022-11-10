@@ -1,36 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" afterDir="false" />
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/UCT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/UCT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +42,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -137,11 +116,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="032db7ea-3bd4-456d-918f-7cd1c9657701" name="Changes" comment="" />
+      <changelist id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class" />
       <created>1667388814892</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667388814892</updated>
+      <workItem from="1668080546410" duration="109000" />
+      <workItem from="1668084478902" duration="9629000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -171,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667747042823</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class">
+      <created>1668018701363</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668018701363</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,29 +193,25 @@
     <MESSAGE value="methods for MTS and also I add a class UTC" />
     <MESSAGE value="Montecarlo done will have bugs for sure idk tomorrow I will run it and fix if I can" />
     <MESSAGE value="sunday starting point" />
-    <option name="LAST_COMMIT_MESSAGE" value="sunday starting point" />
+    <MESSAGE value="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class" />
+    <option name="LAST_COMMIT_MESSAGE" value="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
-          <line>156</line>
-          <properties class="PLAYER.MTS.Node">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Node.java</url>
-          <line>96</line>
+          <line>110</line>
           <properties class="PLAYER.MTS.Node" method="getPlayerID">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="7" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class RuleBasedBot extends Player {
 
-    double[] w = {0.12838702736199448, 0.8600424842062907, 0.7562169805687364, 0.17548046080005508, 0.7663052705087003};
+    double[] w = {1, 1, 1, 1, 1};
 
 
     public RuleBasedBot(String playerName){

@@ -4,12 +4,13 @@ import GAME.Cell;
 import GAME.State;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.Rules;
 import PLAYER.RandomBot;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Node {
+public class Node implements Comparable{
     //TODO store the score of players (white , black )
 
     private Node parent;
@@ -23,7 +24,8 @@ public class Node {
     private int numberOfSimulations;
     private double numberOfWins;
     private int numberOfChildren;
-    private int noec;
+    private int myScore ;
+    private int opponentsScore;
 //    private ArrayList<Cell> emptyCells;
 
     public Node(Node parent,State state,Cell white , Cell black){
@@ -33,17 +35,33 @@ public class Node {
         this.state = state;
         this.white = white;
         this.black = black;
-        this.noec = state.getBoard().getNumberOfEmptyCells();
         numberOfWins = 0;
         numberOfChildren = 0;
         numberOfSimulations = 0;
         children = new ArrayList<>();
+        color();
+            this.myScore = state.getBoard().scoreOfAPlayer(playerID);
+            this.opponentsScore = state.getBoard().scoreOfAPlayer((playerID+1)%2);
+        uncolor();
+
     }
 
-    public int getNoec() {
-        return noec;
-    }
 
+    public double eval(){
+        double[] w = {1, 1, 1, 1, 1};
+        Cell myCell = (playerID==0) ? white : black;
+        Cell opponents = (playerID==0) ? black : white;
+        int incrementOfMyScore = (parent!=null) ? myScore - parent.opponentsScore : 0;
+        int incrementOfOpponentsScore = (parent!=null) ? opponentsScore - parent.myScore : 0;
+
+        double myScore=
+                incrementOfMyScore;
+
+        double opponentsScore =
+                incrementOfOpponentsScore;
+
+        return myScore - opponentsScore;
+    }
     public boolean isRoot(){
         return this.equals(root) ;
     }
@@ -62,17 +80,13 @@ public class Node {
         if(white != null) {
             state.colorWhite(white);
             state.colorBlack(black);
-//            this.noec = state.getBoard().getNumberOfEmptyCells();
         }
     }
     public void uncolor(){
         if(white != null) {
             state.uncolor(white);
             state.uncolor(black);
-//            this.noec = state.getBoard().getNumberOfEmptyCells();
         }
-//        emptyCells = state.getBoard().getEmptyCells();
-
     }
 
     public int numberOfPossibleMoves(){
@@ -140,7 +154,10 @@ public class Node {
         Node node = (Node) o;
         return white.equals(node.white) && black.equals(node.black) && this.depth == node.depth;
     }
-
+    @Override
+    public int compareTo(Object o) {
+        return Double.compare(((Node)o).eval(), this.eval());
+    }
     @Override
     public int hashCode() {
         return Objects.hash(parent, state, white, black, depth);
@@ -150,6 +167,7 @@ public class Node {
     public String toString() {
         return "Node Depth " + depth +" / " + ((white==null)? "null" :white.getId()) + " - " + ((black==null)? "null" :black.getId()) ;
     }
+
 
     public static void main(String[] args) {
         ArrayList<Player> players = new ArrayList<>(){};
@@ -164,5 +182,7 @@ public class Node {
         Node node2 = new Node(null,state,white,black );
         System.out.println(node1.equals(node2));
     }
+
+
 }
 
