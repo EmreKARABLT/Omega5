@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class">
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="some progress on heuristics">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +130,7 @@
       <option name="presentableId" value="Default" />
       <updated>1667388814892</updated>
       <workItem from="1668080546410" duration="109000" />
-      <workItem from="1668084478902" duration="9629000" />
+      <workItem from="1668084478902" duration="10252000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -159,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668018701363</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="some progress on heuristics">
+      <created>1668096337249</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668096337249</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +209,8 @@
     <MESSAGE value="Montecarlo done will have bugs for sure idk tomorrow I will run it and fix if I can" />
     <MESSAGE value="sunday starting point" />
     <MESSAGE value="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class" />
-    <option name="LAST_COMMIT_MESSAGE" value="a small bug fixed on GUI&#10;state.restart() added to constructor of State.class" />
+    <MESSAGE value="some progress on heuristics" />
+    <option name="LAST_COMMIT_MESSAGE" value="some progress on heuristics" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

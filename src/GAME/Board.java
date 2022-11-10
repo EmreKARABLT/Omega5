@@ -158,7 +158,9 @@ public class Board implements Cloneable{
      * @return the score of the given color
      */
     public int scoreOfAPlayer(int color ){
-        int scoreOfPlayer = multiplyTheGivenArrayList( getGroupForColor(color) );
+        ArrayList<Integer> group = getGroupForColor(color);
+        System.out.println(group);
+        int scoreOfPlayer = multiplyTheGivenArrayList( group);
         setAllCellsToNotVisited();
         return scoreOfPlayer;
     }
@@ -167,12 +169,10 @@ public class Board implements Cloneable{
         ArrayList<Integer> groups = new ArrayList<>();
 
         for(Cell startingCell : cells ){
-            if(startingCell.getColor() == color){
-                int numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
-
-                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
+            if(startingCell.getColor() == color && !startingCell.isVisited()){
+                Integer numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
+                if(numberOfPiecesConnectedToStartingCell!=null)
                     groups.add(numberOfPiecesConnectedToStartingCell);
-                }
             }
         }
         return groups;
@@ -185,11 +185,11 @@ public class Board implements Cloneable{
      * @return if the color doesnt match with the starting cell's color returns 0 , else returns the amount of cell with
      * the same color is connected to the provided cell
      */
-    public int numberOfPiecesConnectedToCell(int color,Cell startingCell){
-        if( startingCell.isVisited() && startingCell.getColor() != color )
-            return 0;
-        int number_Of_pieces_in_group = (startingCell.getColor() == color) ? 1 : 0 ;
+    public Integer numberOfPiecesConnectedToCell(int color,Cell startingCell){
 
+        if( startingCell.isVisited() && startingCell.getColor() != color )
+            return null;
+        int number_Of_pieces_in_group = 1;
         LinkedList<Cell> queue = new LinkedList<>();
         queue.add(startingCell);
         startingCell.setVisited(true);
