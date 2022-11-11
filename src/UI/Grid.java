@@ -297,10 +297,12 @@ public class Grid extends JPanel {
         public void mouseReleased(MouseEvent e) {
 
             if(state.getCurrentPlayer().isBot()){
-                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state,lastWhites , lastBlacks);
 
                 moves.get(0).setColor(0);
                 moves.get(1).setColor(1);
+                lastWhites.add(moves.get(0));
+                lastBlacks.add(moves.get(1));
                 state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
                 state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
                 state.nextTurn();

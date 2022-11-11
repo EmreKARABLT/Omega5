@@ -1,6 +1,7 @@
 package GAME;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Cell implements Cloneable{
     private static int counter = 0;
@@ -126,6 +127,18 @@ public class Cell implements Cloneable{
         return RADIUS;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return q == cell.q && r == cell.r && id == cell.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(q, r, id);
+    }
 
     public int[] getQRSasArray(){
         return new int[]{ q, r, s };

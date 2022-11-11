@@ -4,7 +4,7 @@ package PLAYER.GA;
 public class HeapSort
 {
 
-    public static void sort(Individuals individuals[])
+    public static Individuals[] sort(Individuals individuals[])
     {
         int numberIndividuals = individuals.length;
 
@@ -21,6 +21,7 @@ public class HeapSort
             downheap(individuals, 1, numberIndividuals);
         }
         while (numberIndividuals > 1);
+        return individuals;
     }
 
     private static void downheap(Individuals individuals[], int sample, int numberIndividuals)

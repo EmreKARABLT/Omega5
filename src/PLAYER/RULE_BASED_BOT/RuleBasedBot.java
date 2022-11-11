@@ -9,8 +9,6 @@ import java.util.*;
 
 public class RuleBasedBot extends Player {
 
-    double[] w = {1, 1, 1, 1, 1};
-
 
     public RuleBasedBot(String playerName){
         this.playerName = playerName;
@@ -48,11 +46,11 @@ public class RuleBasedBot extends Player {
 
             Double formula =
 
-                    w[0] * Rules.clusters(emptyCells.get(i), 1) +
-                    w[1] * Rules.Nclusters(emptyCells.get(i), 1, board.getCells()) +
-                    w[2] * Rules.neigbourColors(emptyCells.get(i)) +
-                    w[3] * Rules.radius(emptyCells.get(i)) +
-                    w[4] * Rules.N_neibourgs(emptyCells.get(i));
+                    this.getW()[0] * Rules.clusters(emptyCells.get(i), 1) +
+                    this.getW()[1] * Rules.Nclusters(emptyCells.get(i), 1, board.getCells()) +
+                    this.getW()[2] * Rules.neigbourColors(emptyCells.get(i)) +
+                    this.getW()[3] * Rules.radius(emptyCells.get(i)) +
+                    this.getW()[4] * Rules.N_neibourgs(emptyCells.get(i));
 
 
             coeficients.add(formula);

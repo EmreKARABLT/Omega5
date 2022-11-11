@@ -5,13 +5,13 @@ import java.util.Arrays;
 public class Individuals {
 
     private double[] chromosome;
-    private Integer fitness;
+    private Double fitness;
     private String phenotype;
 
 
     public Individuals(double[] chromosome) {
         this.chromosome = chromosome;
-        this.fitness = 0;
+        this.fitness = 0.0;
         this.phenotype = fromGenotypeToPhenotype();
     }
 
@@ -35,7 +35,7 @@ public class Individuals {
         this.chromosome = chromosome;
     }
 
-    public Integer getFitness() {
+    public Double getFitness() {
         return fitness;
     }
 
@@ -43,7 +43,7 @@ public class Individuals {
         if(lose == 0){
             lose = 1;
         }
-        this.fitness = win / lose;
+        this.fitness = (double)win / (double)lose;
     }
 
     public String getPhenotype() {
@@ -57,7 +57,7 @@ public class Individuals {
     @Override
     public String toString() {
         return "Individuals{" +
-                "fitness=" + fitness +
+                "fitness=" + String.format("%.2f", fitness)+
                 ", phenotype='" + phenotype + '\'' +
                 '}';
     }

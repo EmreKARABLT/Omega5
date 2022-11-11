@@ -159,7 +159,6 @@ public class Board implements Cloneable{
      */
     public int scoreOfAPlayer(int color ){
         ArrayList<Integer> group = getGroupForColor(color);
-        System.out.println(group);
         int scoreOfPlayer = multiplyTheGivenArrayList( group);
         setAllCellsToNotVisited();
         return scoreOfPlayer;
@@ -171,7 +170,7 @@ public class Board implements Cloneable{
         for(Cell startingCell : cells ){
             if(startingCell.getColor() == color && !startingCell.isVisited()){
                 Integer numberOfPiecesConnectedToStartingCell = numberOfPiecesConnectedToCell(color , startingCell);
-                if(numberOfPiecesConnectedToStartingCell!=null)
+                if(numberOfPiecesConnectedToStartingCell != null)
                     groups.add(numberOfPiecesConnectedToStartingCell);
             }
         }
@@ -189,9 +188,12 @@ public class Board implements Cloneable{
 
         if( startingCell.isVisited() && startingCell.getColor() != color )
             return null;
+
         int number_Of_pieces_in_group = 1;
         LinkedList<Cell> queue = new LinkedList<>();
+        LinkedList<Cell> visited = new LinkedList<>();
         queue.add(startingCell);
+        visited.add(startingCell);
         startingCell.setVisited(true);
         while(!queue.isEmpty()){
             Cell currentCell = queue.pollLast();
@@ -199,10 +201,12 @@ public class Board implements Cloneable{
                     currentCell.getNeighbors()) {
                 if(!neighborCell.isVisited() && neighborCell.getColor() == color){
                     neighborCell.setVisited(true);
+                    visited.add(neighborCell);
                     queue.add(neighborCell);
                     number_Of_pieces_in_group++;
                 }
             }
+
         }
         return number_Of_pieces_in_group;
     }
@@ -212,7 +216,7 @@ public class Board implements Cloneable{
      * @param integerList an arrayList consists integers
      * @return multiplication of elements in the provided list
      */
-    public int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
+    public static int multiplyTheGivenArrayList(ArrayList<Integer> integerList){
         if(integerList.size() == 0 ) return 0;
         int multiplication = 1 ;
 

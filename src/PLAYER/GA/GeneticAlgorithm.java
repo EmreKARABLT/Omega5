@@ -1,7 +1,9 @@
 package PLAYER.GA;
+import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
 import PLAYER.RULE_BASED_BOT.RuleBasedBot;
+
 import java.util.*;
 
 public class GeneticAlgorithm {
@@ -10,7 +12,7 @@ public class GeneticAlgorithm {
     private final int POPULATION_SIZE = 100;
     private final int GENERATIONS = 10000;
     private final int BOARD_SIZE = 3;
-    private final double MUTATION_RATE = 0.05;
+    private final double MUTATION_RATE = 0.1;
     private final int ADN_SIZE = 5;
 
     private  Individuals[] population;
@@ -31,22 +33,37 @@ public class GeneticAlgorithm {
     public void generations(Individuals[] population){
 
         for (int i = 0; i < GENERATIONS; i++) {
-            System.out.println("GEN " + i);
             population = play(population);
             population = selection(population);
             population = mutation(population);
-            System.out.println(population[0].toString());
+            population = HeapSort.sort(population);
             Random rn = new Random();
-            int newFighter = rn.nextInt(POPULATION_SIZE);
-            players.get(1).setW(population[newFighter].getChromosome());
+            int newFighter = rn.nextInt((int) (POPULATION_SIZE * 0.1));
+            players.get(1).setW(population[0].getChromosome());
+            if(population[0].getFitness() > 30) {
+                System.out.println("GEN " + i);
+                System.out.println(population[0]);
+            }
+
         }
     }
 
     public Individuals[] play(Individuals[] population){
 
+        State state = new State(3, players);
         for (int i = 0; i < population.length; i++) {
-            State state = new State(BOARD_SIZE, players);
+            state.getPlayers().get(1).setW(population[i].getChromosome());
+            while(!state.isGameOver()){
+                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+                moves.get(0).setColor(0);
+                moves.get(1).setColor(1);
+                state.nextTurn();
+                state.nextTurn();
+            }
+                state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
             population[i].setFitness(state.getPlayers().get(0).getScore(), state.getPlayers().get(1).getScore());
+            state.restart();
         }
         HeapSort.sort(population);
         return population;
@@ -68,20 +85,24 @@ public class GeneticAlgorithm {
     }
 
     public Individuals[] crossover(Individuals jerry, Individuals mary) {
+        int crossOverPoint = (int) (Math.random() * jerry.getChromosome().length - 2) + 1;
 
-        Random rn = new Random();
-        int crossOverPoint = rn.nextInt(jerry.getChromosome().length);
-
-        double[] t = jerry.getChromosome();
         double[] j = jerry.getChromosome();
-        double[] m = jerry.getChromosome();
-
-        for (int i = 0; i < crossOverPoint; i++) {
-            j[i] = m[i];
-            m[i] = t[i];
+        double[] m = mary.getChromosome();
+        double[] c1 = new double[j.length];
+        double[] c2 = new double[j.length];
+        for (int i = 0; i < j.length; i++) {
+            if(i <= crossOverPoint ) {
+                c1[i] = j[i];
+                c2[i] = m[i];
+            }else {
+                c1[i] = m[i];
+                c2[i] = j[i];
+            }
         }
-        jerry.setChromosome(j);
-        mary.setChromosome(m);
+
+        jerry.setChromosome(c1);
+        mary.setChromosome(c2);
 
         return new Individuals[] {jerry, mary};
     }
@@ -90,7 +111,7 @@ public class GeneticAlgorithm {
         Random rn = new Random();
         for (int i = 0; i < population.length * MUTATION_RATE; i++) {
             int mutant_index = rn.nextInt(POPULATION_SIZE);
-            population[mutant_index].setChromosome(generateChomosomes());
+            population[mutant_index].setChromosome(generateChromosomes());
         }
         return population;
     }
@@ -98,12 +119,12 @@ public class GeneticAlgorithm {
     public Individuals[] generatePopulation(){
         Individuals[] population = new Individuals[POPULATION_SIZE];
         for (int i = 0; i < POPULATION_SIZE; i++) {
-            population[i] = new Individuals(generateChomosomes());
+            population[i] = new Individuals(generateChromosomes());
         }
         return population;
     }
 
-    public double[] generateChomosomes(){
+    public double[] generateChromosomes(){
         double[] weight = new double[ADN_SIZE];
         for (int i = 0; i < weight.length; i++) {
             weight[i] = Math.random();

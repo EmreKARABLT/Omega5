@@ -11,19 +11,19 @@ public class MonteCarloTreeSearch {
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
+
     }
 
-    public ArrayList<Cell> bestMove(State state){
+    public ArrayList<Cell> bestMove(State state,ArrayList<Cell> whites ,ArrayList<Cell> blacks){
         ArrayList<Cell> move = new ArrayList<>();
-        //TODO instead of creating a new tree all the time, check that if it is discovered before if yes use it wisely otherwise create a new tree!
-        this.tree = new Tree(state);
+        this.tree.setRoot(state,whites,blacks);
+
         double a = 0;
 
         while ( a < SEARCH_TIME){
             double start = System.currentTimeMillis();
 
-            Node currentNode = tree.root;
-            tree.simulation(currentNode);
+            tree.simulation(tree.root);
 
             double finish = System.currentTimeMillis();
             a += finish-start;

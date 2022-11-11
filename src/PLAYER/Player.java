@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class Player {
     //protected static State state;
-    double[] w = {1,1,1,1,1};
+    double[] w = {Math.random(),Math.random(),Math.random(),Math.random(),Math.random()};
     protected String playerName;
     int currentPiecesID = 0 ;
     int score = 0 ;
@@ -17,6 +17,9 @@ public abstract class Player {
 
     public boolean isBot(){return false;};
     public ArrayList<Cell> getMoves(State state){
+        return null;
+    };
+    public ArrayList<Cell> getMoves(State state,ArrayList<Cell> whites ,ArrayList<Cell> blacks){
         return null;
     };
 
@@ -38,6 +41,9 @@ public abstract class Player {
 
     public void setW(double[] w){
         this.w = w;
+    }
+    public double[] getW(){
+        return this.w;
     }
 
 }

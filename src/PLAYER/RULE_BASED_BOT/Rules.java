@@ -1,6 +1,7 @@
 package PLAYER.RULE_BASED_BOT;
 
 import GAME.Cell;
+import PLAYER.MTS.Node;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -30,19 +31,13 @@ public class Rules {
         return Functions.FClusters(N);
     }
 
-    public static double Nclusters(Cell cell, int color, ArrayList<Cell> cells){
+    public static double Nclusters(Node node , int color){
+        ArrayList<Integer> groups ;
 
-        ArrayList<Double> groups = new ArrayList<>();
-
-        for(Cell startingCell : cells ){
-            if(startingCell.getColor() == color){
-                double numberOfPiecesConnectedToStartingCell = clusters(startingCell, color);
-
-                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
-                    groups.add(numberOfPiecesConnectedToStartingCell);
-                }
-            }
-        }
+        if(node.getCurrentPlayersID() == color)
+            groups = node.getWhitesScore();
+        else
+            groups = node.getBlacksScore();
 
         double mean = 0;
         double variance = 0;
@@ -77,5 +72,34 @@ public class Rules {
 
     public static double N_neibourgs(Cell cell){
         return cell.getNeighbors().size();
+    }
+
+    public static double Nclusters(Cell cell, int color, ArrayList<Cell> cells) {
+        ArrayList<Double> groups = new ArrayList<>();
+
+        for(Cell startingCell : cells ){
+            if(startingCell.getColor() == color){
+                double numberOfPiecesConnectedToStartingCell = clusters(startingCell, color);
+
+                if(numberOfPiecesConnectedToStartingCell > 0 ){ //to avoid 0 in multiplication we will have >0 or != 0 condition
+                    groups.add(numberOfPiecesConnectedToStartingCell);
+                }
+            }
+        }
+        double mean = 0;
+        double variance = 0;
+
+        for (int i = 0; i < groups.size(); i++) {
+            mean += groups.get(i);
+            variance += groups.get(i) * groups.get(i);
+        }
+        mean = mean/groups.size();
+        variance = variance/groups.size();
+        variance = variance - mean * mean;
+        if (variance < 0.1){
+            variance = 0.1;
+        }
+        return Functions.FNClusters(mean, variance);
+
     }
 }

@@ -198,8 +198,10 @@ public class Menu extends JPanel{
                 //Players ArrayList
                 ArrayList<Player> players = new ArrayList<>(){};
                 Player.counterForIDs = 0 ;
+                whitePlayer.reset();
+                blackPlayer.reset();
+                players = new ArrayList<>();
                 players.add(whitePlayer);
-//                players.add(new RandomBot("Black") );
                 players.add(blackPlayer);
                 Grid grid = new Grid(new State(boardSize ,players ));
                 Show.frame.setContentPane(grid);

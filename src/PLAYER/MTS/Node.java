@@ -1,5 +1,6 @@
 package PLAYER.MTS;
 
+import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.HumanPlayer;
@@ -14,7 +15,6 @@ public class Node implements Comparable{
     //TODO store the score of players (white , black )
 
     private Node parent;
-    private Node root;
     private State state;
     private final int playerID;
     private ArrayList<Node> children ;
@@ -23,47 +23,61 @@ public class Node implements Comparable{
     private int depth;
     private int numberOfSimulations;
     private double numberOfWins;
-    private int numberOfChildren;
-    private int myScore ;
-    private int opponentsScore;
-//    private ArrayList<Cell> emptyCells;
+    private int scoreOfWhite;
+    private int scoreOfBlack;
+    private ArrayList<Integer> whitesScore;
+    private ArrayList<Integer> blacksScore;
 
     public Node(Node parent,State state,Cell white , Cell black){
         this.parent = parent;
-        this.depth =  (this.parent != null)  ? this.parent.getDepth() +1 : 0;
-        this.playerID = (this.parent == null) ? 1 : ( ( this.parent.playerID + 1 ) % 2 );
+        this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;
+        this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : ( ( this.parent.playerID + 1 ) % 2 );
         this.state = state;
         this.white = white;
         this.black = black;
         numberOfWins = 0;
-        numberOfChildren = 0;
         numberOfSimulations = 0;
         children = new ArrayList<>();
-        color();
-            this.myScore = state.getBoard().scoreOfAPlayer(playerID);
-            this.opponentsScore = state.getBoard().scoreOfAPlayer((playerID+1)%2);
-        uncolor();
-
+        updateScores();
     }
 
+    public void updateScores(){
+        whitesScore = state.getBoard().getGroupForColor(0);
+        state.getBoard().setAllCellsToNotVisited();
+        blacksScore = state.getBoard().getGroupForColor(1);
+        state.getBoard().setAllCellsToNotVisited();
+        this.scoreOfWhite = Board.multiplyTheGivenArrayList(whitesScore);
+        this.scoreOfBlack = Board.multiplyTheGivenArrayList(blacksScore);
+    }
 
     public double eval(){
-        double[] w = {1, 1, 1, 1, 1};
-        Cell myCell = (playerID==0) ? white : black;
-        Cell opponents = (playerID==0) ? black : white;
-        int incrementOfMyScore = (parent!=null) ? myScore - parent.opponentsScore : 0;
-        int incrementOfOpponentsScore = (parent!=null) ? opponentsScore - parent.myScore : 0;
+        double[] w ={0.41939539486680855, 0.596762048047888, 0.1683721532546104, 0.2370089632926684, 0.2703059553712044};
+//        double [] w ={0.6659401716146303, 0.4816490601419914, 0.2750383637396092, 0.8453549473690194, 0.42878832082425156};
+//        double[] w = {0.3221567417337733, 0.8007750919590251, 0.2123912612165917, 0.34145835593064766, 0.4302513217149678};
+//        double[] w = {1, 1, 1, 1, 1};
+        Cell myCell = (playerID == 0) ? white : black;
+        Cell opponents = (playerID == 0) ? black : white;
+        int incrementOfMyScore = (parent.playerID == 0) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack ;
+        int incrementOfOpponentsScore = (parent.playerID ==1) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack;
 
         double myScore=
-                incrementOfMyScore;
+                w[0] * Rules.clusters(myCell, playerID) +
+                w[1] * Rules.Nclusters(this, playerID) +
+                w[2] * Rules.neigbourColors(myCell) +
+                w[3] * Rules.radius(myCell) +
+                w[4] * Rules.N_neibourgs(myCell)
+//                +incrementOfMyScore
+                ;
 
         double opponentsScore =
-                incrementOfOpponentsScore;
-
+                w[0] * Rules.clusters(opponents, (playerID +1)%2) +
+                w[1] * Rules.Nclusters(this, (playerID +1)%2) +
+                w[2] * Rules.neigbourColors(opponents) +
+                w[3] * Rules.radius(opponents) +
+                w[4] * Rules.N_neibourgs(opponents)
+//               +incrementOfOpponentsScore;
+                ;
         return myScore - opponentsScore;
-    }
-    public boolean isRoot(){
-        return this.equals(root) ;
     }
 
     public Node addChild(Node child){
@@ -73,14 +87,16 @@ public class Node implements Comparable{
             }
         }
         children.add(child);
-        numberOfChildren = children.size();
         return child;
     }
     public void color(){
+
         if(white != null) {
+            this.depth = this.parent.getDepth() + 1 ;
             state.colorWhite(white);
             state.colorBlack(black);
         }
+        updateScores();
     }
     public void uncolor(){
         if(white != null) {
@@ -108,7 +124,7 @@ public class Node implements Comparable{
 
 
 
-    public int getPlayerID() {
+    public int getCurrentPlayersID() {
         return playerID;
     }
 
@@ -130,8 +146,6 @@ public class Node implements Comparable{
 
     public State getState() {return state;}
     public void setState(State state) {this.state = state;}
-    public Node getRoot() {return root;}
-    public void setRoot(Node root) {this.root = root;}
     public int getNumberOfSimulations() {return numberOfSimulations;}
     public void setNumberOfSimulations(int numberOfSimulations) {this.numberOfSimulations = numberOfSimulations;}
     public double getNumberOfWins() {return numberOfWins;}
@@ -144,15 +158,45 @@ public class Node implements Comparable{
     public void setWhite(Cell white) {this.white = white;}
     public int getDepth() {return depth;}
     public void setDepth(int depth) {this.depth = depth;}
-    public int getNumberOfChildren() {return numberOfChildren;}
-    public void setNumberOfChildren(int numberOfChildren) {this.numberOfChildren = numberOfChildren;}
+
+    public int getScoreOfWhite() {
+        return scoreOfWhite;
+    }
+
+    public void setScoreOfWhite(int scoreOfWhite) {
+        this.scoreOfWhite = scoreOfWhite;
+    }
+
+    public int getScoreOfBlack() {
+        return scoreOfBlack;
+    }
+
+    public void setScoreOfBlack(int scoreOfBlack) {
+        this.scoreOfBlack = scoreOfBlack;
+    }
+
+    public ArrayList<Integer> getWhitesScore() {
+        return whitesScore;
+    }
+
+    public void setWhitesScore(ArrayList<Integer> whitesScore) {
+        this.whitesScore = whitesScore;
+    }
+
+    public ArrayList<Integer> getBlacksScore() {
+        return blacksScore;
+    }
+
+    public void setBlacksScore(ArrayList<Integer> blacksScore) {
+        this.blacksScore = blacksScore;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return white.equals(node.white) && black.equals(node.black) && this.depth == node.depth;
+        return white.equals(node.white) && black.equals(node.black) && this.parent.equals(node.parent);
     }
     @Override
     public int compareTo(Object o) {
@@ -165,7 +209,7 @@ public class Node implements Comparable{
 
     @Override
     public String toString() {
-        return "Node Depth " + depth +" / " + ((white==null)? "null" :white.getId()) + " - " + ((black==null)? "null" :black.getId()) ;
+        return "Node Depth " + depth +"  ||  w:" + ((white==null)? "null" :white.getId()) + " - b :" + ((black==null) ? "null"  :black.getId()) ;
     }
 
 
