@@ -25,8 +25,8 @@ public class Node implements Comparable{
     private double numberOfWins;
     private int scoreOfWhite;
     private int scoreOfBlack;
-    private ArrayList<Integer> whitesScore;
-    private ArrayList<Integer> blacksScore;
+    private ArrayList<Integer> groupsOfWhite;
+    private ArrayList<Integer> groupsOfBlack;
 
     public Node(Node parent,State state,Cell white , Cell black){
         this.parent = parent;
@@ -42,12 +42,12 @@ public class Node implements Comparable{
     }
 
     public void updateScores(){
-        whitesScore = state.getBoard().getGroupForColor(0);
+        groupsOfWhite = state.getBoard().getGroupForColor(0);
         state.getBoard().setAllCellsToNotVisited();
-        blacksScore = state.getBoard().getGroupForColor(1);
+        groupsOfBlack = state.getBoard().getGroupForColor(1);
         state.getBoard().setAllCellsToNotVisited();
-        this.scoreOfWhite = Board.multiplyTheGivenArrayList(whitesScore);
-        this.scoreOfBlack = Board.multiplyTheGivenArrayList(blacksScore);
+        this.scoreOfWhite = Board.multiplyTheGivenArrayList(groupsOfWhite);
+        this.scoreOfBlack = Board.multiplyTheGivenArrayList(groupsOfBlack);
     }
 
     public double eval(){
@@ -59,14 +59,15 @@ public class Node implements Comparable{
         Cell opponents = (playerID == 0) ? black : white;
         int incrementOfMyScore = (parent.playerID == 0) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack ;
         int incrementOfOpponentsScore = (parent.playerID ==1) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack;
-
+        int myColorsScore = (parent.playerID == 0) ? scoreOfWhite : scoreOfBlack ;
+        int opponentsColorsScore = (parent.playerID ==1) ? scoreOfWhite : scoreOfBlack ;
         double myScore=
                 w[0] * Rules.clusters(myCell, playerID) +
                 w[1] * Rules.Nclusters(this, playerID) +
                 w[2] * Rules.neigbourColors(myCell) +
                 w[3] * Rules.radius(myCell) +
                 w[4] * Rules.N_neibourgs(myCell)
-//                +incrementOfMyScore
+                +incrementOfMyScore/(double)myColorsScore * 100
                 ;
 
         double opponentsScore =
@@ -75,7 +76,7 @@ public class Node implements Comparable{
                 w[2] * Rules.neigbourColors(opponents) +
                 w[3] * Rules.radius(opponents) +
                 w[4] * Rules.N_neibourgs(opponents)
-//               +incrementOfOpponentsScore;
+               +incrementOfOpponentsScore/(double)opponentsColorsScore * 100;
                 ;
         return myScore - opponentsScore;
     }
@@ -175,20 +176,20 @@ public class Node implements Comparable{
         this.scoreOfBlack = scoreOfBlack;
     }
 
-    public ArrayList<Integer> getWhitesScore() {
-        return whitesScore;
+    public ArrayList<Integer> getGroupsOfWhite() {
+        return groupsOfWhite;
     }
 
-    public void setWhitesScore(ArrayList<Integer> whitesScore) {
-        this.whitesScore = whitesScore;
+    public void setGroupsOfWhite(ArrayList<Integer> groupsOfWhite) {
+        this.groupsOfWhite = groupsOfWhite;
     }
 
-    public ArrayList<Integer> getBlacksScore() {
-        return blacksScore;
+    public ArrayList<Integer> getGroupsOfBlack() {
+        return groupsOfBlack;
     }
 
-    public void setBlacksScore(ArrayList<Integer> blacksScore) {
-        this.blacksScore = blacksScore;
+    public void setGroupsOfBlack(ArrayList<Integer> groupsOfBlack) {
+        this.groupsOfBlack = groupsOfBlack;
     }
 
     @Override

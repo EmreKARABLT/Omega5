@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 20000;
+    private final double SEARCH_TIME = 50000;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);

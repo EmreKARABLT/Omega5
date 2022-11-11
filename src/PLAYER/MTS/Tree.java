@@ -53,7 +53,7 @@ public class Tree {
         simNumber=counter++;
         Node tempRoot = node;
         while(!state.isGameOver()){
-            ArrayList<Node> best_n = best_N_Nodes(node,1);
+            ArrayList<Node> best_n = best_N_Nodes(node,300);
             Node nextNode = selection(node,best_n);
             nextNode.color();
             nodes.add(nextNode);
@@ -116,7 +116,7 @@ public class Tree {
     public void setRoot(State state ,ArrayList<Cell> whites , ArrayList<Cell> blacks){
         int n = whites.size();
         for(Node child : root.getChildren()){
-            if (child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {
+            if (n>=2 && child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {
                 for (Node grandchild : child.getChildren()) {
                     if(grandchild.getWhite().equals(whites.get(n-1)) &&grandchild.getBlack().equals(blacks.get(n-1))) {
                         grandchild.color();

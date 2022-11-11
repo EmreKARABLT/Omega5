@@ -35,9 +35,9 @@ public class Rules {
         ArrayList<Integer> groups ;
 
         if(node.getCurrentPlayersID() == color)
-            groups = node.getWhitesScore();
+            groups = node.getGroupsOfWhite();
         else
-            groups = node.getBlacksScore();
+            groups = node.getGroupsOfBlack();
 
         double mean = 0;
         double variance = 0;
