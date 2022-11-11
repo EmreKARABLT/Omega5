@@ -201,7 +201,7 @@ public class Node implements Comparable{
     }
     @Override
     public int compareTo(Object o) {
-        return Double.compare(((Node)o).eval(), this.eval());
+        return (((Node)o).eval() > this.eval()) ? 1 : 0 ;
     }
     @Override
     public int hashCode() {

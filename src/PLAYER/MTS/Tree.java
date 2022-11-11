@@ -5,6 +5,7 @@ import GAME.State;
 import PLAYER.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tree {
     Node root;
@@ -18,11 +19,18 @@ public class Tree {
     }
 
 
-    public Node selection(Node node,ArrayList<Node> best_N){
+    public Node selection(Node node){
         Node selected ;
-        if(node.getChildren().size() < best_N.size() ){
-            int random = (int) (best_N.size() * Math.random());
-            selected = node.addChild( best_N.get(random));
+        int max = 300;
+        ArrayList<ArrayList<Node>> nodes = best_worst_Nodes(node, max);
+        ArrayList<Node> bests = nodes.get(0);
+        ArrayList<Node> worsts = nodes.get(1);
+        if(node.getChildren().size() < bests.size() ){
+            int random = (int) (bests.size() * Math.random());
+            if(node.getCurrentPlayersID() == 1 )
+                selected = node.addChild( bests.get(random));
+            else
+                selected = node.addChild( worsts.get(random));
             return selected;
         } else if(node.getCurrentPlayersID() == 1)
             selected = getBest(node);
@@ -53,8 +61,8 @@ public class Tree {
         simNumber=counter++;
         Node tempRoot = node;
         while(!state.isGameOver()){
-            ArrayList<Node> best_n = best_N_Nodes(node,300);
-            Node nextNode = selection(node,best_n);
+
+            Node nextNode = selection(node);
             nextNode.color();
             nodes.add(nextNode);
             node =nextNode;
@@ -77,16 +85,41 @@ public class Tree {
 
             parent.setNumberOfWins(parent.getNumberOfWins() + win );
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
-            //TODO Think and research about updating score for each parent node by taking playerId of the parent !!!!! It may effect to look for the best or the worst score !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
             node.uncolor();
-            //TODO assign the scores according to saved scores
             node = parent;
         }
 
 
     }
-    private ArrayList<Node> best_N_Nodes(Node parent , int maxChildrenSize){
+
+    private ArrayList<ArrayList<Node>> best_worst_Nodes(Node parent, int maxChildrenSize) {
+
+        ArrayList<Cell> ec = state.getBoard().getEmptyCells();
+        ArrayList<Node> allCombinations = new ArrayList<>();
+        for (int i = 0; i < ec.size(); i++) {
+            for (int j = i + 1; j < ec.size(); j++) {
+                allCombinations.add(new Node(parent, state, ec.get(i), ec.get(j)));
+                allCombinations.add(new Node(parent, state, ec.get(j), ec.get(i)));
+            }
+        }
+        try {
+            Collections.sort(allCombinations);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<Node> bestN = new ArrayList<>();
+        ArrayList<Node> worstN = new ArrayList<>();
+        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
+//            System.out.println(allCombinations.get(i).eval());
+            bestN.add(allCombinations.get(i));
+            worstN.add(allCombinations.get(allCombinations.size()-1-i));
+        }
+        ArrayList<ArrayList<Node>> result = new ArrayList<>();
+        result.add(bestN);
+        result.add(worstN);
+        return result;
+    }
+    private ArrayList<Node> worstNodes(Node parent , int maxChildrenSize){
 
         ArrayList<Cell> ec = state.getBoard().getEmptyCells();
         ArrayList<Node> allCombinations = new ArrayList<>();
@@ -96,16 +129,16 @@ public class Tree {
                 allCombinations.add(new Node(parent, state, ec.get(j), ec.get(i)));
             }
         }
-//        try {
-//            Collections.sort(allCombinations);
-//        }catch (Exception e){
-//            System.out.println(allCombinations);
-//        }
-//            ArrayList<Node> bestN = new ArrayList<>();
-//        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
-////            System.out.println(allCombinations.get(i).eval());
-//            bestN.add(allCombinations.get(i));
-//        }
+        try {
+            Collections.sort(allCombinations);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+            ArrayList<Node> bestN = new ArrayList<>();
+        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
+//            System.out.println(allCombinations.get(i).eval());
+            bestN.add(allCombinations.get(i));
+        }
         return allCombinations;
     }
 
