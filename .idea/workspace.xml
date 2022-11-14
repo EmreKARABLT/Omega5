@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="Some changes on selection method">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22,_22_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22,_12_49_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/TestBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/TestBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MonteCarlo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Grid.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +91,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GAME.TestBot" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GAME.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PLAYER.MTS.test" />
       <module name="Omega" />
@@ -114,10 +120,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Show" />
+        <item itemvalue="Application.TestBot" />
         <item itemvalue="Application.GeneticAlgorithm" />
         <item itemvalue="Application.test" />
         <item itemvalue="Application.Node" />
-        <item itemvalue="Application.Show" />
       </list>
     </recent_temporary>
   </component>
@@ -134,7 +140,8 @@
       <workItem from="1668161326321" duration="6092000" />
       <workItem from="1668181155068" duration="1441000" />
       <workItem from="1668387661504" duration="300000" />
-      <workItem from="1668438507092" duration="1347000" />
+      <workItem from="1668438507092" duration="1657000" />
+      <workItem from="1668440201398" duration="1379000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -213,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668134883936</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Some changes on selection method">
+      <created>1668439962554</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668439962554</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,6 +289,7 @@
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="GAME.Board" memberName="cells" />
         <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="depth" />
         <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="numberOfSimulations" />
         <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="numberOfWins" />

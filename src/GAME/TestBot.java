@@ -18,14 +18,14 @@ public class TestBot {
         ArrayList<Player> playersList = new ArrayList<>();
         playersList.add( bot1 );
         playersList.add( bot2 );
-        state = new State(2, playersList);
+        state = new State(1, playersList);
 
         for (int i = 0; i < numberOfTest; i++) {
             runTest();
             //in this part board will be full and any data can be derived
             // state.getBoard().getCells();// with this line you can get the cells of the board (END GAME )
-            state.restart();
         }
+            state.restart();
 
     }
     public void runTest(){
@@ -48,9 +48,9 @@ public class TestBot {
                 ties++;
                 return ;
             }
-            if(winner.getPlayerName().equals("Black")){
+            if(winner.getPlayerID() == 1){
                 numberOfGamesBlackWon++;
-            }else
+            }else if(winner.getPlayerID() == 0)
                 numberOfGamesWhiteWon++;
         }
     }
@@ -62,10 +62,11 @@ public class TestBot {
     }
     public double getTiesPercentage(){return ties/(double)numberOfTest *100; }
     public static void main(String[] args) {
+
         double start = System.currentTimeMillis();
-        Player bot1 = new RandomBot("Black");
-        Player bot2 = new RandomBot("White");
-        TestBot testBot = new TestBot(10000,bot1,bot2);
+        Player bot1 = new RandomBot("White");
+        Player bot2 = new MonteCarlo("Black");
+        TestBot testBot = new TestBot(2,bot1,bot2);
         System.out.println("win rate (white) :" +testBot.getWhitesWinPercentage() + " win rate (black): " + testBot.getBlacksWinPercentage());
         System.out.println("Tie percentage " + testBot.getTiesPercentage());
         double end = System.currentTimeMillis();
