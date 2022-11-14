@@ -38,7 +38,7 @@ public class Node implements Comparable{
         numberOfWins = 0;
         numberOfSimulations = 0;
         children = new ArrayList<>();
-        updateScores();
+//        updateScores();
     }
 
     public void updateScores(){
@@ -57,26 +57,26 @@ public class Node implements Comparable{
 //        double[] w = {1, 1, 1, 1, 1};
         Cell myCell = (playerID == 0) ? white : black;
         Cell opponents = (playerID == 0) ? black : white;
-        int incrementOfMyScore = (parent.playerID == 0) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack ;
-        int incrementOfOpponentsScore = (parent.playerID ==1) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack;
-        int myColorsScore = (parent.playerID == 0) ? scoreOfWhite : scoreOfBlack ;
-        int opponentsColorsScore = (parent.playerID ==1) ? scoreOfWhite : scoreOfBlack ;
+//        int incrementOfMyScore = (parent.playerID == 0) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack ;
+//        int incrementOfOpponentsScore = (parent.playerID ==1) ? scoreOfWhite - parent.scoreOfWhite : scoreOfBlack - parent.scoreOfBlack;
+//        int myColorsScore = (parent.playerID == 0) ? scoreOfWhite : scoreOfBlack ;
+//        int opponentsColorsScore = (parent.playerID ==1) ? scoreOfWhite : scoreOfBlack ;
         double myScore=
-                w[0] * Rules.clusters(myCell, playerID) +
-                w[1] * Rules.Nclusters(this, playerID) +
+//                w[0] * Rules.clusters(myCell, playerID) +
+//                w[1] * Rules.Nclusters(this, playerID) +
                 w[2] * Rules.neigbourColors(myCell) +
                 w[3] * Rules.radius(myCell) +
                 w[4] * Rules.N_neibourgs(myCell)
-                +incrementOfMyScore/(double)myColorsScore * 100
+//                +incrementOfMyScore/(double)myColorsScore * 100
                 ;
 
         double opponentsScore =
-                w[0] * Rules.clusters(opponents, (playerID +1)%2) +
-                w[1] * Rules.Nclusters(this, (playerID +1)%2) +
+//                w[0] * Rules.clusters(opponents, (playerID +1)%2) +
+//                w[1] * Rules.Nclusters(this, (playerID +1)%2) +
                 w[2] * Rules.neigbourColors(opponents) +
                 w[3] * Rules.radius(opponents) +
                 w[4] * Rules.N_neibourgs(opponents)
-               +incrementOfOpponentsScore/(double)opponentsColorsScore * 100;
+//               +incrementOfOpponentsScore/(double)opponentsColorsScore * 100;
                 ;
         return myScore - opponentsScore;
     }

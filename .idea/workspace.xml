@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="bunchofchanges">
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="Some changes on selection method">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22,_22_04_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_11_22__22_04__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22,_12_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_11_22__12_49__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +42,7 @@
   </component>
   <component name="ProjectId" id="2GzQD9zUvNJyv0AEY4cuP3UGqmG" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -42,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -121,7 +130,11 @@
       <option name="presentableId" value="Default" />
       <updated>1667388814892</updated>
       <workItem from="1668080546410" duration="109000" />
-      <workItem from="1668084478902" duration="37839000" />
+      <workItem from="1668084478902" duration="38558000" />
+      <workItem from="1668161326321" duration="6092000" />
+      <workItem from="1668181155068" duration="1441000" />
+      <workItem from="1668387661504" duration="300000" />
+      <workItem from="1668438507092" duration="1347000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -193,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668133537808</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Some changes on selection method">
+      <created>1668134883936</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668134883936</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +251,8 @@
     <MESSAGE value="some progress on heuristics" />
     <MESSAGE value="board counting fixed a bit :)" />
     <MESSAGE value="bunchofchanges" />
-    <option name="LAST_COMMIT_MESSAGE" value="bunchofchanges" />
+    <MESSAGE value="Some changes on selection method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes on selection method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -247,7 +268,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PLAYER/MTS/Tree.java</url>
-          <line>154</line>
+          <line>156</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>

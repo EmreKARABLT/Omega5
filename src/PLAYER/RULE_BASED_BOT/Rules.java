@@ -31,29 +31,29 @@ public class Rules {
         return Functions.FClusters(N);
     }
 
-    public static double Nclusters(Node node , int color){
-        ArrayList<Integer> groups ;
-
-        if(node.getCurrentPlayersID() == color)
-            groups = node.getGroupsOfWhite();
-        else
-            groups = node.getGroupsOfBlack();
-
-        double mean = 0;
-        double variance = 0;
-
-        for (int i = 0; i < groups.size(); i++) {
-            mean += groups.get(i);
-            variance += groups.get(i) * groups.get(i);
-        }
-        mean = mean/groups.size();
-        variance = variance/groups.size();
-        variance = variance - mean * mean;
-        if (variance < 0.1){
-            variance = 0.1;
-        }
-        return Functions.FNClusters(mean, variance);
-    }
+//    public static double Nclusters(Node node , int color){
+//        ArrayList<Integer> groups ;
+//
+//        if(node.getCurrentPlayersID() == color)
+//            groups = node.getGroupsOfWhite();
+//        else
+//            groups = node.getGroupsOfBlack();
+//
+//        double mean = 0;
+//        double variance = 0;
+//
+//        for (int i = 0; i < groups.size(); i++) {
+//            mean += groups.get(i);
+//            variance += groups.get(i) * groups.get(i);
+//        }
+//        mean = mean/groups.size();
+//        variance = variance/groups.size();
+//        variance = variance - mean * mean;
+//        if (variance < 0.1){
+//            variance = 0.1;
+//        }
+//        return Functions.FNClusters(mean, variance);
+//    }
 
     public static double neigbourColors(Cell cell){
         double counter = 0;

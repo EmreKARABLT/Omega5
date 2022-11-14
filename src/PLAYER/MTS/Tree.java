@@ -3,6 +3,7 @@ package PLAYER.MTS;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
+import PLAYER.RandomBot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,7 @@ public class Tree {
     ArrayList<Node> nodes = new ArrayList<>() ;
     public int simNumber = 0;
     public static int counter = 0;
+    public Player randomBot = new RandomBot("white");
     public Tree(State state){
         this.state = state;
         root = new Node(null, state, null, null );
@@ -25,15 +27,14 @@ public class Tree {
         ArrayList<ArrayList<Node>> nodes = best_worst_Nodes(node, max);
         ArrayList<Node> bests = nodes.get(0);
         ArrayList<Node> worsts = nodes.get(1);
-        if(node.getChildren().size() < bests.size() ){
-            int random = (int) (bests.size() * Math.random());
-            if(node.getCurrentPlayersID() == 1 )
-                selected = node.addChild( bests.get(random));
-            else
-                selected = node.addChild( worsts.get(random));
+        ArrayList<Cell> moves = randomBot.getMoves(node.getState());
+        if(node.getChildren().size() < max ){
+            selected = node.addChild(new Node(node,state,moves.get(0),moves.get(1)));
             return selected;
+
         } else if(node.getCurrentPlayersID() == 1)
             selected = getBest(node);
+
         else
             selected = getWorst(node);
 
