@@ -26,7 +26,9 @@ public class Node implements Comparable{
     private int scoreOfWhite;
     private int scoreOfBlack;
     private ArrayList<Integer> groupsOfWhite;
+
     private ArrayList<Integer> groupsOfBlack;
+    private ArrayList<Double> data = new ArrayList<>();
 
     public Node(Node parent,State state,Cell white , Cell black){
         this.parent = parent;
@@ -97,7 +99,7 @@ public class Node implements Comparable{
             state.colorWhite(white);
             state.colorBlack(black);
         }
-        updateScores();
+        //updateScores();
     }
     public void uncolor(){
         if(white != null) {
@@ -112,7 +114,9 @@ public class Node implements Comparable{
         return binomCoef(n,k);
     }
 
-
+    public void add(double win){
+        this.data.add(win);
+    }
     public int binomCoef (int n , int k) {
         int mult = 1;
         if(n-k <= 0)
@@ -143,6 +147,19 @@ public class Node implements Comparable{
 
     public void setParent(Node parent) {
         this.parent = parent;
+    }
+
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public ArrayList<Double> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<Double> data) {
+        this.data = data;
     }
 
     public State getState() {return state;}

@@ -2,6 +2,7 @@ package PLAYER.MTS;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.Player;
 import PLAYER.RandomBot;
 
@@ -24,19 +25,14 @@ public class Tree {
     public Node selection(Node node){
         Node selected ;
         int max = 300;
-        ArrayList<ArrayList<Node>> nodes = best_worst_Nodes(node, max);
-        ArrayList<Node> bests = nodes.get(0);
-        ArrayList<Node> worsts = nodes.get(1);
-        ArrayList<Cell> moves = randomBot.getMoves(node.getState());
-        if(node.getChildren().size() < max ){
+
+        if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
+            ArrayList<Cell> moves = randomBot.getMoves(node.getState());
             selected = node.addChild(new Node(node,state,moves.get(0),moves.get(1)));
             return selected;
 
-        } else if(node.getCurrentPlayersID() == 1)
+        } else
             selected = getBest(node);
-
-        else
-            selected = getWorst(node);
 
         //TODO implement heuristics for selection instead of random selection
         return selected;
@@ -46,7 +42,7 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        node = UCT.bestNodeUTC(node);
+        node = UCB1.bestNodeUTCB(node);
         return node;
     }
 
@@ -54,29 +50,35 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        node = UCT.worstNodeUTC(node);
+        node = UCB1.bestNodeUTCB(node);
         return node;
     }
 
     public void simulation(Node node){
         simNumber=counter++;
         Node tempRoot = node;
-        while(!state.isGameOver()){
+        int a = 0;
+        while(!state.isGameOver() || a == 5){
 
             Node nextNode = selection(node);
             nextNode.color();
             nodes.add(nextNode);
             node =nextNode;
+            a++;
         }
         node.getState().updatePlayerScores();
         //TODO centerOfMass of Clusters()
         Player winner = node.getState().getWinner();
         Player loser = node.getState().getLoser();
+        int score = node.getScoreOfBlack();
 
         double win =  (winner==null || loser==null)? 0.5 : winner.getPlayerID();
 
+        //int winRate = calculate a ratio of win - lose
+        //add the ratio to the linkedlist of node that stores winners
         node.setNumberOfWins(node.getNumberOfWins() + win);
         node.setNumberOfSimulations(node.getNumberOfSimulations() + 1);
+        node.add(win);
 
         backpropagation(tempRoot, node, win);
     }
@@ -86,61 +88,12 @@ public class Tree {
 
             parent.setNumberOfWins(parent.getNumberOfWins() + win );
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
+            parent.add(win);
             node.uncolor();
             node = parent;
         }
 
 
-    }
-
-    private ArrayList<ArrayList<Node>> best_worst_Nodes(Node parent, int maxChildrenSize) {
-
-        ArrayList<Cell> ec = state.getBoard().getEmptyCells();
-        ArrayList<Node> allCombinations = new ArrayList<>();
-        for (int i = 0; i < ec.size(); i++) {
-            for (int j = i + 1; j < ec.size(); j++) {
-                allCombinations.add(new Node(parent, state, ec.get(i), ec.get(j)));
-                allCombinations.add(new Node(parent, state, ec.get(j), ec.get(i)));
-            }
-        }
-        try {
-            Collections.sort(allCombinations);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ArrayList<Node> bestN = new ArrayList<>();
-        ArrayList<Node> worstN = new ArrayList<>();
-        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
-//            System.out.println(allCombinations.get(i).eval());
-            bestN.add(allCombinations.get(i));
-            worstN.add(allCombinations.get(allCombinations.size()-1-i));
-        }
-        ArrayList<ArrayList<Node>> result = new ArrayList<>();
-        result.add(bestN);
-        result.add(worstN);
-        return result;
-    }
-    private ArrayList<Node> worstNodes(Node parent , int maxChildrenSize){
-
-        ArrayList<Cell> ec = state.getBoard().getEmptyCells();
-        ArrayList<Node> allCombinations = new ArrayList<>();
-        for(int i = 0 ; i < ec.size() ; i++){
-            for (int j = i+1; j < ec.size(); j++) {
-                allCombinations.add(new Node(parent, state, ec.get(i), ec.get(j)));
-                allCombinations.add(new Node(parent, state, ec.get(j), ec.get(i)));
-            }
-        }
-        try {
-            Collections.sort(allCombinations);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-            ArrayList<Node> bestN = new ArrayList<>();
-        for (int i = 0; i < Math.min(maxChildrenSize, allCombinations.size()); i++) {
-//            System.out.println(allCombinations.get(i).eval());
-            bestN.add(allCombinations.get(i));
-        }
-        return allCombinations;
     }
 
     public void setRoot(Node node){

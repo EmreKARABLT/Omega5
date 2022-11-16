@@ -23,7 +23,9 @@ public class RandomBot extends Player{
 
         int r1 = (int) (Math.random() * emptyCells.size());
         Cell cell1 = emptyCells.remove(r1);
-
+        if(emptyCells.isEmpty()){
+            System.out.println();
+        }
         int r2 = (int) (Math.random() * emptyCells.size());
         Cell cell2 = emptyCells.remove(r2);
 

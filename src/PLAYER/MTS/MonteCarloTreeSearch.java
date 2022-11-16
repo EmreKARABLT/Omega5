@@ -2,12 +2,13 @@ package PLAYER.MTS;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 30000;
+    private final double SEARCH_TIME = 20000;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);

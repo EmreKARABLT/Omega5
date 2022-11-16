@@ -1,4 +1,6 @@
-package PLAYER.MTS;
+package PLAYER.MTS.SELECTION_HEURISTICS;
+
+import PLAYER.MTS.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;

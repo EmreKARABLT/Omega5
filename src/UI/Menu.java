@@ -3,6 +3,7 @@ package UI;
 import GAME.State;
 import PLAYER.MonteCarlo;
 import PLAYER.HumanPlayer;
+import PLAYER.P_BOT.PBot;
 import PLAYER.Player;
 import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 
@@ -171,6 +172,7 @@ public class Menu extends JPanel{
                         JButton clickedButton = (JButton) e.getSource();
                         if(clickedButton.getText().contains("COMPUTER")){
                             blackPlayer = new MonteCarlo("Black");
+                            //blackPlayer = new PBot("Black");
                         }
                         if (buttons_player[j] != clickedButton) {
 
