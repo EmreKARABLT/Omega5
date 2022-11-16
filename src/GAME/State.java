@@ -17,6 +17,9 @@ public class State implements Cloneable{
     private int currentColor ;
     private ArrayList<Player> players = new ArrayList<>();
     int boardSize;
+    private ArrayList<Cell> whites = new ArrayList<>();
+    private ArrayList<Cell> blacks = new ArrayList<>();
+
 
     /**
      * Creates the board with given board size and as many players as desired
@@ -34,9 +37,9 @@ public class State implements Cloneable{
 //        this.table = new Table(players);
         this.board = new Board(board_size);
         restart();
-        if(playersList.get(0).isBot() && playersList.get(1).isBot()){
-            gameLoop();
-        }
+//        if(playersList.get(0).isBot() && playersList.get(1).isBot()){
+//            gameLoop();
+//        }
 
 
     }
@@ -45,22 +48,22 @@ public class State implements Cloneable{
         this.board = new Board(boardSize);
     }
 
-    public void gameLoop(){
-
-            while (!isGameOver()){
-                ArrayList<Cell> moves = getCurrentPlayer().getMoves(this);
-
-                moves.get(0).setColor(0);
-                moves.get(1).setColor(1);
-                this.getPlayers().get(0).setScore(this.getBoard().scoreOfAPlayer(0));
-                this.getPlayers().get(1).setScore(this.getBoard().scoreOfAPlayer(1));
-                this.nextTurn();
-                this.nextTurn();
-            }
-
-            resetBoard();
-
-    }
+//    public void gameLoop(){
+//
+//            while (!isGameOver()){
+//                ArrayList<Cell> moves = getCurrentPlayer().getMoves(this);
+//
+//                moves.get(0).setColor(0);
+//                moves.get(1).setColor(1);
+//                this.nextTurn();
+//                this.nextTurn();
+//            }
+//                this.getPlayers().get(0).setScore(this.getBoard().scoreOfAPlayer(0));
+//                this.getPlayers().get(1).setScore(this.getBoard().scoreOfAPlayer(1));
+//
+//            resetBoard();
+//
+//    }
     public State(State state) {
         this.numberOfPlayers = state.getPlayers().size();
         players = state.getPlayers();
@@ -151,6 +154,25 @@ public class State implements Cloneable{
             return null;
         return (players.get(1).getScore()<players.get(0).getScore()) ? players.get(1) : players.get(0);
     }
+    public void addBlack(Cell black){
+        blacks.add(black);
+    }
+    public void addWhite(Cell white){
+        whites.add(white);
+    }
+
+    public ArrayList<Cell> getBlacks() {
+        return blacks;
+    }
+
+    public ArrayList<Cell> getWhites() {
+        return whites;
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
     public void restart(){
 
         for (Player player: players) {

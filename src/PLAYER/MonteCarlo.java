@@ -21,14 +21,14 @@ public class MonteCarlo extends Player{
     @Override
     public boolean isBot(){return true;};
 
-    public ArrayList<Cell> getMoves(State state,ArrayList<Cell> whites , ArrayList<Cell> blacks){
+    public ArrayList<Cell> getMoves(State state){
 
         if(montecarlo == null){
             montecarlo = new MonteCarloTreeSearch(state);
-            return montecarlo.bestMove(state,whites,blacks);
+            return montecarlo.bestMove(state);
         }
 
-        return montecarlo.bestMove(state,whites,blacks);
+        return montecarlo.bestMove(state);
 
     }
 
