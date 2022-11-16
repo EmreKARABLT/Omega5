@@ -1,0 +1,124 @@
+<changelist name="Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]" date="1668097030333" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10/11/22, 17:16 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Grid$HexListener.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Grid$HexListener.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid$HexListener.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Hex.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Hex.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Hex.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/RuleBasedBot.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/GeneticAlgorithm.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/Node.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/Node.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Node.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu$4$1.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu$4$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$4$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/ProbabilityNaive.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/MonteCarloTreeSearch.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/GAME/Cell.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/GAME/Cell.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Cell.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/GeneticAlgorithm$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Grid$1.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Grid$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu$1.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/GAME/Board.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/GAME/Board.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Board.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Grid.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Grid.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu$2.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu$2.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$2.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu$4.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu$4.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$4.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/Node$1.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/Node$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Node$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/test.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/test.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/test.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu$3.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu$3.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$3.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/GAME/State.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/GAME/State.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/State.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/Tree.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/Tree.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Tree.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/GAME/TestBot.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/GAME/TestBot.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/TestBot.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/UI/Menu.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/UI/Menu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Omega/PLAYER/MTS/UCT.class" />
+    <option name="AFTER_PATH" value="out/production/Omega/PLAYER/MTS/UCT.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/UCT.class" />
+  </binary>
+</changelist>
