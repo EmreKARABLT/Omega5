@@ -2,6 +2,7 @@ package PLAYER.MTS;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public class MonteCarloTreeSearch {
 
     }
 
-    public ArrayList<Cell> bestMove(State state,ArrayList<Cell> whites ,ArrayList<Cell> blacks){
+    public ArrayList<Cell> bestMove(State state){
         ArrayList<Cell> move = new ArrayList<>();
-        this.tree.setRoot(state,whites,blacks);
+        this.tree.setRoot(state , state.getWhites(),state.getBlacks());
 
         double a = 0;
 

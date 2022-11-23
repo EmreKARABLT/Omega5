@@ -160,7 +160,16 @@ public class State implements Cloneable{
     public void addWhite(Cell white){
         whites.add(white);
     }
-
+    public Cell getLastWhite(){
+        if(whites.isEmpty())
+            return null;
+        return whites.get(whites.size()-1);
+    }
+    public Cell getLastBlack(){
+        if(blacks.isEmpty())
+            return null;
+        return blacks.get(blacks.size()-1);
+    }
     public ArrayList<Cell> getBlacks() {
         return blacks;
     }

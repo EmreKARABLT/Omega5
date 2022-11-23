@@ -302,7 +302,8 @@ public class Grid extends JPanel {
 
                 moves.get(0).setColor(0);
                 moves.get(1).setColor(1);
-
+                state.addWhite(moves.get(0));
+                state.addBlack(moves.get(1));
                 state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
                 state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
                 state.nextTurn();

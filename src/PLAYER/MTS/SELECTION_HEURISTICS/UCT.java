@@ -27,9 +27,9 @@ public class UCT {
 
         double W = (double) numberOfWins;
         double N = (double) numberOfSimulations;
-        double c = 0.4;
+        double c = Math.sqrt(2);
         double T = (double) numberOfSimulationsParents;
-        double UCT = W/N + c * Math.sqrt((Math.sqrt(T)/N)); //UCT = W/N + c * (log(T) / N)^0.5
+        double UCT = W/N + c * Math.sqrt((Math.log(T)/N)); //UCT = W/N + c * (log(T) / N)^0.5
 
         return UCT;
     }
@@ -46,6 +46,12 @@ public class UCT {
         ArrayList<Node> childrens = node.getChildren();
         return Collections.max(childrens, Comparator.comparing(c -> UCT(visited, c.getNumberOfWins(), c.getNumberOfSimulations())));
     }
+
+
+
+
+
+
     public static Node worstNodeUTC(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> childrens = node.getChildren();
