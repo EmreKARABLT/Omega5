@@ -1,4 +1,5 @@
 /out/
+<<<<<<< HEAD
 /.idea/
 /out/
 /.idea/
@@ -7,3 +8,6 @@
 /out/production/Omega/UI/
 /out/production/
 /out/production/
+=======
+/.idea/workspace.xml
+>>>>>>> db1ca12 (ignore)
