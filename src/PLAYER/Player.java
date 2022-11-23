@@ -49,4 +49,7 @@ public abstract class Player {
         return this.w;
     }
 
+    public Heuristics getHeuristic() {
+        return heuristic;
+    }
 }
