@@ -18,7 +18,7 @@ public class TestBot {
         ArrayList<Player> playersList = new ArrayList<>();
         playersList.add( bot1 );
         playersList.add( bot2 );
-        state = new State(1, playersList);
+        state = new State(new Board(1), playersList);
 
         for (int i = 0; i < numberOfTest; i++) {
             runTest();

@@ -1,5 +1,6 @@
 package UI;
 
+import GAME.Board;
 import GAME.State;
 import PLAYER.MonteCarlo;
 import PLAYER.HumanPlayer;
@@ -26,7 +27,8 @@ public class Menu extends JPanel{
     public JPanel panel ;
     public Player whitePlayer =new HumanPlayer("White");
     public Player blackPlayer = new HumanPlayer("Black");
-
+    public int offSetX ;
+    public int offSetY ;
     private Menu(){
         menuBoardSize();
     }
@@ -53,7 +55,8 @@ public class Menu extends JPanel{
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) (screenSize.getWidth() - 100);
         int height = (int) (screenSize.getHeight() - 100);
-
+        offSetX = width /2 ;
+        offSetY = height/2 ;
         System.out.println("Check the first comment in Board and replace the following line with the variables in Board class");
         System.out.println("private int offsetX = " + width/2  +" , " + "offsetY = " + height/2 + ";");
 
@@ -121,7 +124,7 @@ public class Menu extends JPanel{
             buttons[i].setContentAreaFilled(false);
             buttons[i].setBorderPainted(false);
 
-            if(i==0){
+            if( buttons[i].getText().equalsIgnoreCase(Integer.toString(boardSize))){
                 buttons[i].setForeground(Color.ORANGE);
             }else
                 buttons[i].setForeground(Color.RED);
@@ -171,8 +174,10 @@ public class Menu extends JPanel{
                     for (int j = 0 ; j < buttons_player.length ; j++ ) {
                         JButton clickedButton = (JButton) e.getSource();
                         if(clickedButton.getText().contains("COMPUTER")){
-                            blackPlayer = new MonteCarlo("Black");
-                            //blackPlayer = new PBot("Black");
+                            //TODO: change name to check
+                            //blackPlayer = new MonteCarlo("Black");
+                            whitePlayer = new MonteCarlo("White");
+                            blackPlayer = new HumanPlayer("Black");
                         }
                         if (buttons_player[j] != clickedButton) {
 
@@ -205,7 +210,7 @@ public class Menu extends JPanel{
                 players = new ArrayList<>();
                 players.add(whitePlayer);
                 players.add(blackPlayer);
-                Grid grid = new Grid(new State(boardSize ,players ));
+                Grid grid = new Grid(new State(new Board(boardSize,offSetX,offSetY) ,players ));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
 

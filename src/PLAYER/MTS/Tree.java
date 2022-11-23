@@ -30,6 +30,7 @@ public class Tree {
 
     public Node selection(Node node){
         Node selected ;
+        //TODO: find the ideal max
         int max = 300;
 
         if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
@@ -102,11 +103,13 @@ public class Tree {
 
         backpropagation(tempRoot, node, win);
     }
-    public void backpropagation(Node root, Node node, double win ){
+    public void backpropagation(Node root, Node node, double win){
         while (!node.equals(root) ){
             Node parent = node.getParent();
             lookUp(node, win);
+
             parent.setNumberOfWins(parent.getNumberOfWins() + win );
+
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
             parent.add(win);
             node.uncolor();
@@ -122,9 +125,9 @@ public class Tree {
     public void setRoot(State state ,ArrayList<Cell> whites , ArrayList<Cell> blacks){
         int n = whites.size();
         for(Node child : root.getChildren()){
-            if (n>=2 && child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {
+            if (n>2 && child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {
                 for (Node grandchild : child.getChildren()) {
-                    if(grandchild.getWhite().equals(whites.get(n-1)) &&grandchild.getBlack().equals(blacks.get(n-1))) {
+                    if(grandchild.getDepth()>=2 && grandchild.getWhite().equals(whites.get(n-1)) &&grandchild.getBlack().equals(blacks.get(n-1))) {
                         grandchild.color();
                         simNumber = 0;
                         counter = 0;
@@ -139,8 +142,6 @@ public class Tree {
         counter = 0;
         this.state = state;
         root = new Node(null, state, null, null );
-
-
     }
 
 }

@@ -1,52 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="almost done ( there is a but at Tree.java.30)">
-      <change afterPath="$PROJECT_DIR$/src/PLAYER/MTS/TuplePieces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Board.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/GeneticAlgorithm$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/GeneticAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid$HexListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Grid.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Hex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$4$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/MonteCarloTreeSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Node$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/ProbabilityNaive.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/RuleBasedBot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/TestBot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/Tree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/UCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22,_17_16_[Changes]/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_22__17_16__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Board.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/GeneticAlgorithm$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/GeneticAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu$4$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/RuleBasedBot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22,_16_32_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_22__16_32__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Omega.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Omega.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCT.class" afterDir="false" />
@@ -54,13 +17,15 @@
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GAME/TestBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GAME/TestBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,17 +65,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="PLAYER.GA" />
@@ -193,6 +156,7 @@
       <workItem from="1668181155068" duration="1441000" />
       <workItem from="1668387661504" duration="300000" />
       <workItem from="1668438507092" duration="1347000" />
+      <workItem from="1669201432534" duration="6260000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -336,7 +300,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java</url>
-          <line>64</line>
+          <line>65</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

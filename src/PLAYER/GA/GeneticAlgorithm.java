@@ -1,4 +1,5 @@
 package PLAYER.GA;
+import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
@@ -50,7 +51,7 @@ public class GeneticAlgorithm {
 
     public Individuals[] play(Individuals[] population){
 
-        State state = new State(3, players);
+        State state = new State(new Board(3), players);
         for (int i = 0; i < population.length; i++) {
             state.getPlayers().get(1).setW(population[i].getChromosome());
             while(!state.isGameOver()){
