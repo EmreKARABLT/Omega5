@@ -153,10 +153,10 @@ public class Menu extends JPanel {
         JPanel panel_white = new JPanel();
         panel_white.setForeground(Color.PINK);
         ButtonGroup whites = new ButtonGroup();
-        JRadioButton humanW = new JRadioButton( "Human White" );
-        JRadioButton uctW = new JRadioButton(   "UCT White"  );
-        JRadioButton usb1W = new JRadioButton(  "UCB1 White"  );
-        JRadioButton raveW = new JRadioButton(  "RAVE White"  );
+        JRadioButton humanW = new JRadioButton( "Human White" , new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton uctW = new JRadioButton(   "UCT White"  , new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton usb1W = new JRadioButton(  "UCB1 White"  , new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
         whites.add(humanW);
         whites.add(uctW);
         whites.add(usb1W);
@@ -169,10 +169,10 @@ public class Menu extends JPanel {
 
         JPanel panel_black = new JPanel();
         ButtonGroup blacks = new ButtonGroup();
-        JRadioButton humanB = new JRadioButton("Human Black");
-        JRadioButton uctB  = new JRadioButton("UCT Black");
-        JRadioButton usb1B = new JRadioButton("UCB1 Black");
-        JRadioButton raveB = new JRadioButton("RAVE Black");
+        JRadioButton humanB = new JRadioButton("Human Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton uctB  = new JRadioButton("UCT Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton usb1B = new JRadioButton("UCB1 Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
         blacks.add(humanB);
         blacks.add(uctB);
         blacks.add(usb1B);
