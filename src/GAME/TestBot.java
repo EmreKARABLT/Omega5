@@ -63,13 +63,12 @@ public class TestBot {
     public double getTiesPercentage(){return ties/(double)numberOfTest *100; }
     public static void main(String[] args) {
 
-        double start = System.currentTimeMillis();
-        Player bot1 = new RandomBot("White");
-        Player bot2 = new MonteCarlo("Black");
-        TestBot testBot = new TestBot(2,bot1,bot2);
-        System.out.println("win rate (white) :" +testBot.getWhitesWinPercentage() + " win rate (black): " + testBot.getBlacksWinPercentage());
-        System.out.println("Tie percentage " + testBot.getTiesPercentage());
-        double end = System.currentTimeMillis();
+//        double start = System.currentTimeMillis();
+//
+//        TestBot testBot = new TestBot(2,bot1,bot2);
+//        System.out.println("win rate (white) :" +testBot.getWhitesWinPercentage() + " win rate (black): " + testBot.getBlacksWinPercentage());
+//        System.out.println("Tie percentage " + testBot.getTiesPercentage());
+//        double end = System.currentTimeMillis();
 
 
     }

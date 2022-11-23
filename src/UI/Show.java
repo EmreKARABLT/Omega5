@@ -13,6 +13,7 @@ public class Show extends JFrame {
     public static Font customFont_50f = null;
     public static Font customFont_40f = null;
     public static Font customFont_25f = null;
+    public static Font customFont_20f = null;
 
     public static void main(String[] args) {
         createFonts();
@@ -26,6 +27,7 @@ public class Show extends JFrame {
             Show.customFont_50f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(50f);
             Show.customFont_40f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(35f);
             Show.customFont_25f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(25f);
+            Show.customFont_20f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
             ge.registerFont(Show.customFont_60f);

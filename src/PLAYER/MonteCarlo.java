@@ -4,6 +4,7 @@ import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.MonteCarloTreeSearch;
+import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
 
 import java.util.ArrayList;
 
@@ -11,10 +12,13 @@ public class MonteCarlo extends Player{
 
     MonteCarloTreeSearch montecarlo;
 
-    public MonteCarlo(String playerName){
+    public MonteCarlo(String playerName, Heuristics heuristics){
+        this.heuristic = heuristics;
         this.playerName = playerName;
-        this.playerID = counterForIDs % 2;
-        counterForIDs++;
+        if(playerName.contains("Black") || playerName.contains("black"))
+            this.playerID = 1  ;
+        else
+            this.playerID = 0  ;
 
     }
 

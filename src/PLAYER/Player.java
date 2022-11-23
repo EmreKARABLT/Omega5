@@ -2,6 +2,8 @@ package PLAYER;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public abstract class Player {
     int score = 0 ;
     protected int playerID ;
     public static int counterForIDs = 0;
-
+    public Heuristics heuristic = new UCT();
 
     public boolean isBot(){return false;};
     public ArrayList<Cell> getMoves(State state){
@@ -46,4 +48,11 @@ public abstract class Player {
         return this.w;
     }
 
+    public Heuristics getHeuristic() {
+        return heuristic;
+    }
+
+    public void setHeuristic(Heuristics heuristic) {
+        this.heuristic = heuristic;
+    }
 }

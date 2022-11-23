@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class UCT {
+public class UCT extends Heuristics{
 
     /**
      * This method is an Upper Confidence bound of Trees (UCT)

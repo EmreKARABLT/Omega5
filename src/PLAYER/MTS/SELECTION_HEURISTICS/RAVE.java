@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class RAVE {
+public class RAVE extends Heuristics {
 
     public final static double K = 1000;
 
