@@ -24,18 +24,19 @@ public class State implements Cloneable{
     /**
      * Creates the board with given board size and as many players as desired
      *
-     * @param board_size desired board size (3, 5 ,7)
+     * @param board desired board size (3, 5 ,7)
      */
-    public State(int board_size, ArrayList<Player> playersList) {
-        this.boardSize = board_size;
+    public State(Board board, ArrayList<Player> playersList) {
+        this.boardSize = board.getBoardSize();
 
         this.numberOfPlayers = playersList.size();
         players = playersList;
         id = idCounter++;
         this.currentPlayer = players.get(0);
+        System.out.println("currentplayer state " + players.get(0));
         this.currentColor = 0 ;
 //        this.table = new Table(players);
-        this.board = new Board(board_size);
+        this.board = board;
         restart();
 //        if(playersList.get(0).isBot() && playersList.get(1).isBot()){
 //            gameLoop();

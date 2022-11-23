@@ -33,7 +33,6 @@ public class Grid extends JPanel {
         HexListener listener = new HexListener();
         addMouseListener(listener);
         createGamingPage();
-
     }
     public void createGamingPage(){
         this.setLayout(null);
@@ -229,42 +228,31 @@ public class Grid extends JPanel {
 
         }
 
-        /**
-         * Invoked when a mouse button has been pressed on a component.
-         *
-         * @param e the event to be processed
-         */
+        public void getBotsMove(){
+            if(state.getCurrentPlayer().isBot()){
+                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if(SwingUtilities.isRightMouseButton(e)){
-                int color;
-
-                Player player = state.getCurrentPlayer();
-                color = player.getCurrentPieceID();
-                if (color == 1) {
-                    if(!lastWhites.isEmpty()) {
-                        lastWhites.get(lastWhites.size() - 1).setColor(-1);
-                        lastWhites.remove(lastWhites.size() - 1);
-                    }
-                } else if(color == 0){
-                    if(!lastBlacks.isEmpty()) {
-                        lastBlacks.get(lastBlacks.size() - 1).setColor(-1);
-                        lastBlacks.remove(lastBlacks.size() - 1);
-                    }
-                }
-                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                moves.get(0).setColor(0);
+                moves.get(1).setColor(1);
+                state.addWhite(moves.get(0));
+                state.addBlack(moves.get(1));
                 state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-                state.previousTurn();
-
+                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                state.nextTurn();
+                state.nextTurn();
 
                 updateColors();
                 updateScores();
                 updateColorBars();
                 repaint();
-                return;
             }
-            if(SwingUtilities.isLeftMouseButton(e)) {
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if(SwingUtilities.isRightMouseButton(e)){
+                getBotsMove();
+            }
+            if(SwingUtilities.isLeftMouseButton(e) && !state.getCurrentPlayer().isBot()) {
                 Cell cell = getCellFromMouseClick(e.getX(), e.getY());
                 int color;
 
@@ -287,34 +275,6 @@ public class Grid extends JPanel {
                     repaint();
                 }
             }
-        }
-
-        /**
-         * Invoked when a mouse button has been released on a component.
-         *
-         * @param e the event to be processed
-         */
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-            if(state.getCurrentPlayer().isBot()){
-                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
-
-                moves.get(0).setColor(0);
-                moves.get(1).setColor(1);
-                state.addWhite(moves.get(0));
-                state.addBlack(moves.get(1));
-                state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-                state.nextTurn();
-                state.nextTurn();
-
-                updateColors();
-                updateScores();
-                updateColorBars();
-                repaint();
-            }
-
             if(state.isGameOver()) {
                 StringBuilder s = new StringBuilder();
                 int[] scores = new int[state.getNumberOfPlayers()];
@@ -351,6 +311,17 @@ public class Grid extends JPanel {
                     Show.frame.dispose();
                 }
             }
+        }
+
+        /**
+         * Invoked when a mouse button has been released on a component.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+
 
         }
 

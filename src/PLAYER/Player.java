@@ -49,11 +49,4 @@ public abstract class Player {
         return this.w;
     }
 
-    public Heuristics getHeuristic() {
-        return heuristic;
-    }
-
-    public void setHeuristic(Heuristics heuristic) {
-        this.heuristic = heuristic;
-    }
 }

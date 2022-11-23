@@ -14,14 +14,27 @@ public class Board implements Cloneable{
     TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
          Replace the following line with the printed values on console
      */
-    private int offsetX = 718 , offsetY = 382;
+    private int offsetX, offsetY;
     public Board(int boardSize){
+        this.offsetX = 590 ;
+        this.offsetY = 310;
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
 
 //        colorTheCellsRandomly();
     }
+    public Board(int boardSize,int offsetX , int offsetY){
+
+        this.cells = new ArrayList<>();
+        this.boardSize = boardSize;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        createBoard();
+
+//        colorTheCellsRandomly();
+    }
+
     public Board(Board board){
         offsetX = Menu.WIDTH/2;
         offsetY = Menu.HEIGHT/2;

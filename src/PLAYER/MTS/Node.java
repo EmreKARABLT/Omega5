@@ -35,6 +35,9 @@ public class Node implements Comparable{
         this.parent = parent;
         this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;
         this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : ( ( this.parent.playerID + 1 ) % 2 );
+        if (this.parent == null){
+            System.out.println("playerID: "+state.getCurrentPlayer().getPlayerID());
+        }
         this.state = state;
         this.white = white;
         this.black = black;
@@ -235,17 +238,7 @@ public class Node implements Comparable{
 
 
     public static void main(String[] args) {
-        ArrayList<Player> players = new ArrayList<>(){};
-        players.add(new HumanPlayer("White") );
-        players.add(new RandomBot("Black") );
-        State state = new State(3 , players);
-
-        Cell white = state.getBoard().getCells().get(0);
-        Cell black = state.getBoard().getCells().get(1);
-        Cell black2 = state.getBoard().getCells().get(2);
-        Node node1 = new Node(null,state,white,black );
-        Node node2 = new Node(null,state,white,black );
-        System.out.println(node1.equals(node2));
+;
     }
 
 
