@@ -35,9 +35,7 @@ public class Node implements Comparable{
         this.parent = parent;
         this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;
         this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : ( ( this.parent.playerID + 1 ) % 2 );
-        if (this.parent == null){
-            System.out.println("playerID: "+state.getCurrentPlayer().getPlayerID());
-        }
+
         this.state = state;
         this.white = white;
         this.black = black;

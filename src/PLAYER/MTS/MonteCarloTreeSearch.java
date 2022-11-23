@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 20;
+    private final double SEARCH_TIME = 2000;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
@@ -33,7 +33,7 @@ public class MonteCarloTreeSearch {
 
         move.add(winner.getWhite());
         move.add(winner.getBlack());
-        System.out.println(winRateCalculator(winner));
+        // System.out.println(winRateCalculator(winner));
         return move;
     }
 
@@ -45,7 +45,7 @@ public class MonteCarloTreeSearch {
 
         return  "\n" +
                 "[Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " \n" +
-                "Heuristic = " + winner.getState().getCurrentPlayer().getHeuristic().getName() + " \n" +
+                "Heuristic = " + winner.getState().getCurrentPlayer() + " \n" +
                 "wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
                 "Win Rate = " + winRate + " %" + "\n" +
                 "Your chances of victory = " + (100 - winRate) + " %]";

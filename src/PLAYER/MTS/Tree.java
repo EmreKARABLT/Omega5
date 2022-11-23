@@ -67,7 +67,9 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        node = state.getCurrentPlayer().getHeuristic().bestNode(node);
+
+        node = UCB1.bestNodeUTCB(node);
+        //node = state.getCurrentPlayer().getHeuristic().bestNode(node);
         return node;
     }
 
@@ -75,8 +77,7 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        Heuristics h = state.getCurrentPlayer().getHeuristic();
-        node = h.worstNode(node);
+
         return node;
     }
 
@@ -96,8 +97,12 @@ public class Tree {
         Player winner = node.getState().getWinner();
         Player loser = node.getState().getLoser();
 
-        double win =  (winner==null || loser==null)? 0.5 : winner.getPlayerID();
+        double win =  0;
 
+        if(winner == null){
+            win = 0.5;
+        }else if ( winner.getPlayerID() == root.getCurrentPlayersID())
+            win = 1;
 
         node.setNumberOfWins(node.getNumberOfWins() + win);
         node.setNumberOfSimulations(node.getNumberOfSimulations() + 1);
@@ -106,12 +111,12 @@ public class Tree {
         backpropagation(tempRoot, node, win);
     }
     public void backpropagation(Node root, Node node, double win){
+
         while (!node.equals(root) ){
             Node parent = node.getParent();
             lookUp(node, win);
 
             parent.setNumberOfWins(parent.getNumberOfWins() + win );
-
             parent.setNumberOfSimulations(parent.getNumberOfSimulations() + 1);
             parent.add(win);
             node.uncolor();

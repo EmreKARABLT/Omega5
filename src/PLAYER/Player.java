@@ -16,7 +16,7 @@ public abstract class Player {
     int score = 0 ;
     protected int playerID ;
     public static int counterForIDs = 0;
-    public Heuristics heuristic = new UCB1();
+
 
     public boolean isBot(){return false;};
     public ArrayList<Cell> getMoves(State state){
@@ -49,7 +49,5 @@ public abstract class Player {
         return this.w;
     }
 
-    public Heuristics getHeuristic() {
-        return heuristic;
-    }
+
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class MonteCarlo extends Player{
 
+    private  Heuristics heuristic;
     MonteCarloTreeSearch montecarlo;
 
     public MonteCarlo(String playerName){
