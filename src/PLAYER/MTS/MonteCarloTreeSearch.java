@@ -2,14 +2,12 @@ package PLAYER.MTS;
 
 import GAME.Cell;
 import GAME.State;
-import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 20000;
+    private final double SEARCH_TIME = 20;
     Tree tree;
     public MonteCarloTreeSearch(State state){
         this.tree = new Tree(state);
@@ -32,11 +30,25 @@ public class MonteCarloTreeSearch {
         }
 
         Node winner = tree.getBest(tree.root);
-        System.out.println("UCT : " + UCT.UCT(winner.getParent().getNumberOfSimulations(),winner.getNumberOfWins(),winner.getNumberOfSimulations()));
-        System.out.println("wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations());
-        System.out.println(tree.simNumber);
+
         move.add(winner.getWhite());
         move.add(winner.getBlack());
+        System.out.println(winRateCalculator(winner));
         return move;
+    }
+
+    public String winRateCalculator(Node winner){
+        double rate = 0;
+        rate = (winner.getNumberOfWins() /  winner.getNumberOfSimulations()) * 100;
+        int decimals = 100000;
+        double winRate = (double) Math.round(rate * decimals) / decimals;
+
+        return  "\n" +
+                "[Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " \n" +
+                "Heuristic = " + winner.getState().getCurrentPlayer().getHeuristic().getName() + " \n" +
+                "wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
+                "Win Rate = " + winRate + " %" + "\n" +
+                "Your chances of victory = " + (100 - winRate) + " %]";
+
     }
 }

@@ -4,12 +4,16 @@ import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.MonteCarloTreeSearch;
+import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
 
 public class MonteCarlo extends Player{
 
     MonteCarloTreeSearch montecarlo;
+
 
     public MonteCarlo(String playerName){
         this.playerName = playerName;

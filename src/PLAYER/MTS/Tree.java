@@ -2,6 +2,7 @@ package PLAYER.MTS;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
 import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
@@ -65,7 +66,7 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        node = UCB1.bestNodeUTCB(node);
+        node = state.getCurrentPlayer().getHeuristic().bestNode(node);
         return node;
     }
 
@@ -73,7 +74,8 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-        node = UCB1.bestNodeUTCB(node);
+        Heuristics h = state.getCurrentPlayer().getHeuristic();
+        node = h.worstNode(node);
         return node;
     }
 
