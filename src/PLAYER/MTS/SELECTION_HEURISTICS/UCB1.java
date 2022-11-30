@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class UCB1 extends Heuristics{
     public String name = "UCB1";
 
-    public static double UCB1(int numberOfSimulationsParents, double numberOfWins, int numberOfSimulations, double variance) {
+    public double value(int numberOfSimulationsParents, double numberOfWins, int numberOfSimulations, double variance) {
         if (numberOfSimulations == 0) {
             return 2.147483647E9D;
         } else {
@@ -21,24 +21,38 @@ public class UCB1 extends Heuristics{
         }
     }
 
-    public static Node bestNodeUTCB(Node node) {
+    public Node bestNode(Node node) {
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> childrens = node.getChildren();
         double variance = Variance.Variance(node.getData());
         return (Node)Collections.max(childrens, Comparator.comparing((c) -> {
-            return UCB1(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
+            return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
         }));
     }
 
-    public static Node worstNodeUTC(Node node) {
+    public Node worstNode(Node node) {
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> childrens = node.getChildren();
-        double variance = Variance.Variance(node.getData());
+        double variance = Variance(node.getData());
         return (Node)Collections.min(childrens, Comparator.comparing((c) -> {
-            return UCB1(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
+            return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
         }));
     }
     public String getName() {
         return name;
+    }
+
+    public double Variance(ArrayList<Double> data){
+        double counter = 0;
+        double counter2 = 0;
+        for (int i = 0; i < data.size(); i++) {
+            counter2 = counter2 + Math.pow(data.get(i), 2);
+            if(data.get(i) == 1){
+                counter++;
+            }
+        }
+        double mean = Math.pow(counter / data.size(), 2);
+        double variance = counter2/ data.size() - mean;
+        return variance;
     }
 }

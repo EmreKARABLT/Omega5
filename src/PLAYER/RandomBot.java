@@ -38,8 +38,8 @@ public class RandomBot extends Player{
         return move;
     };
 
-    @Override
-    public String getHeuristicName() {
+
+    public String getName() {
         return "Random";
     }
 }

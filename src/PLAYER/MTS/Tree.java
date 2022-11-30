@@ -22,7 +22,9 @@ public class Tree {
     public int simNumber = 0;
     public static int counter = 0;
     public Player randomBot = new RandomBot("white");
-    public Tree(State state){
+    public Heuristics heuristics = new UCT();
+    public Tree(State state , Heuristics heuristics){
+        this.heuristics = heuristics;
         this.state = state;
         root = new Node(null, state, null, null );
         Hash_AMAF = new HashMap<>();
@@ -68,7 +70,7 @@ public class Tree {
             return null;
         }
 
-        node = UCB1.bestNodeUTCB(node);
+        node = this.heuristics.bestNode(node);
         //node = state.getCurrentPlayer().getHeuristic().bestNode(node);
         return node;
     }
@@ -88,6 +90,8 @@ public class Tree {
         while(!state.isGameOver()){
 
             Node nextNode = selection(node);
+            if(nextNode == null)
+                System.out.println();
             nextNode.color();
             nodes.add(nextNode);
             node =nextNode;

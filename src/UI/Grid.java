@@ -93,12 +93,12 @@ public class Grid extends JPanel {
     }
     public void createBotButton(){
         JButton bot_move  = new JButton("NEXT MOVE");
-        bot_move.setBounds( getBoard().getOffsetX()*2 - 220, getBoard().getOffsetY()*2 - 120 ,200 , 50);
+        bot_move.setBounds( 20, getBoard().getOffsetY()*2 - 120 ,200 , 50);
         bot_move.setFont(Show.customFont_25f);
         bot_move.setBackground(new Color(232,201,116));
         bot_move.setOpaque(true);
-        bot_move.setContentAreaFilled(true);
-        bot_move.setBorderPainted(true);
+        bot_move.setContentAreaFilled(false);
+        bot_move.setBorderPainted(false);
         bot_move.setFocusPainted(false);
         bot_move.addActionListener(new ActionListener() {
             @Override
@@ -119,6 +119,42 @@ public class Grid extends JPanel {
                     updateScores();
                     updateColorBars();
                     repaint();
+                }
+                if(state.isGameOver()) {
+                    StringBuilder s = new StringBuilder();
+                    int[] scores = new int[state.getNumberOfPlayers()];
+                    for (int i = 0; i < scores.length; i++) {
+                        Player p = state.getPlayers().get(i);
+                        scores[i] = p.getScore();
+                        s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
+                    }
+                    if(scores[0] == scores[1]){
+                        s.append("TIE");
+                    }else if(scores[0] < scores[1])
+                        s.append("BLACK WON!!");
+                    else
+                        s.append("WHITE WON!!");
+
+                    String[] playagainbuttontext = {"Play again!"};
+                    int play_again = JOptionPane.showOptionDialog(
+                            null,
+                            s,
+                            "End Frame -- Thank you for playing!",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            playagainbuttontext,
+                            0
+                    );
+
+                    //play_again==0 means you want to play again
+                    if (play_again == 0){
+                        Show.frame.setContentPane(Menu.getInstance().getPanel());
+                        Show.frame.getRootPane().revalidate();
+                    }
+                    else {
+                        Show.frame.dispose();
+                    }
                 }
             }
         });
