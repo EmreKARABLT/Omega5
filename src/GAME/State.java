@@ -33,7 +33,6 @@ public class State implements Cloneable{
         players = playersList;
         id = idCounter++;
         this.currentPlayer = players.get(0);
-        System.out.println("currentplayer state " + players.get(0));
         this.currentColor = 0 ;
 //        this.table = new Table(players);
         this.board = board;

@@ -47,7 +47,7 @@ public class RAVE extends Heuristics{
         ArrayList<Node> children = node.getChildren();
         return Collections.min(children, Comparator.comparing(c -> value(node)));
     }
-
-
-
+    public String getName() {
+        return name;
+    }
 }

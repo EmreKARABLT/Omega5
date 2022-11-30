@@ -24,6 +24,7 @@ public class MonteCarlo extends Player{
     public MonteCarlo(String playerName, Heuristics h){
         this.heuristic = h;
         this.playerName = playerName;
+        this.heuristicName = h.getName();
         if(playerName.contains("Black") || playerName.contains("black"))
             this.playerID = 1  ;
         else
@@ -65,8 +66,6 @@ public class MonteCarlo extends Player{
 
             return move;
         };
-
-
 
     }
 }

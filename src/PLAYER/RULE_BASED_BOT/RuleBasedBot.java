@@ -63,4 +63,8 @@ public class RuleBasedBot extends Player {
         return new Cell[] {hash.get(Collections.max(coeficients)), hash.get(Collections.min(coeficients))};
 
     }
+    @Override
+    public String getHeuristicName() {
+        return "Rule Based Bot";
+    }
 }

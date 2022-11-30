@@ -12,6 +12,7 @@ public abstract class Player {
     //protected static State state;
     double[] w = {Math.random(),Math.random(),Math.random(),Math.random(),Math.random()};
     protected String playerName;
+    protected String heuristicName;
     int currentPiecesID = 0 ;
     int score = 0 ;
     protected int playerID ;
@@ -27,6 +28,7 @@ public abstract class Player {
     };
 
 
+    public String getHeuristicName(){return heuristicName;}
 
     public String getPlayerName(){return playerName;};
     public int getPlayerID(){return playerID;};
