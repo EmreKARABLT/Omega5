@@ -36,8 +36,16 @@ public class Grid extends JPanel {
     }
     public void createGamingPage(){
         this.setLayout(null);
+        boolean isBotExist = false;
+        for (Player player :state.getPlayers()) {
+            createPlayerPanels(player);
+            if(player.isBot())
+                isBotExist = true;
+        }
+        System.out.println(isBotExist);
+        if(isBotExist)
+            createBotButton();
 
-        for (Player player :state.getPlayers()) { createPlayerPanels(player); }
         updateColorBars();
         super.add(mainMenuButton());
         repaint();
@@ -63,22 +71,58 @@ public class Grid extends JPanel {
         int x = 0 , y  = 0;
         if(player.getPlayerID() == 0){ x = 20                              ;  y = 20                              ;}
         if(player.getPlayerID() == 1){ x = getBoard().getOffsetX()*2 - 220 ;  y = 20                              ;}
-        if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*20 - 120;}
-        if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*20 - 120;}
+        if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*2 - 120;}
+        if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*2 - 120;}
+
+        
 
         name.setBounds( x+20,y,200,50);
         score.setBounds(x+20,y+25,200,50);
         colorBar.setBounds(x+5,y+13,7,50);
-
+        
         super.add(name);
         super.add(score);
         super.add(colorBar);
+        
 
 //        panel.setBackground();
 
         colorBars.add(colorBar);
         names.add(name);
         scores.add(score);
+    }
+    public void createBotButton(){
+        JButton bot_move  = new JButton("NEXT MOVE");
+        bot_move.setBounds( getBoard().getOffsetX()*2 - 220, getBoard().getOffsetY()*2 - 120 ,200 , 50);
+        bot_move.setFont(Show.customFont_25f);
+        bot_move.setBackground(new Color(232,201,116));
+        bot_move.setOpaque(true);
+        bot_move.setContentAreaFilled(true);
+        bot_move.setBorderPainted(true);
+        bot_move.setFocusPainted(false);
+        bot_move.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(state.getCurrentPlayer().isBot()){
+                    ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+
+                    moves.get(0).setColor(0);
+                    moves.get(1).setColor(1);
+                    state.addWhite(moves.get(0));
+                    state.addBlack(moves.get(1));
+                    state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+                    state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+                    state.nextTurn();
+                    state.nextTurn();
+
+                    updateColors();
+                    updateScores();
+                    updateColorBars();
+                    repaint();
+                }
+            }
+        });
+        super.add(bot_move);
     }
 
     public LinkedList<Hex> createHexagons(){
@@ -229,23 +273,7 @@ public class Grid extends JPanel {
         }
 
         public void getBotsMove(){
-            if(state.getCurrentPlayer().isBot()){
-                ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
 
-                moves.get(0).setColor(0);
-                moves.get(1).setColor(1);
-                state.addWhite(moves.get(0));
-                state.addBlack(moves.get(1));
-                state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-                state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-                state.nextTurn();
-                state.nextTurn();
-
-                updateColors();
-                updateScores();
-                updateColorBars();
-                repaint();
-            }
         }
         @Override
         public void mousePressed(MouseEvent e) {
