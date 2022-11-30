@@ -4,50 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="almost done ( there is a but at Tree.java.30)">
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="end wenesday bugs to solve: UCT UCB1 now are not working properly">
+      <change afterPath="$PROJECT_DIR$/src/LA_BUNDES_PREMIER_LIG_MLS_ONE/Calendar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Clusters.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/Clusters.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/State.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/GAME/TestBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/GeneticAlgorithm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/HeapSort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/HeapSort.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/Individuals.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/GA/Individuals.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/HumanPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/HumanPlayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/MonteCarloTreeSearch.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/MCRAVE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/MCRAVE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/ProbabilityNaive.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/UCT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/Variance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/SELECTION_HEURISTICS/Variance.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/Tree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MTS/test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo$RuleBasedBot2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo$RuleBasedBot2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/MonteCarlo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/NN.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/NN.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/P_BOT/PBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/P_BOT/PBot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/RuleBasedBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RULE_BASED_BOT/Rules.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/PLAYER/RandomBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/PLAYER/RandomBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid$HexListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Grid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Helpers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Helpers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Hex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Show.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Omega/UI/Show.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarloTreeSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/ProbabilityNaive.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LA_BUNDES_PREMIER_LIG_MLS_ONE/test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,15 +65,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
-  }
-}]]></component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="PLAYER.GA" />
@@ -141,8 +110,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GAME.TestBot" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GAME.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PLAYER.MTS.test" />
+      <option name="MAIN_CLASS_NAME" value="LA_BUNDES_PREMIER_LIG_MLS_ONE.test" />
       <module name="Omega" />
       <extension name="coverage">
         <pattern>
@@ -157,10 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Show" />
+        <item itemvalue="Application.TestBot" />
         <item itemvalue="Application.test" />
         <item itemvalue="Application.GeneticAlgorithm" />
         <item itemvalue="Application.Node" />
-        <item itemvalue="Application.Show" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +161,6 @@
       <workItem from="1668387661504" duration="300000" />
       <workItem from="1668438507092" duration="1347000" />
       <workItem from="1669201432534" duration="6260000" />
-      <workItem from="1669214753922" duration="953000" />
     </task>
     <task id="LOCAL-00001" summary="MCST implementation first attempt :)">
       <created>1667396595168</created>
@@ -272,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668613663455</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="end wenesday bugs to solve: UCT UCB1 now are not working properly">
+      <created>1669213261519</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669213261519</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +300,8 @@
     <MESSAGE value="bunchofchanges" />
     <MESSAGE value="Some changes on selection method" />
     <MESSAGE value="almost done ( there is a but at Tree.java.30)" />
-    <option name="LAST_COMMIT_MESSAGE" value="almost done ( there is a but at Tree.java.30)" />
+    <MESSAGE value="end wenesday bugs to solve: UCT UCB1 now are not working properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="end wenesday bugs to solve: UCT UCB1 now are not working properly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -326,48 +315,11 @@
           <line>65</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PLAYER/RandomBot.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>218</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>220</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>221</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>254</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/Menu.java</url>
-          <line>253</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="depth" />
-        <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="numberOfSimulations" />
-        <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="numberOfWins" />
+        <PinnedItemInfo parentTag="PLAYER.MTS.Node" memberName="playerID" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>
@@ -375,5 +327,10 @@
         <watch expression="node.getWhite().getId()==white.getId()" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Omega5$TestBot.ic" NAME="TestBot Coverage Results" MODIFIED="1669217737261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>GAME.*</FILTER>
+    </SUITE>
   </component>
 </project>
