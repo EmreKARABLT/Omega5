@@ -26,16 +26,4 @@ public class Calendar {
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        Player[] bots =
-                {new MonteCarlo("Black", new UCT()),
-                        new MonteCarlo("Black", new UCB1()),
-                        new MonteCarlo("Black", new RAVE()),
-                        new RuleBasedBot("Black"),
-                        new PBot("Black"),
-                        new RandomBot("Black")};
-
-        System.out.println(getPermutation(bots));
-    }
 }
