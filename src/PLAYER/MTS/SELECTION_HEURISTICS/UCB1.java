@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class UCB1 {
+public class UCB1 extends Heuristics{
+    public String name = "UCB1";
 
     public static double UCB1(int numberOfSimulationsParents, double numberOfWins, int numberOfSimulations, double variance) {
         if (numberOfSimulations == 0) {
@@ -36,5 +37,8 @@ public class UCB1 {
         return (Node)Collections.min(childrens, Comparator.comparing((c) -> {
             return UCB1(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
         }));
+    }
+    public String getName() {
+        return name;
     }
 }

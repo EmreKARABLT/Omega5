@@ -11,5 +11,5 @@ public abstract class Heuristics {
 
     public Node worstNode(Node node){return null;}
 
-    public String getName() {return null;}
+    public String getName() {return name;}
 }
