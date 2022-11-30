@@ -17,6 +17,7 @@ public abstract class Player {
     int score = 0 ;
     protected int playerID ;
     public static int counterForIDs = 0;
+    public Heuristics heuristics = null;
 
 
     public boolean isBot(){return false;};
@@ -28,7 +29,9 @@ public abstract class Player {
     };
 
 
-    public String getHeuristicName(){return heuristicName;}
+    public Heuristics getHeuristics() {
+        return heuristics;
+    }
 
     public String getPlayerName(){return playerName;};
     public int getPlayerID(){return playerID;};

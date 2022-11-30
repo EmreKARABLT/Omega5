@@ -45,9 +45,4 @@ public class PBot extends Player {
 
         return move;
     };
-
-    @Override
-    public String getHeuristicName() {
-        return "P-Bot";
-    }
 }

@@ -5,7 +5,7 @@ import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
-import PLAYER.MonteCarlo;
+import PLAYER.MTS.MonteCarlo;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
 
