@@ -9,15 +9,16 @@ public class Calendar {
     public static ArrayList<ArrayList<Player>> getPermutation(Player[] whitePlayers, Player[] blackPlayers) {
         ArrayList<ArrayList<Player>> pairing = new ArrayList<>();
 
-        for (Player white : whitePlayers) {
+        for (int i = 0; i < whitePlayers.length; i++) {
 
-            for (Player black : blackPlayers) {
+            for (int j = 0; j < blackPlayers.length; j++) {
 
-                ArrayList<Player> tmp = new ArrayList<>();
-                tmp.add(white);
-                tmp.add(black);
-                pairing.add(tmp);
-
+                if (i != j) {
+                    ArrayList<Player> tmp = new ArrayList<>();
+                    tmp.add(whitePlayers[i]);
+                    tmp.add(blackPlayers[j]);
+                    pairing.add(tmp);
+                }
             }
         }
         return pairing;
