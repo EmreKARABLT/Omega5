@@ -3,8 +3,7 @@ package GAME;
 import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
-import PLAYER.MonteCarlo;
-import PLAYER.P_BOT.PBot;
+import PLAYER.MTS.MonteCarlo;
 import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 import PLAYER.RandomBot;
 import PLAYER.Player;
@@ -96,8 +95,8 @@ public class TestBot {
         double start = System.currentTimeMillis();
         for (Player bot1 : whiteBots) {
             for (Player bot2 : blackBots) {
-                String bot1Name = "White "+bot1.getHeuristicName();
-                String bot2Name = "Black "+bot2.getHeuristicName();
+                String bot1Name = "White "+bot1.getHeuristics().getName();
+                String bot2Name = "Black "+bot2.getHeuristics().getName();
                 System.out.println("START MATCH : "+ bot1Name +" vs "
                         + bot2Name +"\n--------------------------");
 
