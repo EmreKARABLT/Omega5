@@ -13,8 +13,8 @@ public abstract class Player {
     double[] w = {Math.random(),Math.random(),Math.random(),Math.random(),Math.random()};
     protected String playerName;
     protected String heuristicName;
-    int currentPiecesID = 0 ;
-    int score = 0 ;
+    public int currentPiecesID = 0 ;
+    public int score = 0 ;
     protected int playerID ;
     public static int counterForIDs = 0;
     public Heuristics heuristics = null;

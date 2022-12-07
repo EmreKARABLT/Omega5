@@ -3,26 +3,24 @@ package PLAYER.MTS;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
-import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 import PLAYER.Player;
 import PLAYER.RandomBot;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
-public class Tree {
+public class Tree implements Runnable {
     Node root;
-    State state ;
+    private State state ;
     private final Boolean ACTIONS = true;
     ArrayList<Node> nodes = new ArrayList<>();
     HashMap<TuplePieces, Node> Hash_AMAF;
     public int simNumber = 0;
     public static int counter = 0;
     public Player randomBot = new RandomBot("white");
-    public Heuristics heuristics = new UCT();
+    public Heuristics heuristics ;
+
+
     public Tree(State state , Heuristics heuristics){
         this.heuristics = heuristics;
         this.state = state;
@@ -34,7 +32,7 @@ public class Tree {
     public Node selection(Node node){
         Node selected ;
         //TODO: find the ideal max
-        int max = 300;
+        int max = 500 ;
 
         if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
             ArrayList<Cell> moves = randomBot.getMoves(node.getState());
@@ -69,9 +67,7 @@ public class Tree {
         if(node.getChildren().size() == 0){
             return null;
         }
-
         node = this.heuristics.bestNode(node);
-        //node = state.getCurrentPlayer().getHeuristic().bestNode(node);
         return node;
     }
 
@@ -83,7 +79,8 @@ public class Tree {
         return node;
     }
 
-    public void simulation(Node node){
+    public void simulation(){
+        Node node = root;
         simNumber=counter++;
         Node tempRoot = node;
 
@@ -155,4 +152,8 @@ public class Tree {
         root = new Node(null, state, null, null );
     }
 
+    @Override
+    public void run() {
+        simulation();
+    }
 }

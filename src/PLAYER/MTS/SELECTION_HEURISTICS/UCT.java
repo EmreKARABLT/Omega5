@@ -40,13 +40,13 @@ public class UCT extends Heuristics{
     public Node bestNode(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> children = node.getChildren();
-        return Collections.max(children, Comparator.comparing(c -> value(node)));
+        return Collections.max(children, Comparator.comparing(c -> value(c)));
     }
 
     public Node worstNode(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> children = node.getChildren();
-        return Collections.min(children, Comparator.comparing(c -> value(node)));
+        return Collections.min(children, Comparator.comparing(c -> value(c)));
     }
     public String getName() {
         return name;

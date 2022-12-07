@@ -32,6 +32,7 @@ public class Node implements Comparable{
     private ArrayList<Double> data = new ArrayList<>();
 
     public Node(Node parent,State state,Cell white , Cell black){
+
         this.parent = parent;
         this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;
         this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : ( ( this.parent.playerID + 1 ) % 2 );
@@ -234,10 +235,6 @@ public class Node implements Comparable{
         return "Node Depth " + depth +"  ||  w:" + ((white==null)? "null" :white.getId()) + " - b :" + ((black==null) ? "null"  :black.getId()) ;
     }
 
-
-    public static void main(String[] args) {
-;
-    }
 
 
 }

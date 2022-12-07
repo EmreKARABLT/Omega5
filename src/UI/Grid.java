@@ -97,7 +97,7 @@ public class Grid extends JPanel {
         bot_move.setFont(Show.customFont_25f);
         bot_move.setBackground(new Color(232,201,116));
         bot_move.setOpaque(true);
-        bot_move.setContentAreaFilled(false);
+        bot_move.setContentAreaFilled(true);
         bot_move.setBorderPainted(false);
         bot_move.setFocusPainted(false);
         bot_move.addActionListener(new ActionListener() {

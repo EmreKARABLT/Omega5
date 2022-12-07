@@ -7,9 +7,8 @@ import UI.Grid;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class State implements Cloneable{
+public class State {
     private int id ;
-    private static int idCounter = 0;
     private Board board;
     private int numberOfPlayers ;
     private int numberOfAIPlayers = 0;
@@ -31,7 +30,7 @@ public class State implements Cloneable{
 
         this.numberOfPlayers = playersList.size();
         players = playersList;
-        id = idCounter++;
+
         this.currentPlayer = players.get(0);
         this.currentColor = 0 ;
 //        this.table = new Table(players);
@@ -67,7 +66,6 @@ public class State implements Cloneable{
     public State(State state) {
         this.numberOfPlayers = state.getPlayers().size();
         players = state.getPlayers();
-        id = idCounter++;
         this.currentPlayer = state.getCurrentPlayer();
         this.currentColor = state.getCurrentColor();
         this.board = new Board(state.getBoard());
@@ -221,4 +219,5 @@ public class State implements Cloneable{
     public String toString() {
         return id + "";
     }
+
 }
