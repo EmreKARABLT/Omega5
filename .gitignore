@@ -1,5 +1,6 @@
 /out/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /.idea/
 /out/
 /.idea/
@@ -11,3 +12,6 @@
 =======
 /.idea/workspace.xml
 >>>>>>> db1ca12 (ignore)
+=======
+/.idea/workspace.xml
+>>>>>>> origin/master
