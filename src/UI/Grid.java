@@ -258,7 +258,7 @@ public class Grid extends JPanel {
     }
     public JButton mainMenuButton(){
         JButton backButton = new JButton("<");
-        backButton.setFont(Show.customFont_40f);
+        backButton.setFont(Show.customFont_25f);
         backButton.setBounds( 10 , getBoard().getOffsetY()-60,60, 60);
 
         backButton.setOpaque(false);

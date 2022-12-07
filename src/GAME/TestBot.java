@@ -25,6 +25,7 @@ public class TestBot implements Runnable {
         playersList.add(bot1);
         playersList.add(bot2);
         state = new State(new Board(3), playersList);
+        run();
     }
 
     @Override
@@ -127,9 +128,10 @@ public class TestBot implements Runnable {
         // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
+
         TestBot testBot = new TestBot(100,white,black);
-        testBot.run();
-        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage());
+        TestBot testBot1 = new TestBot(100,white,black);
+        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage() + " " + testBot1.getWhitesWinPercentage());
 
 
 
@@ -168,42 +170,6 @@ public class TestBot implements Runnable {
 //        }
 //        System.out.println(samples);
 //        System.out.println((numberOfSamplesInCI*1.0)/samples.size());
-
-
-//        Player[] whiteBots =
-//                {new MonteCarlo("White", new UCT()),
-//                        new MonteCarlo("White", new UCB1()),
-//                        new MonteCarlo("White", new RAVE()),
-//                        new RuleBasedBot("White"),
-//                        //new PBot("White"),
-//                        new RandomBot("White")};
-//
-//        Player[] blackBots =
-//                {new MonteCarlo("Black", new UCT()),
-//                        new MonteCarlo("Black", new UCB1()),
-//                        new MonteCarlo("Black", new RAVE()),
-//                        new RuleBasedBot("Black"),
-//                        //new PBot("Black"),
-//                        new RandomBot("Black")};
-//
-//        double start = System.currentTimeMillis();
-//        for (Player bot1 : whiteBots) {
-//            for (Player bot2 : blackBots) {
-//                String bot1Name = "White "+bot1.getHeuristics().getName();
-//                String bot2Name = "Black "+bot2.getHeuristics().getName();
-//                System.out.println("START MATCH : "+ bot1Name +" vs "
-//                        + bot2Name +"\n--------------------------");
-//
-//                TestBot testBot = new TestBot(2, bot1, bot2);
-//
-//                System.out.println("win rate : "+ bot1Name +" = "+ testBot.getWhitesWinPercentage()
-//                        + "\nwin rate: "+ bot2Name + " = " +testBot.getBlacksWinPercentage());
-//                System.out.println("Tie percentage: " + testBot.getTiesPercentage());
-//                System.out.println("END MATCH \n--------------------------");
-//            }
-//        }
-//        double end = System.currentTimeMillis();
-
 
     }
 }
