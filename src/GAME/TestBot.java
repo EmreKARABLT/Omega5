@@ -130,8 +130,8 @@ public class TestBot implements Runnable {
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
 
         TestBot testBot = new TestBot(100,white,black);
-        TestBot testBot1 = new TestBot(100,white,black);
-        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage() + " " + testBot1.getWhitesWinPercentage());
+
+        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage() );
 
 
 
