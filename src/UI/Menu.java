@@ -61,8 +61,6 @@ public class Menu extends JPanel {
         int height = (int) (screenSize.getHeight() - 100);
         offSetX = width / 2;
         offSetY = height / 2;
-        System.out.println("Check the first comment in Board and replace the following line with the variables in Board class");
-        System.out.println("private int offsetX = " + width / 2 + " , " + "offsetY = " + height / 2 + ";");
 
         //LOADING BACKGROUND
         BufferedImage originalImage = null;
@@ -198,7 +196,7 @@ public class Menu extends JPanel {
                 radioButton.setForeground(Color.ORANGE);
             else
                 radioButton.setForeground(Color.RED);
-
+            radioButton.setFocusPainted(false);
             radioButton.setOpaque(false);
             radioButton.setFont(Show.customFont_20f);
             radioButton.addActionListener(new ActionListener() {
@@ -238,7 +236,7 @@ public class Menu extends JPanel {
         JButton playButton = new JButton("PLAY");
         playButton.setBounds((width - 300) / 2, (height - size_l1.height) / 10 * 8, 300, 80);
 
-        playButton.setFont(Show.customFont_60f);
+        playButton.setFont(Show.customFont_50f);
         playButton.setOpaque(false);
         playButton.setContentAreaFilled(false);
         playButton.setBorderPainted(false);
@@ -254,6 +252,7 @@ public class Menu extends JPanel {
                 Grid grid = new Grid(new State(new Board(boardSize, offSetX, offSetY), players));
                 Show.frame.setContentPane(grid);
                 Show.frame.revalidate();
+
 
             }
         });

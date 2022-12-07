@@ -1,16 +1,15 @@
 package GAME;
 
-import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 import PLAYER.MTS.MonteCarlo;
-import PLAYER.RULE_BASED_BOT.RuleBasedBot;
+import PLAYER.MTS.SELECTION_HEURISTICS.Pnaive;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
+import PLAYER.RULE_BASED_BOT.GeneticRuleBasedBot;
 import PLAYER.RandomBot;
 import PLAYER.Player;
 
 import java.util.ArrayList;
 
-public class TestBot {
+public class TestBot implements Runnable {
     private final int numberOfTest;
     private final State state;
     private int numberOfGamesWhiteWon = 0;
@@ -26,16 +25,17 @@ public class TestBot {
         playersList.add(bot1);
         playersList.add(bot2);
         state = new State(new Board(3), playersList);
+    }
 
+    @Override
+    public void run() {
         for (int i = 0; i < numberOfTest; i++) {
             runTest();
-            System.out.println("White : " + state.getPlayers().get(0).getScore() + " Black : " + state.getPlayers().get(1).getScore());
+//            System.out.println("White : " + state.getPlayers().get(0).getScore() + " Black : " + state.getPlayers().get(1).getScore());
             //in this part board will be full and any data can be derived
             // state.getBoard().getCells();// with this line you can get the cells of the board (END GAME )
             state.restart();
-            bot2.reset();
         }
-
     }
 
     public void runTest() {
@@ -72,7 +72,8 @@ public class TestBot {
 
 
     }
-
+    public int getNumberOfGamesWhiteWon(){  return numberOfGamesWhiteWon; }
+    public int getNumberOfGamesBlackWon(){  return numberOfGamesBlackWon; }
     public double getWhitesWinPercentage() {
         return numberOfGamesWhiteWon / (double) numberOfTest * 100;
     }
@@ -118,6 +119,56 @@ public class TestBot {
     }
 
     public static void main(String[] args) {
+        Player white = new MonteCarlo("white", new Pnaive());
+        Player black = new GeneticRuleBasedBot("black");
+        // Random               ->  new RandomBot( "white"/"black")
+        // RuleBased            ->  new RuleBasedBot( "white"/"black")
+        // MonteCarlo PNaive    ->  new MonteCarlo( "white"/"black" , new Pnaive())
+        // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
+        // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
+        // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
+        TestBot testBot = new TestBot(100,white,black);
+        testBot.run();
+        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage());
+
+
+
+//        // Confidence level
+//        double confidenceLevel = 0.95;
+//
+//        // Calculate mean and sample variance
+//        double mean = 0.0;
+//        double variance = 0.0;
+//        for (double sample : samples) {
+//            mean += sample;
+//            variance += Math.pow(sample - mean, 2);
+//
+//        }
+//        mean /= samples.size();
+//        variance /= samples.size() - 1;
+//        System.out.println("Mean : " + mean + " Variance : " + variance);
+//
+//// Calculate standard deviation
+//        double stdDev = Math.sqrt(variance);
+//
+//// Calculate the critical value
+//        double criticalValue = inverseStudentT(confidenceLevel, samples.size() - 1);
+//
+//// Calculate the confidence interval
+//        double marginOfError = criticalValue * stdDev / Math.sqrt(samples.size());
+//        double lowerBound = mean - marginOfError;
+//        double upperBound = mean + marginOfError;
+//
+//// Print the confidence interval
+//        System.out.println("Confidence interval: [" + lowerBound + ", " + upperBound + "]");
+//        int numberOfSamplesInCI = 0 ;
+//        for(double sample : samples){
+//            if(sample>= lowerBound && sample<=upperBound)
+//                numberOfSamplesInCI++;
+//        }
+//        System.out.println(samples);
+//        System.out.println((numberOfSamplesInCI*1.0)/samples.size());
+
 
 //        Player[] whiteBots =
 //                {new MonteCarlo("White", new UCT()),
@@ -152,47 +203,6 @@ public class TestBot {
 //            }
 //        }
 //        double end = System.currentTimeMillis();
-    Player randomBot = new RandomBot("white");
-    Player montecarlo = new MonteCarlo("black" , new UCT());
-    TestBot testBot = new TestBot(1000,randomBot,montecarlo);
-
-        // Sample set
-        ArrayList<Double> samples = testBot.ratios;
-
-// Confidence level
-        double confidenceLevel = 0.95;
-
-// Calculate mean and sample variance
-        double mean = 0.0;
-        double variance = 0.0;
-        for (double sample : samples) {
-            mean += sample;
-            variance += Math.pow(sample - mean, 2);
-        }
-        mean /= samples.size();
-        variance /= samples.size() - 1;
-
-// Calculate standard deviation
-        double stdDev = Math.sqrt(variance);
-
-// Calculate the critical value
-        double criticalValue = inverseStudentT(confidenceLevel, samples.size() - 1);
-
-// Calculate the confidence interval
-        double marginOfError = criticalValue * stdDev / Math.sqrt(samples.size());
-        double lowerBound = mean - marginOfError;
-        double upperBound = mean + marginOfError;
-
-// Print the confidence interval
-        System.out.println("Confidence interval: [" + lowerBound + ", " + upperBound + "]");
-        int numberOfSamplesInCI = 0 ;
-        for(double sample : samples){
-            if(sample>= lowerBound && sample<=upperBound)
-                numberOfSamplesInCI++;
-        }
-        System.out.println(testBot.getRatios());
-        System.out.println(numberOfSamplesInCI/samples.size());
-
 
 
     }

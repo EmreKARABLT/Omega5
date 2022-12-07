@@ -1,7 +1,6 @@
 package GAME;
 
 import PLAYER.Player;
-import UI.Grid;
 
 
 import java.util.ArrayList;

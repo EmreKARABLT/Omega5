@@ -3,7 +3,6 @@ package PLAYER.MTS;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 import PLAYER.Player;
 import PLAYER.RandomBot;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 
 public class Tree implements Runnable {
     Node root;
-    private State state ;
+    private State state;
     private final Boolean ACTIONS = true;
     ArrayList<Node> nodes = new ArrayList<>();
     HashMap<TuplePieces, Node> Hash_AMAF;
@@ -21,7 +20,7 @@ public class Tree implements Runnable {
     public Heuristics heuristics ;
 
 
-    public Tree(State state , Heuristics heuristics){
+    public Tree(State state, Heuristics heuristics){
         this.heuristics = heuristics;
         this.state = state;
         root = new Node(null, state, null, null );
@@ -36,7 +35,7 @@ public class Tree implements Runnable {
 
         if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
             ArrayList<Cell> moves = randomBot.getMoves(node.getState());
-            Node amafNode = new Node(node,state,moves.get(0),moves.get(1));
+            Node amafNode = new Node(node, state,moves.get(0),moves.get(1));
             TuplePieces action = new TuplePieces(moves.get(0),moves.get(1));
             selected = node.addChild(amafNode);
             createTableAMAF(action, amafNode);
@@ -130,7 +129,7 @@ public class Tree implements Runnable {
 
         //TODO after assigning the root an existing node , we may want to set the pieces to null
     }
-    public void setRoot(State state ,ArrayList<Cell> whites , ArrayList<Cell> blacks){
+    public void setRoot(State state, ArrayList<Cell> whites , ArrayList<Cell> blacks){
         int n = whites.size();
         for(Node child : root.getChildren()){
             if (n>2 && child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {

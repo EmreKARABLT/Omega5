@@ -11,7 +11,7 @@ public class MonteCarlo extends Player{
 
 
 
-    private final double SEARCH_TIME = 100;
+    private final double SEARCH_TIME = 1000;
     Tree tree = null;
     public static double winProb = 0;
 
@@ -34,9 +34,9 @@ public class MonteCarlo extends Player{
     public ArrayList<Cell> getMoves(State state){
         ArrayList<Cell> move = new ArrayList<>();
         if(tree == null ){
-            this.tree = new Tree(state , this.heuristics);
+            this.tree = new Tree(state, this.heuristics);
         }else
-            this.tree.setRoot(state , state.getWhites(),state.getBlacks());
+            this.tree.setRoot(state, state.getWhites(), state.getBlacks());
 
         double a = 0;
 

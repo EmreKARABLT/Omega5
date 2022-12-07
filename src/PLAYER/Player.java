@@ -3,8 +3,6 @@ package PLAYER;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public abstract class Player {
     public ArrayList<Cell> getMoves(State state){
         return null;
     };
-    public ArrayList<Cell> getMoves(State state,ArrayList<Cell> whites ,ArrayList<Cell> blacks){
+    public ArrayList<Cell> getMoves(State state, ArrayList<Cell> whites , ArrayList<Cell> blacks){
         return null;
     };
 

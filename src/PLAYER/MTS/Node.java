@@ -3,16 +3,12 @@ package PLAYER.MTS;
 import GAME.Board;
 import GAME.Cell;
 import GAME.State;
-import PLAYER.HumanPlayer;
-import PLAYER.Player;
 import PLAYER.RULE_BASED_BOT.Rules;
-import PLAYER.RandomBot;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Node implements Comparable{
-    //TODO store the score of players (white , black )
 
     private Node parent;
     private State state;
@@ -31,7 +27,7 @@ public class Node implements Comparable{
     private ArrayList<Integer> groupsOfBlack;
     private ArrayList<Double> data = new ArrayList<>();
 
-    public Node(Node parent,State state,Cell white , Cell black){
+    public Node(Node parent, State state, Cell white , Cell black){
 
         this.parent = parent;
         this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;

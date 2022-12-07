@@ -23,29 +23,26 @@ public class Grid extends JPanel {
     private ArrayList<JLabel> scores = new ArrayList<>();
     private ArrayList<JLabel> names = new ArrayList<>();
     private ArrayList<JPanel> colorBars = new ArrayList<>();
-    private ArrayList<Cell> lastWhites = new ArrayList<>();
-    private ArrayList<Cell> lastBlacks = new ArrayList<>();
+    private boolean started = false;
 
     public Grid(State state){
         this.state = state;
         this.setOfCells = state.getBoard().getCells();
         this.setOfHexagons = createHexagons();
         HexListener listener = new HexListener();
-        addMouseListener(listener);
         createGamingPage();
+        addMouseListener(listener);
     }
     public void createGamingPage(){
         this.setLayout(null);
         boolean isBotExist = false;
-        for (Player player :state.getPlayers()) {
+        for (Player player : state.getPlayers()) {
             createPlayerPanels(player);
             if(player.isBot())
                 isBotExist = true;
         }
-        System.out.println(isBotExist);
         if(isBotExist)
             createBotButton();
-
         updateColorBars();
         super.add(mainMenuButton());
         repaint();
@@ -92,73 +89,90 @@ public class Grid extends JPanel {
         scores.add(score);
     }
     public void createBotButton(){
-        JButton bot_move  = new JButton("NEXT MOVE");
-        bot_move.setBounds( 20, getBoard().getOffsetY()*2 - 120 ,200 , 50);
-        bot_move.setFont(Show.customFont_25f);
-        bot_move.setBackground(new Color(232,201,116));
+        JButton bot_move  = new JButton("Start Playing");
+        bot_move.setBounds(1, 1 ,getBoard().getOffsetX()*2 , getBoard().getOffsetY()*2);
+        bot_move.setFont(Show.customFont_60f);
+        bot_move.setBackground(new Color(0,0,0,125));
+        bot_move.setForeground(new Color(0x000000));
         bot_move.setOpaque(true);
         bot_move.setContentAreaFilled(true);
         bot_move.setBorderPainted(false);
         bot_move.setFocusPainted(false);
-        bot_move.addActionListener(new ActionListener() {
+        bot_move.addMouseListener(new MouseAdapter(){
+
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if(state.getCurrentPlayer().isBot()){
-                    ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
-
-                    moves.get(0).setColor(0);
-                    moves.get(1).setColor(1);
-                    state.addWhite(moves.get(0));
-                    state.addBlack(moves.get(1));
-                    state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-                    state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-                    state.nextTurn();
-                    state.nextTurn();
-
-                    updateColors();
-                    updateScores();
-                    updateColorBars();
-                    repaint();
-                }
-                if(state.isGameOver()) {
-                    StringBuilder s = new StringBuilder();
-                    int[] scores = new int[state.getNumberOfPlayers()];
-                    for (int i = 0; i < scores.length; i++) {
-                        Player p = state.getPlayers().get(i);
-                        scores[i] = p.getScore();
-                        s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
-                    }
-                    if(scores[0] == scores[1]){
-                        s.append("TIE");
-                    }else if(scores[0] < scores[1])
-                        s.append("BLACK WON!!");
-                    else
-                        s.append("WHITE WON!!");
-
-                    String[] playagainbuttontext = {"Play again!"};
-                    int play_again = JOptionPane.showOptionDialog(
-                            null,
-                            s,
-                            "End Frame -- Thank you for playing!",
-                            JOptionPane.DEFAULT_OPTION,
-                            JOptionPane.PLAIN_MESSAGE,
-                            null,
-                            playagainbuttontext,
-                            0
-                    );
-
-                    //play_again==0 means you want to play again
-                    if (play_again == 0){
-                        Show.frame.setContentPane(Menu.getInstance().getPanel());
-                        Show.frame.getRootPane().revalidate();
-                    }
-                    else {
-                        Show.frame.dispose();
-                    }
-                }
+            public void mousePressed(MouseEvent e) {
+                bot_move.setContentAreaFilled(false);
+                bot_move.setVisible(false);
+                started = true;
+                Grid.super.revalidate();
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                getBotsMove();
+
+            }
+
         });
+
         super.add(bot_move);
+    }
+    public void getBotsMove(){
+        if(state.getCurrentPlayer().isBot() && started){
+            ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+
+            moves.get(0).setColor(0);
+            moves.get(1).setColor(1);
+            state.addWhite(moves.get(0));
+            state.addBlack(moves.get(1));
+            state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+            state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+            state.nextTurn();
+            state.nextTurn();
+
+            updateColors();
+            updateScores();
+            updateColorBars();
+            repaint();
+        }
+    }
+    public void endFrame(){
+        StringBuilder s = new StringBuilder();
+        int[] scores = new int[state.getNumberOfPlayers()];
+        for (int i = 0; i < scores.length; i++) {
+            Player p = state.getPlayers().get(i);
+            scores[i] = p.getScore();
+            s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
+        }
+        if(scores[0] == scores[1]){
+            s.append("TIE");
+        }else if(scores[0] < scores[1])
+            s.append("BLACK WON!!");
+        else
+            s.append("WHITE WON!!");
+
+        String[] playagainbuttontext = {"Play again!"};
+        int play_again = JOptionPane.showOptionDialog(
+                null,
+                s,
+                "End Frame -- Thank you for playing!",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                playagainbuttontext,
+                0
+        );
+
+        //play_again==0 means you want to play again
+        if (play_again == 0){
+            Show.frame.setContentPane(Menu.getInstance().getPanel());
+            Show.frame.getRootPane().revalidate();
+        }
+        else {
+            Show.frame.dispose();
+        }
+
     }
 
     public LinkedList<Hex> createHexagons(){
@@ -307,15 +321,8 @@ public class Grid extends JPanel {
         public void mouseClicked(MouseEvent e) {
 
         }
-
-        public void getBotsMove(){
-
-        }
         @Override
         public void mousePressed(MouseEvent e) {
-            if(SwingUtilities.isRightMouseButton(e)){
-                getBotsMove();
-            }
             if(SwingUtilities.isLeftMouseButton(e) && !state.getCurrentPlayer().isBot()) {
                 Cell cell = getCellFromMouseClick(e.getX(), e.getY());
                 int color;
@@ -339,41 +346,9 @@ public class Grid extends JPanel {
                     repaint();
                 }
             }
+
             if(state.isGameOver()) {
-                StringBuilder s = new StringBuilder();
-                int[] scores = new int[state.getNumberOfPlayers()];
-                for (int i = 0; i < scores.length; i++) {
-                    Player p = state.getPlayers().get(i);
-                    scores[i] = p.getScore();
-                    s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
-                }
-                if(scores[0] == scores[1]){
-                    s.append("TIE");
-                }else if(scores[0] < scores[1])
-                    s.append("BLACK WON!!");
-                else
-                    s.append("WHITE WON!!");
-
-                String[] playagainbuttontext = {"Play again!"};
-                int play_again = JOptionPane.showOptionDialog(
-                        null,
-                        s,
-                        "End Frame -- Thank you for playing!",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        playagainbuttontext,
-                        0
-                );
-
-                //play_again==0 means you want to play again
-                if (play_again == 0){
-                    Show.frame.setContentPane(Menu.getInstance().getPanel());
-                    Show.frame.getRootPane().revalidate();
-                }
-                else {
-                    Show.frame.dispose();
-                }
+               endFrame();
             }
         }
 
@@ -385,7 +360,12 @@ public class Grid extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
 
-
+            if(state.getCurrentPlayer().isBot()){
+                getBotsMove();
+            }
+            if(state.isGameOver()){
+                endFrame();
+            }
 
         }
 
@@ -396,7 +376,7 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseEntered(MouseEvent e) {
-
+            getBotsMove();
         }
 
         /**
