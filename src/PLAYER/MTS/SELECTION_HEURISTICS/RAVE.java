@@ -16,7 +16,7 @@ public class RAVE extends Heuristics{
 
         double N = node.getNumberOfSimulations();
         double W = node.getNumberOfWins();
-        double T = 1;
+        double T;
         double c = Math.sqrt(2);
         double WA = node.getNumberOfWinsAMAF();
         double NA = node.getNumberOfSimulationsAMAF();

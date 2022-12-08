@@ -11,12 +11,12 @@ public class UCB1 extends Heuristics{
 
     public double value(int numberOfSimulationsParents, double numberOfWins, int numberOfSimulations, double variance) {
         if (numberOfSimulations == 0) {
-            return 2.147483647E9D;
+            return Integer.MAX_VALUE;
         } else {
             double N = (double)numberOfSimulations;
-            double c = 0.4D;
+            double c = Math.sqrt(2);
             double T = (double)numberOfSimulationsParents;
-            double UCB1 = numberOfWins / N + c * Math.sqrt(Math.log(T) / N * Math.min(0.25D, variance + 2.0D * Math.log(T) / N));
+            double UCB1 = numberOfWins / N + c * Math.sqrt(Math.log(T) / N * Math.min(0.25, variance + 2 * Math.log(T) / N));
             return UCB1;
         }
     }

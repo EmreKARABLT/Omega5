@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class Menu extends JPanel {
 
-    public int boardSize = 3;
+    public int boardSize = 9;
     public final int numberOfPlayers = 2;
     public int HumanOrComputer = 0; // default is human against human
     public int numberOfAiPlayers = 0;

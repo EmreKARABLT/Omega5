@@ -19,12 +19,12 @@ public class TestBot implements Runnable {
     private ArrayList<Integer> scoresOfWhite = new ArrayList<>();
     private ArrayList<Double> ratios = new ArrayList<>();
 
-    public TestBot(int numberOfTest, Player bot1, Player bot2) {
+    public TestBot(int numberOfTest, Player bot1, Player bot2, int radious) {
         this.numberOfTest = numberOfTest;
         ArrayList<Player> playersList = new ArrayList<>();
         playersList.add(bot1);
         playersList.add(bot2);
-        state = new State(new Board(3), playersList);
+        state = new State(new Board(radious), playersList);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class TestBot implements Runnable {
         // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
-        TestBot testBot = new TestBot(100,white,black);
+        TestBot testBot = new TestBot(100,white,black,3);
         testBot.run();
         System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage());
 

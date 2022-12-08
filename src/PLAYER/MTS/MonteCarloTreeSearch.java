@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class MonteCarloTreeSearch {
 
-    private final double SEARCH_TIME = 200;
+    private final double SEARCH_TIME = 2000;
     Tree tree;
     public static double winProb = 0;
     public MonteCarloTreeSearch(State state){
-        this.tree = new Tree(state);
+
 
     }
 
@@ -24,7 +24,7 @@ public class MonteCarloTreeSearch {
         while ( a < SEARCH_TIME){
             double start = System.currentTimeMillis();
 
-            tree.simulation(tree.root);
+
 
             double finish = System.currentTimeMillis();
             a += finish-start;

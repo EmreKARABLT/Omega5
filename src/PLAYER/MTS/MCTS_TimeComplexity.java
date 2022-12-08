@@ -7,15 +7,13 @@ import PLAYER.Player;
 
 import java.util.ArrayList;
 
-public class MonteCarlo extends Player{
+public class MCTS_TimeComplexity extends Player {
 
 
-
-    private final double SEARCH_TIME = 1000;
     Tree tree = null;
     public static double winProb = 0;
-
-    public MonteCarlo(String playerName, Heuristics heuristics){
+    public static int a = 0;
+    public MCTS_TimeComplexity(String playerName, Heuristics heuristics){
 
         this.heuristics = heuristics;
         this.playerName = playerName;
@@ -38,23 +36,26 @@ public class MonteCarlo extends Player{
         }else
             this.tree.setRoot(state, state.getWhites(), state.getBlacks());
 
-        double a = 0;
+        a = 0;
+        int times = 0;
 
-
-        while (a < SEARCH_TIME){
+        while (times < 100){
             double start = System.currentTimeMillis();
 
             tree.run();
 
             double finish = System.currentTimeMillis();
             a += finish-start;
+            times++;
         }
+
+        System.out.print((int)a + ", ");
 
         Node winner = tree.getBest(tree.root);
 
         move.add(winner.getWhite());
         move.add(winner.getBlack());
-        System.out.println(winRateCalculator(winner));
+        //System.out.println(winRateCalculator(winner));
         return move;
     }
     public void reset(){

@@ -18,6 +18,9 @@ public class Tree implements Runnable {
     public static int counter = 0;
     public Player randomBot = new RandomBot("white");
     public Heuristics heuristics ;
+    public final int T = 300;
+    public final int ALPHA = 10;
+    public int branchingFactor;
 
 
     public Tree(State state, Heuristics heuristics){
@@ -27,11 +30,26 @@ public class Tree implements Runnable {
         Hash_AMAF = new HashMap<>();
     }
 
+    public int hardPruning(Node node) {
+        int n = node.numberOfPossibleMoves();
+        return Math.max(((int) (ALPHA * Math.log(n))), (T));
+    }
+
+    public int progresiveWidening(Node node) {
+
+        int n = node.getDepth();
+        if(n == 0){return hardPruning(node);}
+        double c = 1;
+        int alpha = 2;
+        return (int) Math.round(c * Math.pow(n, alpha));
+    }
+
 
     public Node selection(Node node){
         Node selected ;
-        //TODO: find the ideal max
-        int max = 500 ;
+        //branchingFactor = hardPruning(node);
+        //branchingFactor = progresiveWidening(node);
+        int max = 300;
 
         if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
             ArrayList<Cell> moves = randomBot.getMoves(node.getState());
