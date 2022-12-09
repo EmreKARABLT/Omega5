@@ -32,43 +32,12 @@ public class State {
 
         this.currentPlayer = players.get(0);
         this.currentColor = 0 ;
-//        this.table = new Table(players);
         this.board = board;
         restart();
-//        if(playersList.get(0).isBot() && playersList.get(1).isBot()){
-//            gameLoop();
-//        }
 
 
     }
 
-    public void resetBoard(){
-        this.board = new Board(boardSize);
-    }
-
-//    public void gameLoop(){
-//
-//            while (!isGameOver()){
-//                ArrayList<Cell> moves = getCurrentPlayer().getMoves(this);
-//
-//                moves.get(0).setColor(0);
-//                moves.get(1).setColor(1);
-//                this.nextTurn();
-//                this.nextTurn();
-//            }
-//                this.getPlayers().get(0).setScore(this.getBoard().scoreOfAPlayer(0));
-//                this.getPlayers().get(1).setScore(this.getBoard().scoreOfAPlayer(1));
-//
-//            resetBoard();
-//
-//    }
-    public State(State state) {
-        this.numberOfPlayers = state.getPlayers().size();
-        players = state.getPlayers();
-        this.currentPlayer = state.getCurrentPlayer();
-        this.currentColor = state.getCurrentColor();
-        this.board = new Board(state.getBoard());
-    }
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
@@ -85,13 +54,7 @@ public class State {
             currentPlayer = players.get( (currentPlayer.getPlayerID()+1) % numberOfPlayers);
         }
     }
-    public void previousTurn(){
-        currentColor = Math.abs(currentColor - 1);
-        int previousColor = currentColor;
-        if(previousColor == 1)
-            currentPlayer = players.get( Math.abs(currentPlayer.getPlayerID() - 1));
-        currentPlayer.setCurrentPieceID(previousColor);
-    }
+
     public void updatePlayerScores(){
         players.get(0).setScore(board.scoreOfAPlayer(0));
         players.get(1).setScore(board.scoreOfAPlayer(1));
@@ -141,42 +104,22 @@ public class State {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
+
     public Player getWinner(){
-        if(players.get(0).getScore() == players.get(1).getScore())
-            return null;
         return (players.get(0).getScore()>players.get(1).getScore()) ? players.get(0) : players.get(1);
     }
-    public Player getLoser(){
-        if(players.get(0).getScore() == players.get(1).getScore())
-            return null;
-        return (players.get(1).getScore()<players.get(0).getScore()) ? players.get(1) : players.get(0);
-    }
+
     public void addBlack(Cell black){
         blacks.add(black);
     }
-    public void addWhite(Cell white){
-        whites.add(white);
-    }
-    public Cell getLastWhite(){
-        if(whites.isEmpty())
-            return null;
-        return whites.get(whites.size()-1);
-    }
-    public Cell getLastBlack(){
-        if(blacks.isEmpty())
-            return null;
-        return blacks.get(blacks.size()-1);
-    }
+    public void addWhite(Cell white){ whites.add(white); }
+
     public ArrayList<Cell> getBlacks() {
         return blacks;
     }
 
     public ArrayList<Cell> getWhites() {
         return whites;
-    }
-
-    public int getBoardSize() {
-        return boardSize;
     }
 
     public void restart(){
@@ -186,6 +129,8 @@ public class State {
         }
         currentColor = 0 ;
         currentPlayer = players.get(0);
+        whites = new ArrayList<>();
+        blacks = new ArrayList<>();
         board.clearBoard();
     }
 

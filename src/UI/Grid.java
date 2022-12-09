@@ -5,10 +5,7 @@ import GAME.Cell;
 import GAME.State;
 import PLAYER.Player;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.*;
@@ -23,26 +20,32 @@ public class Grid extends JPanel {
     private ArrayList<JLabel> scores = new ArrayList<>();
     private ArrayList<JLabel> names = new ArrayList<>();
     private ArrayList<JPanel> colorBars = new ArrayList<>();
-    private boolean started = false;
-
+    private ArrayList<Cell> lastWhites = new ArrayList<>();
+    private ArrayList<Cell> lastBlacks = new ArrayList<>();
+    private boolean isClicksAllowed = true;
     public Grid(State state){
         this.state = state;
         this.setOfCells = state.getBoard().getCells();
         this.setOfHexagons = createHexagons();
         HexListener listener = new HexListener();
-        createGamingPage();
         addMouseListener(listener);
+        createGamingPage();
     }
     public void createGamingPage(){
         this.setLayout(null);
         boolean isBotExist = false;
         for (Player player : state.getPlayers()) {
             createPlayerPanels(player);
-            if(player.isBot())
+            if(player.isBot()) {
                 isBotExist = true;
+                if( player.getPlayerID() == 0 )
+                    isClicksAllowed = false;
+            }
         }
-        if(isBotExist)
+        System.out.println(isBotExist);
+        if(isBotExist) {
             createBotButton();
+        }
         updateColorBars();
         super.add(mainMenuButton());
         repaint();
@@ -71,16 +74,16 @@ public class Grid extends JPanel {
         if(player.getPlayerID() == 2){ x = 20                              ;  y = getBoard().getOffsetY()*2 - 120;}
         if(player.getPlayerID() == 3){ x = getBoard().getOffsetX()*2 - 220 ;  y = getBoard().getOffsetY()*2 - 120;}
 
-        
+
 
         name.setBounds( x+20,y,200,50);
         score.setBounds(x+20,y+25,200,50);
         colorBar.setBounds(x+5,y+13,7,50);
-        
+
         super.add(name);
         super.add(score);
         super.add(colorBar);
-        
+
 
 //        panel.setBackground();
 
@@ -89,90 +92,40 @@ public class Grid extends JPanel {
         scores.add(score);
     }
     public void createBotButton(){
-        JButton bot_move  = new JButton("Start Playing");
-        bot_move.setBounds(1, 1 ,getBoard().getOffsetX()*2 , getBoard().getOffsetY()*2);
-        bot_move.setFont(Show.customFont_60f);
-        bot_move.setBackground(new Color(0,0,0,125));
-        bot_move.setForeground(new Color(0x000000));
+        JButton bot_move  = new JButton("GET BOT'S MOVES");
+        bot_move.setBounds( getBoard().getOffsetX()*2 - 320, getBoard().getOffsetY()*2 - 120 ,250 , 50);
+        bot_move.setFont(Show.customFont_20f);
+        bot_move.setBackground(new Color(232,201,116));
         bot_move.setOpaque(true);
         bot_move.setContentAreaFilled(true);
         bot_move.setBorderPainted(false);
         bot_move.setFocusPainted(false);
-        bot_move.addMouseListener(new MouseAdapter(){
+        bot_move.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                bot_move.setContentAreaFilled(false);
-                bot_move.setVisible(false);
-                started = true;
-                Grid.super.revalidate();
+                isClicksAllowed = false;
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 getBotsMove();
-
+                isClicksAllowed = true;
             }
 
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
-
         super.add(bot_move);
-    }
-    public void getBotsMove(){
-        if(state.getCurrentPlayer().isBot() && started){
-            ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
-
-            moves.get(0).setColor(0);
-            moves.get(1).setColor(1);
-            state.addWhite(moves.get(0));
-            state.addBlack(moves.get(1));
-            state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-            state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-            state.nextTurn();
-            state.nextTurn();
-
-            updateColors();
-            updateScores();
-            updateColorBars();
-            repaint();
-        }
-    }
-    public void endFrame(){
-        StringBuilder s = new StringBuilder();
-        int[] scores = new int[state.getNumberOfPlayers()];
-        for (int i = 0; i < scores.length; i++) {
-            Player p = state.getPlayers().get(i);
-            scores[i] = p.getScore();
-            s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
-        }
-        if(scores[0] == scores[1]){
-            s.append("TIE");
-        }else if(scores[0] < scores[1])
-            s.append("BLACK WON!!");
-        else
-            s.append("WHITE WON!!");
-
-        String[] playagainbuttontext = {"Play again!"};
-        int play_again = JOptionPane.showOptionDialog(
-                null,
-                s,
-                "End Frame -- Thank you for playing!",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                playagainbuttontext,
-                0
-        );
-
-        //play_again==0 means you want to play again
-        if (play_again == 0){
-            Show.frame.setContentPane(Menu.getInstance().getPanel());
-            Show.frame.getRootPane().revalidate();
-        }
-        else {
-            Show.frame.dispose();
-        }
-
     }
 
     public LinkedList<Hex> createHexagons(){
@@ -206,7 +159,7 @@ public class Grid extends JPanel {
     }
     public void updateColorBars() {
         for (int i = 0; i < colorBars.size(); i++) {
-            int colorBarIndexToShow = state.getCurrentPlayer().getPlayerID();
+
             if (i == state.getCurrentPlayer().getPlayerID()) {
                 colorBars.get(i).setVisible(true);
                 Color color = null;
@@ -225,7 +178,7 @@ public class Grid extends JPanel {
     }
 
 
-        public Cell getCellFromMouseClick( double x , double y ){
+    public Cell getCellFromMouseClick( double x , double y ){
         return state.getBoard().getCellFromPosition(x,y);
     }
 
@@ -258,7 +211,7 @@ public class Grid extends JPanel {
     }
     public JButton mainMenuButton(){
         JButton backButton = new JButton("<");
-        backButton.setFont(Show.customFont_25f);
+        backButton.setFont(Show.customFont_40f);
         backButton.setBounds( 10 , getBoard().getOffsetY()-60,60, 60);
 
         backButton.setOpaque(false);
@@ -307,7 +260,62 @@ public class Grid extends JPanel {
     public Board getBoard() {
         return state.getBoard();
     }
+    public void endFrame(){
+        if(state.isGameOver()) {
+            StringBuilder s = new StringBuilder();
+            int[] scores = new int[state.getNumberOfPlayers()];
+            for (int i = 0; i < scores.length; i++) {
+                Player p = state.getPlayers().get(i);
+                scores[i] = p.getScore();
+                s.append(p.getPlayerName()).append(" has ").append(p.getScore()).append(" points. \n");
+            }
+           if(scores[0] > scores[1])
+                s.append("WHITE WON!!");
+            else
+                s.append("BLACK WON!!");
 
+            String[] playagainbuttontext = {"Play again!"};
+            int play_again = JOptionPane.showOptionDialog(
+                    null,
+                    s,
+                    "End Frame -- Thank you for playing!",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    playagainbuttontext,
+                    0
+            );
+
+            //play_again==0 means you want to play again
+            if (play_again == 0){
+                Show.frame.setContentPane(Menu.getInstance().getPanel());
+                Show.frame.getRootPane().revalidate();
+            }
+            else {
+                Show.frame.dispose();
+            }
+        }
+    }
+    public void getBotsMove(){
+        if(state.getCurrentPlayer().isBot()){
+            ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
+
+            moves.get(0).setColor(0);
+            moves.get(1).setColor(1);
+            state.addWhite(moves.get(0));
+            state.addBlack(moves.get(1));
+            state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+            state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+            state.nextTurn();
+            state.nextTurn();
+
+            updateColors();
+            updateScores();
+            updateColorBars();
+            repaint();
+        }
+        endFrame();
+    }
 
     private class HexListener extends MouseAdapter {
 
@@ -319,11 +327,11 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseClicked(MouseEvent e) {
-
-        }
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if(SwingUtilities.isLeftMouseButton(e) && !state.getCurrentPlayer().isBot()) {
+            if(e.getClickCount()>=2){
+                System.out.println("returned");
+                return;
+            }
+            if(SwingUtilities.isLeftMouseButton(e) && !state.getCurrentPlayer().isBot() && isClicksAllowed) {
                 Cell cell = getCellFromMouseClick(e.getX(), e.getY());
                 int color;
 
@@ -346,10 +354,11 @@ public class Grid extends JPanel {
                     repaint();
                 }
             }
+            endFrame();
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {
 
-            if(state.isGameOver()) {
-               endFrame();
-            }
         }
 
         /**
@@ -360,12 +369,7 @@ public class Grid extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
 
-            if(state.getCurrentPlayer().isBot()){
-                getBotsMove();
-            }
-            if(state.isGameOver()){
-                endFrame();
-            }
+
 
         }
 
@@ -376,7 +380,7 @@ public class Grid extends JPanel {
          */
         @Override
         public void mouseEntered(MouseEvent e) {
-            getBotsMove();
+
         }
 
         /**

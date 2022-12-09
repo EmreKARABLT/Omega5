@@ -111,13 +111,14 @@ public class Menu extends JPanel {
         label_Players.setBounds((width - size_l2.width) / 2, (height - size_l2.height) / 10 * 5, size_l2.width, size_l2.height);
 
 
-        //BUTTONS FOR BOARD SIZE AND ACTION LISTENERS
+        //BUTTONS FOR BOARD SIZE AND ACTION LISTENER
+
         JButton buttonBoardSize2 = new JButton("2");
         JButton buttonBoardSize3 = new JButton("3");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
-        JButton[] buttons = new JButton[]{buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+        JButton[] buttons = new JButton[]{ buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setBounds((width - buttons.length * 200 - 100) / 3 + 300 * i, (height - size_l1.height) / 10 * 3, 100, 100);
@@ -154,15 +155,15 @@ public class Menu extends JPanel {
         JRadioButton humanW = new JRadioButton( "Human White" , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctW = new JRadioButton(   "UCT White"  , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton usb1W = new JRadioButton(  "UCB1 White"  , new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
+//        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
         whites.add(humanW);
         whites.add(uctW);
         whites.add(usb1W);
-        whites.add(raveW);
+//        whites.add(raveW);
         panel_white.add(humanW);
         panel_white.add(uctW);
         panel_white.add(usb1W);
-        panel_white.add(raveW);
+//        panel_white.add(raveW);
         humanW.setSelected(true);
 
         JPanel panel_black = new JPanel();
@@ -170,18 +171,19 @@ public class Menu extends JPanel {
         JRadioButton humanB = new JRadioButton("Human Black", new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctB  = new JRadioButton("UCT Black", new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton usb1B = new JRadioButton("UCB1 Black", new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
+//        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
         blacks.add(humanB);
         blacks.add(uctB);
         blacks.add(usb1B);
-        blacks.add(raveB);
+//        blacks.add(raveB);
         panel_black.add(humanB);
         panel_black.add(uctB);
         panel_black.add(usb1B);
-        panel_black.add(raveB);
+//        panel_black.add(raveB);
         humanB.setSelected(true);
 
-        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,raveB,humanW,uctW ,usb1W ,raveW};
+//        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,raveB,humanW,uctW ,usb1W ,raveW};
+        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,humanW,uctW ,usb1W };
         JPanel[] player_panels = new JPanel[]{panel_white, panel_black};
 
         for (int i = 0; i < player_panels.length; i++) {
@@ -215,7 +217,7 @@ public class Menu extends JPanel {
                                 case "Human White" -> whitePlayer = new HumanPlayer("White");
                                 case "UCT White" -> whitePlayer = new MonteCarlo("White", new UCT());
                                 case "UCB1 White" -> whitePlayer = new MonteCarlo("White", new UCB1());
-                                case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
+//                                case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
                             }
                         }
                     if(radioButton.getText().contains("Black")) {
@@ -223,7 +225,7 @@ public class Menu extends JPanel {
                             case "Human Black" -> blackPlayer = new HumanPlayer("Black");
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
-                            case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
+//                            case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
                         }
 
                     }

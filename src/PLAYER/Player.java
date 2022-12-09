@@ -3,11 +3,11 @@ package PLAYER;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
+import UI.Grid;
 
 import java.util.ArrayList;
 
-public abstract class Player {
-    //protected static State state;
+public abstract class Player{
     double[] w = {Math.random(),Math.random(),Math.random(),Math.random(),Math.random()};
     protected String playerName;
     protected String heuristicName;

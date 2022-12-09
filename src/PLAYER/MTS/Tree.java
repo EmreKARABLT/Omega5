@@ -8,17 +8,21 @@ import PLAYER.RandomBot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Tree implements Runnable {
+public class Tree {
+    private int numberOfNodesDiscovered = 0 ;
+    private int numberOfLeafNodes = 0 ;
     Node root;
     private State state;
     private final Boolean ACTIONS = true;
-    ArrayList<Node> nodes = new ArrayList<>();
     HashMap<TuplePieces, Node> Hash_AMAF;
     public int simNumber = 0;
     public static int counter = 0;
     public Player randomBot = new RandomBot("white");
     public Heuristics heuristics ;
 
+
+
+    public Node lastMove = null;
 
     public Tree(State state, Heuristics heuristics){
         this.heuristics = heuristics;
@@ -31,7 +35,7 @@ public class Tree implements Runnable {
     public Node selection(Node node){
         Node selected ;
         //TODO: find the ideal max
-        int max = 500 ;
+        int max = Integer.MAX_VALUE;
 
         if(node.getChildren().size() < Math.min(node.numberOfPossibleMoves() , max )){
             ArrayList<Cell> moves = randomBot.getMoves(node.getState());
@@ -86,22 +90,22 @@ public class Tree implements Runnable {
         while(!state.isGameOver()){
 
             Node nextNode = selection(node);
-            if(nextNode == null)
-                System.out.println();
+
+            if(nextNode.getNumberOfSimulations() == 0 ) {
+                numberOfNodesDiscovered++;
+            }
             nextNode.color();
-            nodes.add(nextNode);
             node =nextNode;
         }
+        if(node.getNumberOfSimulations() == 0)
+            numberOfLeafNodes++;
         node.getState().updatePlayerScores();
         //TODO centerOfMass of Clusters()
         Player winner = node.getState().getWinner();
-        Player loser = node.getState().getLoser();
 
         double win =  0;
 
-        if(winner == null){
-            win = 0.5;
-        }else if ( winner.getPlayerID() == root.getCurrentPlayersID())
+        if ( winner.getPlayerID() == root.getCurrentPlayersID())
             win = 1;
 
         node.setNumberOfWins(node.getNumberOfWins() + win);
@@ -129,30 +133,28 @@ public class Tree implements Runnable {
 
         //TODO after assigning the root an existing node , we may want to set the pieces to null
     }
-    public void setRoot(State state, ArrayList<Cell> whites , ArrayList<Cell> blacks){
+    public void setRoot(State state, ArrayList<Cell> whites , ArrayList<Cell> blacks) {
         int n = whites.size();
-        for(Node child : root.getChildren()){
-            if (n>2 && child.getWhite().equals(whites.get(n-2)) && child.getBlack().equals(blacks.get(n-2))) {
-                for (Node grandchild : child.getChildren()) {
-                    if(grandchild.getDepth()>=2 && grandchild.getWhite().equals(whites.get(n-1)) &&grandchild.getBlack().equals(blacks.get(n-1))) {
-                        grandchild.color();
-                        simNumber = 0;
-                        counter = 0;
-                        setRoot(grandchild);
-                        return;
-                    }
-                }
-            }
-        }
-        nodes = new ArrayList<>();
-        simNumber = 0 ;
-        counter = 0;
         this.state = state;
-        root = new Node(null, state, null, null );
+        try {
+            Node opponentsMove = new Node(lastMove, state, whites.get(n - 1), blacks.get(n - 1));
+            opponentsMove = lastMove.addChild(opponentsMove);
+            opponentsMove.color();
+            setRoot(opponentsMove);
+        }catch (Exception ignored){
+            setRoot(new Node(null , this.state, null,null));
+        }
+    }
+    public int getNumberOfNodesDiscovered() {
+        return numberOfNodesDiscovered;
     }
 
-    @Override
-    public void run() {
-        simulation();
+    public int getNumberOfLeafNodes() {
+        return numberOfLeafNodes;
     }
+    public void setLastMove(Node lastMove) {
+        this.lastMove = lastMove;
+    }
+
+
 }
