@@ -17,6 +17,14 @@ public class Pnaive extends Heuristics {
         return  W/N;
 
     }
+    public double valueWorst(Node node) {
+        double W = (double) node.getNumberOfWins();
+        double N = (double) node.getNumberOfSimulations();
+        if (N == 0) {return Integer.MAX_VALUE;}
+        return  (N-W)/N;
+
+    }
+
 
     public Node bestNode(Node node){
         int visited = node.getNumberOfSimulations();
@@ -27,7 +35,7 @@ public class Pnaive extends Heuristics {
     public Node worstNode(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> children = node.getChildren();
-        return Collections.min(children, Comparator.comparing(c -> value(node)));
+        return Collections.max(children, Comparator.comparing(c -> valueWorst(node)));
     }
     public String getName() {
         return name;

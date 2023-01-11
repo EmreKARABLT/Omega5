@@ -3,11 +3,18 @@ package PLAYER;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
+import PLAYER.MTS.Tree;
 import UI.Grid;
+import UI.Hex;
+import UI.Menu;
+import UI.Show;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
-public abstract class Player{
+public abstract class Player implements Runnable{
     double[] w = {Math.random(),Math.random(),Math.random(),Math.random(),Math.random()};
     protected String playerName;
     protected String heuristicName;
@@ -16,7 +23,10 @@ public abstract class Player{
     protected int playerID ;
     public static int counterForIDs = 0;
     public Heuristics heuristics = null;
-
+    public ArrayList<Cell> moves = new ArrayList<>();
+    public State state;
+    public Grid GUI ;
+    public Tree tree ;
 
     public boolean isBot(){return false;};
     public ArrayList<Cell> getMoves(State state){
@@ -51,6 +61,22 @@ public abstract class Player{
     public double[] getW(){
         return this.w;
     }
+    public void setState(State state) {
+        this.state = state;
+    }
+    public State getState(){
+        return this.state;
+    }
 
+    public void setGUI(Grid GUI) {
+        this.GUI = GUI;
+    }
+
+    public Tree getTree() {return tree;}
+
+    @Override
+    public void run() {
+
+    }
 
 }

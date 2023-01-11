@@ -30,9 +30,9 @@ public class UCT extends Heuristics{
         try {
             T = (double) node.getParent().getNumberOfSimulations();
         }catch (Exception e){
-            T = 1;
+            T = 1.0;
         }
-        if (N == 0) {return Integer.MAX_VALUE;} // W/N = 2147483647
+//        if (N == 0) {return Integer.MAX_VALUE;} // W/N = 2147483647
         return  W/N + c * Math.sqrt((Math.log(T)/N)); //UCT = W/N + c * (log(T) / N)^0.5
 
     }
@@ -40,13 +40,14 @@ public class UCT extends Heuristics{
     public Node bestNode(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> children = node.getChildren();
-        return Collections.max(children, Comparator.comparing(c -> value(c)));
+        return Collections.max(children, Comparator.comparing(this::value));
     }
+
 
     public Node worstNode(Node node){
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> children = node.getChildren();
-        return Collections.min(children, Comparator.comparing(c -> value(c)));
+        return Collections.min(children, Comparator.comparing(this::value));
     }
     public String getName() {
         return name;

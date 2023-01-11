@@ -24,7 +24,7 @@ public class UCB1 extends Heuristics{
     public Node bestNode(Node node) {
         int visited = node.getNumberOfSimulations();
         ArrayList<Node> childrens = node.getChildren();
-        double variance = Variance.Variance(node.getData());
+        double variance = variance(node);
         return (Node)Collections.max(childrens, Comparator.comparing((c) -> {
             return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
         }));
@@ -32,8 +32,9 @@ public class UCB1 extends Heuristics{
 
     public Node worstNode(Node node) {
         int visited = node.getNumberOfSimulations();
+
         ArrayList<Node> childrens = node.getChildren();
-        double variance = Variance(node.getData());
+        double variance = variance(node);
         return (Node)Collections.min(childrens, Comparator.comparing((c) -> {
             return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
         }));
@@ -42,7 +43,8 @@ public class UCB1 extends Heuristics{
         return name;
     }
 
-    public double Variance(ArrayList<Double> data){
+    public double variance(Node node ){
+        ArrayList<Double> data = node.getData();
         double counter = 0;
         double counter2 = 0;
         for (int i = 0; i < data.size(); i++) {

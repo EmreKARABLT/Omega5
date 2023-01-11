@@ -8,11 +8,11 @@ import PLAYER.RULE_BASED_BOT.Rules;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Node implements Comparable{
+public class Node{
 
     private Node parent;
     private State state;
-    private final int playerID;
+    private int playerID;
     private ArrayList<Node> children ;
     private Cell white ;
     private Cell black ;
@@ -23,6 +23,7 @@ public class Node implements Comparable{
     private double numberOfWinsAMAF;
     private int scoreOfWhite;
     private int scoreOfBlack;
+    private int votes = 0 ;
     private ArrayList<Integer> groupsOfWhite;
     private ArrayList<Integer> groupsOfBlack;
     private ArrayList<Double> data = new ArrayList<>();
@@ -31,7 +32,7 @@ public class Node implements Comparable{
 
         this.parent = parent;
         this.depth =  (this.parent != null)  ? this.parent.getDepth() + 1 : 0;
-        this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : ( ( this.parent.playerID + 1 ) % 2 );
+        this.playerID = (this.parent == null) ? state.getCurrentPlayer().getPlayerID() : (this.parent.getPlayerID()+1) % 2 ;
 
         this.state = state;
         this.white = white;
@@ -53,21 +54,6 @@ public class Node implements Comparable{
         this.scoreOfBlack = Board.multiplyTheGivenArrayList(groupsOfBlack);
     }
 
-    public double eval(){
-        double[] w ={0.41939539486680855, 0.596762048047888, 0.1683721532546104, 0.2370089632926684, 0.2703059553712044};
-        Cell myCell = (playerID == 0) ? white : black;
-        Cell opponents = (playerID == 0) ? black : white;
-        double myScore=
-                w[2] * Rules.neigbourColors(myCell) +
-                w[3] * Rules.radius(myCell) +
-                w[4] * Rules.N_neibourgs(myCell);
-
-        double opponentsScore =
-                w[2] * Rules.neigbourColors(opponents) +
-                w[3] * Rules.radius(opponents) +
-                w[4] * Rules.N_neibourgs(opponents);
-        return myScore - opponentsScore;
-    }
 
     public Node addChild(Node child){
         for (Node node: children) {
@@ -111,6 +97,16 @@ public class Node implements Comparable{
             mult*=i;
         }
         return mult;
+    }
+    public double ratioOfDiscovered(){
+        double numberOfDiscovered = 0;
+        for (Node child : this.children) {
+            if(child.numberOfSimulations>0)
+                numberOfDiscovered++;
+
+        }
+
+        return numberOfDiscovered/this.binomCoef(state.getBoard().getNumberOfEmptyCells()+2 , 2);
     }
 
 
@@ -156,6 +152,9 @@ public class Node implements Comparable{
     public int getPlayerID() {
         return playerID;
     }
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
 
     public ArrayList<Double> getData() {
         return data;
@@ -177,6 +176,14 @@ public class Node implements Comparable{
     public void setWhite(Cell white) {this.white = white;}
     public int getDepth() {return depth;}
     public void setDepth(int depth) {this.depth = depth;}
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
 
     public int getScoreOfWhite() {
         return scoreOfWhite;
@@ -210,28 +217,44 @@ public class Node implements Comparable{
         this.groupsOfBlack = groupsOfBlack;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return white.equals(node.white) && black.equals(node.black) && this.parent.equals(node.parent);
+        return depth == node.depth && Objects.equals(parent, node.parent) && white.equals(node.white) && black.equals(node.black);
     }
-    @Override
-    public int compareTo(Object o) {
-        return (((Node)o).eval() > this.eval()) ? 1 : 0 ;
-    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(parent, state, white, black, depth);
+        return Objects.hash(parent, white, black, depth);
+    }
+
+    public void concat(Node node){
+        if (node.getBlack() == null) {
+            this.numberOfSimulations+=node.numberOfSimulations;
+            this.numberOfWins += node.numberOfWins;
+            return;
+        }
+        if(node.getWhite().getId()==this.getWhite().getId() && node.getBlack().getId()==this.getBlack().getId()) {
+            this.numberOfSimulations += node.numberOfSimulations;
+            this.numberOfWins += node.numberOfWins;
+            this.data.addAll(node.data);
+        }
     }
 
     @Override
     public String toString() {
-        return "Node Depth " + depth +"  ||  w:" + ((white==null)? "null" :white.getId()) + " - b :" + ((black==null) ? "null"  :black.getId()) ;
+        return "Node{" +
+                "numberOfSimulations=" + numberOfSimulations +
+                ", numberOfWins=" + numberOfWins +
+                '}';
     }
-
-
-
+    public double getNaive(){
+        if(numberOfSimulations == 0)
+            return -1.0;
+        return numberOfWins/numberOfSimulations;
+    }
 }
 

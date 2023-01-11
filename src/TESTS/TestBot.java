@@ -4,38 +4,56 @@ import GAME.Board;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.MonteCarlo;
+import PLAYER.MTS.ROOT_PARALLELIZATION.MonteCarloRootParallelization;
 import PLAYER.MTS.SELECTION_HEURISTICS.Pnaive;
-import PLAYER.RULE_BASED_BOT.GeneticRuleBasedBot;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
+import PLAYER.MTS.Tree;
 import PLAYER.Player;
+import PLAYER.RandomBot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestBot implements Runnable {
     private final int numberOfTest;
     private final State state;
     private int numberOfGamesWhiteWon = 0;
     private int numberOfGamesBlackWon = 0;
-
-    private ArrayList<Integer> scoresOfBlack = new ArrayList<>();
-    private ArrayList<Integer> scoresOfWhite = new ArrayList<>();
+    private int numberOfTies = 0;
+    Player white ,black;
+    private int optimalPlayForWhite= 0 ;
+    private ArrayList<Integer> scoresOfWhite                = new ArrayList<>();
+    private ArrayList<Integer> numberOfDiscoveredWhite      = new ArrayList<>();
+    private ArrayList<Integer> numberOfDiscoveredLeafWhite  = new ArrayList<>();
+    private ArrayList<Integer> numberOfTotalWinsWhite       = new ArrayList<>();
+    private ArrayList<Integer> numberOfSimulationsWhite     = new ArrayList<>();
+    private ArrayList<Integer> scoresOfBlack                = new ArrayList<>();
+    private ArrayList<Integer> numberOfDiscoveredBlack      = new ArrayList<>();
+    private ArrayList<Integer> numberOfDiscoveredLeafBlack  = new ArrayList<>();
+    private ArrayList<Integer> numberOfTotalWinsBlack       = new ArrayList<>();
+    private ArrayList<Integer> numberOfSimulationsBlack     = new ArrayList<>();
     private ArrayList<Double> ratios = new ArrayList<>();
 
-    public TestBot(int numberOfTest, Player bot1, Player bot2) {
+
+    public TestBot(int numberOfTest, Player white, Player black) {
         this.numberOfTest = numberOfTest;
+        this.white = white;
+        this.black = black;
         ArrayList<Player> playersList = new ArrayList<>();
-        playersList.add(bot1);
-        playersList.add(bot2);
-        state = new State(new Board(3), playersList);
+        playersList.add(white);
+        playersList.add(black);
+        state = new State(new Board(1), playersList);
         run();
     }
 
     @Override
     public void run() {
         for (int i = 0; i < numberOfTest; i++) {
+            System.out.print(i+",");
             runTest();
-//            System.out.println("White : " + state.getPlayers().get(0).getScore() + " Black : " + state.getPlayers().get(1).getScore());
+
             //in this part board will be full and any data can be derived
-            // state.getBoard().getCells();// with this line you can get the cells of the board (END GAME )
             state.restart();
         }
     }
@@ -43,23 +61,28 @@ public class TestBot implements Runnable {
     public void runTest() {
 
         while (!state.isGameOver()) {
-            ArrayList<Cell> moves = state.getCurrentPlayer().getMoves(state);
-            moves.get(0).setColor(0);
-            moves.get(1).setColor(1);
-            state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
-            state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
-            state.nextTurn();
-            state.nextTurn();
+            state.getCurrentPlayer().getMoves(state);
+
             //If you want to get the state of the board after each move it is where you need to derive the state of the board state.getBoard().getCells()
         }
-
         if (state.isGameOver()) {
             Player winner = state.getWinner();
+            int scoreW = state.getPlayers().get(0).getScore();
+            int scoreB = state.getPlayers().get(1).getScore();
 
-            if (winner.getPlayerID() == 1) {
-                numberOfGamesBlackWon++;
-            } else if (winner.getPlayerID() == 0)
+            Cell center = state.getBoard().getCells().stream().filter(cell -> cell.getQ() == 0 && cell.getR() == 0).toList().get(0);
+            if(center.getColor()==0){
+                optimalPlayForWhite++;
+            }
+            System.out.println(state.getPlayers().get(0).getScore() +" - "+ state.getPlayers().get(1).getScore() + " - " + (center.getColor()==0));
+            if(scoreW==scoreB){
+                numberOfTies++;
+            }else
+            if (scoreW>scoreB) {
                 numberOfGamesWhiteWon++;
+            } else {
+                numberOfGamesBlackWon++;
+            }
         }
         int blacks = state.getPlayers().get(1).getScore();
         int whites = state.getPlayers().get(0).getScore();
@@ -67,7 +90,21 @@ public class TestBot implements Runnable {
         scoresOfWhite.add(whites);
         ratios.add((blacks*1.0)/whites);
 
+        if(white.tree!=null) {
+            Tree whiteTree =white.getTree();
+            numberOfDiscoveredWhite.add(whiteTree.getNumberOfNodesDiscovered());
+            numberOfDiscoveredLeafWhite.add(whiteTree.getNumberOfLeafNodes());
+            numberOfTotalWinsWhite.add(whiteTree.getNumberOfTotalWins());
+            numberOfSimulationsWhite.add(whiteTree.getSimNumber());
+        }
 
+        if(black.tree!=null) {
+            Tree blackTree =black.getTree();
+            numberOfDiscoveredBlack.add(blackTree.getNumberOfNodesDiscovered());
+            numberOfDiscoveredLeafBlack.add(blackTree.getNumberOfLeafNodes());
+            numberOfTotalWinsBlack.add(blackTree.getNumberOfTotalWins());
+            numberOfSimulationsBlack.add(blackTree.getSimNumber());
+        }
     }
     public int getNumberOfGamesWhiteWon(){  return numberOfGamesWhiteWon; }
     public int getNumberOfGamesBlackWon(){  return numberOfGamesBlackWon; }
@@ -79,9 +116,6 @@ public class TestBot implements Runnable {
         return numberOfGamesBlackWon / (double) numberOfTest * 100;
     }
 
-    public ArrayList<Double> getRatios() {
-        return ratios;
-    }
 
     public ArrayList<Integer> getScoresOfBlack() {
         return scoresOfBlack;
@@ -91,40 +125,34 @@ public class TestBot implements Runnable {
     }
 
 
-    public static double inverseStudentT(double p, int df) {
-        double t = 0;
-        double dt = 0.5;
-        while (dt > 1e-6) {
-            t += dt * (studentT(t, df) - p);
-            dt *= 0.5;
-        }
-        return t;
-    }
-    // Function to calculate the cumulative distribution function (CDF)
-    // of the Student's t-distribution
-    public static double studentT(double t, int df) {
-        double c = df / (df + t * t);
-        double sum = 0;
-        for (int i = df; i > 0; i--) {
-            sum = 1 + sum * c;
-        }
-        return 1 - 0.5 * Math.pow(1 - c, sum);
-    }
-
     public static void main(String[] args) {
-        Player white = new MonteCarlo("white", new Pnaive());
-        Player black = new GeneticRuleBasedBot("black");
+        Player white = new MonteCarlo("white",new UCB1());
+        Player black = new MonteCarlo("black", new UCT());
         // Random               ->  new RandomBot( "white"/"black")
         // RuleBased            ->  new RuleBasedBot( "white"/"black")
         // MonteCarlo PNaive    ->  new MonteCarlo( "white"/"black" , new Pnaive())
         // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
-
-        TestBot testBot = new TestBot(100,white,black);
-
-        System.out.println("Win Percentage of White Player: " + testBot.getWhitesWinPercentage() );
-
+        double start = System.currentTimeMillis();
+        int N = 10000;
+        TestBot testBot = new TestBot(N,white,black);
+        double end = System.currentTimeMillis();
+        System.out.println("\nAverage execution time for each game "+ (end-start)/N/1000.d +" seconds \n");
+        System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() +"\n");
+        System.out.println("#############################\nPercentage of Ties Player: " + (testBot.numberOfTies*100.d)/N +"\n");
+        System.out.println("Number of optimal moves from white : " + testBot.optimalPlayForWhite  );
+//        System.out.println("--WHITE--");
+//        System.out.println("Number of games won = " +testBot.numberOfTotalWinsWhite      );
+//        System.out.println("Number of discovered nodes  = " +testBot.numberOfDiscoveredWhite     );
+//        System.out.println("Number of discovered leaf nodes = " +testBot.numberOfDiscoveredLeafWhite );
+//        System.out.println("Number of simulations = " +testBot.numberOfSimulationsWhite    );
+//
+//        System.out.println("--BLACK--");
+//        System.out.println("Number of games won = " +testBot.numberOfTotalWinsBlack      );
+//        System.out.println("Number of discovered nodes  = " +testBot.numberOfDiscoveredBlack     );
+//        System.out.println("Number of discovered leaf nodes = " +testBot.numberOfDiscoveredLeafBlack );
+//        System.out.println("Number of simulations = " +testBot.numberOfSimulationsBlack    );
 
 
 //        // Confidence level

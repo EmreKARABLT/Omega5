@@ -1,6 +1,7 @@
 package UI;
 
 
+import GAME.Board;
 import GAME.Cell;
 
 import javax.swing.*;
@@ -16,9 +17,10 @@ public class Hex extends JPanel {
     private final Cell cell ;
 
 
-    public Hex( Cell cell ) {
+    public Hex( Cell cell , int boardSize , int offsetY) {
+        this.radius = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
         this.cell = cell;
-        this.radius = cell.getRADIUS();
+
         this.polygon = createPolygon();
         changeColor(-1 );
     }
@@ -36,8 +38,8 @@ public class Hex extends JPanel {
 
         for (int i = 0; i < 6; i++) {
             p.addPoint(
-                    (int) (cell.getX() + Cell.RADIUS * Math.cos(i * 2 * Math.PI / 6)),
-                    (int) (cell.getY() + Cell.RADIUS * Math.sin(i * 2 * Math.PI / 6))
+                    (int) (cell.getX() + this.radius * Math.cos(i * 2 * Math.PI / 6)),
+                    (int) (cell.getY() + this.radius * Math.sin(i * 2 * Math.PI / 6))
             );
         }
         return p;

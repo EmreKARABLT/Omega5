@@ -7,12 +7,12 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class RAVE extends Heuristics{
-
-    public String name = "RAVE";
-    public final static double K = 1000;
-    public Heuristics UCT = new UCT();
+    public RAVE(){
+        this.name = "RAVE";
+    }
 
     public double value(Node node) {
+        double K = node.getNumberOfSimulationsAMAF();
 
         double N = node.getNumberOfSimulations();
         double W = node.getNumberOfWins();
@@ -24,17 +24,18 @@ public class RAVE extends Heuristics{
         try {
             T = node.getParent().getNumberOfSimulations();
 
-        }catch (Exception e){
-            T = 1;
-        }
+        }catch (Exception ignored){}
+
         if (N == 0) {return Integer.MAX_VALUE;} // W/N = 2147483647
 
-        double QUCT = W/N + c * Math.sqrt((Math.log(T)/N));
+        double Q = W/N + c * Math.sqrt((Math.log(T)/N));
 
-        double Q = WA/NA + c * Math.sqrt((Math.log(T)/N));
+        double QRAVE = WA/NA + c * Math.sqrt((Math.log(T)/N));
 
-        double beta = Math.sqrt(((K) / (3 * NA + K)));
-        return ((1-beta) * QUCT) + (beta * Q);
+        double beta = Math.sqrt( K / (3 * N + K));
+        System.out.println("BETA " + beta);
+//        double beta = 0.33;
+        return ((1-beta) * Q) + (beta * QRAVE);
 
     }
 

@@ -14,10 +14,11 @@ public class Board implements Cloneable{
     TODO Everyone can change these OffsetX and OffsetY values -> Run the Show class and there will be a line which gives you offset values for your screen
          Replace the following line with the printed values on console
      */
+    public static double RADIUS = 30;
     private int offsetX, offsetY;
     public Board(int boardSize){
-        this.offsetX = 590 ;
-        this.offsetY = 310;
+        this.offsetX = 718 ;
+        this.offsetY = 382;
         this.cells = new ArrayList<>();
         this.boardSize = boardSize;
         createBoard();
@@ -106,7 +107,7 @@ public class Board implements Cloneable{
         if(this.cells == null){
             cells = new ArrayList<>();
         }
-        Cell.RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
+        RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
         createCells();
         connectCells();
         createCenters();
@@ -117,12 +118,12 @@ public class Board implements Cloneable{
      */
     public void createCenters(){
         for (Cell cell : cells) {
-            double radius = cell.getRADIUS();
+            RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
             int q = cell.getQ();
             int r = cell.getR();
             double sqrt3 = Math.sqrt(3);
-            double x = radius * (    3/2.d * q) +              offsetX;
-            double y = radius * (sqrt3/2.d * q  + sqrt3 * r ) +offsetY;
+            double x = RADIUS * (    3/2.d * q) +              offsetX;
+            double y = RADIUS * (sqrt3/2.d * q  + sqrt3 * r ) +offsetY;
 
             cell.setX(x);
             cell.setY(y);
@@ -136,7 +137,7 @@ public class Board implements Cloneable{
      * @return a cell which is located at x and y coordinates
      */
     public Cell getCellFromPosition(double x , double y ){
-        double radius = cells.get(0).getRADIUS();
+        double radius = RADIUS = (int)( (offsetY*2 - 50) / (boardSize*2 + 1) / 2 );
         double q =    2/3.d * (x - offsetX) / radius ;
         double r = ( -1/3.d * (x - offsetX) + Math.sqrt(3)/3 * (y - offsetY) )/ radius;
 

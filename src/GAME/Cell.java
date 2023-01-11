@@ -10,7 +10,7 @@ public class Cell implements Cloneable{
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
     private double x,y ; // coordinates in GUI
-    public static double RADIUS = 30;
+
 
     public Cell(int q , int r , int s , int id){
         this.neighbors = new LinkedList<>();
@@ -123,9 +123,6 @@ public class Cell implements Cloneable{
         this.y = y;
     }
 
-    public double getRADIUS() {
-        return RADIUS;
-    }
 
     @Override
     public boolean equals(Object o) {

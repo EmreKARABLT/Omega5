@@ -3,18 +3,21 @@ package PLAYER.MTS;
 import GAME.Cell;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
+import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 import PLAYER.Player;
 import UI.Grid;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class MonteCarlo extends Player{
 
 
 
-    private final double SEARCHTIME = 250;
-    private final double MAX_SIMULATION = 1;
-    Tree tree = null;
+    private final double SEARCHTIME = 150;
+    private final double MAX_SIMULATION = 1000;
     public static double winProb = 0;
 
     public MonteCarlo(String playerName, Heuristics heuristics){
@@ -25,7 +28,6 @@ public class MonteCarlo extends Player{
             this.playerID = 1  ;
         else
             this.playerID = 0  ;
-
     }
 
     @Override
@@ -33,12 +35,12 @@ public class MonteCarlo extends Player{
 
     @Override
     public ArrayList<Cell> getMoves(State state){
-        ArrayList<Cell> move = new ArrayList<>();
-        if(tree == null ){
-            this.tree = new Tree(state, this.heuristics);
-        }else
-            this.tree.setRoot(state, state.getWhites(), state.getBlacks());
-
+//        if(tree == null ){
+//            this.tree = new Tree(state, this.heuristics,playerID);
+//
+//        }else
+//            this.tree.setRoot(state, state.getWhites(), state.getBlacks());
+        this.tree = new Tree(state, this.heuristics,playerID);
         double a = 0;
         double numberOfSim = 0;
 
@@ -49,17 +51,48 @@ public class MonteCarlo extends Player{
             numberOfSim++;
             double finish = System.currentTimeMillis();
             a += finish-start;
+//            a++;
         }
-//        System.out.println("\nEvaluation for " + numberOfSim + " simulations took " + a/Math.pow(10,9) + " seconds");
+
 
 
         Node winner = tree.getBest(tree.root);
         tree.setLastMove(winner);
-        move.add(winner.getWhite());
-        move.add(winner.getBlack());
+        ArrayList<Cell> moves = new ArrayList<>();
+
 //        System.out.println(winRateCalculator(winner));
-        return move;
+
+        moves.add(winner.getWhite());
+        moves.add(winner.getBlack());
+        winner.getWhite().setColor(0);
+        winner.getBlack().setColor(1);
+        state.addWhite(winner.getWhite());
+        state.addBlack(winner.getBlack());
+        state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+        state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+        state.nextTurn();
+        state.nextTurn();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if(GUI!=null) {
+                    GUI.updateScores();
+                    GUI.updateColors();
+                    GUI.updateScores();
+                    GUI.updateColorBars();
+                    GUI.endFrame();
+                    GUI.repaint();
+                }
+            }
+        });
+
+        return moves;
     }
+
+    public Tree getTree() {
+        return tree;
+    }
+
     public void reset(){
         this.score = 0 ;
         this.currentPiecesID = 0 ;
@@ -71,6 +104,7 @@ public class MonteCarlo extends Player{
         rate = (winner.getNumberOfWins() /  winner.getNumberOfSimulations()) * 100;
         int decimals = 100000;
         double winRate = (double) Math.round(rate * decimals) / decimals;
+        double winRateAmaf = (double) Math.round(winner.getNumberOfWinsAMAF()/winner.getNumberOfSimulationsAMAF()*100 * decimals) / decimals;
         int numberOfNonRootNodes = (tree.getNumberOfNodesDiscovered()-1);
         int numberOfNonLeafNodes = tree.getNumberOfNodesDiscovered() - tree.getNumberOfLeafNodes();
 
@@ -80,10 +114,14 @@ public class MonteCarlo extends Player{
                 "[Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " \n" +
                 "Number Of Discovered Nodes " + tree.getNumberOfNodesDiscovered() + "\n" +
                 "Number Of Leaf Nodes " + tree.getNumberOfLeafNodes() + "\n" +
-                "Average Branching Factor " + averageBranchingFactor + "\n" +
+//                "Average Branching Factor " + averageBranchingFactor + "\n" +
+                "Total Number Of Simulations = " + tree.root.getNumberOfSimulations() + " \n"+
                 "Heuristic = " + winner.getState().getCurrentPlayer() + " \n" +
-                "wins : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
-                "Win Rate = " + winRate + " %" + "\n" +
+                "Wins(U) : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
+//                "Wins(A) : " +  winner.getNumberOfWinsAMAF() + " sims: " + winner.getNumberOfSimulationsAMAF() + " \n" +
+                "Win Rate (U)= " + winRate + " %" + "\n" +
+//                "Win Rate (A)= " + winRateAmaf + " %" + "\n" +
+//                "Is AMAF MORE IMPORTANT = " + (winner.getNumberOfSimulationsAMAF() >3* winner.getNumberOfSimulations()) + "\n"+
                 "Your chances of victory = " + (100 - winRate) + " %]";
 
     }

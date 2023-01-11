@@ -6,7 +6,7 @@ import PLAYER.Player;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class State {
+public class State implements Cloneable{
     private int id ;
     private Board board;
     private int numberOfPlayers ;
@@ -17,7 +17,7 @@ public class State {
     int boardSize;
     private ArrayList<Cell> whites = new ArrayList<>();
     private ArrayList<Cell> blacks = new ArrayList<>();
-
+    public static int idCounter = 0;
 
     /**
      * Creates the board with given board size and as many players as desired
@@ -29,6 +29,10 @@ public class State {
 
         this.numberOfPlayers = playersList.size();
         players = playersList;
+        for (Player player:
+             players) {
+            player.setState(this);
+        }
 
         this.currentPlayer = players.get(0);
         this.currentColor = 0 ;
@@ -36,6 +40,14 @@ public class State {
         restart();
 
 
+    }
+    public State(State state) {
+        this.numberOfPlayers = state.getPlayers().size();
+        players = state.getPlayers();
+        id = idCounter++;
+        this.currentPlayer = state.getCurrentPlayer();
+        this.currentColor = state.getCurrentColor();
+        this.board = new Board(state.getBoard());
     }
 
     public Player getCurrentPlayer(){

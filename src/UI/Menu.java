@@ -2,6 +2,8 @@ package UI;
 
 import GAME.Board;
 import GAME.State;
+import PLAYER.MTS.ROOT_PARALLELIZATION.MonteCarloRootParallelization;
+import PLAYER.MTS.SELECTION_HEURISTICS.Pnaive;
 import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
@@ -113,12 +115,14 @@ public class Menu extends JPanel {
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENER
 
+        JButton buttonBoardSize1 = new JButton("1");
         JButton buttonBoardSize2 = new JButton("2");
         JButton buttonBoardSize3 = new JButton("3");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
-        JButton[] buttons = new JButton[]{ buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+//        JButton[] buttons = new JButton[]{ buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+        JButton[] buttons = new JButton[]{ buttonBoardSize1,buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setBounds((width - buttons.length * 200 - 100) / 3 + 300 * i, (height - size_l1.height) / 10 * 3, 100, 100);
@@ -155,15 +159,18 @@ public class Menu extends JPanel {
         JRadioButton humanW = new JRadioButton( "Human White" , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctW = new JRadioButton(   "UCT White"  , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton usb1W = new JRadioButton(  "UCB1 White"  , new ImageIcon("src/UI/transparent_radio.png"));
-//        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton ppW = new JRadioButton(  "Root // White"  , new ImageIcon("src/UI/transparent_radio.png"));
         whites.add(humanW);
         whites.add(uctW);
         whites.add(usb1W);
 //        whites.add(raveW);
+        whites.add(ppW);
         panel_white.add(humanW);
         panel_white.add(uctW);
         panel_white.add(usb1W);
 //        panel_white.add(raveW);
+        panel_white.add(ppW);
         humanW.setSelected(true);
 
         JPanel panel_black = new JPanel();
@@ -171,19 +178,23 @@ public class Menu extends JPanel {
         JRadioButton humanB = new JRadioButton("Human Black", new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctB  = new JRadioButton("UCT Black", new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton usb1B = new JRadioButton("UCB1 Black", new ImageIcon("src/UI/transparent_radio.png"));
-//        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton ppB = new JRadioButton("Root // Black", new ImageIcon("src/UI/transparent_radio.png"));
         blacks.add(humanB);
         blacks.add(uctB);
         blacks.add(usb1B);
 //        blacks.add(raveB);
+        blacks.add(ppB);
         panel_black.add(humanB);
         panel_black.add(uctB);
         panel_black.add(usb1B);
 //        panel_black.add(raveB);
+        panel_black.add(ppB);
         humanB.setSelected(true);
 
+        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,ppW,humanW,uctW ,usb1W ,ppB};
 //        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,raveB,humanW,uctW ,usb1W ,raveW};
-        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,humanW,uctW ,usb1W };
+//        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,humanW,uctW ,usb1W };
         JPanel[] player_panels = new JPanel[]{panel_white, panel_black};
 
         for (int i = 0; i < player_panels.length; i++) {
@@ -217,7 +228,8 @@ public class Menu extends JPanel {
                                 case "Human White" -> whitePlayer = new HumanPlayer("White");
                                 case "UCT White" -> whitePlayer = new MonteCarlo("White", new UCT());
                                 case "UCB1 White" -> whitePlayer = new MonteCarlo("White", new UCB1());
-//                                case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
+                                case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
+                                case "Root // White" -> whitePlayer = new MonteCarloRootParallelization("White", new UCB1());
                             }
                         }
                     if(radioButton.getText().contains("Black")) {
@@ -225,7 +237,8 @@ public class Menu extends JPanel {
                             case "Human Black" -> blackPlayer = new HumanPlayer("Black");
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
-//                            case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
+                            case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
+                            case "Root // Black" -> blackPlayer = new MonteCarloRootParallelization("Black", new UCB1());
                         }
 
                     }
