@@ -319,4 +319,25 @@ public class Board implements Cloneable{
             throw new AssertionError();
         }
     }
+    public String idString(){
+        String idString = "";
+        for (Cell cell :
+                cells) {
+            idString += cell.getId();
+            idString += ",";
+        }
+
+        return idString;
+    }
+    @Override
+    public String toString() {
+        StringBuilder boardString = new StringBuilder();
+        for (Cell cell :
+                cells) {
+            boardString.append(cell.getColor());
+            boardString.append(",");
+        }
+
+        return boardString.toString();
+    }
 }

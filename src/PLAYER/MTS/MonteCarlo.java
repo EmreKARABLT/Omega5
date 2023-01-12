@@ -16,7 +16,7 @@ public class MonteCarlo extends Player{
 
 
 
-    private final double SEARCHTIME = 150;
+    private final double SEARCHTIME = 1;
     private final double MAX_SIMULATION = 1000;
     public static double winProb = 0;
 
@@ -44,14 +44,13 @@ public class MonteCarlo extends Player{
         double a = 0;
         double numberOfSim = 0;
 
-        while ( a < SEARCHTIME){
+        while ( a < MAX_SIMULATION){
             double start = System.currentTimeMillis();
 
             tree.simulation();
             numberOfSim++;
             double finish = System.currentTimeMillis();
             a += finish-start;
-//            a++;
         }
 
 
