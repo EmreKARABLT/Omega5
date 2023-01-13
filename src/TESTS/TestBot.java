@@ -27,12 +27,13 @@ public class TestBot implements Runnable {
     private int numberOfGamesWhiteWon = 0;
     private int numberOfGamesBlackWon = 0;
     private int numberOfTies = 0;
-    Player white ,black;
-    private ArrayList<Integer> scoresOfWhite                = new ArrayList<>();
-    private ArrayList<Integer> scoresOfBlack                = new ArrayList<>();
+    Player white, black;
+    private ArrayList<Integer> scoresOfWhite = new ArrayList<>();
+    private ArrayList<Integer> scoresOfBlack = new ArrayList<>();
     private ArrayList<Double> ratios = new ArrayList<>();
     private ArrayList<String> tempStringArr;
     public static StringBuilder s = new StringBuilder();
+
     public TestBot(int numberOfTest, Player white, Player black) {
         this.numberOfTest = numberOfTest;
         this.white = white;
@@ -80,7 +81,7 @@ public class TestBot implements Runnable {
             int scoreW = state.getPlayers().get(0).getScore();
             int scoreB = state.getPlayers().get(1).getScore();
 
-            if (scoreW>scoreB) {
+            if (scoreW > scoreB) {
                 numberOfGamesWhiteWon++;
             } else {
                 numberOfGamesBlackWon++;
@@ -89,21 +90,28 @@ public class TestBot implements Runnable {
         int blacksScore = state.getPlayers().get(1).getScore();
         int whitesScore = state.getPlayers().get(0).getScore();
 
-        String winLabel = "1" ;
-        if(whitesScore>blacksScore){
+        String winLabel = "1";
+        if (whitesScore > blacksScore) {
             winLabel = "0";
         }
-        int i = 1 ;
-        for (String tempString: tempStringArr) {
-            tempString+= i+",";
+        int i = 1;
+        for (String tempString : tempStringArr) {
+            tempString += i + ",";
             i++;
-            tempString+=winLabel;
+            tempString += winLabel;
             s.append(tempString);
             s.append("\n");
         }
     }
-    public int getNumberOfGamesWhiteWon(){  return numberOfGamesWhiteWon; }
-    public int getNumberOfGamesBlackWon(){  return numberOfGamesBlackWon; }
+
+    public int getNumberOfGamesWhiteWon() {
+        return numberOfGamesWhiteWon;
+    }
+
+    public int getNumberOfGamesBlackWon() {
+        return numberOfGamesBlackWon;
+    }
+
     public double getWhitesWinPercentage() {
         return numberOfGamesWhiteWon / (double) numberOfTest * 100;
     }
@@ -116,16 +124,17 @@ public class TestBot implements Runnable {
     public ArrayList<Integer> getScoresOfBlack() {
         return scoresOfBlack;
     }
+
     public ArrayList<Integer> getScoresOfWhite() {
         return scoresOfWhite;
     }
 
 
     public static void main(String[] args) {
-//        Player white = new MonteCarlo("white",new UCB1());
-//        Player black = new MonteCarlo("black", new UCB1());
-        Player white = new RandomBot("white");
-        Player black = new RandomBot("black");
+        Player white = new MonteCarlo("white",new UCB1());
+        Player black = new MonteCarlo("black", new UCB1());
+//        Player white = new RandomBot("white");
+//        Player black = new RandomBot("black");
         // Random               ->  new RandomBot( "white"/"black")
         // RuleBased            ->  new RuleBasedBot( "white"/"black")
         // MonteCarlo PNaive    ->  new MonteCarlo( "white"/"black" , new Pnaive())
@@ -133,14 +142,14 @@ public class TestBot implements Runnable {
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
         double start = System.currentTimeMillis();
-        int N = 400000;
-        TestBot testBot = new TestBot(N,white,black);
+        int N = 10000;
+        TestBot testBot = new TestBot(N, white, black);
         double end = System.currentTimeMillis();
-        System.out.println("\nExecution time "+ (end-start)/1000.d +" seconds for " + N + " games");
-        System.out.println("\nAverage execution time for each game "+ (end-start)/N +" milliseconds \n");
-        System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() +"\n");
-        double average = (end-start)/N;
-        System.out.println(3600*1000 / average + " games will be generated in an hour");
+        System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
+        System.out.println("\nAverage execution time for each game " + (end - start) / N + " milliseconds \n");
+        System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() + "\n");
+        double average = (end - start) / N;
+        System.out.println(3600 * 1000 / average + " games will be generated in an hour");
 
     }
 }

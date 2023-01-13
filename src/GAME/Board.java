@@ -332,9 +332,8 @@ public class Board implements Cloneable{
     @Override
     public String toString() {
         StringBuilder boardString = new StringBuilder();
-        for (Cell cell :
-                cells) {
-            boardString.append(cell.getColor());
+        for (Cell cell : cells) {
+            boardString.append(cell.getColor() + 1);
             boardString.append(",");
         }
 
