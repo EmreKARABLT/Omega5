@@ -50,6 +50,8 @@ public class TestBot implements Runnable {
     public void run() {
         s.append(state.getBoard().idString());
         s.append("move,");
+        s.append("bscore,");
+        s.append("wscore,");
         s.append("bwin\n");
         for (int i = 0; i < numberOfTest; i++) {
             tempStringArr = new ArrayList<>();
@@ -60,7 +62,7 @@ public class TestBot implements Runnable {
         PrintWriter writer = null;
         try {
 
-            writer = new PrintWriter(String.format("dataset.csv"), StandardCharsets.UTF_8);
+            writer = new PrintWriter(String.format("dataset_m.csv"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,6 +100,8 @@ public class TestBot implements Runnable {
         for (String tempString : tempStringArr) {
             tempString += i + ",";
             i++;
+            tempString += blacksScore + ",";
+            tempString += whitesScore + ",";
             tempString += winLabel;
             s.append(tempString);
             s.append("\n");
@@ -131,7 +135,7 @@ public class TestBot implements Runnable {
 
 
     public static void main(String[] args) {
-        Player white = new MonteCarlo("white",new UCB1());
+        Player white = new MonteCarlo("white", new UCB1());
         Player black = new MonteCarlo("black", new UCB1());
 //        Player white = new RandomBot("white");
 //        Player black = new RandomBot("black");
@@ -142,7 +146,7 @@ public class TestBot implements Runnable {
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
         double start = System.currentTimeMillis();
-        int N = 10000;
+        int N = 1;
         TestBot testBot = new TestBot(N, white, black);
         double end = System.currentTimeMillis();
         System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
