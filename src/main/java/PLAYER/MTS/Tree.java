@@ -1,6 +1,7 @@
 package PLAYER.MTS;
 
 import GAME.Cell;
+import GAME.HelloTensorFlow;
 import GAME.State;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
 import PLAYER.Player;
@@ -9,12 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tree {
-    private int numberOfNodesDiscovered = 0 ;
-    private int numberOfLeafNodes = 0 ;
+
     public int simNumber = 0;
-    public int numberOfTotalWins = 0;
-    public int discoveryOnEachRound = 0 ;
-    public int numberOfTotalWinsEachRound=0;
     Node root;
     private State state;
     private final Boolean ACTIONS = true;
@@ -23,8 +20,7 @@ public class Tree {
     public RandomBot randomBot = new RandomBot("white");
     public Heuristics heuristics ;
     public int treeID ;
-
-
+    public HelloTensorFlow model;
     public Node lastMove = null;
 
     public Tree(State state, Heuristics heuristics, int treeID){
@@ -110,36 +106,19 @@ public class Tree {
         Node node = root;
 
         simNumber=counter++;
-        while(!state.isGameOver()){
-
+        while(!state.isGameOver() ){
             Node nextNode = selection(node);
-
-            if(nextNode.getNumberOfSimulations() == 0 ) {
-                numberOfNodesDiscovered++;
-
-            }
-            discoveryOnEachRound++;
             nextNode.color();
             node =nextNode;
         }
-        if(node.getNumberOfSimulations() == 0)
-            numberOfLeafNodes++;
 
         node.getState().updatePlayerScores();
-        //TODO centerOfMass of Clusters()
         Player winner = node.getState().getWinner();
 
         double win =  0;
-        int scoreW = state.getPlayers().get(0).getScore();
-        int scoreB = state.getPlayers().get(1).getScore();
-//        if(scoreW==scoreB){
-//            win = 0.5;
-//        }else
         if ( winner.getPlayerID() == treeID)
             win = 1;
 
-        numberOfTotalWins+=win;
-        numberOfTotalWinsEachRound+=win;
         node.setNumberOfWins(node.getNumberOfWins() + win);
         node.setNumberOfSimulations(node.getNumberOfSimulations() + 1);
         node.add(win);
@@ -180,35 +159,20 @@ public class Tree {
         setRoot(opponentsMove);
 
     }
-
-
-    public int getNumberOfNodesDiscovered() {
-        return numberOfNodesDiscovered;
+    public Node getRoot(){
+        return this.root;
     }
 
-    public int getNumberOfLeafNodes() {
-        return numberOfLeafNodes;
-    }
-
-    public int getSimNumber() {
-        return simNumber;
-    }
-
-    public int getNumberOfTotalWins() {
-        return numberOfTotalWins;
-    }
 
     public void setLastMove(Node lastMove) {
         this.lastMove = lastMove;
     }
 
-    public int getDiscoveryOnEachRound() {return discoveryOnEachRound;}
-
-    public void setDiscoveryOnEachRound(int discoveryOnEachRound) {
-        this.discoveryOnEachRound = discoveryOnEachRound;
+    public HelloTensorFlow getModel() {
+        return model;
     }
 
-    public HashMap<TuplePieces, Node> getHash_AMAF() {
-        return Hash_AMAF;
+    public void setModel(HelloTensorFlow model) {
+        this.model = model;
     }
 }

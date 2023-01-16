@@ -8,7 +8,7 @@ import PLAYER.RULE_BASED_BOT.Rules;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Node{
+public class Node implements Comparable{
 
     private Node parent;
     private State state;
@@ -24,6 +24,8 @@ public class Node{
     private int scoreOfWhite;
     private int scoreOfBlack;
     private int votes = 0 ;
+    private double annPrediction = 0 ;
+    private ArrayList<Node> betterChildren = null;
     private ArrayList<Integer> groupsOfWhite;
     private ArrayList<Integer> groupsOfBlack;
     private ArrayList<Double> data = new ArrayList<>();
@@ -217,6 +219,17 @@ public class Node{
         this.groupsOfBlack = groupsOfBlack;
     }
 
+    public double getAnnPrediction() {
+        return annPrediction;
+    }
+
+    public void setAnnPrediction(double annPrediction) {
+        this.annPrediction = annPrediction;
+    }
+
+    public ArrayList<Node> getBetterChildren() {return betterChildren;}
+
+    public void setBetterChildren(ArrayList<Node> betterChildren) { this.betterChildren = betterChildren;}
 
     @Override
     public boolean equals(Object o) {
@@ -255,6 +268,16 @@ public class Node{
         if(numberOfSimulations == 0)
             return -1.0;
         return numberOfWins/numberOfSimulations;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Node n = (Node)o;
+        if(annPrediction>n.annPrediction)
+            return -1;
+        else if(annPrediction<n.annPrediction)
+            return 1;
+        return 0;
     }
 }
 

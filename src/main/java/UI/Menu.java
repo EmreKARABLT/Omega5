@@ -2,7 +2,6 @@ package UI;
 
 import GAME.Board;
 import GAME.State;
-import PLAYER.MTS.ROOT_PARALLELIZATION.MonteCarloRootParallelization;
 import PLAYER.MTS.SELECTION_HEURISTICS.Pnaive;
 import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
@@ -229,7 +228,7 @@ public class Menu extends JPanel {
                                 case "UCT White" -> whitePlayer = new MonteCarlo("White", new UCT());
                                 case "UCB1 White" -> whitePlayer = new MonteCarlo("White", new UCB1());
                                 case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
-                                case "Root // White" -> whitePlayer = new MonteCarloRootParallelization("White", new UCB1());
+
                             }
                         }
                     if(radioButton.getText().contains("Black")) {
@@ -238,7 +237,6 @@ public class Menu extends JPanel {
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
                             case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
-                            case "Root // Black" -> blackPlayer = new MonteCarloRootParallelization("Black", new UCB1());
                         }
 
                     }

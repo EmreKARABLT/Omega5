@@ -2,6 +2,7 @@ package PLAYER;
 
 import GAME.Cell;
 import GAME.State;
+import PLAYER.Hybrid.TreeHybrid;
 import PLAYER.MTS.SELECTION_HEURISTICS.Heuristics;
 import PLAYER.MTS.Tree;
 import UI.Grid;
