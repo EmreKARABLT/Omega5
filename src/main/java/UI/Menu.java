@@ -2,10 +2,8 @@ package UI;
 
 import GAME.Board;
 import GAME.State;
-import PLAYER.MTS.SELECTION_HEURISTICS.Pnaive;
-import PLAYER.MTS.SELECTION_HEURISTICS.RAVE;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
-import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
+import PLAYER.Hybrid.Hybrid;
+import PLAYER.MTS.SELECTION_HEURISTICS.*;
 import PLAYER.MTS.MonteCarlo;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
@@ -66,7 +64,7 @@ public class Menu extends JPanel {
         //LOADING BACKGROUND
         BufferedImage originalImage = null;
         try {
-            originalImage = ImageIO.read(new File("src/UI/background.jpg"));
+            originalImage = ImageIO.read(new File("src/main/java/UI/background.jpg"));
         } catch (IOException ignored) {
         }
         Image img = null;
@@ -158,40 +156,31 @@ public class Menu extends JPanel {
         JRadioButton humanW = new JRadioButton( "Human White" , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctW = new JRadioButton(   "UCT White"  , new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton usb1W = new JRadioButton(  "UCB1 White"  , new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton raveW = new JRadioButton(  "RAVE White"  , new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton ppW = new JRadioButton(  "Root // White"  , new ImageIcon("src/UI/transparent_radio.png"));
         whites.add(humanW);
         whites.add(uctW);
         whites.add(usb1W);
-//        whites.add(raveW);
-        whites.add(ppW);
         panel_white.add(humanW);
         panel_white.add(uctW);
         panel_white.add(usb1W);
-//        panel_white.add(raveW);
-        panel_white.add(ppW);
         humanW.setSelected(true);
 
         JPanel panel_black = new JPanel();
         ButtonGroup blacks = new ButtonGroup();
         JRadioButton humanB = new JRadioButton("Human Black", new ImageIcon("src/UI/transparent_radio.png"));
         JRadioButton uctB  = new JRadioButton("UCT Black", new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton usb1B = new JRadioButton("UCB1 Black", new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton raveB = new JRadioButton("RAVE Black", new ImageIcon("src/UI/transparent_radio.png"));
-        JRadioButton ppB = new JRadioButton("Root // Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton ucb1B = new JRadioButton("UCB1 Black", new ImageIcon("src/UI/transparent_radio.png"));
+        JRadioButton ucb1BNN = new JRadioButton("Hybrid Black", new ImageIcon("src/UI/transparent_radio.png"));
         blacks.add(humanB);
         blacks.add(uctB);
-        blacks.add(usb1B);
-//        blacks.add(raveB);
-        blacks.add(ppB);
+        blacks.add(ucb1B);
+        blacks.add(ucb1BNN);
         panel_black.add(humanB);
         panel_black.add(uctB);
-        panel_black.add(usb1B);
-//        panel_black.add(raveB);
-        panel_black.add(ppB);
+        panel_black.add(ucb1B);
+        panel_black.add(ucb1BNN);
         humanB.setSelected(true);
 
-        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,ppW,humanW,uctW ,usb1W ,ppB};
+        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,ucb1B ,ucb1BNN,humanW,uctW ,usb1W };
 //        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,raveB,humanW,uctW ,usb1W ,raveW};
 //        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,humanW,uctW ,usb1W };
         JPanel[] player_panels = new JPanel[]{panel_white, panel_black};
@@ -204,16 +193,23 @@ public class Menu extends JPanel {
 
         }
         for (JRadioButton radioButton  : radioButtons  ) {
+
             if(radioButton.isSelected())
                 radioButton.setForeground(Color.ORANGE);
             else
                 radioButton.setForeground(Color.RED);
+
             radioButton.setFocusPainted(false);
             radioButton.setOpaque(false);
             radioButton.setFont(Show.customFont_20f);
             radioButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    System.out.println((e.getSource()).equals(ucb1BNN) + "  " + buttonBoardSize3.isSelected());
+                    if((e.getSource()).equals(ucb1BNN))
+                        if (!buttonBoardSize3.isSelected())
+                            return;
+
 
                     for (JRadioButton button : radioButtons) {
                         if (button.isSelected())
@@ -227,7 +223,7 @@ public class Menu extends JPanel {
                                 case "Human White" -> whitePlayer = new HumanPlayer("White");
                                 case "UCT White" -> whitePlayer = new MonteCarlo("White", new UCT());
                                 case "UCB1 White" -> whitePlayer = new MonteCarlo("White", new UCB1());
-                                case "RAVE White" -> whitePlayer = new MonteCarlo("White", new RAVE());
+
 
                             }
                         }
@@ -236,7 +232,8 @@ public class Menu extends JPanel {
                             case "Human Black" -> blackPlayer = new HumanPlayer("Black");
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
-                            case "RAVE Black" -> blackPlayer = new MonteCarlo("Black", new RAVE());
+                            case "Hybrid Black" -> blackPlayer = new Hybrid("black", new UCB1NN());
+
                         }
 
                     }

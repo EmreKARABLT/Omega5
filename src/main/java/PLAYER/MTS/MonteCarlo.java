@@ -16,7 +16,7 @@ public class MonteCarlo extends Player{
 
 
 
-    private final double SEARCHTIME = 10;
+    private final double SEARCHTIME = 100;
     private final double MAX_SIMULATION = 1000;
     public static double winProb = 0;
 
@@ -103,25 +103,14 @@ public class MonteCarlo extends Player{
         rate = (winner.getNumberOfWins() /  winner.getNumberOfSimulations()) * 100;
         int decimals = 100000;
         double winRate = (double) Math.round(rate * decimals) / decimals;
-        double winRateAmaf = (double) Math.round(winner.getNumberOfWinsAMAF()/winner.getNumberOfSimulationsAMAF()*100 * decimals) / decimals;
-        int numberOfNonRootNodes = (tree.getNumberOfNodesDiscovered()-1);
-        int numberOfNonLeafNodes = tree.getNumberOfNodesDiscovered() - tree.getNumberOfLeafNodes();
-
-        double averageBranchingFactor = (numberOfNonRootNodes * 1.0) / numberOfNonLeafNodes;
         winProb = winRate;
         return  "\n" +
-                "[Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " \n" +
-                "Number Of Discovered Nodes " + tree.getNumberOfNodesDiscovered() + "\n" +
-                "Number Of Leaf Nodes " + tree.getNumberOfLeafNodes() + "\n" +
-//                "Average Branching Factor " + averageBranchingFactor + "\n" +
-                "Total Number Of Simulations = " + tree.root.getNumberOfSimulations() + " \n"+
-                "Heuristic = " + winner.getState().getCurrentPlayer() + " \n" +
-                "Wins(U) : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
-//                "Wins(A) : " +  winner.getNumberOfWinsAMAF() + " sims: " + winner.getNumberOfSimulationsAMAF() + " \n" +
-                "Win Rate (U)= " + winRate + " %" + "\n" +
-//                "Win Rate (A)= " + winRateAmaf + " %" + "\n" +
-//                "Is AMAF MORE IMPORTANT = " + (winner.getNumberOfSimulationsAMAF() >3* winner.getNumberOfSimulations()) + "\n"+
-                "Your chances of victory = " + (100 - winRate) + " %]";
+                "Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " // Win RATE = " + winRate
+//                "Total Number Of Simulations = " + tree.getRoot().getNumberOfSimulations() + " \n"+
+//				"Wins(U) : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
+//                "Win Rate (U)= " + winRate + " %" + "\n"
+//				+ "Your chances of victory = " + (100 - winRate) + " %]"
+                ;
 
     }
 }

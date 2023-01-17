@@ -3,8 +3,10 @@ package TESTS;
 import GAME.Board;
 import GAME.Cell;
 import GAME.State;
+import PLAYER.Hybrid.Hybrid;
 import PLAYER.MTS.MonteCarlo;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCB1;
+import PLAYER.MTS.SELECTION_HEURISTICS.UCB1NN;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import PLAYER.Player;
@@ -56,6 +58,7 @@ public class TestBot implements Runnable {
         for (int i = 0; i < numberOfTest; i++) {
             tempStringArr = new ArrayList<>();
             runTest();
+            System.out.printf("\n*************   WHITE : %d - BLACK : %d   *************\n",white.getScore(),black.getScore());
             //in this part board will be full and any data can be derived
             state.restart();
         }
@@ -136,7 +139,7 @@ public class TestBot implements Runnable {
 
     public static void main(String[] args) {
         Player white = new MonteCarlo("white", new UCB1());
-        Player black = new MonteCarlo("black", new UCB1());
+        Player black = new Hybrid("black", new UCB1NN());
 //        Player white = new RandomBot("white");
 //        Player black = new RandomBot("black");
         // Random               ->  new RandomBot( "white"/"black")
@@ -146,14 +149,14 @@ public class TestBot implements Runnable {
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
         double start = System.currentTimeMillis();
-        int N = 1;
+        int N = 1000;
         TestBot testBot = new TestBot(N, white, black);
         double end = System.currentTimeMillis();
         System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
         System.out.println("\nAverage execution time for each game " + (end - start) / N + " milliseconds \n");
         System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() + "\n");
-        double average = (end - start) / N;
-        System.out.println(3600 * 1000 / average + " games will be generated in an hour");
+        double average = (end - start)/1000.d / N;
+        System.out.println(3600 / average + " games will be generated in an hour");
 
     }
 }

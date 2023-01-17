@@ -56,14 +56,15 @@ public class TreeHybrid extends Tree {
 
 		if(node.getChildren().size() <= max ){
 
-//			if(node == root ){
-////
-//				int random = (int) (Math.random() * node.getBetterChildren().size());
-//				selected = node.getBetterChildren().get(random);
-////
-//			}else {
-			ArrayList<Cell> moves = randomBot.randomMoves(node.getState());
-			selected = new Node(node, state, moves.get(0), moves.get(1));
+			if(node == root ){
+//
+				int random = (int) (Math.random() * node.getBetterChildren().size());
+				selected = node.getBetterChildren().get(random);
+//
+			}else {
+				ArrayList<Cell> moves = randomBot.randomMoves(node.getState());
+				selected = new Node(node, state, moves.get(0), moves.get(1));
+			}
 			selected = node.addChild(selected);
 //			selected.color();
 //			double prediction = model.predict(state.getBoard().getCells());
@@ -110,8 +111,8 @@ public class TreeHybrid extends Tree {
 
 			node =nextNode;
 
-			if(node.getDepth() - root.getDepth() >= 13)
-				break;
+//			if(node.getDepth() - root.getDepth() >=13)
+//				break;
 
 		}
 
@@ -125,7 +126,7 @@ public class TreeHybrid extends Tree {
 		}else{
 
 			double prediction = model.predict(state.getBoard().getCells());
-			if(prediction<0.3)
+			if(prediction<0.5)
 				win = 0;
 		}
 		node.setNumberOfWins(node.getNumberOfWins() + win);

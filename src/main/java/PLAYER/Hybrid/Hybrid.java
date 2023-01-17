@@ -29,7 +29,7 @@ public class Hybrid extends Player{
 			this.playerID = 1  ;
 		else
 			this.playerID = 0  ;
-		model = new HelloTensorFlow("C:/Users/bpk_e/Desktop/NN1/try_model");
+
 	}
 
 	@Override
@@ -37,11 +37,9 @@ public class Hybrid extends Player{
 
 	@Override
 	public ArrayList<Cell> getMoves(State state){
-
+		if(model == null ) model = new HelloTensorFlow("src/current_model");
+		if(tree.getModel() == null ) tree.setModel(model);
 		this.tree = new TreeHybrid(state, this.heuristics,playerID);
-		if(model == null )
-			System.out.println();
-		tree.setModel(model);
 
 		double a = 0;
 		double numberOfSim = 0;
@@ -119,12 +117,11 @@ public class Hybrid extends Player{
 		double winRate = (double) Math.round(rate * decimals) / decimals;
 		winProb = winRate;
 		return  "\n" +
-				"[Player = " + winner.getState().getCurrentPlayer().getPlayerName() + " " + winner.getState().getCurrentPlayer()+ "\n" +
-				"Total Number Of Simulations = " + tree.getRoot().getNumberOfSimulations() + " \n"+
+				"HYBRID = " + winner.getState().getCurrentPlayer().getPlayerName() + " // Win RATE = " + winRate
+//                "Total Number Of Simulations = " + tree.getRoot().getNumberOfSimulations() + " \n"+
 //				"Wins(U) : " +  winner.getNumberOfWins() + " sims: " + winner.getNumberOfSimulations() + " \n" +
-				"Win Rate (U)= " + winRate + " %" + "\n"
+//                "Win Rate (U)= " + winRate + " %" + "\n"
 //				+ "Your chances of victory = " + (100 - winRate) + " %]"
 				;
-
 	}
 }

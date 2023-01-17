@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="generating data is done">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GAME/GFG.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GAME/HelloTensorFlow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="Hybrid agent / Include Maven for Tensorflow">
+      <change afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/UCB1NN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Omega.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Omega.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Clusters.class" beforeDir="false" />
@@ -51,45 +46,17 @@
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/RubikDirt-Regular.ttf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Show.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GAME/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GAME/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GAME/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GAME/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GAME/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GAME/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/GA/GeneticAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/GA/GeneticAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/GA/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/GA/HeapSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/GA/Individuals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/GA/Individuals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/HumanPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/MonteCarlo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/ROOT_PARALLELIZATION/MonteCarloRootParallelization.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/ROOT_PARALLELIZATION/TreeParallel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/Pnaive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Pnaive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/RAVE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/UCB1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/UCT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/UCT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/SELECTION_HEURISTICS/Variance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Variance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/MTS/TuplePieces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/TuplePieces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/NN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/NN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/RULE_BASED_BOT/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/GeneticRuleBasedBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/RULE_BASED_BOT/GeneticRuleBasedBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/RULE_BASED_BOT/RuleBasedBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RULE_BASED_BOT/Rules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/RULE_BASED_BOT/Rules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PLAYER/RandomBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/RandomBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TESTS/RunTimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TESTS/RunTimeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TESTS/TestBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TESTS/TestBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Helpers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Hex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Hex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/RubikDirt-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/RubikDirt-Regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/transparent_radio.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/transparent_radio.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/background.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/RubikDirt-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/MonteCarlo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TESTS/TestBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TESTS/TestBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UI/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Show.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +74,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="50daa4bcb86a9019359f692103d4a0d1214fd8cd" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -147,37 +114,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bpk_e\Desktop\Omega5\src" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="PLAYER.GA" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestBot (1)">
-    <configuration name="GFG" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GAME.GFG" />
-      <module name="Omega" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GAME.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HelloTensorFlow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GAME.HelloTensorFlow" />
-      <module name="Omega" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GAME.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Show">
     <configuration name="RunTimeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TESTS.RunTimeTest" />
       <module name="Omega" />
@@ -217,13 +161,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GAME.TestBot" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GAME.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LA_BUNDES_PREMIER_LIG_MLS_ONE.test" />
+      <module name="Omega" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PLAYER.MTS.ROOT_PARALLELIZATION.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestBot (1)" />
-        <item itemvalue="Application.HelloTensorFlow" />
-        <item itemvalue="Application.GFG" />
-        <item itemvalue="Application.RunTimeTest" />
         <item itemvalue="Application.Show" />
+        <item itemvalue="Application.TestBot (1)" />
+        <item itemvalue="Application.TestBot" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.RunTimeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -369,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673532980322</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Hybrid agent / Include Maven for Tensorflow">
+      <created>1673912980843</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1673912980843</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +390,8 @@
     <MESSAGE value="end wenesday bugs to solve: UCT UCB1 now are not working properly" />
     <MESSAGE value="first commit of 3rd phase" />
     <MESSAGE value="generating data is done" />
-    <option name="LAST_COMMIT_MESSAGE" value="generating data is done" />
+    <MESSAGE value="Hybrid agent / Include Maven for Tensorflow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hybrid agent / Include Maven for Tensorflow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -432,31 +410,6 @@
           <line>300</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/GAME/HelloTensorFlow.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/GAME/HelloTensorFlow.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="109" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -470,9 +423,11 @@
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/src/main/java/GAME/HelloTensorFlow.java" line="34">
-        <watch expression="session" language="JAVA" />
-      </inline-watch>
+      <configuration name="Application">
+        <watch expression="tempRoot.parent" />
+        <watch expression="node.playerID" />
+        <watch expression="nextNode.playerID" />
+      </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

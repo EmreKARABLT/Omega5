@@ -23,11 +23,11 @@ public class Show extends JFrame {
 
         try {
             //create the font to use. Specify the size!
-            Show.customFont_60f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(70f);
-            Show.customFont_50f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(50f);
-            Show.customFont_40f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(35f);
-            Show.customFont_25f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(25f);
-            Show.customFont_20f = Font.createFont(Font.TRUETYPE_FONT, new File("src/UI/RubikDirt-Regular.ttf")).deriveFont(20f);
+            Show.customFont_60f = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/UI/RubikDirt-Regular.ttf")).deriveFont(70f);
+            Show.customFont_50f = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/UI/RubikDirt-Regular.ttf")).deriveFont(50f);
+            Show.customFont_40f = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/UI/RubikDirt-Regular.ttf")).deriveFont(35f);
+            Show.customFont_25f = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/UI/RubikDirt-Regular.ttf")).deriveFont(25f);
+            Show.customFont_20f = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/UI/RubikDirt-Regular.ttf")).deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
             ge.registerFont(Show.customFont_60f);
