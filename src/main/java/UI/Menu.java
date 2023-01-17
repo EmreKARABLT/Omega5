@@ -112,44 +112,15 @@ public class Menu extends JPanel {
 
         //BUTTONS FOR BOARD SIZE AND ACTION LISTENER
 
-        JButton buttonBoardSize1 = new JButton("1");
+//        JButton buttonBoardSize1 = new JButton("1");
         JButton buttonBoardSize2 = new JButton("2");
         JButton buttonBoardSize3 = new JButton("3");
         JButton buttonBoardSize5 = new JButton("4");
         JButton buttonBoardSize7 = new JButton("5");
 
-//        JButton[] buttons = new JButton[]{ buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
-        JButton[] buttons = new JButton[]{ buttonBoardSize1,buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+        JButton[] buttons = new JButton[]{ buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
+//        JButton[] buttons = new JButton[]{ buttonBoardSize1,buttonBoardSize2, buttonBoardSize3, buttonBoardSize5, buttonBoardSize7};
 
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setBounds((width - buttons.length * 200 - 100) / 3 + 300 * i, (height - size_l1.height) / 10 * 3, 100, 100);
-            buttons[i].setFont(Show.customFont_50f);
-            buttons[i].setOpaque(false);
-            buttons[i].setContentAreaFilled(false);
-            buttons[i].setBorderPainted(false);
-
-            if (buttons[i].getText().equalsIgnoreCase(Integer.toString(boardSize))) {
-                buttons[i].setForeground(Color.ORANGE);
-            } else
-                buttons[i].setForeground(Color.RED);
-
-            buttons[i].setFocusPainted(false);
-            panel.add(buttons[i]);
-            buttons[i].addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    for (JButton button : buttons) {
-                        JButton clickedButton = (JButton) e.getSource();
-                        if (button != clickedButton) {
-                            button.setForeground(Color.RED);
-                        }
-                        clickedButton.setForeground(Color.ORANGE);
-                        boardSize = Integer.parseInt(clickedButton.getText());
-                    }
-                }
-            });
-        }
-        Player.counterForIDs = 0 ;
-        //BUTTONS FOR PLAYER OPTIONS AND ACTION LISTENERS
         JPanel panel_white = new JPanel();
         panel_white.setForeground(Color.PINK);
         ButtonGroup whites = new ButtonGroup();
@@ -180,6 +151,42 @@ public class Menu extends JPanel {
         panel_black.add(ucb1BNN);
         humanB.setSelected(true);
 
+
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setBounds((width - buttons.length * 200 - 100) / 3 + 300 * i, (height - size_l1.height) / 10 * 3, 100, 100);
+            buttons[i].setFont(Show.customFont_50f);
+            buttons[i].setOpaque(false);
+            buttons[i].setContentAreaFilled(false);
+            buttons[i].setBorderPainted(false);
+
+            if (buttons[i].getText().equalsIgnoreCase(Integer.toString(boardSize))) {
+                buttons[i].setForeground(Color.ORANGE);
+            } else
+                buttons[i].setForeground(Color.RED);
+
+            buttons[i].setFocusPainted(false);
+            panel.add(buttons[i]);
+            buttons[i].addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if(ucb1BNN.isSelected() ){
+                        return;
+                    }
+                    for (JButton button : buttons) {
+                        JButton clickedButton = (JButton) e.getSource();
+                        if (button != clickedButton) {
+                            button.setForeground(Color.RED);
+                        }
+                        clickedButton.setForeground(Color.ORANGE);
+                        boardSize = Integer.parseInt(clickedButton.getText());
+                    }
+                }
+            });
+        }
+        Player.counterForIDs = 0 ;
+        //BUTTONS FOR PLAYER OPTIONS AND ACTION LISTENERS
+
+
         JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,ucb1B ,ucb1BNN,humanW,uctW ,usb1W };
 //        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,raveB,humanW,uctW ,usb1W ,raveW};
 //        JRadioButton[] radioButtons = new JRadioButton[]{humanB,uctB ,usb1B ,humanW,uctW ,usb1W };
@@ -205,11 +212,22 @@ public class Menu extends JPanel {
             radioButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println((e.getSource()).equals(ucb1BNN) + "  " + buttonBoardSize3.isSelected());
-                    if((e.getSource()).equals(ucb1BNN))
-                        if (!buttonBoardSize3.isSelected())
-                            return;
-
+                    if ((e.getSource()).equals(ucb1BNN)) {
+                        for (JButton button : buttons) {
+                            if (button != buttonBoardSize3) {
+                                button.setForeground(Color.GRAY);
+                            }
+                        }
+                        if (boardSize != 3) {
+                            buttonBoardSize3.setForeground(Color.ORANGE);
+                            boardSize = 3;
+                        }
+                    }else
+                        for (JButton button : buttons) {
+                            if (button.getForeground().equals(Color.GRAY)) {
+                                button.setForeground(Color.RED);
+                            }
+                        }
 
                     for (JRadioButton button : radioButtons) {
                         if (button.isSelected())
@@ -232,7 +250,7 @@ public class Menu extends JPanel {
                             case "Human Black" -> blackPlayer = new HumanPlayer("Black");
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
-                            case "Hybrid Black" -> blackPlayer = new Hybrid("black", new UCB1NN());
+                            case "Hybrid Black\nOnly with size 3" -> blackPlayer = new Hybrid("black", new UCB1NN());
 
                         }
 

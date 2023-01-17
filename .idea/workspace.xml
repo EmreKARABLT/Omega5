@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="Hybrid agent / Include Maven for Tensorflow">
-      <change afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/UCB1NN.java" afterDir="false" />
+    <list default="true" id="19b15d9a-ac50-4f53-8b31-f32c634a89d2" name="Changes" comment="Combined and works hybrid">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Board.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/GAME/Cell.class" beforeDir="false" />
@@ -47,16 +46,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu$4.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Menu.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/Show.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Omega/UI/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/RubikDirt-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/background.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/Hybrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/Hybrid/TreeHybrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/MonteCarlo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PLAYER/MTS/SELECTION_HEURISTICS/Heuristics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TESTS/TestBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TESTS/TestBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/Show.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673912980843</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Combined and works hybrid">
+      <created>1673958689490</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1673958689490</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,7 +389,8 @@
     <MESSAGE value="first commit of 3rd phase" />
     <MESSAGE value="generating data is done" />
     <MESSAGE value="Hybrid agent / Include Maven for Tensorflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hybrid agent / Include Maven for Tensorflow" />
+    <MESSAGE value="Combined and works hybrid" />
+    <option name="LAST_COMMIT_MESSAGE" value="Combined and works hybrid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

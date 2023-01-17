@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Hybrid extends Player{
 	
-	private final double SEARCHTIME = 1000;
+	private final double SEARCHTIME = 100;
 //	private final double MAX_SIMULATION = 10000;
 	public static double winProb = 0;
 	public HelloTensorFlow model ;
@@ -37,9 +37,11 @@ public class Hybrid extends Player{
 
 	@Override
 	public ArrayList<Cell> getMoves(State state){
-		if(model == null ) model = new HelloTensorFlow("src/current_model");
-		if(tree.getModel() == null ) tree.setModel(model);
+		if(model == null ){
+			model = new HelloTensorFlow("src/current_model");
+		}
 		this.tree = new TreeHybrid(state, this.heuristics,playerID);
+		tree.setModel(model);
 
 		double a = 0;
 		double numberOfSim = 0;
