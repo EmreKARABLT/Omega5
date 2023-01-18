@@ -76,7 +76,7 @@ public class Hybrid extends Player{
 //		}
 //		System.out.println();
 
-        System.out.println(winRateCalculator(winner));
+//        System.out.println(winRateCalculator(winner));
 
 		moves.add(winner.getWhite());
 		moves.add(winner.getBlack());
@@ -125,5 +125,18 @@ public class Hybrid extends Player{
 //                "Win Rate (U)= " + winRate + " %" + "\n"
 //				+ "Your chances of victory = " + (100 - winRate) + " %]"
 				;
+	}
+
+	public static void main(String[] args) {
+		double h_1000 =  92+ 90+ 89+ 80+ 92+ 98+ 92+ 97;
+		double all_1000 =33+ 35+ 36+ 45+ 33+ 27+ 33+ 28 + h_1000;
+		double wr_1000 = (h_1000)/(all_1000);
+		System.out.println(wr_1000);
+
+		double h_100 =  115 +114 +108 +108 +116 +107 +112 +113 ;
+		double all_100 =10+ 11+ 17+ 17+ 9+ 18+ 13+ 12 + h_100;
+		double wr_100 = (h_100)/(all_100);
+		System.out.println(wr_100);
+
 	}
 }

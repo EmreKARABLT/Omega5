@@ -47,7 +47,6 @@ public class TreeHybrid extends Tree {
 	public Node selection(Node node ){
 
 		Node selected ;
-		//TODO: find the ideal max
 		int max = Math.min( node.numberOfPossibleMoves() , 300 );
 //        int max = node.getNumberOfSimulations() /300 + 5 ;
 //        boolean unprune = node.getNumberOfSimulations()%300 == 0 ;
@@ -197,7 +196,7 @@ public class TreeHybrid extends Tree {
 		}
 		Collections.sort(allPossibilities);
 		ArrayList<Node> betterMoves = new ArrayList<>();
-		for (int i = 0; i < Math.min(150, allPossibilities.size()); i++) {
+		for (int i = 0; i < Math.min(300, allPossibilities.size()); i++) {
 			betterMoves.add(allPossibilities.get(i));
 		}
 //		for (int i = 0; i < betterMoves.size(); i++) {

@@ -222,13 +222,13 @@ public class Menu extends JPanel {
                             buttonBoardSize3.setForeground(Color.ORANGE);
                             boardSize = 3;
                         }
-                    }else
+                    }else {
                         for (JButton button : buttons) {
                             if (button.getForeground().equals(Color.GRAY)) {
                                 button.setForeground(Color.RED);
                             }
                         }
-
+                    }
                     for (JRadioButton button : radioButtons) {
                         if (button.isSelected())
                             button.setForeground(Color.ORANGE);
@@ -250,7 +250,7 @@ public class Menu extends JPanel {
                             case "Human Black" -> blackPlayer = new HumanPlayer("Black");
                             case "UCT Black" -> blackPlayer = new MonteCarlo("Black", new UCT());
                             case "UCB1 Black" -> blackPlayer = new MonteCarlo("Black", new UCB1());
-                            case "Hybrid Black\nOnly with size 3" -> blackPlayer = new Hybrid("black", new UCB1NN());
+                            case "Hybrid Black" -> blackPlayer = new Hybrid("black", new UCB1NN());
 
                         }
 

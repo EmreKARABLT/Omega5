@@ -36,7 +36,7 @@ public class UCB1NN extends Heuristics{
 		ArrayList<Node> childrens = node.getChildren();
 		double variance = variance(node);
 		return (Node)Collections.min(childrens, Comparator.comparing((c) -> {
-			return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance);
+			return value(visited, c.getNumberOfWins(), c.getNumberOfSimulations(), variance)+ c.getAnnPrediction();
 		}));
 	}
 	public String getName() {

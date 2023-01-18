@@ -34,7 +34,7 @@ public class TestBot implements Runnable {
     private ArrayList<Integer> scoresOfBlack = new ArrayList<>();
     private ArrayList<Double> ratios = new ArrayList<>();
     private ArrayList<String> tempStringArr;
-    public static StringBuilder s = new StringBuilder();
+//    public static StringBuilder s = new StringBuilder();
 
     public TestBot(int numberOfTest, Player white, Player black) {
         this.numberOfTest = numberOfTest;
@@ -44,34 +44,36 @@ public class TestBot implements Runnable {
         playersList.add(white);
         playersList.add(black);
         state = new State(new Board(3), playersList);
-        run();
+
 
     }
 
     @Override
     public void run() {
-        s.append(state.getBoard().idString());
-        s.append("move,");
-        s.append("bscore,");
-        s.append("wscore,");
-        s.append("bwin\n");
+        System.out.println("Thread is running...");
+//        s.append(state.getBoard().idString());
+//        s.append("move,");
+//        s.append("bscore,");
+//        s.append("wscore,");
+//        s.append("bwin\n");
         for (int i = 0; i < numberOfTest; i++) {
             tempStringArr = new ArrayList<>();
             runTest();
-            System.out.printf("\n*************   WHITE : %d - BLACK : %d   *************\n",white.getScore(),black.getScore());
+//            System.out.printf("\n*************   WHITE : %d - BLACK : %d   *************\n",white.getScore(),black.getScore());
             //in this part board will be full and any data can be derived
             state.restart();
         }
-        PrintWriter writer = null;
-        try {
-
-            writer = new PrintWriter(String.format("dataset_m.csv"), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert writer != null;
-        writer.print(s.toString());
-        writer.close();
+        System.out.println(numberOfGamesWhiteWon + " // " + numberOfGamesBlackWon);
+//        PrintWriter writer = null;
+//        try {
+//
+//            writer = new PrintWriter(String.format("dataset_m.csv"), StandardCharsets.UTF_8);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        assert writer != null;
+//        writer.print(s.toString());
+//        writer.close();
     }
 
     public void runTest() {
@@ -92,23 +94,23 @@ public class TestBot implements Runnable {
                 numberOfGamesBlackWon++;
             }
         }
-        int blacksScore = state.getPlayers().get(1).getScore();
-        int whitesScore = state.getPlayers().get(0).getScore();
+//        int blacksScore = state.getPlayers().get(1).getScore();
+//        int whitesScore = state.getPlayers().get(0).getScore();
 
-        String winLabel = "1";
-        if (whitesScore > blacksScore) {
-            winLabel = "0";
-        }
-        int i = 1;
-        for (String tempString : tempStringArr) {
-            tempString += i + ",";
-            i++;
-            tempString += blacksScore + ",";
-            tempString += whitesScore + ",";
-            tempString += winLabel;
-            s.append(tempString);
-            s.append("\n");
-        }
+//        String winLabel = "1";
+//        if (whitesScore > blacksScore) {
+//            winLabel = "0";
+//        }
+//        int i = 1;
+//        for (String tempString : tempStringArr) {
+//            tempString += i + ",";
+//            i++;
+//            tempString += blacksScore + ",";
+//            tempString += whitesScore + ",";
+//            tempString += winLabel;
+////            s.append(tempString);
+//            s.append("\n");
+//        }
     }
 
     public int getNumberOfGamesWhiteWon() {
@@ -138,8 +140,8 @@ public class TestBot implements Runnable {
 
 
     public static void main(String[] args) {
-        Player white = new MonteCarlo("white", new UCB1());
-        Player black = new Hybrid("black", new UCB1NN());
+//        Player white = new MonteCarlo("white", new UCB1());
+//        Player black = new Hybrid("black", new UCB1NN());
 //        Player white = new RandomBot("white");
 //        Player black = new RandomBot("black");
         // Random               ->  new RandomBot( "white"/"black")
@@ -148,15 +150,26 @@ public class TestBot implements Runnable {
         // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
-        double start = System.currentTimeMillis();
+//        double start = System.currentTimeMillis();
         int N = 1000;
-        TestBot testBot = new TestBot(N, white, black);
-        double end = System.currentTimeMillis();
-        System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
-        System.out.println("\nAverage execution time for each game " + (end - start) / N + " milliseconds \n");
-        System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() + "\n");
-        double average = (end - start)/1000.d / N;
-        System.out.println(3600 / average + " games will be generated in an hour");
+//        TestBot testBot = new TestBot(N, white, black);
+//        double end = System.currentTimeMillis();
+//        System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
+//        System.out.println("\nAverage execution time for each game " + (end - start) / N + " milliseconds \n");
+//        System.out.println("#############################\nWin Percentage of White Player: " + testBot.getWhitesWinPercentage() + "\n");
+//        double average = (end - start)/1000.d / N;
+//        System.out.println(3600 / average + " games will be generated in an hour");
+        Thread[] threads = new Thread[8];
+        for (int i = 0; i < threads.length ; i++) {
+            Player white = new MonteCarlo("white", new UCB1());
+            Player black = new Hybrid("black", new UCB1NN());
+            threads[i] = new Thread(new TestBot(125 , white, black));
+            
+        }
+        for (Thread thread :
+                threads) {
+            thread.start();
+        }
 
     }
 }
