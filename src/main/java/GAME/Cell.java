@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Cell implements Cloneable{
     private static int counter = 0;
     private int q , r , s , id ; // indices / coordinates
-    private int color ; // -1:empty 0:white 1:black 2:red 3:blue
+    private int color ; // -1:empty 0:white 1:black
     private boolean visited ; // will be used to count groups
     private LinkedList<Cell> neighbors ;
     private double x,y ; // coordinates in GUI

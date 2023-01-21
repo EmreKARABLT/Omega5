@@ -27,14 +27,28 @@ public class RuleBasedBot extends Player {
         ArrayList<Cell> move = new ArrayList<>();
         Cell[] a = evaluation(state);
 
-        if(playerName.equals("Black")){
+        if(playerName.contains("Black") || playerName.contains("black")){
             move.add(a[0]);
             move.add(a[1]);
+
+            a[0].setColor(0);
+            a[1].setColor(1);
+            state.addWhite(a[0]);
+            state.addBlack(a[1]);
         }else{
             move.add(a[1]);
             move.add(a[0]);
+
+            a[1].setColor(0);
+            a[0].setColor(1);
+            state.addWhite(a[1]);
+            state.addBlack(a[0]);
         }
 
+        state.getPlayers().get(0).setScore(state.getBoard().scoreOfAPlayer(0));
+        state.getPlayers().get(1).setScore(state.getBoard().scoreOfAPlayer(1));
+        state.nextTurn();
+        state.nextTurn();
 
         return move;
     };
@@ -51,9 +65,9 @@ public class RuleBasedBot extends Player {
 
                     //this.getW()[0] * Rules.clusters(emptyCells.get(i), 1) +
                     //this.getW()[1] * Rules.Nclusters(emptyCells.get(i), 1, board.getCells()) +
-                    this.getW()[2] * Rules.neigbourColors(emptyCells.get(i)) +
-                    this.getW()[3] * Rules.radius(emptyCells.get(i)) +
-                    this.getW()[4] * Rules.N_neibourgs(emptyCells.get(i));
+                    Rules.neigbourColors(emptyCells.get(i)) +
+                    Rules.radius(emptyCells.get(i)) +
+                    Rules.N_neibourgs(emptyCells.get(i));
 
 
             coeficients.add(formula);

@@ -184,11 +184,11 @@ public class TreeHybrid extends Tree {
 			for (int j = i+1; j < emptyCells.size(); j++) {
 				Node node1 = new Node(parent , state,emptyCells.get(i),emptyCells.get(j));
 				node1.color();
-				node1.setAnnPrediction(model.predict(state.getBoard().getCells()));
+				node1.setAnnPrediction(1-model.predict(state.getBoard().getCells()));
 				node1.uncolor();
 				Node node2 = new Node(parent , state,emptyCells.get(j),emptyCells.get(i));
 				node2.color();
-				node2.setAnnPrediction(model.predict(state.getBoard().getCells()));
+				node2.setAnnPrediction(1-model.predict(state.getBoard().getCells()));
 				node2.uncolor();
 				allPossibilities.add(node1);
 				allPossibilities.add(node2);

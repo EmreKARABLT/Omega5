@@ -17,11 +17,23 @@ import java.util.ArrayList;
 
 public class Hybrid extends Player{
 	
-	private final double SEARCHTIME = 100;
+	private double SEARCHTIME = 100;
 //	private final double MAX_SIMULATION = 10000;
 	public static double winProb = 0;
 	public HelloTensorFlow model ;
 	public Hybrid(String playerName, Heuristics heuristics){
+		this.heuristics = heuristics;
+		this.playerName = playerName;
+		this.heuristicName = heuristics.getName();
+		if(playerName.contains("Black") || playerName.contains("black"))
+			this.playerID = 1  ;
+		else
+			this.playerID = 0  ;
+
+	}
+
+	public Hybrid(String playerName, Heuristics heuristics, double searchtime){
+		this.SEARCHTIME = searchtime;
 		this.heuristics = heuristics;
 		this.playerName = playerName;
 		this.heuristicName = heuristics.getName();

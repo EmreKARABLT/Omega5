@@ -7,6 +7,7 @@ import PLAYER.MTS.SELECTION_HEURISTICS.*;
 import PLAYER.MTS.MonteCarlo;
 import PLAYER.HumanPlayer;
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

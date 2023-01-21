@@ -16,11 +16,22 @@ public class MonteCarlo extends Player{
 
 
 
-    private final double SEARCHTIME = 100;
+    private double SEARCHTIME = 100;
     private final double MAX_SIMULATION = 1000;
     public static double winProb = 0;
 
     public MonteCarlo(String playerName, Heuristics heuristics){
+        this.heuristics = heuristics;
+        this.playerName = playerName;
+        this.heuristicName = heuristics.getName();
+        if(playerName.contains("Black") || playerName.contains("black"))
+            this.playerID = 1  ;
+        else
+            this.playerID = 0  ;
+    }
+
+    public MonteCarlo(String playerName, Heuristics heuristics, double searchtime){
+        this.SEARCHTIME = searchtime;
         this.heuristics = heuristics;
         this.playerName = playerName;
         this.heuristicName = heuristics.getName();

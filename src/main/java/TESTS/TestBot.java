@@ -10,6 +10,8 @@ import PLAYER.MTS.SELECTION_HEURISTICS.UCB1NN;
 import PLAYER.MTS.SELECTION_HEURISTICS.UCT;
 
 import PLAYER.Player;
+import PLAYER.RULE_BASED_BOT.GeneticRuleBasedBot;
+import PLAYER.RULE_BASED_BOT.RuleBasedBot;
 import PLAYER.RandomBot;
 
 import java.io.BufferedWriter;
@@ -44,8 +46,7 @@ public class TestBot implements Runnable {
         playersList.add(white);
         playersList.add(black);
         state = new State(new Board(3), playersList);
-
-
+        run();
     }
 
     @Override
@@ -57,13 +58,13 @@ public class TestBot implements Runnable {
 //        s.append("wscore,");
 //        s.append("bwin\n");
         for (int i = 0; i < numberOfTest; i++) {
-            tempStringArr = new ArrayList<>();
             runTest();
+
 //            System.out.printf("\n*************   WHITE : %d - BLACK : %d   *************\n",white.getScore(),black.getScore());
             //in this part board will be full and any data can be derived
             state.restart();
         }
-        System.out.println(numberOfGamesWhiteWon + " // " + numberOfGamesBlackWon);
+        System.out.print((double) numberOfGamesWhiteWon / numberOfTest + "+");
 //        PrintWriter writer = null;
 //        try {
 //
@@ -79,7 +80,6 @@ public class TestBot implements Runnable {
     public void runTest() {
         while (!state.isGameOver()) {
             state.getCurrentPlayer().getMoves(state);
-            tempStringArr.add(state.getBoard().toString());
             //If you want to get the state of the board after each move it is where you need to derive the state of the board state.getBoard().getCells()
         }
 
@@ -146,12 +146,10 @@ public class TestBot implements Runnable {
 //        Player black = new RandomBot("black");
         // Random               ->  new RandomBot( "white"/"black")
         // RuleBased            ->  new RuleBasedBot( "white"/"black")
-        // MonteCarlo PNaive    ->  new MonteCarlo( "white"/"black" , new Pnaive())
         // MonteCarlo UCT       ->  new MonteCarlo( "white"/"black" , new UCT() )
         // MonteCarlo UCB1      ->  new MonteCarlo( "white"/"black" , new USB1() )
         // Genetic Ruled Based  ->  new GeneticRuleBasedBot("white"/"black")
 //        double start = System.currentTimeMillis();
-        int N = 1000;
 //        TestBot testBot = new TestBot(N, white, black);
 //        double end = System.currentTimeMillis();
 //        System.out.println("\nExecution time " + (end - start) / 1000.d + " seconds for " + N + " games");
@@ -160,16 +158,17 @@ public class TestBot implements Runnable {
 //        double average = (end - start)/1000.d / N;
 //        System.out.println(3600 / average + " games will be generated in an hour");
         Thread[] threads = new Thread[8];
-        for (int i = 0; i < threads.length ; i++) {
-            Player white = new MonteCarlo("white", new UCB1());
-            Player black = new Hybrid("black", new UCB1NN());
-            threads[i] = new Thread(new TestBot(125 , white, black));
-            
+        for (int i = 0; i < threads.length; i++) {
+            Player white = new Hybrid("white", new UCB1NN(), 10);
+//            Player black = new Hybrid("black", new UCB1(), 10);
+//            Player white = new MonteCarlo("white", new UCB1(), 10);
+            Player black = new MonteCarlo("black", new UCB1(), 10);
+//            Player black = new RandomBot("black");
+            threads[i] = new Thread(new TestBot(15, white, black));
         }
         for (Thread thread :
                 threads) {
             thread.start();
         }
-
     }
 }
